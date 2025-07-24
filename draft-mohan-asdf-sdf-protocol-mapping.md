@@ -9,15 +9,15 @@ number:
 date:
 consensus: true
 v: 3
-area: ""
-workgroup: ASDF
+area: "Applications and Real-Time"
+workgroup: "A Semantic Definition Format for Data and Interactions of Things"
 keyword:
  - IoT
 venue:
-  group: ASDF
-  type: Working Group
-  mail: asdf@ietf.org
-  github: ietf-wg-asdf/sdf-protocol-mapping
+  group: "A Semantic Definition Format for Data and Interactions of Things"
+  type: "Working Group"
+  mail: "asdf@ietf.org"
+  github: "ietf-wg-asdf/sdf-protocol-mapping"
 
 author:
  -
