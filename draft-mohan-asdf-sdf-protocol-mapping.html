@@ -1264,9 +1264,10 @@ a protocol-specific operation, as implementations of the same affordance
 will differ between protocols. For example, BLE will address a property
 as a service characteristic, while a property in Zigbee is addressed
 as an attribute in a cluster of an endpoint.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">A protocol mapping object is a JSON object identified by the
-<code>sdfProtocolMap</code> keyword. Protocol-specific properties are embedded
-within this object, organized by protocol name, e.g., "ble" or "zigbee".<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-2">A protocol mapping object is a JSON object identified by the <code>sdfProtocolMap</code>
+keyword. Protocol-specific properties are embedded within this object, organized
+by protocol name, e.g., "ble" or "zigbee". The protocol name <span class="bcp14">MUST</span> be specified
+in the IANA registry requested in <a href="#iana-prot-map" class="auto internal xref">Section 7.1</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <span id="name-property-mapping"></span><div id="protmap">
 <figure id="figure-1">
         <div id="section-3-3.1">
@@ -1376,10 +1377,10 @@ object<a href="#section-3-7.3.1" class="pilcrow">¶</a></p>
 <a href="#name-example-property-mapping" class="selfRef">Example property mapping</a>
         </figcaption></figure>
 </div>
-<p id="section-3-10">A protocol map is provided as part of the SDF model, in the SDF affordance
-definition. The extension points in the SDF affordance definition
-defined in <span>[<a href="#I-D.ietf-asdf-sdf" class="cite xref">I-D.ietf-asdf-sdf</a>]</span> are used to specify the protocol mapping information
-as a part of the SDF model.<a href="#section-3-10" class="pilcrow">¶</a></p>
+<p id="section-3-10">A protocol map <span class="bcp14">MAY</span> be provided as part of the SDF model, specifically in the SDF
+affordance definition. The extension points in the SDF affordance definition
+defined in <span>[<a href="#I-D.ietf-asdf-sdf" class="cite xref">I-D.ietf-asdf-sdf</a>]</span> are used to specify the protocol mapping information as a
+part of the SDF model.<a href="#section-3-10" class="pilcrow">¶</a></p>
 <p id="section-3-11">For SDF properties, the protocol mapping is specified as an
 extension to a named property quality using the <code>sdfProtocolMap</code> keyword.
 For SDF actions and events, the protocol mapping can be specified

@@ -129,7 +129,8 @@ Table of Contents
    A protocol mapping object is a JSON object identified by the
    sdfProtocolMap keyword.  Protocol-specific properties are embedded
    within this object, organized by protocol name, e.g., "ble" or
-   "zigbee".
+   "zigbee".  The protocol name MUST be specified in the IANA registry
+   requested in Section 7.1.
 
    sdfProtocolMap
      |
@@ -195,10 +196,10 @@ Table of Contents
 
                      Figure 2: Example property mapping
 
-   A protocol map is provided as part of the SDF model, in the SDF
-   affordance definition.  The extension points in the SDF affordance
-   definition defined in [I-D.ietf-asdf-sdf] are used to specify the
-   protocol mapping information as a part of the SDF model.
+   A protocol map MAY be provided as part of the SDF model, specifically
+   in the SDF affordance definition.  The extension points in the SDF
+   affordance definition defined in [I-D.ietf-asdf-sdf] are used to
+   specify the protocol mapping information as a part of the SDF model.
 
    For SDF properties, the protocol mapping is specified as an extension
    to a named property quality using the sdfProtocolMap keyword.  For
