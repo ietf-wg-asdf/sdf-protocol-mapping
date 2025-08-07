@@ -20,14 +20,21 @@ venue:
   github: "ietf-wg-asdf/sdf-protocol-mapping"
 
 author:
- -
-    name: Rohit Mohan
-    org: Cisco Systems
-    street: 170 West Tasman Drive
-    code: 95134
-    city: San Jose
-    country: USA
-    email: rohitmo@cisco.com
+ - name: Rohit Mohan
+   org: Cisco Systems
+   street: 170 West Tasman Drive
+   code: 95134
+   city: San Jose
+   country: USA
+   email: rohitmo@cisco.com
+
+ - name: Lorenzo Corneo
+   org: Ericsson
+   street: Hirsalantie 11
+   code: 02420
+   city: Jorvas
+   country: Finland
+   email: lorenzo.corneo@ericsson.com
 
 normative:
   I-D.ietf-asdf-sdf: sdf
