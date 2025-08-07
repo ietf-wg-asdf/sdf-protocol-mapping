@@ -97,9 +97,12 @@ will differ between protocols. For example, BLE will address a property
 as a service characteristic, while a property in Zigbee is addressed
 as an attribute in a cluster of an endpoint.
 
-A protocol mapping object is a JSON object identified by the
-`sdfProtocolMap` keyword. Protocol-specific properties are embedded
-within this object, organized by protocol name, e.g., "ble" or "zigbee".
+A protocol mapping object is a JSON object identified by the `sdfProtocolMap`
+keyword. Protocol-specific properties are embedded within this object, organized
+by protocol name, e.g., "ble" or "zigbee". The protocol name MUST be specified
+in the IANA registry requested in {{iana-prot-map}}.
+
+
 
 ~~~ aasvg
 sdfProtocolMap
@@ -161,10 +164,10 @@ Example protocol mapping:
 ~~~
 {: #exprotmap title="Example property mapping"}
 
-A protocol map is provided as part of the SDF model, in the SDF affordance
-definition. The extension points in the SDF affordance definition
-defined in {{-sdf}} are used to specify the protocol mapping information
-as a part of the SDF model.
+A protocol map MAY be provided as part of the SDF model, specifically in the SDF
+affordance definition. The extension points in the SDF affordance definition
+defined in {{-sdf}} are used to specify the protocol mapping information as a
+part of the SDF model.
 
 For SDF properties, the protocol mapping is specified as an
 extension to a named property quality using the `sdfProtocolMap` keyword.
