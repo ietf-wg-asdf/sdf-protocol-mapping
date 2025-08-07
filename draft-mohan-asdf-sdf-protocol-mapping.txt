@@ -4,8 +4,9 @@
 
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                             Cisco Systems
-Intended status: Standards Track                            29 July 2025
-Expires: 30 January 2026
+Intended status: Standards Track                               L. Corneo
+Expires: 8 February 2026                                        Ericsson
+                                                           7 August 2025
 
 
                         Protocol Mapping for SDF
@@ -52,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 January 2026.
+   This Internet-Draft will expire on 8 February 2026.
 
 Copyright Notice
 
@@ -86,7 +87,7 @@ Table of Contents
      8.1.  Normative References
      8.2.  Informative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -505,7 +506,7 @@ Acknowledgments
 
    TODO acknowledge.
 
-Author's Address
+Authors' Addresses
 
    Rohit Mohan
    Cisco Systems
@@ -513,3 +514,11 @@ Author's Address
    San Jose,  95134
    United States of America
    Email: rohitmo@cisco.com
+
+
+   Lorenzo Corneo
+   Ericsson
+   Hirsalantie 11
+   FI-1296 Jorvas
+   Finland
+   Email: lorenzo.corneo@ericsson.com
