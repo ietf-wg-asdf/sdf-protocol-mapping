@@ -57,33 +57,32 @@ informative:
 
 --- abstract
 
-This document defines protocol mapping extensions for the Semantic
-Definition Format (SDF) to enable mapping of protocol-agnostic SDF
-affordances to protocol-specific operations. The protocol mapping
-mechanism allows SDF models to specify how properties, actions, and
-events should be accessed using specific non-IP protocols such as
-Bluetooth Low Energy and Zigbee.
+This document defines protocol mapping extensions for the Semantic Definition
+Format (SDF) to enable mapping of protocol-agnostic SDF affordances to
+protocol-specific operations. The protocol mapping mechanism allows SDF models
+to specify how properties, actions, and events should be accessed using specific
+IP and non-IP protocols such as Bluetooth Low Energy and Zigbee.
 
 --- middle
 
 # Introduction
 
-The Semantic Definition Format (SDF) {{-sdf}} provides a protocol-agnostic
-way to describe IoT devices and their capabilities through properties,
-actions, and events (collectively called affordances). However, when
-implementing these affordances on actual devices that use specific
-communication protocols, there needs to be a mechanism to map the
-protocol-agnostic SDF definitions to protocol-specific operations.
+The Semantic Definition Format (SDF) {{-sdf}} provides a protocol-agnostic way
+to describe IoT devices and their capabilities through properties, actions, and
+events (collectively called affordances). However, when implementing these
+affordances on actual devices using specific communication protocols, there
+needs to be a mechanism to map the protocol-agnostic SDF definitions to
+protocol-specific operations.
 
 These protocols can be non-IP protocols that are commonly used in IoT
-environments, such as {{BLE53}} and {{Zigbee22}}, or
-IP-based protocols like HTTP or CoAP.
+environments, such as {{BLE53}} and {{Zigbee22}}, or IP-based protocols, such as
+HTTP or CoAP.
 
-To leverage an SDF model to perform protocol-specific operations on an
-instance of a device, a mapping of the SDF affordance to a protocol-specific
-attribute is required. This document defines the protocol mapping mechanism
-using the `sdfProtocolMap` keyword, which allows SDF models to include
-protocol-specific mapping information alongside the protocol-agnostic definitions.
+To leverage an SDF model to perform protocol-specific operations on an instance
+of a device, a mapping of the SDF affordance to a protocol-specific attribute is
+required. This document defines the protocol mapping mechanism using the
+`sdfProtocolMap` keyword, which allows SDF models to include protocol-specific
+mapping information alongside the protocol-agnostic definitions.
 
 
 # Conventions and Definitions
@@ -100,7 +99,7 @@ as an attribute in a cluster of an endpoint.
 
 A protocol mapping object is a JSON object identified by the
 `sdfProtocolMap` keyword. Protocol-specific properties are embedded
-within this object, organized by protocol name (e.g., "ble" or "zigbee").
+within this object, organized by protocol name, e.g., "ble" or "zigbee".
 
 ~~~ aasvg
 sdfProtocolMap
@@ -193,7 +192,7 @@ ble-protocol-map = {
   characteristicID: text
 }
 ~~~
-{: #blemap1 title="BLE Protocol Mapping for properties and actions"}
+{: #blemap1 title="CDDL definition for BLE Protocol Mapping for properties and actions"}
 
 Where:
 
@@ -295,7 +294,7 @@ zigbee-protocol-map = {
   type: uint
 }
 ~~~
-{: #zigmap1 title="Zigbee Protocol Mapping for properties and actions"}
+{: #zigmap1 title="CDDL definition for Zigbee Protocol Mapping for properties and actions"}
 
 Where:
 
