@@ -18,8 +18,8 @@ Abstract
    Definition Format (SDF) to enable mapping of protocol-agnostic SDF
    affordances to protocol-specific operations.  The protocol mapping
    mechanism allows SDF models to specify how properties, actions, and
-   events should be accessed using specific non-IP protocols such as
-   Bluetooth Low Energy and Zigbee.
+   events should be accessed using specific IP and non-IP protocols such
+   as Bluetooth Low Energy and Zigbee.
 
 About This Document
 
@@ -95,13 +95,13 @@ Table of Contents
    protocol-agnostic way to describe IoT devices and their capabilities
    through properties, actions, and events (collectively called
    affordances).  However, when implementing these affordances on actual
-   devices that use specific communication protocols, there needs to be
-   a mechanism to map the protocol-agnostic SDF definitions to protocol-
+   devices using specific communication protocols, there needs to be a
+   mechanism to map the protocol-agnostic SDF definitions to protocol-
    specific operations.
 
    These protocols can be non-IP protocols that are commonly used in IoT
-   environments, such as [BLE53] and [Zigbee22], or IP-based protocols
-   like HTTP or CoAP.
+   environments, such as [BLE53] and [Zigbee22], or IP-based protocols,
+   such as HTTP or CoAP.
 
    To leverage an SDF model to perform protocol-specific operations on
    an instance of a device, a mapping of the SDF affordance to a
@@ -128,8 +128,8 @@ Table of Contents
 
    A protocol mapping object is a JSON object identified by the
    sdfProtocolMap keyword.  Protocol-specific properties are embedded
-   within this object, organized by protocol name (e.g., "ble" or
-   "zigbee").
+   within this object, organized by protocol name, e.g., "ble" or
+   "zigbee".
 
    sdfProtocolMap
      |
@@ -226,7 +226,8 @@ Table of Contents
      characteristicID: text
    }
 
-         Figure 3: BLE Protocol Mapping for properties and actions
+     Figure 3: CDDL definition for BLE Protocol Mapping for properties
+                                and actions
 
    Where:
 
@@ -327,7 +328,8 @@ Table of Contents
      type: uint
    }
 
-        Figure 5: Zigbee Protocol Mapping for properties and actions
+         Figure 5: CDDL definition for Zigbee Protocol Mapping for
+                           properties and actions
 
    Where:
 
