@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-07T01:08:48.641584+00:00",
+  "timestamp": "2025-08-10T01:12:17.167956+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -49,6 +49,61 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOPSJ9A87Er91H",
+      "title": "CDDL for protocol mapping placement in SDF docs",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/1",
+      "state": "OPEN",
+      "author": "lorenzocorneo",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "enhancement"
+      ],
+      "body": "Suggesting improvement to add a CDDL snippet showing the delta between original SDF and the proposed protocol mapping extension.\n\n``` cddl\npropertyqualities = {\n ? observable: bool\n ? readable: bool\n ? writable: bool\n ? sdfProtocolMap ; this is the delta\n ~dataqualities\n}\n```\n\nJust saying that sdfProtocolMap can be added as named quality does not help much the implementors of the spec, imo.",
+      "createdAt": "2025-08-07T10:07:48Z",
+      "updatedAt": "2025-08-07T10:48:09Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOPSJ9A87EsNvp",
+      "title": "Inclusion of protocol mappings models in this draft",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/2",
+      "state": "OPEN",
+      "author": "lorenzocorneo",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "question"
+      ],
+      "body": "Creating this issue to discuss on wether to include the BLE, Zigbee, HTTP protocol mappings in this draft. One alternative could be to just describe sdf protocol mappings in this draft, and having separate drafts for BLE, Zigbee, HTTP, etc...",
+      "createdAt": "2025-08-07T10:28:11Z",
+      "updatedAt": "2025-08-07T10:30:24Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOPSJ9A87EsQF6",
+      "title": "Protocol mapping usage",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/3",
+      "state": "OPEN",
+      "author": "lorenzocorneo",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "bug"
+      ],
+      "body": "Protocol mappings is currently written in several inconsistent ways, e.g., Protocol Mapping, Protocol mapping. Let's decide on one way and make it consistent throughout the text.",
+      "createdAt": "2025-08-07T10:31:44Z",
+      "updatedAt": "2025-08-07T10:31:44Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": []
 }
