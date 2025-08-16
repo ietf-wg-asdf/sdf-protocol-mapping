@@ -190,10 +190,7 @@ For SDF properties and actions, the BLE protocol mapping structure
 is defined as follows:
 
 ~~~ cddl
-ble-protocol-map = {
-  serviceID: text
-  characteristicID: text
-}
+{::include cddl/ble-protocol-map.cddl}
 ~~~
 {: #blemap1 title="CDDL definition for BLE Protocol Mapping for properties and actions"}
 
@@ -223,11 +220,7 @@ For SDF events, the BLE protocol mapping structure is similar, but it may
 include additional attributes such as the type of the event.
 
 ~~~ cddl
-ble-event-map = {
-  type: "gatt" / "advertisements" / "connection_events"
-  ? serviceID: text
-  ? characteristicID: text
-}
+{::include cddl/ble-event-map.cddl}
 ~~~
 {: #blemap2 title="BLE Protocol Mapping for events"}
 
@@ -290,12 +283,7 @@ For SDF properties and actions, the Zigbee protocol mapping structure
 is defined as follows:
 
 ~~~ cddl
-zigbee-protocol-map = {
-  endpointID: uint
-  clusterID: uint
-  attributeID: uint
-  type: uint
-}
+{::include cddl/zigbee-protocol-map.cddl}
 ~~~
 {: #zigmap1 title="CDDL definition for Zigbee Protocol Mapping for properties and actions"}
 
@@ -426,8 +414,17 @@ Following protocol mappings are described in this document:
 | zigbee       | Zigbee                      | Protocol mapping for Zigbee devices         | This document   |
 {: #protmap-reg title="Protocol Mapping Registry"}
 
-
 --- back
+
+# CDDL Definition
+
+~~~ cddl
+{::include cddl/ble-protocol-map.cddl}
+
+{::include cddl/ble-event-map.cddl}
+
+{::include cddl/zigbee-protocol-map.cddl}
+~~~
 
 # Acknowledgments
 {:numbered="false"}
