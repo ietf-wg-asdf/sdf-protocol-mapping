@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-14T01:04:17.474713+00:00",
+  "timestamp": "2025-08-17T01:08:46.025135+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -64,7 +64,7 @@
       ],
       "body": "Suggesting improvement to add a CDDL snippet showing the delta between original SDF and the proposed protocol mapping extension.\n\n``` cddl\npropertyqualities = {\n ? observable: bool\n ? readable: bool\n ? writable: bool\n ? sdfProtocolMap ; this is the delta\n ~dataqualities\n}\n```\n\nJust saying that sdfProtocolMap can be added as named quality does not help much the implementors of the spec, imo.",
       "createdAt": "2025-08-07T10:07:48Z",
-      "updatedAt": "2025-08-11T15:04:03Z",
+      "updatedAt": "2025-08-16T11:41:25Z",
       "closedAt": null,
       "comments": [
         {
@@ -73,6 +73,13 @@
           "body": "Yes, I wasn't sure what would be the write way to represent this in the CDDL without including the entire SDF CDDL.\nI guess, just a diff would suffice?",
           "createdAt": "2025-08-11T15:04:03Z",
           "updatedAt": "2025-08-11T15:04:03Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "body": "I guess for defining the extensions, you could (or should?) also use the mechanisms defined in the CDDL RFC: https://datatracker.ietf.org/doc/html/rfc8610#section-3.9\n\n(I tried to apply the syntax in [PR](https://github.com/ietf-wg-asdf/sdf-relations/pull/6) against the `sdf-relations` repository, but I am not entirely sure if I used it correctly.)",
+          "createdAt": "2025-08-16T11:41:25Z",
+          "updatedAt": "2025-08-16T11:41:25Z"
         }
       ]
     },
@@ -121,5 +128,32 @@
       "comments": []
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 4,
+      "id": "PR_kwDOPSJ9A86j8-lA",
+      "title": "Use extension point in CDDL",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/4",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Added an appendix section with the combined cddl. \r\n\r\nAddress #1",
+      "createdAt": "2025-08-16T18:23:45Z",
+      "updatedAt": "2025-08-16T18:24:22Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "16a3a5adb5633adaa9485bfaae7b42c979903f7a",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "sdf-cddl",
+      "headRefOid": "f2ff1c77eaedd3244046bae865de3dcb2f6bbf1f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
