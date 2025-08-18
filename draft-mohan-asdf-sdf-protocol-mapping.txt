@@ -3,10 +3,11 @@
 
 
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
-Internet-Draft                                             Cisco Systems
-Intended status: Standards Track                               L. Corneo
-Expires: 8 February 2026                                        Ericsson
-                                                           7 August 2025
+Internet-Draft                                              B. Brinckman
+Intended status: Standards Track                           Cisco Systems
+Expires: 19 February 2026                                      L. Corneo
+                                                                Ericsson
+                                                          18 August 2025
 
 
                         Protocol Mapping for SDF
@@ -19,7 +20,7 @@ Abstract
    affordances to protocol-specific operations.  The protocol mapping
    mechanism allows SDF models to specify how properties, actions, and
    events should be accessed using specific IP and non-IP protocols such
-   as Bluetooth Low Energy and Zigbee.
+   as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
 
 About This Document
 
@@ -53,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 February 2026.
+   This Internet-Draft will expire on 19 February 2026.
 
 Copyright Notice
 
@@ -73,19 +74,21 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Overview
-   4.  SDF Protocol Mapping structure
-     4.1.  BLE Protocol Mapping
-       4.1.1.  BLE Protocol Mapping Structure
-     4.2.  Zigbee Protocol Mapping
-       4.2.1.  Zigbee Protocol Mapping Structure
-   5.  IP based Protocol Mapping
-   6.  Security Considerations
-   7.  IANA Considerations
-     7.1.  Protocol mapping
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   3.  Structure
+   4.  Usage
+   5.  Examples
+     5.1.  BLE Protocol Mapping
+       5.1.1.  BLE Protocol Mapping Structure
+     5.2.  Zigbee Protocol Mapping
+       5.2.1.  Zigbee Protocol Mapping Structure
+   6.  IP based Protocol Mapping
+   7.  Security Considerations
+   8.  IANA Considerations
+     8.1.  Protocol mapping
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
+   Appendix A.  CDDL Definition
    Acknowledgments
    Authors' Addresses
 
@@ -101,7 +104,7 @@ Table of Contents
 
    These protocols can be non-IP protocols that are commonly used in IoT
    environments, such as [BLE53] and [Zigbee22], or IP-based protocols,
-   such as HTTP or CoAP.
+   such as HTTP [RFC2616] or CoAP [RFC7252].
 
    To leverage an SDF model to perform protocol-specific operations on
    an instance of a device, a mapping of the SDF affordance to a
@@ -118,7 +121,7 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  Overview
+3.  Structure
 
    Protocol mapping is required to map a protocol-agnostic affordance to
    a protocol-specific operation, as implementations of the same
@@ -130,7 +133,7 @@ Table of Contents
    sdfProtocolMap keyword.  Protocol-specific properties are embedded
    within this object, organized by protocol name, e.g., "ble" or
    "zigbee".  The protocol name MUST be specified in the IANA registry
-   requested in Section 7.1.
+   requested in Section 8.1.
 
    sdfProtocolMap
      |
@@ -196,6 +199,8 @@ Table of Contents
 
                      Figure 2: Example property mapping
 
+4.  Usage
+
    A protocol map MAY be provided as part of the SDF model, specifically
    in the SDF affordance definition.  The extension points in the SDF
    affordance definition defined in [I-D.ietf-asdf-sdf] are used to
@@ -207,9 +212,9 @@ Table of Contents
    extension to the named quality or as part of the sdfInputData or
    sdfOutputData objects.
 
-4.  SDF Protocol Mapping structure
+5.  Examples
 
-4.1.  BLE Protocol Mapping
+5.1.  BLE Protocol Mapping
 
    The BLE protocol mapping allows SDF models to specify how properties,
    actions, and events should be accessed using Bluetooth Low Energy
@@ -217,10 +222,12 @@ Table of Contents
    characteristic IDs that are used to access the corresponding SDF
    affordances.
 
-4.1.1.  BLE Protocol Mapping Structure
+5.1.1.  BLE Protocol Mapping Structure
 
    For SDF properties and actions, the BLE protocol mapping structure is
    defined as follows:
+
+   $$SDF-EXTENSION-DATA //= ble-protocol-map
 
    ble-protocol-map = {
      serviceID: text
@@ -256,6 +263,8 @@ Table of Contents
 
    For SDF events, the BLE protocol mapping structure is similar, but it
    may include additional attributes such as the type of the event.
+
+   $$SDF-EXTENSION-DATA //= ble-event-map
 
    ble-event-map = {
      type: "gatt" / "advertisements" / "connection_events"
@@ -309,7 +318,7 @@ Table of Contents
      }
    }
 
-4.2.  Zigbee Protocol Mapping
+5.2.  Zigbee Protocol Mapping
 
    The Zigbee protocol mapping allows SDF models to specify how
    properties, actions, and events should be accessed using the Zigbee
@@ -317,10 +326,12 @@ Table of Contents
    attribute IDs that are used to access the corresponding SDF
    affordances.
 
-4.2.1.  Zigbee Protocol Mapping Structure
+5.2.1.  Zigbee Protocol Mapping Structure
 
    For SDF properties and actions, the Zigbee protocol mapping structure
    is defined as follows:
+
+   $$SDF-EXTENSION-DATA //= zigbee-protocol-map
 
    zigbee-protocol-map = {
      endpointID: uint
@@ -363,7 +374,7 @@ Table of Contents
      }
    }
 
-5.  IP based Protocol Mapping
+6.  IP based Protocol Mapping
 
    The protocol mapping mechanism can potentially also be used for IP-
    based protocols such as HTTP or CoAP.  An example of a protocol
@@ -429,17 +440,17 @@ Table of Contents
              description: |-
                The current body temperature in degrees Celsius.
 
-6.  Security Considerations
+7.  Security Considerations
 
    TODO Security
 
-7.  IANA Considerations
+8.  IANA Considerations
 
    This section provides guidance to the Internet Assigned Numbers
    Authority (IANA) regarding registration of values related to this
    document, in accordance with [RFC8126].
 
-7.1.  Protocol mapping
+8.1.  Protocol mapping
 
    IANA is requested to create a new registry called "SDF Protocol
    mapping".
@@ -469,9 +480,9 @@ Table of Contents
 
                      Table 2: Protocol Mapping Registry
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [I-D.ietf-asdf-sdf]
               Koster, M., Bormann, C., and A. Keränen, "Semantic
@@ -495,15 +506,52 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-8.2.  Informative References
+9.2.  Informative References
 
    [BLE53]    Bluetooth SIG, "Bluetooth Core Specification Version 5.3",
               13 July 2021,
               <https://www.bluetooth.com/specifications/specs/core-
               specification-5-3/>.
 
+   [RFC2616]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+              Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
+              Transfer Protocol -- HTTP/1.1", RFC 2616,
+              DOI 10.17487/RFC2616, June 1999,
+              <https://www.rfc-editor.org/rfc/rfc2616>.
+
+   [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
+              Application Protocol (CoAP)", RFC 7252,
+              DOI 10.17487/RFC7252, June 2014,
+              <https://www.rfc-editor.org/rfc/rfc7252>.
+
    [Zigbee22] Zigbee Alliance, "Zigbee 3.0 Specification", 2022,
               <https://zigbeealliance.org/solution/zigbee/>.
+
+Appendix A.  CDDL Definition
+
+   $$SDF-EXTENSION-DATA //= ble-protocol-map
+
+   ble-protocol-map = {
+     serviceID: text
+     characteristicID: text
+   }
+
+   $$SDF-EXTENSION-DATA //= ble-event-map
+
+   ble-event-map = {
+     type: "gatt" / "advertisements" / "connection_events"
+     ? serviceID: text
+     ? characteristicID: text
+   }
+
+   $$SDF-EXTENSION-DATA //= zigbee-protocol-map
+
+   zigbee-protocol-map = {
+     endpointID: uint
+     clusterID: uint
+     attributeID: uint
+     type: uint
+   }
 
 Acknowledgments
 
@@ -517,6 +565,14 @@ Authors' Addresses
    San Jose,  95134
    United States of America
    Email: rohitmo@cisco.com
+
+
+   Bart Brinckman
+   Cisco Systems
+   170 West Tasman Drive
+   San Jose,  95134
+   United States of America
+   Email: bbrinckm@cisco.com
 
 
    Lorenzo Corneo
