@@ -28,7 +28,7 @@ author:
    country: USA
    email: rohitmo@cisco.com
 
- - name: Bart Brinckman 
+ - name: Bart Brinckman
    org: Cisco Systems
    street: 170 West Tasman Drive
    code: 95134
@@ -97,7 +97,7 @@ mapping information alongside the protocol-agnostic definitions.
 
 {::boilerplate bcp14-tagged}
 
-# Structure 
+# Structure
 
 Protocol mapping is required to map a protocol-agnostic affordance to
 a protocol-specific operation, as implementations of the same affordance
