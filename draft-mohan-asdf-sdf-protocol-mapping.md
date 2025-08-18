@@ -110,8 +110,6 @@ keyword. Protocol-specific properties are embedded within this object, organized
 by protocol name, e.g., "ble" or "zigbee". The protocol name MUST be specified
 in the IANA registry requested in {{iana-prot-map}}.
 
-
-
 ~~~ aasvg
 sdfProtocolMap
   |
@@ -323,7 +321,7 @@ For example, a Zigbee protocol mapping for a temperature property might look lik
 }
 ~~~
 
-# IP based Protocol Mapping
+## IP based Protocol Mapping
 
 The protocol mapping mechanism can potentially also be used for IP-based protocols
 such as HTTP or CoAP. An example of a protocol mapping for a property using HTTP
