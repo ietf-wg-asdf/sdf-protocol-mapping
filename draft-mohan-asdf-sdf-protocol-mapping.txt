@@ -81,13 +81,13 @@ Table of Contents
        5.1.1.  BLE Protocol Mapping Structure
      5.2.  Zigbee Protocol Mapping
        5.2.1.  Zigbee Protocol Mapping Structure
-   6.  IP based Protocol Mapping
-   7.  Security Considerations
-   8.  IANA Considerations
-     8.1.  Protocol mapping
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+     5.3.  IP based Protocol Mapping
+   6.  Security Considerations
+   7.  IANA Considerations
+     7.1.  Protocol mapping
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Appendix A.  CDDL Definition
    Acknowledgments
    Authors' Addresses
@@ -133,7 +133,7 @@ Table of Contents
    sdfProtocolMap keyword.  Protocol-specific properties are embedded
    within this object, organized by protocol name, e.g., "ble" or
    "zigbee".  The protocol name MUST be specified in the IANA registry
-   requested in Section 8.1.
+   requested in Section 7.1.
 
    sdfProtocolMap
      |
@@ -374,7 +374,7 @@ Table of Contents
      }
    }
 
-6.  IP based Protocol Mapping
+5.3.  IP based Protocol Mapping
 
    The protocol mapping mechanism can potentially also be used for IP-
    based protocols such as HTTP or CoAP.  An example of a protocol
@@ -440,17 +440,17 @@ Table of Contents
              description: |-
                The current body temperature in degrees Celsius.
 
-7.  Security Considerations
+6.  Security Considerations
 
    TODO Security
 
-8.  IANA Considerations
+7.  IANA Considerations
 
    This section provides guidance to the Internet Assigned Numbers
    Authority (IANA) regarding registration of values related to this
    document, in accordance with [RFC8126].
 
-8.1.  Protocol mapping
+7.1.  Protocol mapping
 
    IANA is requested to create a new registry called "SDF Protocol
    mapping".
@@ -480,9 +480,9 @@ Table of Contents
 
                      Table 2: Protocol Mapping Registry
 
-9.  References
+8.  References
 
-9.1.  Normative References
+8.1.  Normative References
 
    [I-D.ietf-asdf-sdf]
               Koster, M., Bormann, C., and A. Keränen, "Semantic
@@ -506,7 +506,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-9.2.  Informative References
+8.2.  Informative References
 
    [BLE53]    Bluetooth SIG, "Bluetooth Core Specification Version 5.3",
               13 July 2021,
