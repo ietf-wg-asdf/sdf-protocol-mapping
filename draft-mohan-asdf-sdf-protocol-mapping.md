@@ -28,6 +28,14 @@ author:
    country: USA
    email: rohitmo@cisco.com
 
+ - name: Bart Brinckman 
+   org: Cisco Systems
+   street: 170 West Tasman Drive
+   code: 95134
+   city: San Jose
+   country: USA
+   email: bbrinckm@cisco.com
+
  - name: Lorenzo Corneo
    org: Ericsson
    street: Hirsalantie 11
@@ -61,7 +69,7 @@ This document defines protocol mapping extensions for the Semantic Definition
 Format (SDF) to enable mapping of protocol-agnostic SDF affordances to
 protocol-specific operations. The protocol mapping mechanism allows SDF models
 to specify how properties, actions, and events should be accessed using specific
-IP and non-IP protocols such as Bluetooth Low Energy and Zigbee.
+IP and non-IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
 
 --- middle
 
@@ -76,7 +84,7 @@ protocol-specific operations.
 
 These protocols can be non-IP protocols that are commonly used in IoT
 environments, such as {{BLE53}} and {{Zigbee22}}, or IP-based protocols, such as
-HTTP or CoAP.
+HTTP {{?RFC2616}} or CoAP {{?RFC7252}}.
 
 To leverage an SDF model to perform protocol-specific operations on an instance
 of a device, a mapping of the SDF affordance to a protocol-specific attribute is
@@ -89,7 +97,7 @@ mapping information alongside the protocol-agnostic definitions.
 
 {::boilerplate bcp14-tagged}
 
-# Overview
+# Structure 
 
 Protocol mapping is required to map a protocol-agnostic affordance to
 a protocol-specific operation, as implementations of the same affordance
@@ -164,6 +172,8 @@ Example protocol mapping:
 ~~~
 {: #exprotmap title="Example property mapping"}
 
+# Usage
+
 A protocol map MAY be provided as part of the SDF model, specifically in the SDF
 affordance definition. The extension points in the SDF affordance definition
 defined in {{-sdf}} are used to specify the protocol mapping information as a
@@ -175,7 +185,7 @@ For SDF actions and events, the protocol mapping can be specified
 as an extension to the named quality or as part of the `sdfInputData` or
 `sdfOutputData` objects.
 
-# SDF Protocol Mapping structure
+# Examples
 
 ## BLE Protocol Mapping
 
