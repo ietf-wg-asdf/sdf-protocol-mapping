@@ -1,0 +1,7 @@
+$$SDF-EXTENSION-DATA //= ble-event-map
+
+ble-event-map = {
+  type: "gatt" / "advertisements" / "connection_events"
+  ? serviceID: text
+  ? characteristicID: text
+}
