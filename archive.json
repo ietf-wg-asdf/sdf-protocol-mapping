@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-17T01:08:46.025135+00:00",
+  "timestamp": "2025-08-19T01:01:25.562863+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -126,6 +126,22 @@
       "updatedAt": "2025-08-07T10:31:44Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOPSJ9A87GmE4m",
+      "title": "Add examples for HTTP and COAP",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/5",
+      "state": "OPEN",
+      "author": "bbrinckman",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The document talks about protocol mapping for IP and Npn-IP protocols, with HTTP and CoAP as examples for IP.\nThere are no examples on IP-based mapping. We should add HTTP and CoAP examples.",
+      "createdAt": "2025-08-18T19:36:10Z",
+      "updatedAt": "2025-08-18T20:24:07Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -134,26 +150,42 @@
       "id": "PR_kwDOPSJ9A86j8-lA",
       "title": "Use extension point in CDDL",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/4",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Added an appendix section with the combined cddl. \r\n\r\nAddress #1",
       "createdAt": "2025-08-16T18:23:45Z",
-      "updatedAt": "2025-08-16T18:24:22Z",
+      "updatedAt": "2025-08-18T19:54:45Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "16a3a5adb5633adaa9485bfaae7b42c979903f7a",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "sdf-cddl",
       "headRefOid": "f2ff1c77eaedd3244046bae865de3dcb2f6bbf1f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-08-18T19:54:45Z",
+      "mergedAt": "2025-08-18T19:54:45Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "ea4cc3c3a8e36a2176472b7e1b7b80517d073b71"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A866WPFP",
+          "commit": {
+            "abbreviatedOid": "f2ff1c7"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-08-17T16:00:04Z",
+          "updatedAt": "2025-08-17T16:00:04Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
