@@ -323,9 +323,20 @@ For example, a Zigbee protocol mapping for a temperature property might look lik
 
 ## IP based Protocol Mapping
 
-The protocol mapping mechanism can potentially also be used for IP-based protocols
-such as HTTP or CoAP. An example of a protocol mapping for a property using HTTP
-might look like:
+The protocol mapping mechanism can also be used for IP-based protocols
+such as HTTP or CoAP.
+
+### OpenAPI Protocol Mapping Structure
+
+In the case of HTTP, SDF protocol mappings towards an SDF quality MAY be
+expressed by directly pointing to OpenAPI schema and/or component.
+
+~~~ cddl
+{::include cddl/openapi-protocol-map.cddl}
+~~~
+{: #apimap1 title="CDDL definition for HTTP OpenAPI Protocol Mapping for properties and actions"}
+
+An example of a protocol mapping for a property using HTTP might look like:
 
 ~~~ json
 =============== NOTE: '\' line wrapping per RFC 8792 ================

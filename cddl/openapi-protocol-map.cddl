@@ -1,0 +1,6 @@
+$$SDF-EXTENSION-DATA //= openapi-protocol-map
+
+openapi-protocol-map = {
+  operationRef: text
+  $ref: text
+}
