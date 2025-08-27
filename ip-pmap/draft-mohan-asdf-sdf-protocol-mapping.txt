@@ -130,12 +130,14 @@ Table of Contents
    affordance will differ between protocols.  For example, BLE will
    address a property as a service characteristic, while a property in
    Zigbee is addressed as an attribute in a cluster of an endpoint.
+   Again, HTTP is addressed by a method, an endpoint path, an optional
+   query string, optional headers, and an optional body.
 
    A protocol mapping object is a JSON object identified by the
    sdfProtocolMap keyword.  Protocol-specific properties are embedded
    within this object, organized by protocol name, e.g., "ble" or
-   "zigbee".  The protocol name MUST be specified in the IANA registry
-   requested in Section 7.1.
+   "zigbee" or "http".  The protocol name MUST be specified in the IANA
+   registry requested in Section 7.1.
 
    sdfProtocolMap
      |
@@ -144,14 +146,18 @@ Table of Contents
      |        +--> BLE-specific mapping
      |
      +-----> zigbee
+     |        |
+     |        +--> Zigbee-specific mapping
+     |
+     +-----> http
               |
-              +--> Zigbee-specific mapping
+              +--> HTTP-specific mapping
 
                          Figure 1: Property Mapping
 
    As shown in Figure 1, protocol-specific properties must be embedded
-   in an sdfProtocolMap object, for example a "ble" or a "zigbee"
-   object.
+   in an sdfProtocolMap object, for example a "ble" or a "zigbee" or a
+   "http" object.
 
     +===========+========+===========================================+
     | Attribute | Type   | Example                                   |
@@ -159,6 +165,8 @@ Table of Contents
     | ble       | object | an object with BLE-specific attributes    |
     +-----------+--------+-------------------------------------------+
     | zigbee    | object | an object with Zigbee-specific attributes |
+    +-----------+--------+-------------------------------------------+
+    | http      | object | an object with HTTP-specific attributes   |
     +-----------+--------+-------------------------------------------+
 
                         Table 1: Protocol objects
@@ -170,6 +178,9 @@ Table of Contents
 
    *  "zigbee" is an object containing properties that are specific to
       the Zigbee protocol.
+
+   *  "http" is an object containing properties that are specific to the
+      HTTP protocol.
 
    *  Other protocol mapping objects can be added by creating a new
       protocol object
@@ -545,17 +556,20 @@ Table of Contents
 
    Following protocol mappings are described in this document:
 
-     +==============+===============+====================+===========+
-     | Protocol map | Protocol Name | Description        | Reference |
-     +==============+===============+====================+===========+
-     | ble          | Bluetooth Low | Protocol mapping   | This      |
-     |              | Energy (BLE)  | for BLE devices    | document  |
-     +--------------+---------------+--------------------+-----------+
-     | zigbee       | Zigbee        | Protocol mapping   | This      |
-     |              |               | for Zigbee devices | document  |
-     +--------------+---------------+--------------------+-----------+
+   +==============+===============+=======================+===========+
+   | Protocol map | Protocol Name | Description           | Reference |
+   +==============+===============+=======================+===========+
+   | ble          | Bluetooth Low | Protocol mapping for  | This      |
+   |              | Energy (BLE)  | BLE devices           | document  |
+   +--------------+---------------+-----------------------+-----------+
+   | zigbee       | Zigbee        | Protocol mapping for  | This      |
+   |              |               | Zigbee devices        | document  |
+   +--------------+---------------+-----------------------+-----------+
+   | http         | HTTP          | Protocol mapping for  | This      |
+   |              |               | HTTP IP-based devices | document  |
+   +--------------+---------------+-----------------------+-----------+
 
-                     Table 2: Protocol Mapping Registry
+                    Table 2: Protocol Mapping Registry
 
 8.  References
 
@@ -628,6 +642,16 @@ Appendix A.  CDDL Definition
      clusterID: uint
      attributeID: uint
      type: uint
+   }
+
+   $$SDF-EXTENSION-DATA //= http-protocol-map
+
+   http-protocol-map = {
+     method: "GET" / "POST" / "PUT" / "DELETE"
+     path: text
+     ? query: {text => text}
+     ? headers: {text => text}
+     ? body: text
    }
 
 Acknowledgments

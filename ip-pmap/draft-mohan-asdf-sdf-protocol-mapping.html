@@ -1278,29 +1278,35 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-structure">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-structure" class="section-name selfRef">Structure</a>
       </h2>
-<p id="section-3-1">Protocol mapping is required to map a protocol-agnostic affordance to
-a protocol-specific operation, as implementations of the same affordance
-will differ between protocols. For example, BLE will address a property
-as a service characteristic, while a property in Zigbee is addressed
-as an attribute in a cluster of an endpoint.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">Protocol mapping is required to map a protocol-agnostic affordance to a
+protocol-specific operation, as implementations of the same affordance will
+differ between protocols. For example, BLE will address a property as a service
+characteristic, while a property in Zigbee is addressed as an attribute in a
+cluster of an endpoint. Again, HTTP is addressed by a method, an endpoint path,
+an optional query string, optional headers, and an optional body.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">A protocol mapping object is a JSON object identified by the <code>sdfProtocolMap</code>
 keyword. Protocol-specific properties are embedded within this object, organized
-by protocol name, e.g., "ble" or "zigbee". The protocol name <span class="bcp14">MUST</span> be specified
-in the IANA registry requested in <a href="#iana-prot-map" class="auto internal xref">Section 7.1</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+by protocol name, e.g., "ble" or "zigbee" or "http". The protocol name <span class="bcp14">MUST</span> be
+specified in the IANA registry requested in <a href="#iana-prot-map" class="auto internal xref">Section 7.1</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <span id="name-property-mapping"></span><div id="protmap">
 <figure id="figure-1">
         <div id="section-3-3.1">
           <div class="alignLeft art-svg artwork" id="section-3-3.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="176" width="320" viewBox="0 0 320 176" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-              <path d="M 24,48 L 24,128" fill="none" stroke="black"></path>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="240" width="320" viewBox="0 0 320 240" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 24,48 L 24,192" fill="none" stroke="black"></path>
               <path d="M 96,80 L 96,96" fill="none" stroke="black"></path>
               <path d="M 96,144 L 96,160" fill="none" stroke="black"></path>
+              <path d="M 96,208 L 96,224" fill="none" stroke="black"></path>
               <path d="M 24,64 L 72,64" fill="none" stroke="black"></path>
               <path d="M 96,96 L 120,96" fill="none" stroke="black"></path>
               <path d="M 24,128 L 72,128" fill="none" stroke="black"></path>
               <path d="M 96,160 L 120,160" fill="none" stroke="black"></path>
+              <path d="M 24,192 L 72,192" fill="none" stroke="black"></path>
+              <path d="M 96,224 L 120,224" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="128,224 116,218.4 116,229.6" fill="black" transform="rotate(0,120,224)"></polygon>
               <polygon class="arrowhead" points="128,160 116,154.4 116,165.6" fill="black" transform="rotate(0,120,160)"></polygon>
               <polygon class="arrowhead" points="128,96 116,90.4 116,101.6" fill="black" transform="rotate(0,120,96)"></polygon>
+              <polygon class="arrowhead" points="80,192 68,186.4 68,197.6" fill="black" transform="rotate(0,72,192)"></polygon>
               <polygon class="arrowhead" points="80,128 68,122.4 68,133.6" fill="black" transform="rotate(0,72,128)"></polygon>
               <polygon class="arrowhead" points="80,64 68,58.4 68,69.6" fill="black" transform="rotate(0,72,64)"></polygon>
               <g class="text">
@@ -1311,6 +1317,9 @@ in the IANA registry requested in <a href="#iana-prot-map" class="auto internal 
                 <text x="108" y="132">zigbee</text>
                 <text x="192" y="164">Zigbee-specific</text>
                 <text x="288" y="164">mapping</text>
+                <text x="100" y="196">http</text>
+                <text x="184" y="228">HTTP-specific</text>
+                <text x="272" y="228">mapping</text>
               </g>
             </svg><a href="#section-3-3.1.1" class="pilcrow">¶</a>
 </div>
@@ -1320,7 +1329,7 @@ in the IANA registry requested in <a href="#iana-prot-map" class="auto internal 
         </figcaption></figure>
 </div>
 <p id="section-3-4">As shown in <a href="#protmap" class="auto internal xref">Figure 1</a>, protocol-specific properties must be embedded in an
-sdfProtocolMap object, for example a "ble" or a "zigbee" object.<a href="#section-3-4" class="pilcrow">¶</a></p>
+sdfProtocolMap object, for example a "ble" or a "zigbee" or a "http" object.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <span id="name-protocol-objects"></span><div id="proobj">
 <table class="center" id="table-1">
         <caption>
@@ -1345,6 +1354,11 @@ sdfProtocolMap object, for example a "ble" or a "zigbee" object.<a href="#sectio
             <td class="text-left" rowspan="1" colspan="1">object</td>
             <td class="text-left" rowspan="1" colspan="1">an object with Zigbee-specific attributes</td>
           </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">http</td>
+            <td class="text-left" rowspan="1" colspan="1">object</td>
+            <td class="text-left" rowspan="1" colspan="1">an object with HTTP-specific attributes</td>
+          </tr>
         </tbody>
       </table>
 </div>
@@ -1359,8 +1373,12 @@ protocol.<a href="#section-3-7.1.1" class="pilcrow">¶</a></p>
 Zigbee protocol.<a href="#section-3-7.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-7.3">
-          <p id="section-3-7.3.1">Other protocol mapping objects can be added by creating a new protocol
-object<a href="#section-3-7.3.1" class="pilcrow">¶</a></p>
+          <p id="section-3-7.3.1">"http" is an object containing properties that are specific to the HTTP
+protocol.<a href="#section-3-7.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-7.4">
+          <p id="section-3-7.4.1">Other protocol mapping objects can be added by creating a new protocol
+object<a href="#section-3-7.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-3-8">Example protocol mapping:<a href="#section-3-8" class="pilcrow">¶</a></p>
@@ -1856,6 +1874,12 @@ in accordance with <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</spa
               <td class="text-left" rowspan="1" colspan="1">Protocol mapping for Zigbee devices</td>
               <td class="text-left" rowspan="1" colspan="1">This document</td>
             </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">http</td>
+              <td class="text-left" rowspan="1" colspan="1">HTTP</td>
+              <td class="text-left" rowspan="1" colspan="1">Protocol mapping for HTTP IP-based devices</td>
+              <td class="text-left" rowspan="1" colspan="1">This document</td>
+            </tr>
           </tbody>
         </table>
 </div>
@@ -1949,6 +1973,16 @@ zigbee-protocol-map = {
   clusterID: uint
   attributeID: uint
   type: uint
+}
+
+$$SDF-EXTENSION-DATA //= http-protocol-map
+
+http-protocol-map = {
+  method: "GET" / "POST" / "PUT" / "DELETE"
+  path: text
+  ? query: {text =&gt; text}
+  ? headers: {text =&gt; text}
+  ? body: text
 }
 </pre><a href="#appendix-A-1" class="pilcrow">¶</a>
 </div>
