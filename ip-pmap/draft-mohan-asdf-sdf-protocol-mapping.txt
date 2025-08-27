@@ -1,0 +1,660 @@
+
+
+
+
+A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
+Internet-Draft                                              B. Brinckman
+Intended status: Standards Track                           Cisco Systems
+Expires: 28 February 2026                                      L. Corneo
+                                                                Ericsson
+                                                          27 August 2025
+
+
+                        Protocol Mapping for SDF
+              draft-mohan-asdf-sdf-protocol-mapping-latest
+
+Abstract
+
+   This document defines protocol mapping extensions for the Semantic
+   Definition Format (SDF) to enable mapping of protocol-agnostic SDF
+   affordances to protocol-specific operations.  The protocol mapping
+   mechanism allows SDF models to specify how properties, actions, and
+   events should be accessed using specific IP and non-IP protocols such
+   as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-mohan-asdf-sdf-protocol-
+   mapping/.
+
+   Discussion of this document takes place on the A Semantic Definition
+   Format for Data and Interactions of Things Working Group mailing list
+   (mailto:asdf@ietf.org), which is archived at
+   https://mailarchive.ietf.org/arch/browse/asdf/.  Subscribe at
+   https://www.ietf.org/mailman/listinfo/asdf/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/ietf-wg-asdf/sdf-protocol-mapping.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 28 February 2026.
+
+Copyright Notice
+
+   Copyright (c) 2025 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Structure
+   4.  Usage
+   5.  Examples
+     5.1.  BLE Protocol Mapping
+       5.1.1.  BLE Protocol Mapping Structure
+     5.2.  Zigbee Protocol Mapping
+       5.2.1.  Zigbee Protocol Mapping Structure
+     5.3.  IP based Protocol Mapping
+       5.3.1.  HTTP
+       5.3.2.  OpenAPI Protocol Mapping Structure
+   6.  Security Considerations
+   7.  IANA Considerations
+     7.1.  Protocol mapping
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
+   Appendix A.  CDDL Definition
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   The Semantic Definition Format (SDF) [I-D.ietf-asdf-sdf] provides a
+   protocol-agnostic way to describe IoT devices and their capabilities
+   through properties, actions, and events (collectively called
+   affordances).  However, when implementing these affordances on actual
+   devices using specific communication protocols, there needs to be a
+   mechanism to map the protocol-agnostic SDF definitions to protocol-
+   specific operations.
+
+   These protocols can be non-IP protocols that are commonly used in IoT
+   environments, such as [BLE53] and [Zigbee22], or IP-based protocols,
+   such as HTTP [RFC2616] or CoAP [RFC7252].
+
+   To leverage an SDF model to perform protocol-specific operations on
+   an instance of a device, a mapping of the SDF affordance to a
+   protocol-specific attribute is required.  This document defines the
+   protocol mapping mechanism using the sdfProtocolMap keyword, which
+   allows SDF models to include protocol-specific mapping information
+   alongside the protocol-agnostic definitions.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  Structure
+
+   Protocol mapping is required to map a protocol-agnostic affordance to
+   a protocol-specific operation, as implementations of the same
+   affordance will differ between protocols.  For example, BLE will
+   address a property as a service characteristic, while a property in
+   Zigbee is addressed as an attribute in a cluster of an endpoint.
+
+   A protocol mapping object is a JSON object identified by the
+   sdfProtocolMap keyword.  Protocol-specific properties are embedded
+   within this object, organized by protocol name, e.g., "ble" or
+   "zigbee".  The protocol name MUST be specified in the IANA registry
+   requested in Section 7.1.
+
+   sdfProtocolMap
+     |
+     +-----> ble
+     |        |
+     |        +--> BLE-specific mapping
+     |
+     +-----> zigbee
+              |
+              +--> Zigbee-specific mapping
+
+                         Figure 1: Property Mapping
+
+   As shown in Figure 1, protocol-specific properties must be embedded
+   in an sdfProtocolMap object, for example a "ble" or a "zigbee"
+   object.
+
+    +===========+========+===========================================+
+    | Attribute | Type   | Example                                   |
+    +===========+========+===========================================+
+    | ble       | object | an object with BLE-specific attributes    |
+    +-----------+--------+-------------------------------------------+
+    | zigbee    | object | an object with Zigbee-specific attributes |
+    +-----------+--------+-------------------------------------------+
+
+                        Table 1: Protocol objects
+
+   where-
+
+   *  "ble" is an object containing properties that are specific to the
+      BLE protocol.
+
+   *  "zigbee" is an object containing properties that are specific to
+      the Zigbee protocol.
+
+   *  Other protocol mapping objects can be added by creating a new
+      protocol object
+
+   Example protocol mapping:
+
+   {
+     "sdfObject": {
+       "healthsensor": {
+         "sdfProperty": {
+           "heartrate": {
+             "description": "The current measured heart rate",
+             "type": "number",
+             "unit": "beat/min",
+             "observable": false,
+             "writable": false,
+             "sdfProtocolMap": {
+               "ble": {
+                 "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+                 "characteristicID":
+                   "12345678-1234-5678-1234-56789abcdef4"
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+
+                     Figure 2: Example property mapping
+
+4.  Usage
+
+   A protocol map MAY be provided as part of the SDF model, specifically
+   in the SDF affordance definition.  The extension points in the SDF
+   affordance definition defined in [I-D.ietf-asdf-sdf] are used to
+   specify the protocol mapping information as a part of the SDF model.
+
+   For SDF properties, the protocol mapping is specified as an extension
+   to a named property quality using the sdfProtocolMap keyword.  For
+   SDF actions and events, the protocol mapping can be specified as an
+   extension to the named quality or as part of the sdfInputData or
+   sdfOutputData objects.
+
+5.  Examples
+
+5.1.  BLE Protocol Mapping
+
+   The BLE protocol mapping allows SDF models to specify how properties,
+   actions, and events should be accessed using Bluetooth Low Energy
+   (BLE) protocol.  The mapping includes details such as service IDs and
+   characteristic IDs that are used to access the corresponding SDF
+   affordances.
+
+5.1.1.  BLE Protocol Mapping Structure
+
+   For SDF properties and actions, the BLE protocol mapping structure is
+   defined as follows:
+
+   $$SDF-EXTENSION-DATA //= ble-protocol-map
+
+   ble-protocol-map = {
+     serviceID: text
+     characteristicID: text
+   }
+
+     Figure 3: CDDL definition for BLE Protocol Mapping for properties
+                                and actions
+
+   Where:
+
+   *  serviceID is the BLE service ID that corresponds to the SDF
+      property or action.
+
+   *  characteristicID is the BLE characteristic ID that corresponds to
+      the SDF property or action.
+
+   For example, a BLE protocol mapping for a temperature property might
+   look like:
+
+   {
+     "sdfProperty": {
+       "temperature": {
+         "sdfProtocolMap": {
+           "ble": {
+             "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+             "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+           }
+         }
+       }
+     }
+   }
+
+   For SDF events, the BLE protocol mapping structure is similar, but it
+   may include additional attributes such as the type of the event.
+
+   $$SDF-EXTENSION-DATA //= ble-event-map
+
+   ble-event-map = {
+     type: "gatt" / "advertisements" / "connection_events"
+     ? serviceID: text
+     ? characteristicID: text
+   }
+
+                 Figure 4: BLE Protocol Mapping for events
+
+   Where:
+
+   *  type specifies the type of BLE event, such as "gatt" for GATT
+      events, "advertisements" for advertisement events, or
+      "connection_events" for connection-related events.
+
+   *  serviceID and characteristicID are optional attributes that are
+      specified if the type is "gatt".
+
+   For example, a BLE event mapping for a heart rate measurement event
+   might look like:
+
+   {
+     "sdfEvent": {
+       "heartRate": {
+         "sdfOutputData": {
+           "sdfProtocolMap": {
+             "ble": {
+               "type": "gatt",
+               "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+               "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+             }
+           }
+         }
+       }
+     }
+   }
+
+   Another example of an isPresent event using BLE advertisements:
+
+   {
+     "sdfEvent": {
+       "isPresent": {
+         "sdfOutputData": {
+           "sdfProtocolMap": {
+             "ble": {
+               "type": "advertisements"
+             }
+           }
+         }
+       }
+     }
+   }
+
+5.2.  Zigbee Protocol Mapping
+
+   The Zigbee protocol mapping allows SDF models to specify how
+   properties, actions, and events should be accessed using the Zigbee
+   protocol.  The mapping includes details such as cluster IDs and
+   attribute IDs that are used to access the corresponding SDF
+   affordances.
+
+5.2.1.  Zigbee Protocol Mapping Structure
+
+   For SDF properties and actions, the Zigbee protocol mapping structure
+   is defined as follows:
+
+   $$SDF-EXTENSION-DATA //= zigbee-protocol-map
+
+   zigbee-protocol-map = {
+     endpointID: uint
+     clusterID: uint
+     attributeID: uint
+     type: uint
+   }
+
+         Figure 5: CDDL definition for Zigbee Protocol Mapping for
+                           properties and actions
+
+   Where:
+
+   *  endpointID is the Zigbee endpoint ID that corresponds to the SDF
+      affordance.
+
+   *  clusterID is the Zigbee cluster ID that corresponds to the SDF
+      affordance.
+
+   *  attributeID is the Zigbee attribute ID that corresponds to the SDF
+      affordance.
+
+   *  type is the Zigbee data type of the attribute.
+
+   For example, a Zigbee protocol mapping for a temperature property
+   might look like:
+
+   {
+     "sdfProperty": {
+       "temperature": {
+         "sdfProtocolMap": {
+           "zigbee": {
+             "endpointID": 1,
+             "clusterID": 1026, // 0x0402
+             "attributeID": 0, // 0x0000
+             "type": 41 // 0x29
+           }
+         }
+       }
+     }
+   }
+
+5.3.  IP based Protocol Mapping
+
+   The protocol mapping mechanism can also be used for IP-based
+   protocols such as HTTP or CoAP.
+
+5.3.1.  HTTP
+
+   The HTTP protocol mapping allows SDF models to specify how
+   properties, actions, and events should be accessed using the HTTP
+   protocol.  The mapping includes details such as method, path,
+   optional headers, request body and query parameters that are used to
+   access the corresponding SDF affordances.
+
+   $$SDF-EXTENSION-DATA //= http-protocol-map
+
+   http-protocol-map = {
+     method: "GET" / "POST" / "PUT" / "DELETE"
+     path: text
+     ? query: {text => text}
+     ? headers: {text => text}
+     ? body: text
+   }
+
+      Figure 6: CDDL definition for HTTP OpenAPI Protocol Mapping for
+                      properties, actions, and events
+
+   Where:
+
+   *  method is the method of the HTTP request towards the affordance.
+      Allowed methods are GET, POST, PUT, and DELETE.
+
+   *  path is the path targeted by the HTTP request.
+
+   *  query is the optional query string expressed as a text map.  The
+      key of the map is the name of the query parameter and the value of
+      the map is the value of the query parameter.
+
+   *  headers is the optional set of HTTP headers expressed as text map.
+      The key of the map is the name of the header and the value of the
+      map is the value of the header field.
+
+   *  body is the optional body of the HTTP request expressed as text.
+
+   For example, a HTTP protocol mapping for a temperature property might
+   look like:
+
+   {
+     "sdfProperty": {
+       "temperature": {
+         "sdfProtocolMap": {
+           "http": {
+             "method": "GET",
+             "path": "/device/123/temperature/0",
+             "query": {"unit": "celsius"},
+           }
+         }
+       }
+     }
+   }
+
+   The above SDF Protocol Mapping will be resolved to the following HTTP
+   request: GET /device/123/temperature/0?unit=celsius.
+
+5.3.2.  OpenAPI Protocol Mapping Structure
+
+   In the case of HTTP, SDF protocol mappings towards an SDF quality MAY
+   be expressed by directly pointing to OpenAPI schema and/or component.
+
+   $$SDF-EXTENSION-DATA //= openapi-protocol-map
+
+   openapi-protocol-map = {
+     operationRef: text
+     $ref: text
+   }
+
+      Figure 7: CDDL definition for HTTP OpenAPI Protocol Mapping for
+                           properties and actions
+
+   An example of a protocol mapping for a property using HTTP might look
+   like:
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   {
+     "sdfProperty": {
+       "heartrate": {
+         "sdfProtocolMap": {
+           "openapi": {
+               "operationRef": "https://example.com/openapi.json#/paths\
+   /~1heartrate~1{id}~1current/get",
+               "$ref": "https://example.com/openapi.json#/components/sc\
+   hema/HeartRate/properties/pulse"
+           }
+         }
+       }
+     }
+   }
+
+   The operationRef points to the OpenAPI operation that retrieves the
+   current heart rate, and the $ref points to the OpenAPI schema that
+   defines the heart rate property.  An example of the OpenAPI schema
+   might look like:
+
+   paths:
+     /heartrate/{id}/current:
+       get:
+         summary: Get current heart rate
+         description: |-
+           Retrieve the current heart rate for a specific user
+           identified by {id}.
+         parameters:
+           - name: id
+             in: path
+             required: true
+             description: |-
+               The ID of the user whose heart rate is being queried.
+             schema:
+               type: string
+         responses:
+           "200":
+             description: |-
+               Successful response with current heart rate data.
+             content:
+               application/json:
+                 schema:
+                   $ref: "#/components/schemas/HeartRate/properties/pulse"
+
+   components:
+     schemas:
+       HeartRate:
+         type: object
+         properties:
+           pulse:
+             type: integer
+             description: The current heart rate in beats per minute.
+           spo2:
+             type: number
+             format: float
+             description: |-
+               The current body temperature in degrees Celsius.
+
+6.  Security Considerations
+
+   TODO Security
+
+7.  IANA Considerations
+
+   This section provides guidance to the Internet Assigned Numbers
+   Authority (IANA) regarding registration of values related to this
+   document, in accordance with [RFC8126].
+
+7.1.  Protocol mapping
+
+   IANA is requested to create a new registry called "SDF Protocol
+   mapping".
+
+   The registry must contain following attributes:
+
+   *  Protocol map name
+
+   *  Protocol name
+
+   *  Description
+
+   *  Reference of the specification describing the protocol mapping.
+      This specification must be reviewed by an expert.
+
+   Following protocol mappings are described in this document:
+
+     +==============+===============+====================+===========+
+     | Protocol map | Protocol Name | Description        | Reference |
+     +==============+===============+====================+===========+
+     | ble          | Bluetooth Low | Protocol mapping   | This      |
+     |              | Energy (BLE)  | for BLE devices    | document  |
+     +--------------+---------------+--------------------+-----------+
+     | zigbee       | Zigbee        | Protocol mapping   | This      |
+     |              |               | for Zigbee devices | document  |
+     +--------------+---------------+--------------------+-----------+
+
+                     Table 2: Protocol Mapping Registry
+
+8.  References
+
+8.1.  Normative References
+
+   [I-D.ietf-asdf-sdf]
+              Koster, M., Bormann, C., and A. Keränen, "Semantic
+              Definition Format (SDF) for Data and Interactions of
+              Things", Work in Progress, Internet-Draft, draft-ietf-
+              asdf-sdf-24, 27 July 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
+              sdf-24>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", BCP 26,
+              RFC 8126, DOI 10.17487/RFC8126, June 2017,
+              <https://www.rfc-editor.org/rfc/rfc8126>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+8.2.  Informative References
+
+   [BLE53]    Bluetooth SIG, "Bluetooth Core Specification Version 5.3",
+              13 July 2021,
+              <https://www.bluetooth.com/specifications/specs/core-
+              specification-5-3/>.
+
+   [RFC2616]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+              Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
+              Transfer Protocol -- HTTP/1.1", RFC 2616,
+              DOI 10.17487/RFC2616, June 1999,
+              <https://www.rfc-editor.org/rfc/rfc2616>.
+
+   [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
+              Application Protocol (CoAP)", RFC 7252,
+              DOI 10.17487/RFC7252, June 2014,
+              <https://www.rfc-editor.org/rfc/rfc7252>.
+
+   [Zigbee22] Zigbee Alliance, "Zigbee 3.0 Specification", 2022,
+              <https://zigbeealliance.org/solution/zigbee/>.
+
+Appendix A.  CDDL Definition
+
+   $$SDF-EXTENSION-DATA //= ble-protocol-map
+
+   ble-protocol-map = {
+     serviceID: text
+     characteristicID: text
+   }
+
+   $$SDF-EXTENSION-DATA //= ble-event-map
+
+   ble-event-map = {
+     type: "gatt" / "advertisements" / "connection_events"
+     ? serviceID: text
+     ? characteristicID: text
+   }
+
+   $$SDF-EXTENSION-DATA //= zigbee-protocol-map
+
+   zigbee-protocol-map = {
+     endpointID: uint
+     clusterID: uint
+     attributeID: uint
+     type: uint
+   }
+
+Acknowledgments
+
+   TODO acknowledge.
+
+Authors' Addresses
+
+   Rohit Mohan
+   Cisco Systems
+   170 West Tasman Drive
+   San Jose,  95134
+   United States of America
+   Email: rohitmo@cisco.com
+
+
+   Bart Brinckman
+   Cisco Systems
+   170 West Tasman Drive
+   San Jose,  95134
+   United States of America
+   Email: bbrinckm@cisco.com
+
+
+   Lorenzo Corneo
+   Ericsson
+   Hirsalantie 11
+   FI-1296 Jorvas
+   Finland
+   Email: lorenzo.corneo@ericsson.com
