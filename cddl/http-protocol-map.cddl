@@ -1,0 +1,9 @@
+$$SDF-EXTENSION-DATA //= http-protocol-map
+
+http-protocol-map = {
+  method: "GET" / "POST" / "PUT" / "DELETE"
+  path: text
+  ? query: {text => text}
+  ? headers: {text => text}
+  ? body: text
+}

@@ -326,6 +326,46 @@ For example, a Zigbee protocol mapping for a temperature property might look lik
 The protocol mapping mechanism can also be used for IP-based protocols
 such as HTTP or CoAP.
 
+### HTTP
+
+The HTTP protocol mapping allows SDF models to specify how properties, actions,
+and events should be accessed using the HTTP protocol. The mapping includes
+details such as method, path, optional headers, request body and query
+parameters that are used to access the corresponding SDF affordances.
+
+~~~ cddl
+{::include cddl/http-protocol-map.cddl}
+~~~
+{: #httpmap1 title="CDDL definition for HTTP OpenAPI Protocol Mapping for properties, actions, and events"}
+
+Where:
+
+- `method` is the method of the HTTP request towards the affordance. Allowed methods are `GET`, `POST`, `PUT`, and `DELETE`.
+- `path` is the path targeted by the HTTP request.
+- `query` is the optional query string expressed as a text map. The key of the map is the name of the query parameter and the value of the map is the value of the query parameter.
+- `headers` is the optional set of HTTP headers expressed as text map. The key of the map is the name of the header and the value of the map is the value of the header field.
+- `body` is the optional body of the HTTP request expressed as text.
+
+For example, a HTTP protocol mapping for a temperature property might look like:
+
+~~~ jsonc
+{
+  "sdfProperty": {
+    "temperature": {
+      "sdfProtocolMap": {
+        "http": {
+          "method": "GET",
+          "path": "/device/123/temperature/0",
+          "query": {"unit": "celsius"},
+        }
+      }
+    }
+  }
+}
+~~~
+
+The above SDF Protocol Mapping will be resolved to the following HTTP request: `GET /device/123/temperature/0?unit=celsius`.
+
 ### OpenAPI Protocol Mapping Structure
 
 In the case of HTTP, SDF protocol mappings towards an SDF quality MAY be
