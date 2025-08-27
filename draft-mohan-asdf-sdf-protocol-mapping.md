@@ -99,16 +99,17 @@ mapping information alongside the protocol-agnostic definitions.
 
 # Structure
 
-Protocol mapping is required to map a protocol-agnostic affordance to
-a protocol-specific operation, as implementations of the same affordance
-will differ between protocols. For example, BLE will address a property
-as a service characteristic, while a property in Zigbee is addressed
-as an attribute in a cluster of an endpoint.
+Protocol mapping is required to map a protocol-agnostic affordance to a
+protocol-specific operation, as implementations of the same affordance will
+differ between protocols. For example, BLE will address a property as a service
+characteristic, while a property in Zigbee is addressed as an attribute in a
+cluster of an endpoint. Again, HTTP is addressed by a method, an endpoint path,
+an optional query string, optional headers, and an optional body.
 
 A protocol mapping object is a JSON object identified by the `sdfProtocolMap`
 keyword. Protocol-specific properties are embedded within this object, organized
-by protocol name, e.g., "ble" or "zigbee". The protocol name MUST be specified
-in the IANA registry requested in {{iana-prot-map}}.
+by protocol name, e.g., "ble" or "zigbee" or "http". The protocol name MUST be
+specified in the IANA registry requested in {{iana-prot-map}}.
 
 ~~~ aasvg
 sdfProtocolMap
@@ -118,19 +119,24 @@ sdfProtocolMap
   |        +--> BLE-specific mapping
   |
   +-----> zigbee
+  |        |
+  |        +--> Zigbee-specific mapping
+  |
+  +-----> http
            |
-           +--> Zigbee-specific mapping
+           +--> HTTP-specific mapping
 ~~~
 {: #protmap title="Property Mapping"}
 
 As shown in {{protmap}}, protocol-specific properties must be embedded in an
-sdfProtocolMap object, for example a "ble" or a "zigbee" object.
+sdfProtocolMap object, for example a "ble" or a "zigbee" or a "http" object.
 
 
 | Attribute |  Type  |          Example                         |
 +-----------+--------+------------------------------------------|
 | ble       | object | an object with BLE-specific attributes   |
 | zigbee    | object | an object with Zigbee-specific attributes|
+| http      | object | an object with HTTP-specific attributes  |
 {: #proobj title="Protocol objects"}
 
 where-
@@ -139,6 +145,8 @@ where-
    protocol.
  - "zigbee" is an object containing properties that are specific to the
    Zigbee protocol.
+ - "http" is an object containing properties that are specific to the HTTP
+   protocol.
  - Other protocol mapping objects can be added by creating a new protocol
    object
 
@@ -471,6 +479,7 @@ Following protocol mappings are described in this document:
 |--------------|-----------------------------|---------------------------------------------|-----------------|
 | ble          | Bluetooth Low Energy (BLE)  | Protocol mapping for BLE devices            | This document   |
 | zigbee       | Zigbee                      | Protocol mapping for Zigbee devices         | This document   |
+| http         | HTTP                        | Protocol mapping for HTTP IP-based devices  | This document   |
 {: #protmap-reg title="Protocol Mapping Registry"}
 
 --- back
@@ -483,6 +492,8 @@ Following protocol mappings are described in this document:
 {::include cddl/ble-event-map.cddl}
 
 {::include cddl/zigbee-protocol-map.cddl}
+
+{::include cddl/http-protocol-map.cddl}
 ~~~
 
 # Acknowledgments
