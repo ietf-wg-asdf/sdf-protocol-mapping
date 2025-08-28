@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-19T01:01:25.562863+00:00",
+  "timestamp": "2025-08-28T00:57:52.670659+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -134,12 +134,38 @@
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/5",
       "state": "OPEN",
       "author": "bbrinckman",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The document talks about protocol mapping for IP and Npn-IP protocols, with HTTP and CoAP as examples for IP.\nThere are no examples on IP-based mapping. We should add HTTP and CoAP examples.",
       "createdAt": "2025-08-18T19:36:10Z",
-      "updatedAt": "2025-08-18T20:24:07Z",
+      "updatedAt": "2025-08-26T08:18:28Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "body": "Yes, and instead we have mappings to Open API. Do we want to keep this? what is the rationale to have that?",
+          "createdAt": "2025-08-26T08:18:28Z",
+          "updatedAt": "2025-08-26T08:18:28Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOPSJ9A87IKbQg",
+      "title": "Is protocol mapping the right name?",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/6",
+      "state": "OPEN",
+      "author": "lorenzocorneo",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "question"
+      ],
+      "body": "During the last interim the working group members suggested to spend some time pondering on whether protocol mapping is the terminology we want to use. Let's use this issue to discuss.",
+      "createdAt": "2025-08-27T06:32:29Z",
+      "updatedAt": "2025-08-27T06:32:29Z",
       "closedAt": null,
       "comments": []
     }
@@ -186,6 +212,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOPSJ9A86lkdPB",
+      "title": "HTTP and CoAP",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/7",
+      "state": "OPEN",
+      "author": "lorenzocorneo",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "# HTTP and CoAP SDF Protocol Mappings\n\nThis PR aim is to add SDF Protocol Mappings for HTTP and CoAP. It addresses the issue #5.\n\nCoAP is still missing.\n\nThis PR currently features:\n- **OpenAPI CDDL and structure change**\n- **Draft of HTTP protocol mapping**\n",
+      "createdAt": "2025-08-27T09:50:05Z",
+      "updatedAt": "2025-08-27T10:29:43Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "c9593aa5d2825b8fffc2b040ee8d1e7f5df6f31d",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "ip-pmap",
+      "headRefOid": "ab17f99a151b9f227a6d7f40d7a44f87f79c16f3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
