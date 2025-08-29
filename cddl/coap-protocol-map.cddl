@@ -1,0 +1,8 @@
+$$SDF-EXTENSION-DATA //= coap-protocol-map
+
+coap-protocol-map = {
+  method: "GET" / "POST" / "PUT" / "DELETE"
+  uri: text
+  ? query: {text => text}
+  ? options: {text => text}
+}

@@ -104,12 +104,13 @@ protocol-specific operation, as implementations of the same affordance will
 differ between protocols. For example, BLE will address a property as a service
 characteristic, while a property in Zigbee is addressed as an attribute in a
 cluster of an endpoint. Again, HTTP is addressed by a method, an endpoint path,
-an optional query string, optional headers, and an optional body.
+an optional query string, optional headers, and an optional body. Finally, CoAP
+is addressed by a method, a URI, an optional query string and options set.
 
 A protocol mapping object is a JSON object identified by the `sdfProtocolMap`
 keyword. Protocol-specific properties are embedded within this object, organized
-by protocol name, e.g., "ble" or "zigbee" or "http". The protocol name MUST be
-specified in the IANA registry requested in {{iana-prot-map}}.
+by protocol name, e.g., "ble" or "zigbee" or "http" or "coap". The protocol name
+MUST be specified in the IANA registry requested in {{iana-prot-map}}.
 
 ~~~ aasvg
 sdfProtocolMap
@@ -123,8 +124,11 @@ sdfProtocolMap
   |        +--> Zigbee-specific mapping
   |
   +-----> http
-           |
-           +--> HTTP-specific mapping
+  |        |
+  |        +--> HTTP-specific mapping
+  +-----> coap
+  |        |
+  |        +--> CoAP-specific mapping
 ~~~
 {: #protmap title="Property Mapping"}
 
@@ -344,7 +348,7 @@ parameters that are used to access the corresponding SDF affordances.
 ~~~ cddl
 {::include cddl/http-protocol-map.cddl}
 ~~~
-{: #httpmap1 title="CDDL definition for HTTP OpenAPI Protocol Mapping for properties, actions, and events"}
+{: #httpmap1 title="CDDL definition for HTTP Protocol Mapping for properties, actions, and events"}
 
 Where:
 
@@ -373,6 +377,64 @@ For example, a HTTP protocol mapping for a temperature property might look like:
 ~~~
 
 The above SDF Protocol Mapping will be resolved to the following HTTP request: `GET /device/123/temperature/0?unit=celsius`.
+
+### CoAP
+
+The CoAP protocol mapping allows SDF models to specify how affordances should be
+accessed using the CoAP protocol. The mapping includes details such as method,
+URI, as well as optional query string and options.
+
+~~~ cddl
+{::include cddl/coap-protocol-map.cddl}
+~~~
+{: #coapmap1 title="CDDL definition for CoAP Protocol Mapping for properties, actions, and events"}
+
+Where:
+
+- `method` is the method of the CoAP request towards the affordance. Allowed methods are `GET`, `POST`, `PUT`, and `DELETE`.
+- `uri` is the URI that identifies the resource associated to the affordance.
+- `query` is the optional query string expressed as a text map. The key of the map is the name of the query parameter and the value of the map is the value of the query parameter.
+- `options` is the optional set of CoAP options expressed as text map. The key of the map is the name of the option and the value of the map is the value of the option.
+
+For example, a CoAP protocol mapping for a temperature property may look like:
+
+~~~ jsonc
+{
+  "sdfProperty": {
+    "temperature": {
+      "sdfProtocolMap": {
+        "coap": {
+          "method": "GET",
+          "path": "/device/123/temperature/0",
+          "query": {"unit": "celsius"},
+          "options": {"Accept": "application/senml+json"},
+        }
+      }
+    }
+  }
+}
+~~~
+
+The next example shows how to register for notifications with OBSERVE when a
+resource's value gets above 20, e.g., degree Celsius.
+
+~~~ jsonc
+{
+  "sdfProperty": {
+    "temperature": {
+      "sdfProtocolMap": {
+        "coap": {
+          "method": "GET",
+          "path": "/device/123/temperature/0?above=20",
+          "query": {"above": "20", "unit": "celsius"},
+          "options": {"Accept": "application/senml+json",
+                      "Observe": 0},
+        }
+      }
+    }
+  }
+}
+~~~
 
 ### OpenAPI Protocol Mapping Structure
 
@@ -480,6 +542,7 @@ Following protocol mappings are described in this document:
 | ble          | Bluetooth Low Energy (BLE)  | Protocol mapping for BLE devices            | This document   |
 | zigbee       | Zigbee                      | Protocol mapping for Zigbee devices         | This document   |
 | http         | HTTP                        | Protocol mapping for HTTP IP-based devices  | This document   |
+| coap         | CoAP                        | Protocol mapping for CoAP IP-based devices  | This document   |
 {: #protmap-reg title="Protocol Mapping Registry"}
 
 --- back
@@ -494,6 +557,8 @@ Following protocol mappings are described in this document:
 {::include cddl/zigbee-protocol-map.cddl}
 
 {::include cddl/http-protocol-map.cddl}
+
+{::include cddl/coap-protocol-map.cddl}
 ~~~
 
 # Acknowledgments
