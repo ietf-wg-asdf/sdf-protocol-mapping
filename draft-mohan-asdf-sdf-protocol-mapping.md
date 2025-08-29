@@ -126,6 +126,7 @@ sdfProtocolMap
   +-----> http
   |        |
   |        +--> HTTP-specific mapping
+  |
   +-----> coap
            |
            +--> CoAP-specific mapping
@@ -141,6 +142,7 @@ sdfProtocolMap object, for example a "ble" or a "zigbee" or a "http" object.
 | ble       | object | an object with BLE-specific attributes   |
 | zigbee    | object | an object with Zigbee-specific attributes|
 | http      | object | an object with HTTP-specific attributes  |
+| coap      | object | an object with CoAP-specific attributes  |
 {: #proobj title="Protocol objects"}
 
 where-
