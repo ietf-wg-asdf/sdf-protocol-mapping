@@ -127,8 +127,8 @@ sdfProtocolMap
   |        |
   |        +--> HTTP-specific mapping
   +-----> coap
-  |        |
-  |        +--> CoAP-specific mapping
+           |
+           +--> CoAP-specific mapping
 ~~~
 {: #protmap title="Property Mapping"}
 
