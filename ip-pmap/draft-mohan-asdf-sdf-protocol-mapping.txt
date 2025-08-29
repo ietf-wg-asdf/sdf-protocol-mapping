@@ -156,8 +156,8 @@ Table of Contents
      |        |
      |        +--> HTTP-specific mapping
      +-----> coap
-     |        |
-     |        +--> CoAP-specific mapping
+              |
+              +--> CoAP-specific mapping
 
                          Figure 1: Property Mapping
 
