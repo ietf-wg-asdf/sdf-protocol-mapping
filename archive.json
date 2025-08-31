@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-28T00:57:52.670659+00:00",
+  "timestamp": "2025-08-31T01:02:16.000686+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -221,23 +221,54 @@
       "state": "OPEN",
       "author": "lorenzocorneo",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "lorenzocorneo"
+      ],
       "labels": [],
       "body": "# HTTP and CoAP SDF Protocol Mappings\n\nThis PR aim is to add SDF Protocol Mappings for HTTP and CoAP. It addresses the issue #5.\n\nCoAP is still missing.\n\nThis PR currently features:\n- **OpenAPI CDDL and structure change**\n- **Draft of HTTP protocol mapping**\n",
       "createdAt": "2025-08-27T09:50:05Z",
-      "updatedAt": "2025-08-27T10:29:43Z",
+      "updatedAt": "2025-08-29T23:04:16Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "c9593aa5d2825b8fffc2b040ee8d1e7f5df6f31d",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "ip-pmap",
-      "headRefOid": "ab17f99a151b9f227a6d7f40d7a44f87f79c16f3",
+      "headRefOid": "be9326467642bc01f618df791d5d3015af3366b1",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "body": "Up to this commit, HTTP method, path, and query string are in three separate fields. Should they be in a single field?",
+          "createdAt": "2025-08-29T06:19:37Z",
+          "updatedAt": "2025-08-29T06:19:37Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A868_EmL",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-08-29T23:04:15Z",
+          "updatedAt": "2025-08-29T23:04:16Z",
+          "comments": [
+            {
+              "originalPosition": 106,
+              "body": "The idea behind using openapi as one of the mappings was because the path, body, etc. in http can have variables that can be considered instance information and openapi provides a format to describe these variables. \nIf we want to have a http mapping, should this be a URI template instead? \n```suggestion\n          \"path\": \"/device/{some_id}/temperature/{some_other_id}?unit=celsius\",\n```",
+              "createdAt": "2025-08-29T23:04:15Z",
+              "updatedAt": "2025-08-29T23:04:16Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
