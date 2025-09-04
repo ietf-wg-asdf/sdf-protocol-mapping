@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-31T01:02:16.000686+00:00",
+  "timestamp": "2025-09-04T00:55:50.360965+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -165,9 +165,17 @@
       ],
       "body": "During the last interim the working group members suggested to spend some time pondering on whether protocol mapping is the terminology we want to use. Let's use this issue to discuss.",
       "createdAt": "2025-08-27T06:32:29Z",
-      "updatedAt": "2025-08-27T06:32:29Z",
+      "updatedAt": "2025-09-02T19:59:05Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I am copying Bart's response here. I also have the same opinion.\n \n> I suggest we use sdfProtocolMap as currently specified for following reasons:\n> 1. The name is a good description of what is defined in the object, we are mapping an sdf affordance to a protocol implementation\n> 2. We discussed the naming in the hackathon and last face to face and changed it from ProtocolMap to sdfProtocolMap. We seemed to have consensus on this in the face 2 face.\n> 3. This naming has now been adopted in a product that is shipping and developers are already integrating with the APIs. Changing the name again will present difficulties for the developers.\n> \n> With this, I would recommend going with sdfProtocolMap, and only change the name if there is a good reason why this naming would not work.\n\n",
+          "createdAt": "2025-09-02T19:59:05Z",
+          "updatedAt": "2025-09-02T19:59:05Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -227,7 +235,7 @@
       "labels": [],
       "body": "# HTTP and CoAP SDF Protocol Mappings\n\nThis PR aim is to add SDF Protocol Mappings for HTTP and CoAP. It addresses the issue #5.\n\nCoAP is still missing.\n\nThis PR currently features:\n- **OpenAPI CDDL and structure change**\n- **Draft of HTTP protocol mapping**\n",
       "createdAt": "2025-08-27T09:50:05Z",
-      "updatedAt": "2025-08-29T23:04:16Z",
+      "updatedAt": "2025-09-02T13:30:31Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "c9593aa5d2825b8fffc2b040ee8d1e7f5df6f31d",
@@ -265,6 +273,26 @@
               "body": "The idea behind using openapi as one of the mappings was because the path, body, etc. in http can have variables that can be considered instance information and openapi provides a format to describe these variables. \nIf we want to have a http mapping, should this be a URI template instead? \n```suggestion\n          \"path\": \"/device/{some_id}/temperature/{some_other_id}?unit=celsius\",\n```",
               "createdAt": "2025-08-29T23:04:15Z",
               "updatedAt": "2025-08-29T23:04:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A869Vttx",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-02T13:30:31Z",
+          "updatedAt": "2025-09-02T13:30:31Z",
+          "comments": [
+            {
+              "originalPosition": 106,
+              "body": "That is a good point; perhaps that is the way!",
+              "createdAt": "2025-09-02T13:30:31Z",
+              "updatedAt": "2025-09-02T13:30:31Z"
             }
           ]
         }
