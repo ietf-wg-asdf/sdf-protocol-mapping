@@ -451,7 +451,7 @@ Table of Contents
          "sdfProtocolMap": {
            "http": {
              "method": "GET",
-             "path": "/device/123/temperature/0",
+             "path": "/device/{some_id}/temperature/{some_other_id}?unit=celsius",
              "query": {"unit": "celsius"},
            }
          }
