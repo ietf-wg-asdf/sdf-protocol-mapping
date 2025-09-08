@@ -544,7 +544,7 @@ Following protocol mappings are described in this document:
 | ble          | Bluetooth Low Energy (BLE)  | Protocol mapping for BLE devices            | This document   |
 | zigbee       | Zigbee                      | Protocol mapping for Zigbee devices         | This document   |
 | http         | HTTP                        | Protocol mapping for HTTP IP-based devices  | This document   |
-| coap         | CoAP                        | Protocol mapping for CoAP IP-based devices  | This document   |
+| coap         | CoAP                        | Protocol mapping for CoAP-based devices  | This document   |
 {: #protmap-reg title="Protocol Mapping Registry"}
 
 --- back
