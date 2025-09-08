@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 2 March 2026                                          L. Corneo
+Expires: 12 March 2026                                         L. Corneo
                                                                 Ericsson
-                                                          29 August 2025
+                                                        8 September 2025
 
 
                         Protocol Mapping for SDF
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 March 2026.
+   This Internet-Draft will expire on 12 March 2026.
 
 Copyright Notice
 
@@ -188,8 +188,8 @@ Table of Contents
    *  "zigbee" is an object containing properties that are specific to
       the Zigbee protocol.
 
-   *  "http" is an object containing properties that are specific to the
-      HTTP protocol.
+   *  "http" is an object containing properties that are specific to
+      HTTP.
 
    *  Other protocol mapping objects can be added by creating a new
       protocol object
