@@ -383,7 +383,7 @@ The above SDF Protocol Mapping will be resolved to the following HTTP request: `
 ### CoAP
 
 The CoAP protocol mapping allows SDF models to specify how affordances should be
-accessed using the CoAP protocol. The mapping includes details such as method,
+accessed using CoAP. The mapping includes details such as method,
 URI, as well as optional query string and options.
 
 ~~~ cddl
