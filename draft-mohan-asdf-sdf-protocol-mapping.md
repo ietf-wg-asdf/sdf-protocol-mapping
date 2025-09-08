@@ -369,7 +369,7 @@ For example, a HTTP protocol mapping for a temperature property might look like:
       "sdfProtocolMap": {
         "http": {
           "method": "GET",
-          "path": "/device/123/temperature/0",
+          "path": "/device/{some_id}/temperature/{some_other_id}?unit=celsius",
           "query": {"unit": "celsius"},
         }
       }
