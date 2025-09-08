@@ -151,8 +151,7 @@ where-
    protocol.
  - "zigbee" is an object containing properties that are specific to the
    Zigbee protocol.
- - "http" is an object containing properties that are specific to the HTTP
-   protocol.
+ - "http" is an object containing properties that are specific to HTTP.
  - Other protocol mapping objects can be added by creating a new protocol
    object
 
