@@ -653,7 +653,7 @@ Table of Contents
    |              |               | HTTP IP-based devices | document  |
    +--------------+---------------+-----------------------+-----------+
    | coap         | CoAP          | Protocol mapping for  | This      |
-   |              |               | CoAP IP-based devices | document  |
+   |              |               | CoAP-based devices    | document  |
    +--------------+---------------+-----------------------+-----------+
 
                     Table 2: Protocol Mapping Registry
