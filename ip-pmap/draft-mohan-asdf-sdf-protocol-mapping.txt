@@ -465,9 +465,9 @@ Table of Contents
 5.3.2.  CoAP
 
    The CoAP protocol mapping allows SDF models to specify how
-   affordances should be accessed using the CoAP protocol.  The mapping
-   includes details such as method, URI, as well as optional query
-   string and options.
+   affordances should be accessed using CoAP.  The mapping includes
+   details such as method, URI, as well as optional query string and
+   options.
 
    $$SDF-EXTENSION-DATA //= coap-protocol-map
 
