@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-04T00:55:50.360965+00:00",
+  "timestamp": "2025-09-09T00:57:44.235790+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -235,13 +235,13 @@
       "labels": [],
       "body": "# HTTP and CoAP SDF Protocol Mappings\n\nThis PR aim is to add SDF Protocol Mappings for HTTP and CoAP. It addresses the issue #5.\n\nCoAP is still missing.\n\nThis PR currently features:\n- **OpenAPI CDDL and structure change**\n- **Draft of HTTP protocol mapping**\n",
       "createdAt": "2025-08-27T09:50:05Z",
-      "updatedAt": "2025-09-02T13:30:31Z",
+      "updatedAt": "2025-09-08T06:28:01Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "c9593aa5d2825b8fffc2b040ee8d1e7f5df6f31d",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "ip-pmap",
-      "headRefOid": "be9326467642bc01f618df791d5d3015af3366b1",
+      "headRefOid": "055b0495917542eb8000eb1386ae1296c3711913",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -293,6 +293,250 @@
               "body": "That is a good point; perhaps that is the way!",
               "createdAt": "2025-09-02T13:30:31Z",
               "updatedAt": "2025-09-02T13:30:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86-ZYJi",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Thank you, @lorenzocorneo, I think this is an interesting starting point for further discussion! See a first set of CoAP-related comments below.",
+          "createdAt": "2025-09-07T09:04:02Z",
+          "updatedAt": "2025-09-07T09:20:18Z",
+          "comments": [
+            {
+              "originalPosition": 130,
+              "body": "For CoAP, there is also `PATCH`, `FETCH`, and `iPATCH` defined. Should these be disallowed to be used here? Or would it make sense to refer to the respective IANA registry here (in case more CoAP methods are added later)?\r\n\r\nI guess similar considerations apply to HTTP.",
+              "createdAt": "2025-09-07T09:04:02Z",
+              "updatedAt": "2025-09-07T09:20:47Z"
+            },
+            {
+              "originalPosition": 63,
+              "body": "As \"HTTP\" already includes \"protocol\", this could probably be shortened.\n\n```suggestion\n - \"http\" is an object containing properties that are specific to HTTP.\n```",
+              "createdAt": "2025-09-07T09:05:25Z",
+              "updatedAt": "2025-09-07T09:20:18Z"
+            },
+            {
+              "originalPosition": 64,
+              "body": "```suggestion\n - \"coap\" is an object containing properties that are specific to CoAP.\n - Other protocol mapping objects can be added by creating a new protocol\n```",
+              "createdAt": "2025-09-07T09:05:53Z",
+              "updatedAt": "2025-09-07T09:20:18Z"
+            },
+            {
+              "originalPosition": 146,
+              "body": "Since CoAP options are different from HTTP in the sense that they aren't simple key-value pairs, we had a long discussion in the Web of Things working group (see https://github.com/w3c/wot-binding-templates/pull/149) that lead to specifying CoAP options via \"features\" instead of an `options` object (also see [this Editor's Note](https://w3c.github.io/wot-binding-templates/bindings/protocols/coap/index.html#issue-container-generatedID)).\r\n\r\nI assume we could apply some of the results here as well. However, that would make this part of the CoAP section a bit more complex. We would also need to define an extension point for future options that may need to be covered later.",
+              "createdAt": "2025-09-07T09:14:18Z",
+              "updatedAt": "2025-09-07T09:23:17Z"
+            },
+            {
+              "originalPosition": 173,
+              "body": "One thing that also became clear from the WoT discussion[^1]: If the property is marked as \"observable\", we do not really need this indication, partly because a client could simply try to observe by adding the respective option and fall back to polling if the server does not include an observe option itself. \n\n[^1]: https://w3c.github.io/wot-binding-templates/bindings/protocols/coap/index.html#observing-resources",
+              "createdAt": "2025-09-07T09:19:00Z",
+              "updatedAt": "2025-09-07T09:20:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86-ZaBW",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-07T09:25:36Z",
+          "updatedAt": "2025-09-07T09:25:36Z",
+          "comments": [
+            {
+              "originalPosition": 121,
+              "body": "```suggestion\nThe CoAP protocol mapping allows SDF models to specify how affordances should be\naccessed using CoAP. The mapping includes details such as method,\nURI, as well as optional query string and options.\n```",
+              "createdAt": "2025-09-07T09:25:36Z",
+              "updatedAt": "2025-09-07T09:25:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86-ZadV",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-07T09:30:55Z",
+          "updatedAt": "2025-09-07T09:30:55Z",
+          "comments": [
+            {
+              "originalPosition": 173,
+              "body": "The use case covered by the example is pretty interesting, though, so I guess it would just need to be adjusted in the light of the previous comment.",
+              "createdAt": "2025-09-07T09:30:55Z",
+              "updatedAt": "2025-09-07T09:30:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86-Za8O",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-07T09:37:08Z",
+          "updatedAt": "2025-09-07T09:37:08Z",
+          "comments": [
+            {
+              "originalPosition": 194,
+              "body": "Since (at least theoretically) you could also use CoAP over something like [Bluetooth GATT](https://datatracker.ietf.org/doc/html/draft-amsuess-core-coap-over-gatt-07) or even [SMS](https://datatracker.ietf.org/doc/html/draft-becker-core-coap-sms-gprs-06), maybe we could also omit \"IP-based\" here.\n\n```suggestion\n| coap         | CoAP                        | Protocol mapping for CoAP-based devices  | This document   |\n```",
+              "createdAt": "2025-09-07T09:37:08Z",
+              "updatedAt": "2025-09-07T09:37:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86-ZbKV",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-07T09:39:46Z",
+          "updatedAt": "2025-09-07T09:39:46Z",
+          "comments": [
+            {
+              "originalPosition": 134,
+              "body": "If we have a `body` for HTTP, should we also have a `payload` for CoAP here (or neither)? ",
+              "createdAt": "2025-09-07T09:39:46Z",
+              "updatedAt": "2025-09-07T09:39:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86-Zbo5",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-07T09:44:06Z",
+          "updatedAt": "2025-09-07T09:44:07Z",
+          "comments": [
+            {
+              "originalPosition": 106,
+              "body": "I guess something similar could be applied to CoAP as well. However, if the query is included, then using `path` here might not be as accurate anymore.\n\nIf we are using URI template variables, we probably also want to associate them with a schema, similar to how WoT is doing it (see https://www.w3.org/TR/wot-thing-description11/#form-uriVariables).",
+              "createdAt": "2025-09-07T09:44:07Z",
+              "updatedAt": "2025-09-07T09:46:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86-Zc00",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-07T09:56:29Z",
+          "updatedAt": "2025-09-07T09:56:29Z",
+          "comments": [
+            {
+              "originalPosition": 105,
+              "body": "Looking at this with WoT TD in mind, I just also had the thought that we probably also need a way to differentiate different \"operation types\" here, i.e., what if you can read _and_ write a property? Would an array of objects that could be associated with certain operations (similar to WoT's `forms`) work here?",
+              "createdAt": "2025-09-07T09:56:29Z",
+              "updatedAt": "2025-09-07T09:56:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86-cPvR",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-08T06:06:58Z",
+          "updatedAt": "2025-09-08T06:06:58Z",
+          "comments": [
+            {
+              "originalPosition": 130,
+              "body": "Yes, Jan! Maybe a pointer to the IANA registry is more future proof, although it may be less human readable...It is a trade-off.",
+              "createdAt": "2025-09-08T06:06:58Z",
+              "updatedAt": "2025-09-08T06:06:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86-cSXn",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-08T06:12:17Z",
+          "updatedAt": "2025-09-08T06:12:17Z",
+          "comments": [
+            {
+              "originalPosition": 173,
+              "body": "Perhaps a better example where it is not necessary to specify observe is in an event, and not a property like in the case above...",
+              "createdAt": "2025-09-08T06:12:17Z",
+              "updatedAt": "2025-09-08T06:12:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86-cVJ6",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-08T06:15:47Z",
+          "updatedAt": "2025-09-08T06:15:47Z",
+          "comments": [
+            {
+              "originalPosition": 134,
+              "body": "I think it may be good to have an optional body. And yes, we should have a `payload` for CoAP.",
+              "createdAt": "2025-09-08T06:15:47Z",
+              "updatedAt": "2025-09-08T06:15:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86-cbhT",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-08T06:28:01Z",
+          "updatedAt": "2025-09-08T06:28:01Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "My mental model is oriented to simple yet usable solutions, thus avoiding complexity. I though acknowledge that key-value based options may be limiting...Perhaps you could open an issue here on GitHub to be discussed during interim meetings.\r\n\r\nA reflection on the WoT solution is that NIPC specifically targets IoT devices, so it may make sense to provide more functionality in spite of complexity for CoAP. TBD.",
+              "createdAt": "2025-09-08T06:28:01Z",
+              "updatedAt": "2025-09-08T06:28:01Z"
             }
           ]
         }
