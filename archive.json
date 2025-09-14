@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-09T00:57:44.235790+00:00",
+  "timestamp": "2025-09-14T01:00:48.029423+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -191,7 +191,7 @@
       "labels": [],
       "body": "Added an appendix section with the combined cddl. \r\n\r\nAddress #1",
       "createdAt": "2025-08-16T18:23:45Z",
-      "updatedAt": "2025-08-18T19:54:45Z",
+      "updatedAt": "2025-09-11T03:56:29Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "16a3a5adb5633adaa9485bfaae7b42c979903f7a",
@@ -235,7 +235,7 @@
       "labels": [],
       "body": "# HTTP and CoAP SDF Protocol Mappings\n\nThis PR aim is to add SDF Protocol Mappings for HTTP and CoAP. It addresses the issue #5.\n\nCoAP is still missing.\n\nThis PR currently features:\n- **OpenAPI CDDL and structure change**\n- **Draft of HTTP protocol mapping**\n",
       "createdAt": "2025-08-27T09:50:05Z",
-      "updatedAt": "2025-09-08T06:28:01Z",
+      "updatedAt": "2025-09-13T14:26:58Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "c9593aa5d2825b8fffc2b040ee8d1e7f5df6f31d",
@@ -537,6 +537,66 @@
               "body": "My mental model is oriented to simple yet usable solutions, thus avoiding complexity. I though acknowledge that key-value based options may be limiting...Perhaps you could open an issue here on GitHub to be discussed during interim meetings.\r\n\r\nA reflection on the WoT solution is that NIPC specifically targets IoT devices, so it may make sense to provide more functionality in spite of complexity for CoAP. TBD.",
               "createdAt": "2025-09-08T06:28:01Z",
               "updatedAt": "2025-09-08T06:28:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86_-kZw",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-13T14:08:23Z",
+          "updatedAt": "2025-09-13T14:08:23Z",
+          "comments": [
+            {
+              "originalPosition": 130,
+              "body": "Maybe the current list of entries could be given as an example, while mentioning that the names assigned to the method codes in the [registry](https://www.iana.org/assignments/core-parameters/core-parameters.xhtml#method-codes) are authoritative?",
+              "createdAt": "2025-09-13T14:08:23Z",
+              "updatedAt": "2025-09-13T14:08:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86_-sHL",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-13T14:20:27Z",
+          "updatedAt": "2025-09-13T14:20:27Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "> Perhaps you could open an issue here on GitHub to be discussed during interim meetings.\r\n\r\nSure, will do :)\r\n\r\nJust for reference, in the WoT Binding Template, we currently have the features `accept`, `contentFormat`, `hopLimit`, `blockwise`, `qblockwise` covered, with additional hints for the minimal polling interval and whether confirmable requests should be used.\r\n\r\nSo, an example that would cover most of these features could look like this:\r\n\r\n```suggestion\r\n          \"accept\": 60,\r\n          \"contentFormat\": 50,\r\n          \"minPollingInterval\": 60,\r\n          \"confirmable\": true,\r\n          \"hopLimit\": 15,\r\n          \"blockwise\": {\r\n            \"block2Size\": 64\r\n          }\r\n```\r\n\r\nVia an extension point, more options could be covered like this in the future.",
+              "createdAt": "2025-09-13T14:20:27Z",
+              "updatedAt": "2025-09-13T14:20:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A86_-wkw",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-13T14:26:58Z",
+          "updatedAt": "2025-09-13T14:26:58Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "Hmm, on second thought, I am wondering whether these features actually classify as class information or if they are mainly instance-specific. I suppose at least `confirmable`, `minPollingInterval`, `hopLimit`, and `blockwise` could be seen that way. The content formats could maybe also be seen as implementation-specific. Leaving this information out (for now) would of course make things a lot easier.",
+              "createdAt": "2025-09-13T14:26:58Z",
+              "updatedAt": "2025-09-13T14:27:12Z"
             }
           ]
         }
