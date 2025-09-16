@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-14T01:00:48.029423+00:00",
+  "timestamp": "2025-09-16T00:56:14.141395+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -235,7 +235,7 @@
       "labels": [],
       "body": "# HTTP and CoAP SDF Protocol Mappings\n\nThis PR aim is to add SDF Protocol Mappings for HTTP and CoAP. It addresses the issue #5.\n\nCoAP is still missing.\n\nThis PR currently features:\n- **OpenAPI CDDL and structure change**\n- **Draft of HTTP protocol mapping**\n",
       "createdAt": "2025-08-27T09:50:05Z",
-      "updatedAt": "2025-09-13T14:26:58Z",
+      "updatedAt": "2025-09-15T21:29:21Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "c9593aa5d2825b8fffc2b040ee8d1e7f5df6f31d",
@@ -597,6 +597,126 @@
               "body": "Hmm, on second thought, I am wondering whether these features actually classify as class information or if they are mainly instance-specific. I suppose at least `confirmable`, `minPollingInterval`, `hopLimit`, and `blockwise` could be seen that way. The content formats could maybe also be seen as implementation-specific. Leaving this information out (for now) would of course make things a lot easier.",
               "createdAt": "2025-09-13T14:26:58Z",
               "updatedAt": "2025-09-13T14:27:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87AI3bg",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-15T08:54:43Z",
+          "updatedAt": "2025-09-15T08:54:43Z",
+          "comments": [
+            {
+              "originalPosition": 105,
+              "body": "> what if you can read and write a property?\r\n\r\nThat should be specified in the property and perhaps not in the protocol mapping?",
+              "createdAt": "2025-09-15T08:54:43Z",
+              "updatedAt": "2025-09-15T08:54:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87AMrX5",
+          "commit": {
+            "abbreviatedOid": "055b049"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-15T13:12:59Z",
+          "updatedAt": "2025-09-15T13:12:59Z",
+          "comments": [
+            {
+              "originalPosition": 105,
+              "body": "Hmm, but at the moment, you could only specify one method, while reading and writing would probably use different methods (e.g., `GET` and `PUT`), right?",
+              "createdAt": "2025-09-15T13:12:59Z",
+              "updatedAt": "2025-09-15T13:12:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87ARFJ5",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-15T17:52:11Z",
+          "updatedAt": "2025-09-15T17:52:11Z",
+          "comments": [
+            {
+              "originalPosition": 134,
+              "body": "How do we define the body here? The body will often contain information that is not known at the time of writing the sdf document (such as the value to be written). It can also be instance information. ",
+              "createdAt": "2025-09-15T17:52:11Z",
+              "updatedAt": "2025-09-15T17:52:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87ARGJ3",
+          "commit": {
+            "abbreviatedOid": "055b049"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-15T17:53:41Z",
+          "updatedAt": "2025-09-15T17:53:41Z",
+          "comments": [
+            {
+              "originalPosition": 107,
+              "body": "Do we need this `query` if it is already a part of the `path` above?",
+              "createdAt": "2025-09-15T17:53:41Z",
+              "updatedAt": "2025-09-15T17:53:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87ATtEQ",
+          "commit": {
+            "abbreviatedOid": "be93264"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-15T21:28:35Z",
+          "updatedAt": "2025-09-15T21:28:36Z",
+          "comments": [
+            {
+              "originalPosition": 134,
+              "body": "Yeah, I think that is a good point, @rohitmohan96 \u2013 I guess in practice, the output of all devices is probably going to be the same value quite rarely. Hmm, or do we have a use case that would justify prescribing a body/payload at the model level?",
+              "createdAt": "2025-09-15T21:28:35Z",
+              "updatedAt": "2025-09-15T21:28:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87ATtet",
+          "commit": {
+            "abbreviatedOid": "055b049"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-15T21:29:21Z",
+          "updatedAt": "2025-09-15T21:29:21Z",
+          "comments": [
+            {
+              "originalPosition": 107,
+              "body": "Maybe we could merge `path` and `query` into something like `href`?",
+              "createdAt": "2025-09-15T21:29:21Z",
+              "updatedAt": "2025-09-15T21:29:22Z"
             }
           ]
         }
