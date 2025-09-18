@@ -118,8 +118,12 @@ sdfProtocolMap
   |        +--> BLE-specific mapping
   |
   +-----> zigbee
+  |        |
+  |        +--> Zigbee-specific mapping
+  |
+  +-----> openapi
            |
-           +--> Zigbee-specific mapping
+           +--> OpenAPI-specific mapping
 ~~~
 {: #protmap title="Property Mapping"}
 
@@ -127,10 +131,11 @@ As shown in {{protmap}}, protocol-specific properties must be embedded in an
 sdfProtocolMap object, for example a "ble" or a "zigbee" object.
 
 
-| Attribute |  Type  |          Example                         |
-+-----------+--------+------------------------------------------|
-| ble       | object | an object with BLE-specific attributes   |
-| zigbee    | object | an object with Zigbee-specific attributes|
+| Attribute |  Type  |          Example                           |
++-----------+--------+--------------------------------------------|
+| ble       | object | an object with BLE-specific attributes     |
+| zigbee    | object | an object with Zigbee-specific attributes  |
+| openapi   | object | an object with OpenAPI-specific attributes |
 {: #proobj title="Protocol objects"}
 
 where-
@@ -160,6 +165,40 @@ Example protocol mapping:
               "serviceID": "12345678-1234-5678-1234-56789abcdef4",
               "characteristicID":
                 "12345678-1234-5678-1234-56789abcdef4"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+~~~
+{: #exprotmap title="Example property mapping"}
+
+For properties that have a different protocol mapping for read and write operations, the protocol mapping can be specified as such: 
+
+~~~ json
+{
+  "sdfObject": {
+    "healthsensor": {
+      "sdfProperty": {
+        "heartrate": {
+          "description": "The current measured heart rate",
+          "type": "number",
+          "unit": "beat/min",
+          "observable": false,
+          "sdfProtocolMap": {
+            "ble": {
+              "read": {
+                "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+                "characteristicID":
+                  "12345678-1234-5678-1234-56789abcdef5"
+              },
+              "write": {
+                "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+                "characteristicID":
+                  "12345678-1234-5678-1234-56789abcdef6"
+              }
             }
           }
         }
@@ -420,6 +459,7 @@ Following protocol mappings are described in this document:
 |--------------|-----------------------------|---------------------------------------------|-----------------|
 | ble          | Bluetooth Low Energy (BLE)  | Protocol mapping for BLE devices            | This document   |
 | zigbee       | Zigbee                      | Protocol mapping for Zigbee devices         | This document   |
+| openapi      | OpenAPI                     | Protocol mapping for OpenAPI                | This document   |
 {: #protmap-reg title="Protocol Mapping Registry"}
 
 --- back
@@ -427,6 +467,8 @@ Following protocol mappings are described in this document:
 # CDDL Definition
 
 ~~~ cddl
+{::include cddl/sdf-protocol-map.cddl}
+
 {::include cddl/ble-protocol-map.cddl}
 
 {::include cddl/ble-event-map.cddl}

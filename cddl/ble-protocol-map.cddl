@@ -1,6 +1,8 @@
-$$SDF-EXTENSION-DATA //= ble-protocol-map
+$$SDF-PROTOCOL-MAP //= ble-protocol-map
 
 ble-protocol-map = {
-  serviceID: text
-  characteristicID: text
+  ble: {
+    serviceID: text
+    characteristicID: text
+  }
 }

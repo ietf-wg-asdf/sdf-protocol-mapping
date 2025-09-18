@@ -1,8 +1,10 @@
-$$SDF-EXTENSION-DATA //= zigbee-protocol-map
+$$SDF-PROTOCOL-MAP //= zigbee-protocol-map
 
 zigbee-protocol-map = {
-  endpointID: uint
-  clusterID: uint
-  attributeID: uint
-  type: uint
+  zigbee: {
+    endpointID: uint
+    clusterID: uint
+    attributeID: uint
+    type: uint
+  }
 }
