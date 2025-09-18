@@ -15,21 +15,21 @@ protocol-specific operations. The protocol mapping mechanism allows SDF models
 to specify how properties, actions, and events should be accessed using specific
 IP and non-IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP. 
     " name="description">
-<meta content="xml2rfc 3.30.0" name="generator">
+<meta content="xml2rfc 3.30.1" name="generator">
 <meta content="IoT" name="keyword">
 <meta content="draft-mohan-asdf-sdf-protocol-mapping-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.0
+  xml2rfc 3.30.1
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.3.8
+    platformdirs 4.4.0
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.4
+    requests 2.32.5
     setuptools 80.9.0
     wcwidth 0.2.13
 -->
@@ -1050,11 +1050,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">sdf-protocol-mapping</td>
-<td class="right">August 2025</td>
+<td class="right">September 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Mohan, et al.</td>
-<td class="center">Expires 19 February 2026</td>
+<td class="center">Expires 22 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-mohan-asdf-sdf-protocol-mapping-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-08-18" class="published">18 August 2025</time>
+<time datetime="2025-09-18" class="published">18 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-02-19">19 February 2026</time></dd>
+<dd class="expires"><time datetime="2026-03-22">22 March 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1133,7 +1133,7 @@ IP and non-IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.<a
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 19 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1283,16 +1283,21 @@ in the IANA registry requested in <a href="#iana-prot-map" class="auto internal 
 <figure id="figure-1">
         <div id="section-3-3.1">
           <div class="alignLeft art-svg artwork" id="section-3-3.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="176" width="320" viewBox="0 0 320 176" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-              <path d="M 24,48 L 24,128" fill="none" stroke="black"></path>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="240" width="328" viewBox="0 0 328 240" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 24,48 L 24,192" fill="none" stroke="black"></path>
               <path d="M 96,80 L 96,96" fill="none" stroke="black"></path>
               <path d="M 96,144 L 96,160" fill="none" stroke="black"></path>
+              <path d="M 96,208 L 96,224" fill="none" stroke="black"></path>
               <path d="M 24,64 L 72,64" fill="none" stroke="black"></path>
               <path d="M 96,96 L 120,96" fill="none" stroke="black"></path>
               <path d="M 24,128 L 72,128" fill="none" stroke="black"></path>
               <path d="M 96,160 L 120,160" fill="none" stroke="black"></path>
+              <path d="M 24,192 L 72,192" fill="none" stroke="black"></path>
+              <path d="M 96,224 L 120,224" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="128,224 116,218.4 116,229.6" fill="black" transform="rotate(0,120,224)"></polygon>
               <polygon class="arrowhead" points="128,160 116,154.4 116,165.6" fill="black" transform="rotate(0,120,160)"></polygon>
               <polygon class="arrowhead" points="128,96 116,90.4 116,101.6" fill="black" transform="rotate(0,120,96)"></polygon>
+              <polygon class="arrowhead" points="80,192 68,186.4 68,197.6" fill="black" transform="rotate(0,72,192)"></polygon>
               <polygon class="arrowhead" points="80,128 68,122.4 68,133.6" fill="black" transform="rotate(0,72,128)"></polygon>
               <polygon class="arrowhead" points="80,64 68,58.4 68,69.6" fill="black" transform="rotate(0,72,64)"></polygon>
               <g class="text">
@@ -1303,6 +1308,9 @@ in the IANA registry requested in <a href="#iana-prot-map" class="auto internal 
                 <text x="108" y="132">zigbee</text>
                 <text x="192" y="164">Zigbee-specific</text>
                 <text x="288" y="164">mapping</text>
+                <text x="112" y="196">openapi</text>
+                <text x="196" y="228">OpenAPI-specific</text>
+                <text x="296" y="228">mapping</text>
               </g>
             </svg><a href="#section-3-3.1.1" class="pilcrow">¶</a>
 </div>
@@ -1336,6 +1344,11 @@ sdfProtocolMap object, for example a "ble" or a "zigbee" object.<a href="#sectio
             <td class="text-left" rowspan="1" colspan="1">zigbee</td>
             <td class="text-left" rowspan="1" colspan="1">object</td>
             <td class="text-left" rowspan="1" colspan="1">an object with Zigbee-specific attributes</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">openapi</td>
+            <td class="text-left" rowspan="1" colspan="1">object</td>
+            <td class="text-left" rowspan="1" colspan="1">an object with OpenAPI-specific attributes</td>
           </tr>
         </tbody>
       </table>
@@ -1388,6 +1401,45 @@ object<a href="#section-3-7.3.1" class="pilcrow">¶</a></p>
 <a href="#name-example-property-mapping" class="selfRef">Example property mapping</a>
         </figcaption></figure>
 </div>
+<p id="section-3-10">For properties that have a different protocol mapping for read and write operations, the protocol mapping can be specified as such:<a href="#section-3-10" class="pilcrow">¶</a></p>
+<span id="name-example-property-mapping-2"></span><div id="exprotmap2">
+<figure id="figure-3">
+        <div class="lang-json sourcecode" id="section-3-11.1">
+<pre>
+{
+  "sdfObject": {
+    "healthsensor": {
+      "sdfProperty": {
+        "heartrate": {
+          "description": "The current measured heart rate",
+          "type": "number",
+          "unit": "beat/min",
+          "observable": false,
+          "sdfProtocolMap": {
+            "ble": {
+              "read": {
+                "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+                "characteristicID":
+                  "12345678-1234-5678-1234-56789abcdef5"
+              },
+              "write": {
+                "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+                "characteristicID":
+                  "12345678-1234-5678-1234-56789abcdef6"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-example-property-mapping-2" class="selfRef">Example property mapping</a>
+        </figcaption></figure>
+</div>
 </section>
 </div>
 <div id="usage">
@@ -1428,18 +1480,20 @@ IDs that are used to access the corresponding SDF affordances.<a href="#section-
 <p id="section-5.1.1-1">For SDF properties and actions, the BLE protocol mapping structure
 is defined as follows:<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-ble-pro"></span><div id="blemap1">
-<figure id="figure-3">
+<figure id="figure-4">
             <div class="lang-cddl sourcecode" id="section-5.1.1-2.1">
 <pre>
-$$SDF-EXTENSION-DATA //= ble-protocol-map
+$$SDF-PROTOCOL-MAP //= ble-protocol-map
 
 ble-protocol-map = {
-  serviceID: text
-  characteristicID: text
+  ble: {
+    serviceID: text
+    characteristicID: text
+  }
 }
 </pre>
 </div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-cddl-definition-for-ble-pro" class="selfRef">CDDL definition for BLE Protocol Mapping for properties and actions</a>
             </figcaption></figure>
 </div>
@@ -1472,19 +1526,21 @@ ble-protocol-map = {
 <p id="section-5.1.1-7">For SDF events, the BLE protocol mapping structure is similar, but it may
 include additional attributes such as the type of the event.<a href="#section-5.1.1-7" class="pilcrow">¶</a></p>
 <span id="name-ble-protocol-mapping-for-ev"></span><div id="blemap2">
-<figure id="figure-4">
+<figure id="figure-5">
             <div class="lang-cddl sourcecode" id="section-5.1.1-8.1">
 <pre>
-$$SDF-EXTENSION-DATA //= ble-event-map
+$$SDF-PROTOCOL-MAP //= ble-event-map
 
 ble-event-map = {
-  type: "gatt" / "advertisements" / "connection_events"
-  ? serviceID: text
-  ? characteristicID: text
+  ble: {
+    type: "gatt" / "advertisements" / "connection_events"
+    ? serviceID: text
+    ? characteristicID: text
+  }
 }
 </pre>
 </div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
 <a href="#name-ble-protocol-mapping-for-ev" class="selfRef">BLE Protocol Mapping for events</a>
             </figcaption></figure>
 </div>
@@ -1559,20 +1615,22 @@ used to access the corresponding SDF affordances.<a href="#section-5.2-1" class=
 <p id="section-5.2.1-1">For SDF properties and actions, the Zigbee protocol mapping structure
 is defined as follows:<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-"></span><div id="zigmap1">
-<figure id="figure-5">
+<figure id="figure-6">
             <div class="lang-cddl sourcecode" id="section-5.2.1-2.1">
 <pre>
-$$SDF-EXTENSION-DATA //= zigbee-protocol-map
+$$SDF-PROTOCOL-MAP //= zigbee-protocol-map
 
 zigbee-protocol-map = {
-  endpointID: uint
-  clusterID: uint
-  attributeID: uint
-  type: uint
+  zigbee: {
+    endpointID: uint
+    clusterID: uint
+    attributeID: uint
+    type: uint
+  }
 }
 </pre>
 </div>
-<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
 <a href="#name-cddl-definition-for-zigbee-" class="selfRef">CDDL definition for Zigbee Protocol Mapping for properties and actions</a>
             </figcaption></figure>
 </div>
@@ -1632,7 +1690,7 @@ might look like:<a href="#section-5.3-1" class="pilcrow">¶</a></p>
       "sdfProtocolMap": {
         "openapi": {
             "operationRef": "https://example.com/openapi.json#/paths\
-/~1heartrate~1{id}~1current/get",
+/~1heartrate~1{id}~1current",
             "$ref": "https://example.com/openapi.json#/components/sc\
 hema/HeartRate/properties/pulse"
         }
@@ -1646,7 +1704,7 @@ hema/HeartRate/properties/pulse"
 current heart rate, and the <code>$ref</code> points to the OpenAPI schema that
 defines the heart rate property. An example of the OpenAPI schema
 might look like:<a href="#section-5.3-3" class="pilcrow">¶</a></p>
-<div class="lang-yaml sourcecode" id="section-5.3-4">
+<div class="breakable lang-yaml sourcecode" id="section-5.3-4">
 <pre>
 paths:
   /heartrate/{id}/current:
@@ -1670,7 +1728,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HeartRate/properties/pulse"
+                $ref: "#/components/schemas/HeartRate"
+    put:
+      summary: Set current heart rate
+      description: |-
+        Set the current heart rate for a specific user
+        identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: |-
+            The ID of the user whose heart rate is being set.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeartRate"
 
 components:
   schemas:
@@ -1686,6 +1763,36 @@ components:
           description: |-
             The current body temperature in degrees Celsius.
 </pre><a href="#section-5.3-4" class="pilcrow">¶</a>
+</div>
+<p id="section-5.3-5">We assume that the readable properties will map to GET operations and the writable properties will map to PUT operations.
+If this is not the case, or if the API is different, the protocol mapping can be specified as such:<a href="#section-5.3-5" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.3-6">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "sdfProperty": {
+    "heartrate": {
+      "sdfProtocolMap": {
+        "openapi": {
+          "read": {
+            "operationRef": "https://example.com/openapi.json#/paths\
+/~1heartrate~1{id}~1current/get",
+            "$ref": "https://example.com/openapi.json#/components/sc\
+hema/HeartRate/properties/pulse"
+          },
+          "write": {
+            "operationRef": "https://example.com/openapi.json#/paths\
+/~1heartrate~1{id}~1current/put",
+            "$ref": "https://example.com/openapi.json#/components/sc\
+hema/HeartRate/properties/pulse"
+          }
+        }
+      }
+    }
+  }
+}
+</pre><a href="#section-5.3-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1754,6 +1861,12 @@ in accordance with <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</spa
               <td class="text-left" rowspan="1" colspan="1">zigbee</td>
               <td class="text-left" rowspan="1" colspan="1">Zigbee</td>
               <td class="text-left" rowspan="1" colspan="1">Protocol mapping for Zigbee devices</td>
+              <td class="text-left" rowspan="1" colspan="1">This document</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">openapi</td>
+              <td class="text-left" rowspan="1" colspan="1">OpenAPI</td>
+              <td class="text-left" rowspan="1" colspan="1">Protocol mapping for OpenAPI</td>
               <td class="text-left" rowspan="1" colspan="1">This document</td>
             </tr>
           </tbody>
@@ -1827,28 +1940,41 @@ in accordance with <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</spa
       </h2>
 <div class="lang-cddl sourcecode" id="appendix-A-1">
 <pre>
-$$SDF-EXTENSION-DATA //= ble-protocol-map
+$$SDF-EXTENSION-DATA //= sdf-protocol-map
+
+; sdf-protocol-map is a map of protocol name to protocol-specific mapping information
+sdf-protocol-map = {
+    * $$SDF-PROTOCOL-MAP
+}
+
+$$SDF-PROTOCOL-MAP //= ble-protocol-map
 
 ble-protocol-map = {
-  serviceID: text
-  characteristicID: text
+  ble: {
+    serviceID: text
+    characteristicID: text
+  }
 }
 
-$$SDF-EXTENSION-DATA //= ble-event-map
+$$SDF-PROTOCOL-MAP //= ble-event-map
 
 ble-event-map = {
-  type: "gatt" / "advertisements" / "connection_events"
-  ? serviceID: text
-  ? characteristicID: text
+  ble: {
+    type: "gatt" / "advertisements" / "connection_events"
+    ? serviceID: text
+    ? characteristicID: text
+  }
 }
 
-$$SDF-EXTENSION-DATA //= zigbee-protocol-map
+$$SDF-PROTOCOL-MAP //= zigbee-protocol-map
 
 zigbee-protocol-map = {
-  endpointID: uint
-  clusterID: uint
-  attributeID: uint
-  type: uint
+  zigbee: {
+    endpointID: uint
+    clusterID: uint
+    attributeID: uint
+    type: uint
+  }
 }
 </pre><a href="#appendix-A-1" class="pilcrow">¶</a>
 </div>
