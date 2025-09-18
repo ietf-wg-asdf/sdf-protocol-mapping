@@ -175,7 +175,7 @@ Example protocol mapping:
 ~~~
 {: #exprotmap title="Example property mapping"}
 
-For properties that have a different protocol mapping for read and write operations, the protocol mapping can be specified as such: 
+For properties that have a different protocol mapping for read and write operations, the protocol mapping can be specified as such:
 
 ~~~ json
 {
@@ -207,7 +207,7 @@ For properties that have a different protocol mapping for read and write operati
   }
 }
 ~~~
-{: #exprotmap title="Example property mapping"}
+{: #exprotmap2 title="Example property mapping"}
 
 # Usage
 
@@ -375,7 +375,7 @@ might look like:
       "sdfProtocolMap": {
         "openapi": {
             "operationRef": "https://example.com/openapi.json#/paths\
-/~1heartrate~1{id}~1current/get",
+/~1heartrate~1{id}~1current",
             "$ref": "https://example.com/openapi.json#/components/sc\
 hema/HeartRate/properties/pulse"
         }
@@ -413,7 +413,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HeartRate/properties/pulse"
+                $ref: "#/components/schemas/HeartRate"
+    put:
+      summary: Set current heart rate
+      description: |-
+        Set the current heart rate for a specific user
+        identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: |-
+            The ID of the user whose heart rate is being set.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeartRate"
 
 components:
   schemas:
@@ -428,6 +447,36 @@ components:
           format: float
           description: |-
             The current body temperature in degrees Celsius.
+~~~
+
+We assume that the readable properties will map to GET operations and the writable properties will map to PUT operations.
+If this is not the case, or if the API is different, the protocol mapping can be specified as such:
+
+~~~ json
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "sdfProperty": {
+    "heartrate": {
+      "sdfProtocolMap": {
+        "openapi": {
+          "read": {
+            "operationRef": "https://example.com/openapi.json#/paths\
+/~1heartrate~1{id}~1current/get",
+            "$ref": "https://example.com/openapi.json#/components/sc\
+hema/HeartRate/properties/pulse"
+          },
+          "write": {
+            "operationRef": "https://example.com/openapi.json#/paths\
+/~1heartrate~1{id}~1current/put",
+            "$ref": "https://example.com/openapi.json#/components/sc\
+hema/HeartRate/properties/pulse"
+          }
+        }
+      }
+    }
+  }
+}
 ~~~
 
 # Security Considerations
