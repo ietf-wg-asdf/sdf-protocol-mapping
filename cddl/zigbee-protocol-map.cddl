@@ -3,8 +3,14 @@ $$SDF-PROTOCOL-MAP //= (
 )
 
 zigbee-protocol-map = {
+  ? zigbee-property,
+  ? read: { zigbee-property },
+  ? write: { zigbee-property }
+}
+
+zigbee-property = (
   endpointID: uint,
   clusterID: uint,
   attributeID: uint,
   type: uint
-}
+)

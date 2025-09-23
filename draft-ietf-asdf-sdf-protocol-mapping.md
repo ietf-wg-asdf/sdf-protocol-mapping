@@ -263,6 +263,30 @@ For example, a BLE protocol mapping for a temperature property might look like:
 }
 ~~~
 
+For a temperature property that has different mappings for read and write operations,
+the BLE protocol mapping might look like:
+
+~~~ json
+{
+  "sdfProperty": {
+    "temperature": {
+      "sdfProtocolMap": {
+        "ble": {
+          "read": {
+            "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+            "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+          },
+          "write": {
+            "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+            "characteristicID": "12345678-1234-5678-1234-56789abcdef6"
+          }
+        }
+      }
+    }
+  }
+}
+~~~
+
 For SDF events, the BLE protocol mapping structure is similar, but it may
 include additional attributes such as the type of the event.
 
@@ -363,8 +387,16 @@ For example, a Zigbee protocol mapping for a temperature property might look lik
 ## IP based Protocol Mapping
 
 The protocol mapping mechanism can potentially also be used for IP-based protocols
-such as HTTP or CoAP. An example of a protocol mapping for a property using HTTP
-might look like:
+such as HTTP or CoAP.
+
+In the case of HTTP, SDF protocol mappings towards an SDF quality MAY be
+expressed by directly pointing to OpenAPI schema and/or component.
+
+~~~ cddl
+{::include cddl/openapi-protocol-map.cddl}
+~~~
+
+An example of a protocol mapping for a property using HTTP might look like:
 
 ~~~ json
 =============== NOTE: '\' line wrapping per RFC 8792 ================
