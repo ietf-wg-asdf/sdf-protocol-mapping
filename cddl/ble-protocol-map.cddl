@@ -3,6 +3,12 @@ $$SDF-PROTOCOL-MAP //= (
 )
 
 ble-protocol-map = {
+  ? ble-property,
+  ? read: { ble-property },
+  ? write: { ble-property }
+}
+
+ble-property = (
   serviceID: text,
   characteristicID: text
-}
+)
