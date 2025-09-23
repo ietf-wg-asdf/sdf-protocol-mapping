@@ -1,6 +1,5 @@
-$$SDF-EXTENSION-DATA //= sdf-protocol-map
-
-; sdf-protocol-map is a map of protocol name to protocol-specific mapping information
-sdf-protocol-map = {
+$$SDF-EXTENSION-DATA //= (
+  sdfProtocolMap: {
     * $$SDF-PROTOCOL-MAP
-}
+  }
+)

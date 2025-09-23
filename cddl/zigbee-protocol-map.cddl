@@ -1,10 +1,10 @@
-$$SDF-PROTOCOL-MAP //= zigbee-protocol-map
+$$SDF-PROTOCOL-MAP //= (
+  zigbee: zigbee-protocol-map
+)
 
 zigbee-protocol-map = {
-  zigbee: {
-    endpointID: uint
-    clusterID: uint
-    attributeID: uint
-    type: uint
-  }
+  endpointID: uint,
+  clusterID: uint,
+  attributeID: uint,
+  type: uint
 }
