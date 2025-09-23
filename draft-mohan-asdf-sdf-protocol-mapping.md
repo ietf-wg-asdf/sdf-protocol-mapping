@@ -118,8 +118,12 @@ sdfProtocolMap
   |        +--> BLE-specific mapping
   |
   +-----> zigbee
+  |        |
+  |        +--> Zigbee-specific mapping
+  |
+  +-----> openapi
            |
-           +--> Zigbee-specific mapping
+           +--> OpenAPI-specific mapping
 ~~~
 {: #protmap title="Property Mapping"}
 
@@ -127,10 +131,11 @@ As shown in {{protmap}}, protocol-specific properties must be embedded in an
 sdfProtocolMap object, for example a "ble" or a "zigbee" object.
 
 
-| Attribute |  Type  |          Example                         |
-+-----------+--------+------------------------------------------|
-| ble       | object | an object with BLE-specific attributes   |
-| zigbee    | object | an object with Zigbee-specific attributes|
+| Attribute |  Type  |          Example                           |
++-----------+--------+--------------------------------------------|
+| ble       | object | an object with BLE-specific attributes     |
+| zigbee    | object | an object with Zigbee-specific attributes  |
+| openapi   | object | an object with OpenAPI-specific attributes |
 {: #proobj title="Protocol objects"}
 
 where-
@@ -169,6 +174,40 @@ Example protocol mapping:
 }
 ~~~
 {: #exprotmap title="Example property mapping"}
+
+For properties that have a different protocol mapping for read and write operations, the protocol mapping can be specified as such:
+
+~~~ json
+{
+  "sdfObject": {
+    "healthsensor": {
+      "sdfProperty": {
+        "heartrate": {
+          "description": "The current measured heart rate",
+          "type": "number",
+          "unit": "beat/min",
+          "observable": false,
+          "sdfProtocolMap": {
+            "ble": {
+              "read": {
+                "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+                "characteristicID":
+                  "12345678-1234-5678-1234-56789abcdef5"
+              },
+              "write": {
+                "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+                "characteristicID":
+                  "12345678-1234-5678-1234-56789abcdef6"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+~~~
+{: #exprotmap2 title="Example property mapping"}
 
 # Usage
 
@@ -217,6 +256,30 @@ For example, a BLE protocol mapping for a temperature property might look like:
         "ble": {
           "serviceID": "12345678-1234-5678-1234-56789abcdef4",
           "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+        }
+      }
+    }
+  }
+}
+~~~
+
+For a temperature property that has different mappings for read and write operations,
+the BLE protocol mapping might look like:
+
+~~~ json
+{
+  "sdfProperty": {
+    "temperature": {
+      "sdfProtocolMap": {
+        "ble": {
+          "read": {
+            "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+            "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+          },
+          "write": {
+            "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+            "characteristicID": "12345678-1234-5678-1234-56789abcdef6"
+          }
         }
       }
     }
@@ -324,8 +387,16 @@ For example, a Zigbee protocol mapping for a temperature property might look lik
 ## IP based Protocol Mapping
 
 The protocol mapping mechanism can potentially also be used for IP-based protocols
-such as HTTP or CoAP. An example of a protocol mapping for a property using HTTP
-might look like:
+such as HTTP or CoAP.
+
+In the case of HTTP, SDF protocol mappings towards an SDF quality MAY be
+expressed by directly pointing to OpenAPI schema and/or component.
+
+~~~ cddl
+{::include cddl/openapi-protocol-map.cddl}
+~~~
+
+An example of a protocol mapping for a property using HTTP might look like:
 
 ~~~ json
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -336,7 +407,7 @@ might look like:
       "sdfProtocolMap": {
         "openapi": {
             "operationRef": "https://example.com/openapi.json#/paths\
-/~1heartrate~1{id}~1current/get",
+/~1heartrate~1{id}~1current",
             "$ref": "https://example.com/openapi.json#/components/sc\
 hema/HeartRate/properties/pulse"
         }
@@ -374,7 +445,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HeartRate/properties/pulse"
+                $ref: "#/components/schemas/HeartRate"
+    put:
+      summary: Set current heart rate
+      description: |-
+        Set the current heart rate for a specific user
+        identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: |-
+            The ID of the user whose heart rate is being set.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeartRate"
 
 components:
   schemas:
@@ -389,6 +479,36 @@ components:
           format: float
           description: |-
             The current body temperature in degrees Celsius.
+~~~
+
+We assume that the readable properties will map to GET operations and the writable properties will map to PUT operations.
+If this is not the case, or if the API is different, the protocol mapping can be specified as such:
+
+~~~ json
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "sdfProperty": {
+    "heartrate": {
+      "sdfProtocolMap": {
+        "openapi": {
+          "read": {
+            "operationRef": "https://example.com/openapi.json#/paths\
+/~1heartrate~1{id}~1current/get",
+            "$ref": "https://example.com/openapi.json#/components/sc\
+hema/HeartRate/properties/pulse"
+          },
+          "write": {
+            "operationRef": "https://example.com/openapi.json#/paths\
+/~1heartrate~1{id}~1current/put",
+            "$ref": "https://example.com/openapi.json#/components/sc\
+hema/HeartRate/properties/pulse"
+          }
+        }
+      }
+    }
+  }
+}
 ~~~
 
 # Security Considerations
@@ -420,6 +540,7 @@ Following protocol mappings are described in this document:
 |--------------|-----------------------------|---------------------------------------------|-----------------|
 | ble          | Bluetooth Low Energy (BLE)  | Protocol mapping for BLE devices            | This document   |
 | zigbee       | Zigbee                      | Protocol mapping for Zigbee devices         | This document   |
+| openapi      | OpenAPI                     | Protocol mapping for OpenAPI                | This document   |
 {: #protmap-reg title="Protocol Mapping Registry"}
 
 --- back
@@ -427,6 +548,8 @@ Following protocol mappings are described in this document:
 # CDDL Definition
 
 ~~~ cddl
+{::include cddl/sdf-protocol-map.cddl}
+
 {::include cddl/ble-protocol-map.cddl}
 
 {::include cddl/ble-event-map.cddl}
