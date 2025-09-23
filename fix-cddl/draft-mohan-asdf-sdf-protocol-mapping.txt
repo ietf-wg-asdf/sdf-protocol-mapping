@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 22 March 2026                                         L. Corneo
+Expires: 27 March 2026                                         L. Corneo
                                                                 Ericsson
-                                                       18 September 2025
+                                                       23 September 2025
 
 
                         Protocol Mapping for SDF
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 March 2026.
+   This Internet-Draft will expire on 27 March 2026.
 
 Copyright Notice
 
@@ -267,14 +267,20 @@ Table of Contents
    For SDF properties and actions, the BLE protocol mapping structure is
    defined as follows:
 
-   $$SDF-PROTOCOL-MAP //= ble-protocol-map
+   $$SDF-PROTOCOL-MAP //= (
+     ble: ble-protocol-map
+   )
 
    ble-protocol-map = {
-     ble: {
-       serviceID: text
-       characteristicID: text
-     }
+     ? ble-property,
+     ? read: { ble-property },
+     ? write: { ble-property }
    }
+
+   ble-property = (
+     serviceID: text,
+     characteristicID: text
+   )
 
      Figure 4: CDDL definition for BLE Protocol Mapping for properties
                                 and actions
@@ -303,17 +309,39 @@ Table of Contents
      }
    }
 
+   For a temperature property that has different mappings for read and
+   write operations, the BLE protocol mapping might look like:
+
+   {
+     "sdfProperty": {
+       "temperature": {
+         "sdfProtocolMap": {
+           "ble": {
+             "read": {
+               "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+               "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+             },
+             "write": {
+               "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+               "characteristicID": "12345678-1234-5678-1234-56789abcdef6"
+             }
+           }
+         }
+       }
+     }
+   }
+
    For SDF events, the BLE protocol mapping structure is similar, but it
    may include additional attributes such as the type of the event.
 
-   $$SDF-PROTOCOL-MAP //= ble-event-map
+   $$SDF-PROTOCOL-MAP //= (
+     ble: ble-event-map
+   )
 
    ble-event-map = {
-     ble: {
-       type: "gatt" / "advertisements" / "connection_events"
-       ? serviceID: text
-       ? characteristicID: text
-     }
+     type: "gatt" / "advertisements" / "connection_events",
+     ? serviceID: text,
+     ? characteristicID: text
    }
 
                  Figure 5: BLE Protocol Mapping for events
@@ -375,16 +403,22 @@ Table of Contents
    For SDF properties and actions, the Zigbee protocol mapping structure
    is defined as follows:
 
-   $$SDF-PROTOCOL-MAP //= zigbee-protocol-map
+   $$SDF-PROTOCOL-MAP //= (
+     zigbee: zigbee-protocol-map
+   )
 
    zigbee-protocol-map = {
-     zigbee: {
-       endpointID: uint
-       clusterID: uint
-       attributeID: uint
-       type: uint
-     }
+     ? zigbee-property,
+     ? read: { zigbee-property },
+     ? write: { zigbee-property }
    }
+
+   zigbee-property = (
+     endpointID: uint,
+     clusterID: uint,
+     attributeID: uint,
+     type: uint
+   )
 
          Figure 6: CDDL definition for Zigbee Protocol Mapping for
                            properties and actions
@@ -423,8 +457,28 @@ Table of Contents
 5.3.  IP based Protocol Mapping
 
    The protocol mapping mechanism can potentially also be used for IP-
-   based protocols such as HTTP or CoAP.  An example of a protocol
-   mapping for a property using HTTP might look like:
+   based protocols such as HTTP or CoAP.
+
+   In the case of HTTP, SDF protocol mappings towards an SDF quality MAY
+   be expressed by directly pointing to OpenAPI schema and/or component.
+
+   $$SDF-PROTOCOL-MAP //= (
+     openapi: openapi-protocol-map
+   )
+
+   openapi-protocol-map = {
+     ? openapi-property,
+     ? read: { openapi-property },
+     ? write: { openapi-property }
+   }
+
+   openapi-property = (
+     operationRef: text,
+     $ref: text
+   )
+
+   An example of a protocol mapping for a property using HTTP might look
+   like:
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -627,42 +681,53 @@ Table of Contents
 
 Appendix A.  CDDL Definition
 
-   $$SDF-EXTENSION-DATA //= sdf-protocol-map
-
-   ; sdf-protocol-map is a map of protocol name to protocol-specific mapping information
-   sdf-protocol-map = {
+   $$SDF-EXTENSION-DATA //= (
+     sdfProtocolMap: {
        * $$SDF-PROTOCOL-MAP
-   }
+     }
+   )
 
-   $$SDF-PROTOCOL-MAP //= ble-protocol-map
+   $$SDF-PROTOCOL-MAP //= (
+     ble: ble-protocol-map
+   )
 
    ble-protocol-map = {
-     ble: {
-       serviceID: text
-       characteristicID: text
-     }
+     ? ble-property,
+     ? read: { ble-property },
+     ? write: { ble-property }
    }
 
-   $$SDF-PROTOCOL-MAP //= ble-event-map
+   ble-property = (
+     serviceID: text,
+     characteristicID: text
+   )
+
+   $$SDF-PROTOCOL-MAP //= (
+     ble: ble-event-map
+   )
 
    ble-event-map = {
-     ble: {
-       type: "gatt" / "advertisements" / "connection_events"
-       ? serviceID: text
-       ? characteristicID: text
-     }
+     type: "gatt" / "advertisements" / "connection_events",
+     ? serviceID: text,
+     ? characteristicID: text
    }
 
-   $$SDF-PROTOCOL-MAP //= zigbee-protocol-map
+   $$SDF-PROTOCOL-MAP //= (
+     zigbee: zigbee-protocol-map
+   )
 
    zigbee-protocol-map = {
-     zigbee: {
-       endpointID: uint
-       clusterID: uint
-       attributeID: uint
-       type: uint
-     }
+     ? zigbee-property,
+     ? read: { zigbee-property },
+     ? write: { zigbee-property }
    }
+
+   zigbee-property = (
+     endpointID: uint,
+     clusterID: uint,
+     attributeID: uint,
+     type: uint
+   )
 
 Acknowledgments
 
