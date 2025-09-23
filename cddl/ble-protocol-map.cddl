@@ -1,8 +1,8 @@
-$$SDF-PROTOCOL-MAP //= ble-protocol-map
+$$SDF-PROTOCOL-MAP //= (
+  ble: ble-protocol-map
+)
 
 ble-protocol-map = {
-  ble: {
-    serviceID: text
-    characteristicID: text
-  }
+  serviceID: text,
+  characteristicID: text
 }
