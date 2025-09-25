@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-21T01:02:01.987298+00:00",
+  "timestamp": "2025-09-25T00:57:28.408942+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -64,7 +64,7 @@
       ],
       "body": "Suggesting improvement to add a CDDL snippet showing the delta between original SDF and the proposed protocol mapping extension.\n\n``` cddl\npropertyqualities = {\n ? observable: bool\n ? readable: bool\n ? writable: bool\n ? sdfProtocolMap ; this is the delta\n ~dataqualities\n}\n```\n\nJust saying that sdfProtocolMap can be added as named quality does not help much the implementors of the spec, imo.",
       "createdAt": "2025-08-07T10:07:48Z",
-      "updatedAt": "2025-08-16T11:41:25Z",
+      "updatedAt": "2025-09-23T22:23:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -80,6 +80,13 @@
           "body": "I guess for defining the extensions, you could (or should?) also use the mechanisms defined in the CDDL RFC: https://datatracker.ietf.org/doc/html/rfc8610#section-3.9\n\n(I tried to apply the syntax in [PR](https://github.com/ietf-wg-asdf/sdf-relations/pull/6) against the `sdf-relations` repository, but I am not entirely sure if I used it correctly.)",
           "createdAt": "2025-08-16T11:41:25Z",
           "updatedAt": "2025-08-16T11:41:25Z"
+        },
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I realized that the CDDLs that I added previously were incorrect and was missing the `sdfProtocolMap` object. I have fixed the definitions in #8. ",
+          "createdAt": "2025-09-23T22:23:02Z",
+          "updatedAt": "2025-09-23T22:23:02Z"
         }
       ]
     },
@@ -772,22 +779,22 @@
     {
       "number": 8,
       "id": "PR_kwDOPSJ9A86pLwoM",
-      "title": "CDDL is missing `sdfProtocolMap` and protocol specific keys",
+      "title": "Fix CDDL definitions and add missing `sdfProtocolMap` and protocol specific keys",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/8",
       "state": "OPEN",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "",
+      "body": "This PR fixes the CDDL definitions in the draft to include the `sdfProtocolMap`, `ble`, `zigbee`, and `openapi` keys.\r\n\r\nAlso, added a way to add separate read/write mappings to a single SDF property.\r\n\r\nFor example, we can have a mapping like this which maps the read to the GET and write to the PUT:\r\n``` json\r\n{\r\n  \"sdfProtocolMap\": {\r\n    \"openapi\": {\r\n      \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current\",\r\n      \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n    }\r\n  }\r\n}\r\n```\r\n\r\nOr a more specific one: \r\n``` json\r\n{\r\n  \"sdfProtocolMap\": {\r\n    \"openapi\": {\r\n      \"read\": {\r\n        \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current/get\",\r\n        \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n      },\r\n      \"write\": {\r\n        \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current/post\",\r\n        \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n```",
       "createdAt": "2025-09-18T01:49:49Z",
-      "updatedAt": "2025-09-18T01:49:49Z",
+      "updatedAt": "2025-09-23T22:36:20Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "c9593aa5d2825b8fffc2b040ee8d1e7f5df6f31d",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "fix-cddl",
-      "headRefOid": "60dbba541c44681089b516a4c9bb710ea219f93b",
+      "headRefOid": "81df7c81dcfbf42cf25ed302fdea8dbf5e42f62b",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
