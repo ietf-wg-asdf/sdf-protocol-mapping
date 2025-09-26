@@ -2,12 +2,12 @@
 
 # Protocol Mapping for SDF
 
-This is the working area for the individual Internet-Draft, "Protocol Mapping for SDF".
+This is the working area for the IETF [ASDF Working Group](https://datatracker.ietf.org/group/asdf/documents/) Internet-Draft, "Protocol Mapping for SDF".
 
-* [Editor's Copy](https://ietf-wg-asdf.github.io/sdf-protocol-mapping/#go.draft-mohan-asdf-sdf-protocol-mapping.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-mohan-asdf-sdf-protocol-mapping)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-mohan-asdf-sdf-protocol-mapping)
-* [Compare Editor's Copy to Individual Draft](https://ietf-wg-asdf.github.io/sdf-protocol-mapping/#go.draft-mohan-asdf-sdf-protocol-mapping.diff)
+* [Editor's Copy](https://ietf-wg-asdf.github.io/sdf-protocol-mapping/#go.draft-ietf-asdf-sdf-protocol-mapping.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol-mapping)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-protocol-mapping)
+* [Compare Editor's Copy to Working Group Draft](https://ietf-wg-asdf.github.io/sdf-protocol-mapping/#go.draft-ietf-asdf-sdf-protocol-mapping.diff)
 
 
 ## Contributing
