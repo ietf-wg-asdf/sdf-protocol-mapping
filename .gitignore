@@ -18,6 +18,7 @@
 /versioned/
 Gemfile.lock
 archive.json
+draft-ietf-asdf-sdf-protocol-mapping.xml
 draft-mohan-asdf-sdf-protocol-mapping.xml
 package-lock.json
 report.xml
