@@ -3,7 +3,7 @@ title: "Protocol Mapping for SDF"
 abbrev: "sdf-protocol-mapping"
 category: std
 
-docname: draft-mohan-asdf-sdf-protocol-mapping-latest
+docname: draft-ietf-asdf-sdf-protocol-mapping-latest
 submissiontype: IETF
 number:
 date:
