@@ -5,13 +5,13 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 19 February 2026                                      L. Corneo
+Expires: 30 March 2026                                         L. Corneo
                                                                 Ericsson
-                                                          18 August 2025
+                                                       26 September 2025
 
 
                         Protocol Mapping for SDF
-              draft-mohan-asdf-sdf-protocol-mapping-latest
+              draft-ietf-asdf-sdf-protocol-mapping-latest
 
 Abstract
 
@@ -27,7 +27,7 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    Status information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-mohan-asdf-sdf-protocol-
+   https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol-
    mapping/.
 
    Discussion of this document takes place on the A Semantic Definition
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 February 2026.
+   This Internet-Draft will expire on 30 March 2026.
 
 Copyright Notice
 
