@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-25T00:57:28.408942+00:00",
+  "timestamp": "2025-10-07T00:57:08.394383+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -242,7 +242,7 @@
       "labels": [],
       "body": "# HTTP and CoAP SDF Protocol Mappings\n\nThis PR aim is to add SDF Protocol Mappings for HTTP and CoAP. It addresses the issue #5.\n\nCoAP is still missing.\n\nThis PR currently features:\n- **OpenAPI CDDL and structure change**\n- **Draft of HTTP protocol mapping**\n",
       "createdAt": "2025-08-27T09:50:05Z",
-      "updatedAt": "2025-09-18T02:20:30Z",
+      "updatedAt": "2025-10-06T10:19:15Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "c9593aa5d2825b8fffc2b040ee8d1e7f5df6f31d",
@@ -771,6 +771,26 @@
               "body": "That's a good point. This issue is present for other protocols as well. I have tried to put together an idea in #8 which should handle this for BLE and openapi. ",
               "createdAt": "2025-09-18T01:52:51Z",
               "updatedAt": "2025-09-18T01:52:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87E6yYV",
+          "commit": {
+            "abbreviatedOid": "055b049"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-06T10:19:15Z",
+          "updatedAt": "2025-10-06T10:19:15Z",
+          "comments": [
+            {
+              "originalPosition": 107,
+              "body": "I like `href`!",
+              "createdAt": "2025-10-06T10:19:15Z",
+              "updatedAt": "2025-10-06T10:19:15Z"
             }
           ]
         }
