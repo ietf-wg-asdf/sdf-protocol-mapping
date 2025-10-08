@@ -1642,7 +1642,7 @@ used to access the corresponding SDF affordances.<a href="#section-5.2-1" class=
           <h4 id="name-zigbee-protocol-mapping-str">
 <a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-zigbee-protocol-mapping-str" class="section-name selfRef">Zigbee Protocol Mapping Structure</a>
           </h4>
-<p id="section-5.2.1-1">For SDF properties and actions, the Zigbee protocol mapping structure
+<p id="section-5.2.1-1">For SDF properties and events, the Zigbee protocol mapping structure
 is defined as follows:<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-"></span><div id="zigmap1">
 <figure id="figure-6">
@@ -1660,6 +1660,7 @@ zigbee-protocol-map = {
 
 zigbee-property = (
   endpointID: uint,
+  manufacturerCode: uint,
   clusterID: uint,
   attributeID: uint,
   type: uint
@@ -1685,8 +1686,9 @@ zigbee-property = (
               <p id="section-5.2.1-4.4.1"><code>type</code> is the Zigbee data type of the attribute.<a href="#section-5.2.1-4.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-5.2.1-5">For example, a Zigbee protocol mapping for a temperature property might look like:<a href="#section-5.2.1-5" class="pilcrow">¶</a></p>
-<div class="lang-jsonc sourcecode" id="section-5.2.1-6">
+<p id="section-5.2.1-5">SDF properties are mapped to Zigbee cluster attributes and events are mapped to Zigbee cluster attribute reporting.<a href="#section-5.2.1-5" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-6">For example, a Zigbee protocol mapping for a temperature property might look like:<a href="#section-5.2.1-6" class="pilcrow">¶</a></p>
+<div class="lang-jsonc sourcecode" id="section-5.2.1-7">
 <pre>
 {
   "sdfProperty": {
@@ -1702,7 +1704,58 @@ zigbee-property = (
     }
   }
 }
-</pre><a href="#section-5.2.1-6" class="pilcrow">¶</a>
+</pre><a href="#section-5.2.1-7" class="pilcrow">¶</a>
+</div>
+<p id="section-5.2.1-8">SDF actions are mapped to Zigbee cluster commands. The Zigbee protocol mapping structure for actions is defined as follows:<a href="#section-5.2.1-8" class="pilcrow">¶</a></p>
+<span id="name-cddl-definition-for-zigbee-p"></span><div id="zigmap2">
+<figure id="figure-7">
+            <div class="lang-cddl sourcecode" id="section-5.2.1-9.1">
+<pre>
+$$SDF-PROTOCOL-MAP //= (
+  zigbee: zigbee-action-map
+)
+
+zigbee-action-map = {
+  endpointID: uint,
+  manufacturerCode: uint,
+  clusterID: uint,
+  commandID: uint,
+}
+</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<a href="#name-cddl-definition-for-zigbee-p" class="selfRef">CDDL definition for Zigbee Protocol Mapping for actions</a>
+            </figcaption></figure>
+</div>
+<p id="section-5.2.1-10">Where:<a href="#section-5.2.1-10" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2.1-11.1">
+              <p id="section-5.2.1-11.1.1"><code>endpointID</code> is the Zigbee endpoint ID that corresponds to the SDF action.<a href="#section-5.2.1-11.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.1-11.2">
+              <p id="section-5.2.1-11.2.1"><code>clusterID</code> is the Zigbee cluster ID that corresponds to the SDF action.<a href="#section-5.2.1-11.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.1-11.3">
+              <p id="section-5.2.1-11.3.1"><code>commandID</code> is the Zigbee command ID that corresponds to the SDF action.<a href="#section-5.2.1-11.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-5.2.1-12">For example, a Zigbee protocol mapping to set a temperature might look like:<a href="#section-5.2.1-12" class="pilcrow">¶</a></p>
+<div class="lang-jsonc sourcecode" id="section-5.2.1-13">
+<pre>
+{
+  "sdfAction": {
+    "setTemperature": {
+      "sdfProtocolMap": {
+        "zigbee": {
+          "endpointID": 1,
+          "clusterID": 1026, // 0x0402
+          "commandID": 0 // 0x0000
+        }
+      }
+    }
+  }
+}
+</pre><a href="#section-5.2.1-13" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1994,7 +2047,7 @@ in accordance with <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</spa
       <h2 id="name-cddl-definition">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-cddl-definition" class="section-name selfRef">CDDL Definition</a>
       </h2>
-<div class="lang-cddl sourcecode" id="appendix-A-1">
+<div class="breakable lang-cddl sourcecode" id="appendix-A-1">
 <pre>
 $$SDF-EXTENSION-DATA //= (
   sdfProtocolMap: {
@@ -2039,10 +2092,22 @@ zigbee-protocol-map = {
 
 zigbee-property = (
   endpointID: uint,
+  manufacturerCode: uint,
   clusterID: uint,
   attributeID: uint,
   type: uint
 )
+
+$$SDF-PROTOCOL-MAP //= (
+  zigbee: zigbee-action-map
+)
+
+zigbee-action-map = {
+  endpointID: uint,
+  manufacturerCode: uint,
+  clusterID: uint,
+  commandID: uint,
+}
 </pre><a href="#appendix-A-1" class="pilcrow">¶</a>
 </div>
 </section>

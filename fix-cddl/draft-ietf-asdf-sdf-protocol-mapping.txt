@@ -400,7 +400,7 @@ Table of Contents
 
 5.2.1.  Zigbee Protocol Mapping Structure
 
-   For SDF properties and actions, the Zigbee protocol mapping structure
+   For SDF properties and events, the Zigbee protocol mapping structure
    is defined as follows:
 
    $$SDF-PROTOCOL-MAP //= (
@@ -415,6 +415,7 @@ Table of Contents
 
    zigbee-property = (
      endpointID: uint,
+     manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
      type: uint
@@ -436,6 +437,9 @@ Table of Contents
 
    *  type is the Zigbee data type of the attribute.
 
+   SDF properties are mapped to Zigbee cluster attributes and events are
+   mapped to Zigbee cluster attribute reporting.
+
    For example, a Zigbee protocol mapping for a temperature property
    might look like:
 
@@ -448,6 +452,50 @@ Table of Contents
              "clusterID": 1026, // 0x0402
              "attributeID": 0, // 0x0000
              "type": 41 // 0x29
+           }
+         }
+       }
+     }
+   }
+
+   SDF actions are mapped to Zigbee cluster commands.  The Zigbee
+   protocol mapping structure for actions is defined as follows:
+
+   $$SDF-PROTOCOL-MAP //= (
+     zigbee: zigbee-action-map
+   )
+
+   zigbee-action-map = {
+     endpointID: uint,
+     manufacturerCode: uint,
+     clusterID: uint,
+     commandID: uint,
+   }
+
+     Figure 7: CDDL definition for Zigbee Protocol Mapping for actions
+
+   Where:
+
+   *  endpointID is the Zigbee endpoint ID that corresponds to the SDF
+      action.
+
+   *  clusterID is the Zigbee cluster ID that corresponds to the SDF
+      action.
+
+   *  commandID is the Zigbee command ID that corresponds to the SDF
+      action.
+
+   For example, a Zigbee protocol mapping to set a temperature might
+   look like:
+
+   {
+     "sdfAction": {
+       "setTemperature": {
+         "sdfProtocolMap": {
+           "zigbee": {
+             "endpointID": 1,
+             "clusterID": 1026, // 0x0402
+             "commandID": 0 // 0x0000
            }
          }
        }
@@ -724,10 +772,22 @@ Appendix A.  CDDL Definition
 
    zigbee-property = (
      endpointID: uint,
+     manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
      type: uint
    )
+
+   $$SDF-PROTOCOL-MAP //= (
+     zigbee: zigbee-action-map
+   )
+
+   zigbee-action-map = {
+     endpointID: uint,
+     manufacturerCode: uint,
+     clusterID: uint,
+     commandID: uint,
+   }
 
 Acknowledgments
 
