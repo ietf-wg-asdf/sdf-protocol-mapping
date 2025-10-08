@@ -350,7 +350,7 @@ used to access the corresponding SDF affordances.
 
 ### Zigbee Protocol Mapping Structure
 
-For SDF properties and actions, the Zigbee protocol mapping structure
+For SDF properties and events, the Zigbee protocol mapping structure
 is defined as follows:
 
 ~~~ cddl
@@ -364,6 +364,8 @@ Where:
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF affordance.
 - `attributeID` is the Zigbee attribute ID that corresponds to the SDF affordance.
 - `type` is the Zigbee data type of the attribute.
+
+SDF properties are mapped to Zigbee cluster attributes and events are mapped to Zigbee cluster attribute reporting.
 
 For example, a Zigbee protocol mapping for a temperature property might look like:
 
@@ -383,6 +385,38 @@ For example, a Zigbee protocol mapping for a temperature property might look lik
   }
 }
 ~~~
+
+SDF actions are mapped to Zigbee cluster commands. The Zigbee protocol mapping structure for actions is defined as follows:
+
+~~~ cddl
+{::include cddl/zigbee-action-map.cddl}
+~~~
+{: #zigmap2 title="CDDL definition for Zigbee Protocol Mapping for actions"}
+
+Where:
+
+- `endpointID` is the Zigbee endpoint ID that corresponds to the SDF action.
+- `clusterID` is the Zigbee cluster ID that corresponds to the SDF action.
+- `commandID` is the Zigbee command ID that corresponds to the SDF action.
+
+For example, a Zigbee protocol mapping to set a temperature might look like:
+
+~~~ jsonc
+{
+  "sdfAction": {
+    "setTemperature": {
+      "sdfProtocolMap": {
+        "zigbee": {
+          "endpointID": 1,
+          "clusterID": 1026, // 0x0402
+          "commandID": 0 // 0x0000
+        }
+      }
+    }
+  }
+}
+~~~
+
 
 ## IP based Protocol Mapping
 
@@ -555,6 +589,8 @@ Following protocol mappings are described in this document:
 {::include cddl/ble-event-map.cddl}
 
 {::include cddl/zigbee-protocol-map.cddl}
+
+{::include cddl/zigbee-action-map.cddl}
 ~~~
 
 # Acknowledgments

@@ -10,6 +10,7 @@ zigbee-protocol-map = {
 
 zigbee-property = (
   endpointID: uint,
+  manufacturerCode: uint,
   clusterID: uint,
   attributeID: uint,
   type: uint
