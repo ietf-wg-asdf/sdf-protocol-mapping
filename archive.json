@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-07T00:57:08.394383+00:00",
+  "timestamp": "2025-10-09T00:57:26.671947+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -808,18 +808,26 @@
       "labels": [],
       "body": "This PR fixes the CDDL definitions in the draft to include the `sdfProtocolMap`, `ble`, `zigbee`, and `openapi` keys.\r\n\r\nAlso, added a way to add separate read/write mappings to a single SDF property.\r\n\r\nFor example, we can have a mapping like this which maps the read to the GET and write to the PUT:\r\n``` json\r\n{\r\n  \"sdfProtocolMap\": {\r\n    \"openapi\": {\r\n      \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current\",\r\n      \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n    }\r\n  }\r\n}\r\n```\r\n\r\nOr a more specific one: \r\n``` json\r\n{\r\n  \"sdfProtocolMap\": {\r\n    \"openapi\": {\r\n      \"read\": {\r\n        \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current/get\",\r\n        \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n      },\r\n      \"write\": {\r\n        \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current/post\",\r\n        \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n```",
       "createdAt": "2025-09-18T01:49:49Z",
-      "updatedAt": "2025-09-23T22:36:20Z",
+      "updatedAt": "2025-10-08T21:31:14Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
-      "baseRefOid": "c9593aa5d2825b8fffc2b040ee8d1e7f5df6f31d",
+      "baseRefOid": "5f35aefa6b5856ec7b10f2fefaeca5c6d49dd3d2",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "fix-cddl",
-      "headRefOid": "81df7c81dcfbf42cf25ed302fdea8dbf5e42f62b",
+      "headRefOid": "282504a57ff2bda568ba0a17e9afe1d32f192321",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@lorenzocorneo can you take a look at this PR?",
+          "createdAt": "2025-10-08T21:31:14Z",
+          "updatedAt": "2025-10-08T21:31:14Z"
+        }
+      ],
       "reviews": []
     }
   ]
