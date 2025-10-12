@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-09T00:57:26.671947+00:00",
+  "timestamp": "2025-10-12T01:00:06.898718+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -808,7 +808,7 @@
       "labels": [],
       "body": "This PR fixes the CDDL definitions in the draft to include the `sdfProtocolMap`, `ble`, `zigbee`, and `openapi` keys.\r\n\r\nAlso, added a way to add separate read/write mappings to a single SDF property.\r\n\r\nFor example, we can have a mapping like this which maps the read to the GET and write to the PUT:\r\n``` json\r\n{\r\n  \"sdfProtocolMap\": {\r\n    \"openapi\": {\r\n      \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current\",\r\n      \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n    }\r\n  }\r\n}\r\n```\r\n\r\nOr a more specific one: \r\n``` json\r\n{\r\n  \"sdfProtocolMap\": {\r\n    \"openapi\": {\r\n      \"read\": {\r\n        \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current/get\",\r\n        \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n      },\r\n      \"write\": {\r\n        \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current/post\",\r\n        \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n```",
       "createdAt": "2025-09-18T01:49:49Z",
-      "updatedAt": "2025-10-08T21:31:14Z",
+      "updatedAt": "2025-10-10T09:39:51Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "5f35aefa6b5856ec7b10f2fefaeca5c6d49dd3d2",
@@ -826,6 +826,13 @@
           "body": "@lorenzocorneo can you take a look at this PR?",
           "createdAt": "2025-10-08T21:31:14Z",
           "updatedAt": "2025-10-08T21:31:14Z"
+        },
+        {
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "body": "Looks good to me!",
+          "createdAt": "2025-10-10T09:39:51Z",
+          "updatedAt": "2025-10-10T09:39:51Z"
         }
       ],
       "reviews": []
