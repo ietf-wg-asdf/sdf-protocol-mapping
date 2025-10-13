@@ -391,6 +391,35 @@ components:
             The current body temperature in degrees Celsius.
 ~~~
 
+# SCIM SDF Extension
+
+While SDF provides a way to describe a type of device, there is no way to associate a mapping
+between an instance of a device and SDF models. {{?I-D.ietf-scim-device-model}} describes
+the SCIM resource schema for devices. This can be extended using a SCIM device schema extension
+to associate an SDF model with a device instance.
+
+An example SCIM device schema extension might look like:
+
+~~~ json
+{
+    "schemas": [
+        "urn:ietf:params:scim:schemas:core:2.0:Device",
+        "urn:ietf:params:scim:schemas:extension:sdf:2.0:Device"
+    ],
+    "id": "e9e30dba-f08f-4109-8486-d5c6a3316111",
+    "displayName": "Heart Monitor",
+    "active": true,
+    "urn:ietf:params:scim:schemas:extension:sdf:2.0:Device": {
+        "sdf": [
+            "https://example.com/thermometer#/sdfThing/thermometer",
+            "https://example.com/heartrate#/sdfObject/healthsensor"
+        ]
+    }
+}
+~~~
+
+The schema for this extension is provided in {{scim-sdf-extension-schema}}.
+
 # Security Considerations
 
 TODO Security
@@ -432,6 +461,12 @@ Following protocol mappings are described in this document:
 {::include cddl/ble-event-map.cddl}
 
 {::include cddl/zigbee-protocol-map.cddl}
+~~~
+
+# SCIM SDF Extension Schema {#scim-sdf-extension-schema}
+
+~~~
+{::include scim/scim-sdf-extension.json.folded}
 ~~~
 
 # Acknowledgments
