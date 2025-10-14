@@ -144,8 +144,12 @@ Table of Contents
      |        +--> BLE-specific mapping
      |
      +-----> zigbee
+     |        |
+     |        +--> Zigbee-specific mapping
+     |
+     +-----> openapi
               |
-              +--> Zigbee-specific mapping
+              +--> OpenAPI-specific mapping
 
                          Figure 1: Property Mapping
 
@@ -153,15 +157,17 @@ Table of Contents
    in an sdfProtocolMap object, for example a "ble" or a "zigbee"
    object.
 
-    +===========+========+===========================================+
-    | Attribute | Type   | Example                                   |
-    +===========+========+===========================================+
-    | ble       | object | an object with BLE-specific attributes    |
-    +-----------+--------+-------------------------------------------+
-    | zigbee    | object | an object with Zigbee-specific attributes |
-    +-----------+--------+-------------------------------------------+
+    +===========+========+============================================+
+    | Attribute | Type   | Example                                    |
+    +===========+========+============================================+
+    | ble       | object | an object with BLE-specific attributes     |
+    +-----------+--------+--------------------------------------------+
+    | zigbee    | object | an object with Zigbee-specific attributes  |
+    +-----------+--------+--------------------------------------------+
+    | openapi   | object | an object with OpenAPI-specific attributes |
+    +-----------+--------+--------------------------------------------+
 
-                        Table 1: Protocol objects
+                         Table 1: Protocol objects
 
    where-
 
@@ -201,6 +207,40 @@ Table of Contents
 
                      Figure 2: Example property mapping
 
+   For properties that have a different protocol mapping for read and
+   write operations, the protocol mapping can be specified as such:
+
+   {
+     "sdfObject": {
+       "healthsensor": {
+         "sdfProperty": {
+           "heartrate": {
+             "description": "The current measured heart rate",
+             "type": "number",
+             "unit": "beat/min",
+             "observable": false,
+             "sdfProtocolMap": {
+               "ble": {
+                 "read": {
+                   "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+                   "characteristicID":
+                     "12345678-1234-5678-1234-56789abcdef5"
+                 },
+                 "write": {
+                   "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+                   "characteristicID":
+                     "12345678-1234-5678-1234-56789abcdef6"
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+
+                     Figure 3: Example property mapping
+
 4.  Usage
 
    A protocol map MAY be provided as part of the SDF model, specifically
@@ -229,14 +269,22 @@ Table of Contents
    For SDF properties and actions, the BLE protocol mapping structure is
    defined as follows:
 
-   $$SDF-EXTENSION-DATA //= ble-protocol-map
+   $$SDF-PROTOCOL-MAP //= (
+     ble: ble-protocol-map
+   )
 
    ble-protocol-map = {
-     serviceID: text
-     characteristicID: text
+     ? ble-property,
+     ? read: { ble-property },
+     ? write: { ble-property }
    }
 
-     Figure 3: CDDL definition for BLE Protocol Mapping for properties
+   ble-property = (
+     serviceID: text,
+     characteristicID: text
+   )
+
+     Figure 4: CDDL definition for BLE Protocol Mapping for properties
                                 and actions
 
    Where:
@@ -263,18 +311,42 @@ Table of Contents
      }
    }
 
+   For a temperature property that has different mappings for read and
+   write operations, the BLE protocol mapping might look like:
+
+   {
+     "sdfProperty": {
+       "temperature": {
+         "sdfProtocolMap": {
+           "ble": {
+             "read": {
+               "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+               "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+             },
+             "write": {
+               "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+               "characteristicID": "12345678-1234-5678-1234-56789abcdef6"
+             }
+           }
+         }
+       }
+     }
+   }
+
    For SDF events, the BLE protocol mapping structure is similar, but it
    may include additional attributes such as the type of the event.
 
-   $$SDF-EXTENSION-DATA //= ble-event-map
+   $$SDF-PROTOCOL-MAP //= (
+     ble: ble-event-map
+   )
 
    ble-event-map = {
-     type: "gatt" / "advertisements" / "connection_events"
-     ? serviceID: text
+     type: "gatt" / "advertisements" / "connection_events",
+     ? serviceID: text,
      ? characteristicID: text
    }
 
-                 Figure 4: BLE Protocol Mapping for events
+                 Figure 5: BLE Protocol Mapping for events
 
    Where:
 
@@ -330,19 +402,28 @@ Table of Contents
 
 5.2.1.  Zigbee Protocol Mapping Structure
 
-   For SDF properties and actions, the Zigbee protocol mapping structure
+   For SDF properties and events, the Zigbee protocol mapping structure
    is defined as follows:
 
-   $$SDF-EXTENSION-DATA //= zigbee-protocol-map
+   $$SDF-PROTOCOL-MAP //= (
+     zigbee: zigbee-protocol-map
+   )
 
    zigbee-protocol-map = {
-     endpointID: uint
-     clusterID: uint
-     attributeID: uint
-     type: uint
+     ? zigbee-property,
+     ? read: { zigbee-property },
+     ? write: { zigbee-property }
    }
 
-         Figure 5: CDDL definition for Zigbee Protocol Mapping for
+   zigbee-property = (
+     endpointID: uint,
+     manufacturerCode: uint,
+     clusterID: uint,
+     attributeID: uint,
+     type: uint
+   )
+
+         Figure 6: CDDL definition for Zigbee Protocol Mapping for
                            properties and actions
 
    Where:
@@ -357,6 +438,9 @@ Table of Contents
       affordance.
 
    *  type is the Zigbee data type of the attribute.
+
+   SDF properties are mapped to Zigbee cluster attributes and events are
+   mapped to Zigbee cluster attribute reporting.
 
    For example, a Zigbee protocol mapping for a temperature property
    might look like:
@@ -376,11 +460,75 @@ Table of Contents
      }
    }
 
+   SDF actions are mapped to Zigbee cluster commands.  The Zigbee
+   protocol mapping structure for actions is defined as follows:
+
+   $$SDF-PROTOCOL-MAP //= (
+     zigbee: zigbee-action-map
+   )
+
+   zigbee-action-map = {
+     endpointID: uint,
+     manufacturerCode: uint,
+     clusterID: uint,
+     commandID: uint,
+   }
+
+     Figure 7: CDDL definition for Zigbee Protocol Mapping for actions
+
+   Where:
+
+   *  endpointID is the Zigbee endpoint ID that corresponds to the SDF
+      action.
+
+   *  clusterID is the Zigbee cluster ID that corresponds to the SDF
+      action.
+
+   *  commandID is the Zigbee command ID that corresponds to the SDF
+      action.
+
+   For example, a Zigbee protocol mapping to set a temperature might
+   look like:
+
+   {
+     "sdfAction": {
+       "setTemperature": {
+         "sdfProtocolMap": {
+           "zigbee": {
+             "endpointID": 1,
+             "clusterID": 1026, // 0x0402
+             "commandID": 0 // 0x0000
+           }
+         }
+       }
+     }
+   }
+
 5.3.  IP based Protocol Mapping
 
    The protocol mapping mechanism can potentially also be used for IP-
-   based protocols such as HTTP or CoAP.  An example of a protocol
-   mapping for a property using HTTP might look like:
+   based protocols such as HTTP or CoAP.
+
+   In the case of HTTP, SDF protocol mappings towards an SDF quality MAY
+   be expressed by directly pointing to OpenAPI schema and/or component.
+
+   $$SDF-PROTOCOL-MAP //= (
+     openapi: openapi-protocol-map
+   )
+
+   openapi-protocol-map = {
+     ? openapi-property,
+     ? read: { openapi-property },
+     ? write: { openapi-property }
+   }
+
+   openapi-property = (
+     operationRef: text,
+     $ref: text
+   )
+
+   An example of a protocol mapping for a property using HTTP might look
+   like:
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -390,7 +538,7 @@ Table of Contents
          "sdfProtocolMap": {
            "openapi": {
                "operationRef": "https://example.com/openapi.json#/paths\
-   /~1heartrate~1{id}~1current/get",
+   /~1heartrate~1{id}~1current",
                "$ref": "https://example.com/openapi.json#/components/sc\
    hema/HeartRate/properties/pulse"
            }
@@ -426,7 +574,26 @@ Table of Contents
              content:
                application/json:
                  schema:
-                   $ref: "#/components/schemas/HeartRate/properties/pulse"
+                   $ref: "#/components/schemas/HeartRate"
+       put:
+         summary: Set current heart rate
+         description: |-
+           Set the current heart rate for a specific user
+           identified by {id}.
+         parameters:
+           - name: id
+             in: path
+             required: true
+             description: |-
+               The ID of the user whose heart rate is being set.
+             schema:
+               type: string
+         requestBody:
+           required: true
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/HeartRate"
 
    components:
      schemas:
@@ -441,6 +608,36 @@ Table of Contents
              format: float
              description: |-
                The current body temperature in degrees Celsius.
+
+   We assume that the readable properties will map to GET operations and
+   the writable properties will map to PUT operations.  If this is not
+   the case, or if the API is different, the protocol mapping can be
+   specified as such:
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   {
+     "sdfProperty": {
+       "heartrate": {
+         "sdfProtocolMap": {
+           "openapi": {
+             "read": {
+               "operationRef": "https://example.com/openapi.json#/paths\
+   /~1heartrate~1{id}~1current/get",
+               "$ref": "https://example.com/openapi.json#/components/sc\
+   hema/HeartRate/properties/pulse"
+             },
+             "write": {
+               "operationRef": "https://example.com/openapi.json#/paths\
+   /~1heartrate~1{id}~1current/put",
+               "$ref": "https://example.com/openapi.json#/components/sc\
+   hema/HeartRate/properties/pulse"
+             }
+           }
+         }
+       }
+     }
+   }
 
 6.  SCIM SDF Extension
 
@@ -506,6 +703,9 @@ Table of Contents
      | zigbee       | Zigbee        | Protocol mapping   | This      |
      |              |               | for Zigbee devices | document  |
      +--------------+---------------+--------------------+-----------+
+     | openapi      | OpenAPI       | Protocol mapping   | This      |
+     |              |               | for OpenAPI        | document  |
+     +--------------+---------------+--------------------+-----------+
 
                      Table 2: Protocol Mapping Registry
 
@@ -565,28 +765,64 @@ Table of Contents
 
 Appendix A.  CDDL Definition
 
-   $$SDF-EXTENSION-DATA //= ble-protocol-map
+   $$SDF-EXTENSION-DATA //= (
+     sdfProtocolMap: {
+       * $$SDF-PROTOCOL-MAP
+     }
+   )
+
+   $$SDF-PROTOCOL-MAP //= (
+     ble: ble-protocol-map
+   )
 
    ble-protocol-map = {
-     serviceID: text
-     characteristicID: text
+     ? ble-property,
+     ? read: { ble-property },
+     ? write: { ble-property }
    }
 
-   $$SDF-EXTENSION-DATA //= ble-event-map
+   ble-property = (
+     serviceID: text,
+     characteristicID: text
+   )
+
+   $$SDF-PROTOCOL-MAP //= (
+     ble: ble-event-map
+   )
 
    ble-event-map = {
-     type: "gatt" / "advertisements" / "connection_events"
-     ? serviceID: text
+     type: "gatt" / "advertisements" / "connection_events",
+     ? serviceID: text,
      ? characteristicID: text
    }
 
-   $$SDF-EXTENSION-DATA //= zigbee-protocol-map
+   $$SDF-PROTOCOL-MAP //= (
+     zigbee: zigbee-protocol-map
+   )
 
    zigbee-protocol-map = {
-     endpointID: uint
-     clusterID: uint
-     attributeID: uint
+     ? zigbee-property,
+     ? read: { zigbee-property },
+     ? write: { zigbee-property }
+   }
+
+   zigbee-property = (
+     endpointID: uint,
+     manufacturerCode: uint,
+     clusterID: uint,
+     attributeID: uint,
      type: uint
+   )
+
+   $$SDF-PROTOCOL-MAP //= (
+     zigbee: zigbee-action-map
+   )
+
+   zigbee-action-map = {
+     endpointID: uint,
+     manufacturerCode: uint,
+     clusterID: uint,
+     commandID: uint,
    }
 
 Appendix B.  SCIM SDF Extension Schema
