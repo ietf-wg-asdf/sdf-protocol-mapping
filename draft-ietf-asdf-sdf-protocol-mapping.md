@@ -393,10 +393,11 @@ components:
 
 # SCIM SDF Extension
 
-While SDF provides a way to describe a type of device, there is no way to associate a mapping
-between an instance of a device and SDF models. {{?I-D.ietf-scim-device-model}} describes
-the SCIM resource schema for devices. This can be extended using a SCIM device schema extension
-to associate an SDF model with a device instance.
+While SDF provides a way to describe a device, a method is needed to associate a
+mapping between an instance of a device and its associated SDF models. To
+accomplish this, we define a SCIM extension that can be used in conjunction with
+{{?I-D.ietf-scim-device-model}}, the details of which can be found in
+{{scim-sdf-extension-schema}}.
 
 An example SCIM device schema extension might look like:
 
@@ -417,8 +418,6 @@ An example SCIM device schema extension might look like:
     }
 }
 ~~~
-
-The schema for this extension is provided in {{scim-sdf-extension-schema}}.
 
 # Security Considerations
 
