@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-12T01:00:06.898718+00:00",
+  "timestamp": "2025-10-14T00:57:20.664754+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -836,6 +836,59 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOPSJ9A86tjHFe",
+      "title": "Add SCIM device schema extension for SDF model",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/9",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-13T22:24:29Z",
+      "updatedAt": "2025-10-14T00:55:18Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "5f35aefa6b5856ec7b10f2fefaeca5c6d49dd3d2",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "scim-extension",
+      "headRefOid": "2232e4a24376228eaa356564670a3c9bdeb5f54b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A87GsJtU",
+          "commit": {
+            "abbreviatedOid": "09356a4"
+          },
+          "author": "elear",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-10-14T00:15:22Z",
+          "updatedAt": "2025-10-14T00:16:17Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "In a draft you should just state what you are trying to accomplish.  Also, put a link\r\nto the formal description **before** the example.\r\n\r\n```suggestion\r\nWhile SDF provides a way to describe a device, a method is needed to associate a\r\nmapping between an instance of a device and its associated SDF models.  To\r\naccomplish this, we define a SCIM extension that can be used in conjunction with\r\n{{?I-D.ietf-scim-device-model}}, the details of which can be found in\r\n{{scim-sdf-extension-schema}}.\r\n```",
+              "createdAt": "2025-10-14T00:15:22Z",
+              "updatedAt": "2025-10-14T00:16:17Z"
+            },
+            {
+              "originalPosition": 31,
+              "body": "```suggestion\r\n```\r\n\r\nSee above.",
+              "createdAt": "2025-10-14T00:16:03Z",
+              "updatedAt": "2025-10-14T00:16:17Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
