@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 16 April 2026                                         L. Corneo
+Expires: 17 April 2026                                         L. Corneo
                                                                 Ericsson
-                                                         13 October 2025
+                                                         14 October 2025
 
 
                         Protocol Mapping for SDF
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 April 2026.
+   This Internet-Draft will expire on 17 April 2026.
 
 Copyright Notice
 
@@ -444,11 +444,12 @@ Table of Contents
 
 6.  SCIM SDF Extension
 
-   While SDF provides a way to describe a type of device, there is no
-   way to associate a mapping between an instance of a device and SDF
-   models.  [I-D.ietf-scim-device-model] describes the SCIM resource
-   schema for devices.  This can be extended using a SCIM device schema
-   extension to associate an SDF model with a device instance.
+   While SDF provides a way to describe a device, a method is needed to
+   associate a mapping between an instance of a device and its
+   associated SDF models.  To accomplish this, we define a SCIM
+   extension that can be used in conjunction with
+   [I-D.ietf-scim-device-model], the details of which can be found in
+   Appendix B.
 
    An example SCIM device schema extension might look like:
 
@@ -467,8 +468,6 @@ Table of Contents
            ]
        }
    }
-
-   The schema for this extension is provided in Appendix B.
 
 7.  Security Considerations
 
