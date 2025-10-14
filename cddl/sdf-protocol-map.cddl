@@ -1,0 +1,5 @@
+$$SDF-EXTENSION-DATA //= (
+  sdfProtocolMap: {
+    * $$SDF-PROTOCOL-MAP
+  }
+)

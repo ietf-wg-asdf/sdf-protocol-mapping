@@ -1,0 +1,14 @@
+$$SDF-PROTOCOL-MAP //= (
+  openapi: openapi-protocol-map
+)
+
+openapi-protocol-map = {
+  ? openapi-property,
+  ? read: { openapi-property },
+  ? write: { openapi-property }
+}
+
+openapi-property = (
+  operationRef: text,
+  $ref: text
+)
