@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-14T00:57:20.664754+00:00",
+  "timestamp": "2025-10-16T00:58:23.638981+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -801,24 +801,26 @@
       "id": "PR_kwDOPSJ9A86pLwoM",
       "title": "Fix CDDL definitions and add missing `sdfProtocolMap` and protocol specific keys",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/8",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR fixes the CDDL definitions in the draft to include the `sdfProtocolMap`, `ble`, `zigbee`, and `openapi` keys.\r\n\r\nAlso, added a way to add separate read/write mappings to a single SDF property.\r\n\r\nFor example, we can have a mapping like this which maps the read to the GET and write to the PUT:\r\n``` json\r\n{\r\n  \"sdfProtocolMap\": {\r\n    \"openapi\": {\r\n      \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current\",\r\n      \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n    }\r\n  }\r\n}\r\n```\r\n\r\nOr a more specific one: \r\n``` json\r\n{\r\n  \"sdfProtocolMap\": {\r\n    \"openapi\": {\r\n      \"read\": {\r\n        \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current/get\",\r\n        \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n      },\r\n      \"write\": {\r\n        \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current/post\",\r\n        \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n```",
       "createdAt": "2025-09-18T01:49:49Z",
-      "updatedAt": "2025-10-10T09:39:51Z",
+      "updatedAt": "2025-10-14T18:28:36Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
-      "baseRefOid": "5f35aefa6b5856ec7b10f2fefaeca5c6d49dd3d2",
+      "baseRefOid": "e410680485f8492307f6407ec98fdd3655c72efd",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "fix-cddl",
-      "headRefOid": "282504a57ff2bda568ba0a17e9afe1d32f192321",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "919ecb9797fc602790ac791d24ff5043a85097ef",
+      "closedAt": "2025-10-14T18:28:35Z",
+      "mergedAt": "2025-10-14T18:28:35Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "7f2e3474b29167bbd4aa57b8f679748f4a44aeb1"
+      },
       "comments": [
         {
           "author": "rohitmohan96",
@@ -842,24 +844,26 @@
       "id": "PR_kwDOPSJ9A86tjHFe",
       "title": "Add SCIM device schema extension for SDF model",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/9",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-13T22:24:29Z",
-      "updatedAt": "2025-10-14T00:55:18Z",
+      "updatedAt": "2025-10-14T07:36:19Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "5f35aefa6b5856ec7b10f2fefaeca5c6d49dd3d2",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "scim-extension",
       "headRefOid": "2232e4a24376228eaa356564670a3c9bdeb5f54b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-14T07:36:19Z",
+      "mergedAt": "2025-10-14T07:36:19Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "e410680485f8492307f6407ec98fdd3655c72efd"
+      },
       "comments": [],
       "reviews": [
         {
@@ -887,6 +891,19 @@
               "updatedAt": "2025-10-14T00:16:17Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87GtoRF",
+          "commit": {
+            "abbreviatedOid": "2232e4a"
+          },
+          "author": "elear",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-14T04:21:24Z",
+          "updatedAt": "2025-10-14T04:21:24Z",
+          "comments": []
         }
       ]
     }
