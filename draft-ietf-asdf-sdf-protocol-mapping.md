@@ -545,7 +545,7 @@ hema/HeartRate/properties/pulse"
 }
 ~~~
 
-# SCIM SDF Extension
+# SCIM SDF Extension {#scim-sdf-extension}
 
 While SDF provides a way to describe a device, a method is needed to associate a
 mapping between an instance of a device and its associated SDF models. To
@@ -584,7 +584,6 @@ This section provides guidance to the Internet Assigned Numbers Authority
 (IANA) regarding registration of values related to this document,
 in accordance with {{!RFC8126}}.
 
-
 ## Protocol mapping {#iana-prot-map}
 
 IANA is requested to create a new registry called "SDF Protocol mapping".
@@ -604,6 +603,16 @@ Following protocol mappings are described in this document:
 | zigbee       | Zigbee                      | Protocol mapping for Zigbee devices         | This document   |
 | openapi      | OpenAPI                     | Protocol mapping for OpenAPI                | This document   |
 {: #protmap-reg title="Protocol Mapping Registry"}
+
+## SCIM Device Schema SDF Extension
+
+IANA is requested to create the following extensions in the SCIM
+Server-Related Schema URIs registry as described in {{scim-sdf-extension}}:
+
+| URN | Description | Resource Type | Reference |
+|-----|-------------|-----------|-----------|
+| urn:ietf:params:scim: schemas:extension: sdf:2.0:Device | SDF Extension | Device | This memo, [](#scim-sdf-extension) |
+
 
 --- back
 
