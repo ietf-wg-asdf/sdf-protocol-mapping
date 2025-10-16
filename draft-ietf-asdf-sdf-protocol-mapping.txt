@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 17 April 2026                                         L. Corneo
+Expires: 19 April 2026                                         L. Corneo
                                                                 Ericsson
-                                                         14 October 2025
+                                                         16 October 2025
 
 
                         Protocol Mapping for SDF
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 April 2026.
+   This Internet-Draft will expire on 19 April 2026.
 
 Copyright Notice
 
@@ -86,6 +86,7 @@ Table of Contents
    7.  Security Considerations
    8.  IANA Considerations
      8.1.  Protocol mapping
+     8.2.  SCIM Device Schema SDF Extension
    9.  References
      9.1.  Normative References
      9.2.  Informative References
@@ -708,6 +709,22 @@ Table of Contents
      +--------------+---------------+--------------------+-----------+
 
                      Table 2: Protocol Mapping Registry
+
+8.2.  SCIM Device Schema SDF Extension
+
+   IANA is requested to create the following extensions in the SCIM
+   Server-Related Schema URIs registry as described in Section 6:
+
+      +=======================+=============+==========+===========+
+      | URN                   | Description | Resource | Reference |
+      |                       |             | Type     |           |
+      +=======================+=============+==========+===========+
+      | urn:ietf:params:scim: | SDF         | Device   | This      |
+      | schemas:extension:    | Extension   |          | memo,     |
+      | sdf:2.0:Device        |             |          | Section 6 |
+      +-----------------------+-------------+----------+-----------+
+
+                                 Table 3
 
 9.  References
 
