@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-16T00:58:23.638981+00:00",
+  "timestamp": "2025-10-19T01:05:08.074349+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -903,6 +903,48 @@
           "body": "",
           "createdAt": "2025-10-14T04:21:24Z",
           "updatedAt": "2025-10-14T04:21:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOPSJ9A86t_fXe",
+      "title": "Add IANA registration for new SCIM extension",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/10",
+      "state": "MERGED",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-16T02:03:31Z",
+      "updatedAt": "2025-10-16T16:48:17Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "7f2e3474b29167bbd4aa57b8f679748f4a44aeb1",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "scim-extension",
+      "headRefOid": "ea21b210af496a909088932e37528c6eeda916e2",
+      "closedAt": "2025-10-16T16:48:17Z",
+      "mergedAt": "2025-10-16T16:48:17Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "2d10de8829a0b571ef0e72e8e5729ecd3b051868"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A87HTPYE",
+          "commit": {
+            "abbreviatedOid": "ea21b21"
+          },
+          "author": "elear",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-16T08:44:04Z",
+          "updatedAt": "2025-10-16T08:44:04Z",
           "comments": []
         }
       ]
