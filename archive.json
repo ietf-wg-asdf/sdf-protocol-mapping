@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-19T01:05:08.074349+00:00",
+  "timestamp": "2025-11-02T01:04:07.528925+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -183,6 +183,22 @@
           "updatedAt": "2025-09-02T19:59:05Z"
         }
       ]
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOPSJ9A87VRS-b",
+      "title": "Update procedure and versioning of registry entries",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/11",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Reading through the draft again, I noticed that (especially in the case of protocols such as CoAP and HTTP) there might the case where additional features are added via extensions and the protocol mapping specification needs to be updated or replaced.\n\nI guess the draft should deal with this question, at least shortly, and may need to define a policy for how this process should be carried out. Whether such an update constitutes a breaking or non-breaking change may need to be taken into account here as well.",
+      "createdAt": "2025-11-01T14:46:28Z",
+      "updatedAt": "2025-11-01T14:47:15Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
