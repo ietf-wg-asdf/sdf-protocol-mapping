@@ -550,8 +550,12 @@ hema/HeartRate/properties/pulse"
 While SDF provides a way to describe a device, a method is needed to associate a
 mapping between an instance of a device and its associated SDF models. To
 accomplish this, we define a SCIM extension that can be used in conjunction with
-{{?I-D.ietf-scim-device-model}}, the details of which can be found in
-{{scim-sdf-extension-schema}}.
+{{!I-D.ietf-scim-device-model}} in {{scim-sdf-extension-schema}}.
+
+~~~
+{::include scim/scim-sdf-extension.json.folded}
+~~~
+{: #scim-sdf-extension-schema title="SCIM SDF Extension Schema"}
 
 An example SCIM device schema extension might look like:
 
@@ -628,12 +632,6 @@ Server-Related Schema URIs registry as described in {{scim-sdf-extension}}:
 {::include cddl/zigbee-protocol-map.cddl}
 
 {::include cddl/zigbee-action-map.cddl}
-~~~
-
-# SCIM SDF Extension Schema {#scim-sdf-extension-schema}
-
-~~~
-{::include scim/scim-sdf-extension.json.folded}
 ~~~
 
 # Acknowledgments
