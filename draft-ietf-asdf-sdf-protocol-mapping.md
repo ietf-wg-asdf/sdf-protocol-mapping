@@ -550,7 +550,9 @@ hema/HeartRate/properties/pulse"
 While SDF provides a way to describe a device, a method is needed to associate a
 mapping between an instance of a device and its associated SDF models. To
 accomplish this, we define a SCIM extension that can be used in conjunction with
-{{!I-D.ietf-scim-device-model}} in {{scim-sdf-extension-schema}}.
+{{!I-D.ietf-scim-device-model}} in {{scim-sdf-extension-schema}}. Implementation
+of this SCIM extension is OPTIONAL and independent of the protocol mapping
+functionality defined in the rest of this document.
 
 ~~~
 {::include scim/scim-sdf-extension.json.folded}
