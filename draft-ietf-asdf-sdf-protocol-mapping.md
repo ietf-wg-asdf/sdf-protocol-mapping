@@ -553,6 +553,7 @@ accomplish this, we define a SCIM extension that can be used in conjunction with
 {{!I-D.ietf-scim-device-model}} in {{scim-sdf-extension-schema}}. Implementation
 of this SCIM extension is OPTIONAL and independent of the protocol mapping
 functionality defined in the rest of this document.
+The SCIM schema attributes used here are described in Section 7 of {{!RFC7643}}.
 
 ~~~
 {::include scim/scim-sdf-extension.json.folded}
