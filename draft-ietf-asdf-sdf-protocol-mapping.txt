@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 19 April 2026                                         L. Corneo
+Expires: 10 May 2026                                           L. Corneo
                                                                 Ericsson
-                                                         16 October 2025
+                                                         6 November 2025
 
 
                         Protocol Mapping for SDF
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 April 2026.
+   This Internet-Draft will expire on 10 May 2026.
 
 Copyright Notice
 
@@ -91,7 +91,6 @@ Table of Contents
      9.1.  Normative References
      9.2.  Informative References
    Appendix A.  CDDL Definition
-   Appendix B.  SCIM SDF Extension Schema
    Acknowledgments
    Authors' Addresses
 
@@ -646,8 +645,38 @@ Table of Contents
    associate a mapping between an instance of a device and its
    associated SDF models.  To accomplish this, we define a SCIM
    extension that can be used in conjunction with
-   [I-D.ietf-scim-device-model], the details of which can be found in
-   Appendix B.
+   [I-D.ietf-scim-device-model] in Figure 8.  Implementation of this
+   SCIM extension is OPTIONAL and independent of the protocol mapping
+   functionality defined in the rest of this document.  The SCIM schema
+   attributes used here are described in Section 7 of [RFC7643].
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   {
+       "id": "urn:ietf:params:scim:schemas:extension:sdf:2.0:Device",
+       "name": "SDFExtension",
+       "description": "Device extension schema for SDF.",
+       "attributes": [
+           {
+               "name": "sdf",
+               "type": "string",
+               "description": "SDF models supported by the device.",
+               "multiValued": true,
+               "required": true,
+               "caseExact": true,
+               "mutability": "readWrite",
+               "returned": "default",
+               "uniqueness": "none"
+           }
+       ],
+       "meta": {
+           "resourceType": "Schema",
+           "location": "/v2/Schemas/urn:ietf:params:scim:schemas:extens\
+   ion:sdf:2.0:Device"
+       }
+   }
+
+                    Figure 8: SCIM SDF Extension Schema
 
    An example SCIM device schema extension might look like:
 
@@ -738,10 +767,22 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
               sdf-25>.
 
+   [I-D.ietf-scim-device-model]
+              Shahzad, M., Iqbal, H., and E. Lear, "Device Schema
+              Extensions to the SCIM model", Work in Progress, Internet-
+              Draft, draft-ietf-scim-device-model-18, 3 September 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-scim-
+              device-model-18>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC7643]  Hunt, P., Ed., Grizzle, K., Wahlstroem, E., and C.
+              Mortimore, "System for Cross-domain Identity Management:
+              Core Schema", RFC 7643, DOI 10.17487/RFC7643, September
+              2015, <https://www.rfc-editor.org/rfc/rfc7643>.
 
    [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
               Writing an IANA Considerations Section in RFCs", BCP 26,
@@ -758,13 +799,6 @@ Table of Contents
               13 July 2021,
               <https://www.bluetooth.com/specifications/specs/core-
               specification-5-3/>.
-
-   [I-D.ietf-scim-device-model]
-              Shahzad, M., Iqbal, H., and E. Lear, "Device Schema
-              Extensions to the SCIM model", Work in Progress, Internet-
-              Draft, draft-ietf-scim-device-model-18, 3 September 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-scim-
-              device-model-18>.
 
    [RFC2616]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
               Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
@@ -840,35 +874,6 @@ Appendix A.  CDDL Definition
      manufacturerCode: uint,
      clusterID: uint,
      commandID: uint,
-   }
-
-Appendix B.  SCIM SDF Extension Schema
-
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
-   {
-       "id": "urn:ietf:params:scim:schemas:extension:sdf:2.0:Device",
-       "name": "SDFExtension",
-       "description": "Device extension schema for SDF.",
-       "attributes": [
-           {
-               "name": "sdf",
-               "type": "string",
-               "description": "SDF global names supported by the device\
-   .",
-               "multiValued": true,
-               "required": true,
-               "caseExact": false,
-               "mutability": "readWrite",
-               "returned": "default",
-               "uniqueness": "none"
-           }
-       ],
-       "meta": {
-           "resourceType": "Schema",
-           "location": "/v2/Schemas/urn:ietf:params:scim:schemas:extens\
-   ion:sdf:2.0:Device"
-       }
    }
 
 Acknowledgments
