@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-02T01:04:07.528925+00:00",
+  "timestamp": "2025-11-06T01:01:06.630142+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -962,6 +962,66 @@
           "createdAt": "2025-10-16T08:44:04Z",
           "updatedAt": "2025-10-16T08:44:04Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOPSJ9A86xgCRT",
+      "title": "Make SCIM SDF extension normative",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/12",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Changes incorporating @akeranen's feedback.",
+      "createdAt": "2025-11-04T20:49:03Z",
+      "updatedAt": "2025-11-05T17:20:54Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "15a238e3518db3450f688093876373c16210a36b",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "scim-extension-fixes",
+      "headRefOid": "75118b2083caa0746399e8ac843f7fd5f3bd5c31",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A87Lw6GC",
+          "commit": {
+            "abbreviatedOid": "90bad62"
+          },
+          "author": "elear",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-11-04T20:52:28Z",
+          "updatedAt": "2025-11-04T20:52:28Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87L3XKP",
+          "commit": {
+            "abbreviatedOid": "c88c83a"
+          },
+          "author": "akeranen",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-05T07:26:50Z",
+          "updatedAt": "2025-11-05T07:26:50Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "Adding a reference to the place where the attributes are defined is useful here.\r\n\r\n```suggestion\r\nThe SCIM schema attributes used here are described in Section 7 of {{!RFC7643}}.\r\n\r\n```",
+              "createdAt": "2025-11-05T07:26:50Z",
+              "updatedAt": "2025-11-05T07:26:51Z"
+            }
+          ]
         }
       ]
     }
