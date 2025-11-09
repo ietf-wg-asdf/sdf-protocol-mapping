@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-06T01:01:06.630142+00:00",
+  "timestamp": "2025-11-09T01:03:55.237516+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -970,24 +970,26 @@
       "id": "PR_kwDOPSJ9A86xgCRT",
       "title": "Make SCIM SDF extension normative",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/12",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Changes incorporating @akeranen's feedback.",
       "createdAt": "2025-11-04T20:49:03Z",
-      "updatedAt": "2025-11-05T17:20:54Z",
+      "updatedAt": "2025-11-06T21:14:13Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "15a238e3518db3450f688093876373c16210a36b",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "scim-extension-fixes",
       "headRefOid": "75118b2083caa0746399e8ac843f7fd5f3bd5c31",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-11-06T21:14:13Z",
+      "mergedAt": "2025-11-06T21:14:13Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "b51ba9ea61552e4faeffe16af9b705845a9300cf"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1009,7 +1011,7 @@
             "abbreviatedOid": "c88c83a"
           },
           "author": "akeranen",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-11-05T07:26:50Z",
