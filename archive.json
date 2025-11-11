@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-09T01:03:55.237516+00:00",
+  "timestamp": "2025-11-11T01:01:50.358765+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -144,9 +144,9 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "The document talks about protocol mapping for IP and Npn-IP protocols, with HTTP and CoAP as examples for IP.\nThere are no examples on IP-based mapping. We should add HTTP and CoAP examples.",
+      "body": "The document talks about protocol mapping for IP and Non-IP protocols, with HTTP and CoAP as examples for IP.\nThere are no examples on IP-based mapping. We should add HTTP and CoAP examples.",
       "createdAt": "2025-08-18T19:36:10Z",
-      "updatedAt": "2025-08-26T08:18:28Z",
+      "updatedAt": "2025-11-10T03:13:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -155,6 +155,13 @@
           "body": "Yes, and instead we have mappings to Open API. Do we want to keep this? what is the rationale to have that?",
           "createdAt": "2025-08-26T08:18:28Z",
           "updatedAt": "2025-08-26T08:18:28Z"
+        },
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We have section 5.3 (IP based protocol mapping) that defines an OpenAPI protocol mapping that can be used for HTTP, along with an example and formal CDDL definition. This is normative in the current draft. \nHere's what the example looks like: \n``` json\n{\n \"sdfProperty\": {\n   \"heartrate\": {\n     \"sdfProtocolMap\": {\n      \"openapi\": {\n         \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current\",\n         \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\n       }\n     }\n   }\n }\n} \n```\n\nThere were some concerns in the IETF124 meeting regarding this. @cabo's suggestion was to make this particular mapping non-normative and move the example to the appendix.\n\nOne of the suggestions we proposed to keep it normative was to use `http` as the protocol and have a type field that says that we are using openapi to map it. \n```diff\n {\n   \"sdfProperty\": {\n     \"heartrate\": {\n       \"sdfProtocolMap\": {\n-        \"openapi\": {\n+        \"http\": {\n+          \"type\": \"openapi\",\n           \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current\",\n           \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\n         }\n       }\n     }\n   }\n } \n```\n\n@elear suggested that we take a to digest this. We can use this issue to discuss on it further.",
+          "createdAt": "2025-11-10T03:13:24Z",
+          "updatedAt": "2025-11-10T03:13:24Z"
         }
       ]
     },
