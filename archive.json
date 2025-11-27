@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-11T01:01:50.358765+00:00",
+  "timestamp": "2025-11-27T01:00:33.699716+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -104,7 +104,7 @@
       ],
       "body": "Creating this issue to discuss on wether to include the BLE, Zigbee, HTTP protocol mappings in this draft. One alternative could be to just describe sdf protocol mappings in this draft, and having separate drafts for BLE, Zigbee, HTTP, etc...",
       "createdAt": "2025-08-07T10:28:11Z",
-      "updatedAt": "2025-08-11T15:03:24Z",
+      "updatedAt": "2025-11-26T22:03:23Z",
       "closedAt": null,
       "comments": [
         {
@@ -113,6 +113,13 @@
           "body": "I think we should have BLE and zigbee as part of this draft, since the NIPC draft will depend on this, and that way we can get moving quickly. ",
           "createdAt": "2025-08-11T15:03:24Z",
           "updatedAt": "2025-08-11T15:03:24Z"
+        },
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "#5 relates to this. We need to take a call if we want to include any IP based protocol mappings in the draft. ",
+          "createdAt": "2025-11-26T22:03:23Z",
+          "updatedAt": "2025-11-26T22:03:23Z"
         }
       ]
     },
@@ -1033,6 +1040,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOPSJ9A861vBqm",
+      "title": "Add OpenAPI definitions for BLE and Zigbee protocol mappings",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/13",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses: https://github.com/ietf-wg-asdf/asdf-nipc/issues/164",
+      "createdAt": "2025-11-26T21:51:22Z",
+      "updatedAt": "2025-11-26T21:51:22Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "b51ba9ea61552e4faeffe16af9b705845a9300cf",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "openapi",
+      "headRefOid": "3ae58b0f080f4239593a5b50065a965624529db6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
