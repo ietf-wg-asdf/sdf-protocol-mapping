@@ -625,7 +625,10 @@ Server-Related Schema URIs registry as described in {{scim-sdf-extension}}:
 
 # CDDL Definition
 
+This appendix contains the combined CDDL definitions for the SDF protocol mappings.
+
 ~~~ cddl
+<CODE BEGINS> file "sdf-protocol-map.cddl"
 {::include cddl/sdf-protocol-map.cddl}
 
 {::include cddl/ble-protocol-map.cddl}
@@ -635,7 +638,37 @@ Server-Related Schema URIs registry as described in {{scim-sdf-extension}}:
 {::include cddl/zigbee-protocol-map.cddl}
 
 {::include cddl/zigbee-action-map.cddl}
+<CODE ENDS>
 ~~~
+
+# OpenAPI Definition
+
+The following non-normative model is provided for convenience of the implementor.
+
+~~~~~~
+<CODE BEGINS> file "ProtocolMap.yaml"
+{::include openapi/ProtocolMap.yaml.folded}
+<CODE ENDS>
+~~~~~~
+{: #protocolmapmodel}
+
+## Protocol map for BLE
+
+~~~~~
+<CODE BEGINS> file "ProtocolMap-BLE.yaml"
+{::include openapi/ProtocolMap-BLE.yaml.folded}
+<CODE ENDS>
+~~~~~
+{: #protocolmapble}
+
+## Protocol map for Zigbee
+
+~~~~~
+<CODE BEGINS> file "ProtocolMap-Zigbee.yaml"
+{::include openapi/ProtocolMap-Zigbee.yaml.folded}
+<CODE ENDS>
+~~~~~~
+{: #protocolmapzigbee}
 
 # Acknowledgments
 {:numbered="false"}
