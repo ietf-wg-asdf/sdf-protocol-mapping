@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-27T01:00:33.699716+00:00",
+  "timestamp": "2025-12-02T01:02:42.753666+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -64,7 +64,7 @@
       ],
       "body": "Suggesting improvement to add a CDDL snippet showing the delta between original SDF and the proposed protocol mapping extension.\n\n``` cddl\npropertyqualities = {\n ? observable: bool\n ? readable: bool\n ? writable: bool\n ? sdfProtocolMap ; this is the delta\n ~dataqualities\n}\n```\n\nJust saying that sdfProtocolMap can be added as named quality does not help much the implementors of the spec, imo.",
       "createdAt": "2025-08-07T10:07:48Z",
-      "updatedAt": "2025-09-23T22:23:02Z",
+      "updatedAt": "2025-12-02T00:13:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -87,6 +87,13 @@
           "body": "I realized that the CDDLs that I added previously were incorrect and was missing the `sdfProtocolMap` object. I have fixed the definitions in #8. ",
           "createdAt": "2025-09-23T22:23:02Z",
           "updatedAt": "2025-09-23T22:23:02Z"
+        },
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@JKRhb the draft now includes CDDL definitions for the different protocol mappings. Do you think we can close this issue now?",
+          "createdAt": "2025-12-02T00:13:52Z",
+          "updatedAt": "2025-12-02T00:13:52Z"
         }
       ]
     },
@@ -137,9 +144,17 @@
       ],
       "body": "Protocol mappings is currently written in several inconsistent ways, e.g., Protocol Mapping, Protocol mapping. Let's decide on one way and make it consistent throughout the text.",
       "createdAt": "2025-08-07T10:31:44Z",
-      "updatedAt": "2025-08-07T10:31:44Z",
+      "updatedAt": "2025-12-02T00:09:56Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The current version of the draft uses \"Protocol Mapping\" in titles such as section headings, tables and figures only. It is lowercase everywhere else. ",
+          "createdAt": "2025-12-02T00:09:56Z",
+          "updatedAt": "2025-12-02T00:09:56Z"
+        }
+      ]
     },
     {
       "number": 5,
@@ -186,7 +201,7 @@
       ],
       "body": "During the last interim the working group members suggested to spend some time pondering on whether protocol mapping is the terminology we want to use. Let's use this issue to discuss.",
       "createdAt": "2025-08-27T06:32:29Z",
-      "updatedAt": "2025-09-02T19:59:05Z",
+      "updatedAt": "2025-12-02T00:12:53Z",
       "closedAt": null,
       "comments": [
         {
@@ -195,6 +210,13 @@
           "body": "I am copying Bart's response here. I also have the same opinion.\n \n> I suggest we use sdfProtocolMap as currently specified for following reasons:\n> 1. The name is a good description of what is defined in the object, we are mapping an sdf affordance to a protocol implementation\n> 2. We discussed the naming in the hackathon and last face to face and changed it from ProtocolMap to sdfProtocolMap. We seemed to have consensus on this in the face 2 face.\n> 3. This naming has now been adopted in a product that is shipping and developers are already integrating with the APIs. Changing the name again will present difficulties for the developers.\n> \n> With this, I would recommend going with sdfProtocolMap, and only change the name if there is a good reason why this naming would not work.\n\n",
           "createdAt": "2025-09-02T19:59:05Z",
           "updatedAt": "2025-09-02T19:59:05Z"
+        },
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe we closed on this issue in a previous interim? @lorenzocorneo can we go ahead and close this?",
+          "createdAt": "2025-12-02T00:12:53Z",
+          "updatedAt": "2025-12-02T00:12:53Z"
         }
       ]
     },
@@ -210,9 +232,17 @@
       "labels": [],
       "body": "Reading through the draft again, I noticed that (especially in the case of protocols such as CoAP and HTTP) there might the case where additional features are added via extensions and the protocol mapping specification needs to be updated or replaced.\n\nI guess the draft should deal with this question, at least shortly, and may need to define a policy for how this process should be carried out. Whether such an update constitutes a breaking or non-breaking change may need to be taken into account here as well.",
       "createdAt": "2025-11-01T14:46:28Z",
-      "updatedAt": "2025-11-01T14:47:15Z",
+      "updatedAt": "2025-12-02T00:10:38Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Added a line to address this in #14. ",
+          "createdAt": "2025-12-02T00:10:38Z",
+          "updatedAt": "2025-12-02T00:10:38Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -838,7 +868,7 @@
       "labels": [],
       "body": "This PR fixes the CDDL definitions in the draft to include the `sdfProtocolMap`, `ble`, `zigbee`, and `openapi` keys.\r\n\r\nAlso, added a way to add separate read/write mappings to a single SDF property.\r\n\r\nFor example, we can have a mapping like this which maps the read to the GET and write to the PUT:\r\n``` json\r\n{\r\n  \"sdfProtocolMap\": {\r\n    \"openapi\": {\r\n      \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current\",\r\n      \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n    }\r\n  }\r\n}\r\n```\r\n\r\nOr a more specific one: \r\n``` json\r\n{\r\n  \"sdfProtocolMap\": {\r\n    \"openapi\": {\r\n      \"read\": {\r\n        \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current/get\",\r\n        \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n      },\r\n      \"write\": {\r\n        \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current/post\",\r\n        \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n```",
       "createdAt": "2025-09-18T01:49:49Z",
-      "updatedAt": "2025-10-14T18:28:36Z",
+      "updatedAt": "2025-12-02T00:11:22Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "e410680485f8492307f6407ec98fdd3655c72efd",
@@ -949,7 +979,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-10-16T02:03:31Z",
-      "updatedAt": "2025-10-16T16:48:17Z",
+      "updatedAt": "2025-12-02T00:11:20Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "7f2e3474b29167bbd4aa57b8f679748f4a44aeb1",
@@ -991,7 +1021,7 @@
       "labels": [],
       "body": "Changes incorporating @akeranen's feedback.",
       "createdAt": "2025-11-04T20:49:03Z",
-      "updatedAt": "2025-11-06T21:14:13Z",
+      "updatedAt": "2025-12-02T00:11:16Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "15a238e3518db3450f688093876373c16210a36b",
@@ -1046,20 +1076,48 @@
       "id": "PR_kwDOPSJ9A861vBqm",
       "title": "Add OpenAPI definitions for BLE and Zigbee protocol mappings",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/13",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses: https://github.com/ietf-wg-asdf/asdf-nipc/issues/164",
       "createdAt": "2025-11-26T21:51:22Z",
-      "updatedAt": "2025-11-26T21:51:22Z",
+      "updatedAt": "2025-12-02T00:11:13Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "b51ba9ea61552e4faeffe16af9b705845a9300cf",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "openapi",
       "headRefOid": "3ae58b0f080f4239593a5b50065a965624529db6",
+      "closedAt": "2025-12-01T23:06:30Z",
+      "mergedAt": "2025-12-01T23:06:30Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "e9e6a7777bf2f63b3cd39ebfa90414172980fb4d"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOPSJ9A862eUOn",
+      "title": "Add guidance for updating existing protocol mapping registry entries",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/14",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses #11 ",
+      "createdAt": "2025-12-02T00:10:20Z",
+      "updatedAt": "2025-12-02T00:10:20Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "e9e6a7777bf2f63b3cd39ebfa90414172980fb4d",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "update-iana",
+      "headRefOid": "6c12ab6ad225ab6c91b2d58aee53c811fb3ebe4f",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
