@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 4 June 2026                                           L. Corneo
+Expires: 5 June 2026                                           L. Corneo
                                                                 Ericsson
-                                                         1 December 2025
+                                                         2 December 2025
 
 
                         Protocol Mapping for SDF
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 June 2026.
+   This Internet-Draft will expire on 5 June 2026.
 
 Copyright Notice
 
@@ -85,7 +85,7 @@ Table of Contents
    6.  SCIM SDF Extension
    7.  Security Considerations
    8.  IANA Considerations
-     8.1.  Protocol mapping
+     8.1.  Protocol Mapping
      8.2.  SCIM Device Schema SDF Extension
    9.  References
      9.1.  Normative References
@@ -709,12 +709,12 @@ Table of Contents
    Authority (IANA) regarding registration of values related to this
    document, in accordance with [RFC8126].
 
-8.1.  Protocol mapping
+8.1.  Protocol Mapping
 
    IANA is requested to create a new registry called "SDF Protocol
-   mapping".
+   Mapping".
 
-   The registry must contain following attributes:
+   The registry must contain the following attributes:
 
    *  Protocol map name
 
@@ -724,6 +724,12 @@ Table of Contents
 
    *  Reference of the specification describing the protocol mapping.
       This specification must be reviewed by an expert.
+
+   The registrant of an existing entry may request updates to that
+   entry, subject to the same expert review.  They should verify that
+   updates preserve backward compatibility with deployed
+   implementations, or if breaking changes are necessary, consider
+   whether a new registry entry is more appropriate.
 
    Following protocol mappings are described in this document:
 
