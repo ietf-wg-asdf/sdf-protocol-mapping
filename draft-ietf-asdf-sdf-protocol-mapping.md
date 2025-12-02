@@ -591,16 +591,19 @@ This section provides guidance to the Internet Assigned Numbers Authority
 (IANA) regarding registration of values related to this document,
 in accordance with {{!RFC8126}}.
 
-## Protocol mapping {#iana-prot-map}
+## Protocol Mapping {#iana-prot-map}
 
-IANA is requested to create a new registry called "SDF Protocol mapping".
+IANA is requested to create a new registry called "SDF Protocol Mapping".
 
-The registry must contain following attributes:
+The registry must contain the following attributes:
 
 - Protocol map name
 - Protocol name
 - Description
 - Reference of the specification describing the protocol mapping. This specification must be reviewed by an expert.
+
+The registrant of an existing entry may request updates to that entry, subject to the same expert review.
+They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.
 
 Following protocol mappings are described in this document:
 
