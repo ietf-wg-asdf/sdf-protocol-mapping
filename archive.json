@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-02T01:02:42.753666+00:00",
+  "timestamp": "2025-12-04T01:02:45.315656+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -64,7 +64,7 @@
       ],
       "body": "Suggesting improvement to add a CDDL snippet showing the delta between original SDF and the proposed protocol mapping extension.\n\n``` cddl\npropertyqualities = {\n ? observable: bool\n ? readable: bool\n ? writable: bool\n ? sdfProtocolMap ; this is the delta\n ~dataqualities\n}\n```\n\nJust saying that sdfProtocolMap can be added as named quality does not help much the implementors of the spec, imo.",
       "createdAt": "2025-08-07T10:07:48Z",
-      "updatedAt": "2025-12-02T00:13:52Z",
+      "updatedAt": "2025-12-02T18:48:05Z",
       "closedAt": null,
       "comments": [
         {
@@ -94,6 +94,20 @@
           "body": "@JKRhb the draft now includes CDDL definitions for the different protocol mappings. Do you think we can close this issue now?",
           "createdAt": "2025-12-02T00:13:52Z",
           "updatedAt": "2025-12-02T00:13:52Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "body": "> @JKRhb the draft now includes CDDL definitions for the different protocol mappings. Do you think we can close this issue now?\n\nThank you @rohitmohan96 for mentioning me here :)\n\nI think the definitions generally look good, although I've noticed that currently the extension point `SDF-EXTENSION-DATA` is being used. In the latest version of SDF base there is now also an extension point for properties, so you could consider limiting `sdfProtocolMap` to affordances only (which would probably make sense, right?)",
+          "createdAt": "2025-12-02T06:41:09Z",
+          "updatedAt": "2025-12-02T06:41:46Z"
+        },
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "For actions and events, the the protocol map can also be a part of the `sdfInputData` or `sdfOutputData`, so we still need to use the `SDF-EXTENSION-DATA`. ",
+          "createdAt": "2025-12-02T18:48:05Z",
+          "updatedAt": "2025-12-02T18:48:05Z"
         }
       ]
     },
@@ -201,7 +215,7 @@
       ],
       "body": "During the last interim the working group members suggested to spend some time pondering on whether protocol mapping is the terminology we want to use. Let's use this issue to discuss.",
       "createdAt": "2025-08-27T06:32:29Z",
-      "updatedAt": "2025-12-02T00:12:53Z",
+      "updatedAt": "2025-12-02T06:55:39Z",
       "closedAt": null,
       "comments": [
         {
@@ -217,6 +231,13 @@
           "body": "I believe we closed on this issue in a previous interim? @lorenzocorneo can we go ahead and close this?",
           "createdAt": "2025-12-02T00:12:53Z",
           "updatedAt": "2025-12-02T00:12:53Z"
+        },
+        {
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "body": "> I believe we closed on this issue in a previous interim? [@lorenzocorneo](https://github.com/lorenzocorneo) can we go ahead and close this?\n\nAbsolutely, go ahead and close this issue.",
+          "createdAt": "2025-12-02T06:55:39Z",
+          "updatedAt": "2025-12-02T06:55:39Z"
         }
       ]
     },
@@ -1104,26 +1125,42 @@
       "id": "PR_kwDOPSJ9A862eUOn",
       "title": "Add guidance for updating existing protocol mapping registry entries",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/14",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses #11 ",
       "createdAt": "2025-12-02T00:10:20Z",
-      "updatedAt": "2025-12-02T00:10:20Z",
+      "updatedAt": "2025-12-02T17:15:06Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "e9e6a7777bf2f63b3cd39ebfa90414172980fb4d",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "update-iana",
       "headRefOid": "6c12ab6ad225ab6c91b2d58aee53c811fb3ebe4f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-12-02T17:15:06Z",
+      "mergedAt": "2025-12-02T17:15:06Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "0ea62bf1d1dd596c6132c99f445c16d453570d4b"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A87SUAc5",
+          "commit": {
+            "abbreviatedOid": "6c12ab6"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Thanks, looks good to me :)",
+          "createdAt": "2025-12-02T06:49:28Z",
+          "updatedAt": "2025-12-02T06:49:29Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
