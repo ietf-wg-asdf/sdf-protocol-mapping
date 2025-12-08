@@ -451,8 +451,14 @@ An example SCIM device schema extension might look like:
 
 # Security Considerations
 
-TODO Security
+The security considerations of {{-sdf}} apply to this document as well.
 
+Each protocol mapped using this mechanism has its own security model.
+The protocol mapping mechanism defined in this document does not provide
+additional security beyond what is offered by the underlying protocols.
+Implementations MUST ensure that appropriate protocol-level security
+mechanisms are employed when accessing affordances through the mapped
+protocol operations.
 
 # IANA Considerations
 
