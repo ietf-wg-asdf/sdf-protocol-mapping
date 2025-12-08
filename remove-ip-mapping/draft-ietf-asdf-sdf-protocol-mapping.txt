@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 9 May 2026                                            L. Corneo
+Expires: 11 June 2026                                          L. Corneo
                                                                 Ericsson
-                                                         5 November 2025
+                                                         8 December 2025
 
 
                         Protocol Mapping for SDF
@@ -19,8 +19,8 @@ Abstract
    Definition Format (SDF) to enable mapping of protocol-agnostic SDF
    affordances to protocol-specific operations.  The protocol mapping
    mechanism allows SDF models to specify how properties, actions, and
-   events should be accessed using specific IP and non-IP protocols such
-   as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
+   events should be accessed using specific non-IP protocols such as
+   Bluetooth Low Energy and Zigbee.
 
 About This Document
 
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 May 2026.
+   This Internet-Draft will expire on 11 June 2026.
 
 Copyright Notice
 
@@ -81,16 +81,18 @@ Table of Contents
        5.1.1.  BLE Protocol Mapping Structure
      5.2.  Zigbee Protocol Mapping
        5.2.1.  Zigbee Protocol Mapping Structure
-     5.3.  IP based Protocol Mapping
    6.  SCIM SDF Extension
    7.  Security Considerations
    8.  IANA Considerations
-     8.1.  Protocol mapping
+     8.1.  Protocol Mapping
      8.2.  SCIM Device Schema SDF Extension
    9.  References
      9.1.  Normative References
      9.2.  Informative References
    Appendix A.  CDDL Definition
+   Appendix B.  OpenAPI Definition
+     B.1.  Protocol map for BLE
+     B.2.  Protocol map for Zigbee
    Acknowledgments
    Authors' Addresses
 
@@ -105,8 +107,10 @@ Table of Contents
    specific operations.
 
    These protocols can be non-IP protocols that are commonly used in IoT
-   environments, such as [BLE53] and [Zigbee22], or IP-based protocols,
-   such as HTTP [RFC2616] or CoAP [RFC7252].
+   environments, such as [BLE53] and [Zigbee22].  The protocol mapping
+   mechanism is designed to be extensible, allowing future
+   specifications to define mappings for IP-based protocols such as HTTP
+   [RFC2616] or CoAP [RFC7252].
 
    To leverage an SDF model to perform protocol-specific operations on
    an instance of a device, a mapping of the SDF affordance to a
@@ -144,12 +148,8 @@ Table of Contents
      |        +--> BLE-specific mapping
      |
      +-----> zigbee
-     |        |
-     |        +--> Zigbee-specific mapping
-     |
-     +-----> openapi
               |
-              +--> OpenAPI-specific mapping
+              +--> Zigbee-specific mapping
 
                          Figure 1: Property Mapping
 
@@ -157,17 +157,15 @@ Table of Contents
    in an sdfProtocolMap object, for example a "ble" or a "zigbee"
    object.
 
-    +===========+========+============================================+
-    | Attribute | Type   | Example                                    |
-    +===========+========+============================================+
-    | ble       | object | an object with BLE-specific attributes     |
-    +-----------+--------+--------------------------------------------+
-    | zigbee    | object | an object with Zigbee-specific attributes  |
-    +-----------+--------+--------------------------------------------+
-    | openapi   | object | an object with OpenAPI-specific attributes |
-    +-----------+--------+--------------------------------------------+
+    +===========+========+===========================================+
+    | Attribute | Type   | Example                                   |
+    +===========+========+===========================================+
+    | ble       | object | an object with BLE-specific attributes    |
+    +-----------+--------+-------------------------------------------+
+    | zigbee    | object | an object with Zigbee-specific attributes |
+    +-----------+--------+-------------------------------------------+
 
-                         Table 1: Protocol objects
+                        Table 1: Protocol objects
 
    where-
 
@@ -504,141 +502,6 @@ Table of Contents
      }
    }
 
-5.3.  IP based Protocol Mapping
-
-   The protocol mapping mechanism can potentially also be used for IP-
-   based protocols such as HTTP or CoAP.
-
-   In the case of HTTP, SDF protocol mappings towards an SDF quality MAY
-   be expressed by directly pointing to OpenAPI schema and/or component.
-
-   $$SDF-PROTOCOL-MAP //= (
-     openapi: openapi-protocol-map
-   )
-
-   openapi-protocol-map = {
-     ? openapi-property,
-     ? read: { openapi-property },
-     ? write: { openapi-property }
-   }
-
-   openapi-property = (
-     operationRef: text,
-     $ref: text
-   )
-
-   An example of a protocol mapping for a property using HTTP might look
-   like:
-
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
-   {
-     "sdfProperty": {
-       "heartrate": {
-         "sdfProtocolMap": {
-           "openapi": {
-               "operationRef": "https://example.com/openapi.json#/paths\
-   /~1heartrate~1{id}~1current",
-               "$ref": "https://example.com/openapi.json#/components/sc\
-   hema/HeartRate/properties/pulse"
-           }
-         }
-       }
-     }
-   }
-
-   The operationRef points to the OpenAPI operation that retrieves the
-   current heart rate, and the $ref points to the OpenAPI schema that
-   defines the heart rate property.  An example of the OpenAPI schema
-   might look like:
-
-   paths:
-     /heartrate/{id}/current:
-       get:
-         summary: Get current heart rate
-         description: |-
-           Retrieve the current heart rate for a specific user
-           identified by {id}.
-         parameters:
-           - name: id
-             in: path
-             required: true
-             description: |-
-               The ID of the user whose heart rate is being queried.
-             schema:
-               type: string
-         responses:
-           "200":
-             description: |-
-               Successful response with current heart rate data.
-             content:
-               application/json:
-                 schema:
-                   $ref: "#/components/schemas/HeartRate"
-       put:
-         summary: Set current heart rate
-         description: |-
-           Set the current heart rate for a specific user
-           identified by {id}.
-         parameters:
-           - name: id
-             in: path
-             required: true
-             description: |-
-               The ID of the user whose heart rate is being set.
-             schema:
-               type: string
-         requestBody:
-           required: true
-           content:
-             application/json:
-               schema:
-                 $ref: "#/components/schemas/HeartRate"
-
-   components:
-     schemas:
-       HeartRate:
-         type: object
-         properties:
-           pulse:
-             type: integer
-             description: The current heart rate in beats per minute.
-           spo2:
-             type: number
-             format: float
-             description: |-
-               The current body temperature in degrees Celsius.
-
-   We assume that the readable properties will map to GET operations and
-   the writable properties will map to PUT operations.  If this is not
-   the case, or if the API is different, the protocol mapping can be
-   specified as such:
-
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
-   {
-     "sdfProperty": {
-       "heartrate": {
-         "sdfProtocolMap": {
-           "openapi": {
-             "read": {
-               "operationRef": "https://example.com/openapi.json#/paths\
-   /~1heartrate~1{id}~1current/get",
-               "$ref": "https://example.com/openapi.json#/components/sc\
-   hema/HeartRate/properties/pulse"
-             },
-             "write": {
-               "operationRef": "https://example.com/openapi.json#/paths\
-   /~1heartrate~1{id}~1current/put",
-               "$ref": "https://example.com/openapi.json#/components/sc\
-   hema/HeartRate/properties/pulse"
-             }
-           }
-         }
-       }
-     }
-   }
-
 6.  SCIM SDF Extension
 
    While SDF provides a way to describe a device, a method is needed to
@@ -698,7 +561,15 @@ Table of Contents
 
 7.  Security Considerations
 
-   TODO Security
+   The security considerations of [I-D.ietf-asdf-sdf] apply to this
+   document as well.
+
+   Each protocol mapped using this mechanism has its own security model.
+   The protocol mapping mechanism defined in this document does not
+   provide additional security beyond what is offered by the underlying
+   protocols.  Implementations MUST ensure that appropriate protocol-
+   level security mechanisms are employed when accessing affordances
+   through the mapped protocol operations.
 
 8.  IANA Considerations
 
@@ -706,12 +577,12 @@ Table of Contents
    Authority (IANA) regarding registration of values related to this
    document, in accordance with [RFC8126].
 
-8.1.  Protocol mapping
+8.1.  Protocol Mapping
 
    IANA is requested to create a new registry called "SDF Protocol
-   mapping".
+   Mapping".
 
-   The registry must contain following attributes:
+   The registry must contain the following attributes:
 
    *  Protocol map name
 
@@ -721,6 +592,12 @@ Table of Contents
 
    *  Reference of the specification describing the protocol mapping.
       This specification must be reviewed by an expert.
+
+   The registrant of an existing entry may request updates to that
+   entry, subject to the same expert review.  They should verify that
+   updates preserve backward compatibility with deployed
+   implementations, or if breaking changes are necessary, consider
+   whether a new registry entry is more appropriate.
 
    Following protocol mappings are described in this document:
 
@@ -732,9 +609,6 @@ Table of Contents
      +--------------+---------------+--------------------+-----------+
      | zigbee       | Zigbee        | Protocol mapping   | This      |
      |              |               | for Zigbee devices | document  |
-     +--------------+---------------+--------------------+-----------+
-     | openapi      | OpenAPI       | Protocol mapping   | This      |
-     |              |               | for OpenAPI        | document  |
      +--------------+---------------+--------------------+-----------+
 
                      Table 2: Protocol Mapping Registry
@@ -816,6 +690,10 @@ Table of Contents
 
 Appendix A.  CDDL Definition
 
+   This appendix contains the combined CDDL definitions for the SDF
+   protocol mappings.
+
+   <CODE BEGINS> file "sdf-protocol-map.cddl"
    $$SDF-EXTENSION-DATA //= (
      sdfProtocolMap: {
        * $$SDF-PROTOCOL-MAP
@@ -875,6 +753,399 @@ Appendix A.  CDDL Definition
      clusterID: uint,
      commandID: uint,
    }
+   <CODE ENDS>
+
+Appendix B.  OpenAPI Definition
+
+   The following non-normative model is provided for convenience of the
+   implementor.
+
+   <CODE BEGINS> file "ProtocolMap.yaml"
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   openapi: 3.0.3
+   info:
+     title: SDF Protocol Mapping
+     description: |-
+       SDF Protocol Mapping. When adding a
+       new protocol mapping please add a reference to the protocol map
+       for all the schemas in this file.
+     version: 0.10.0
+   externalDocs:
+     description: SDF Protocol Mapping IETF draft
+     url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
+   -mapping/
+
+   paths: {}
+
+   components:
+     schemas:
+   # Protocol Mapping
+   ## Protocol Map for Service Discovery
+       ProtocolMap-ServiceList:
+         type: object
+         properties:
+           sdfProtocolMap:
+             oneOf:
+               - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
+   ocolMap-BLE-ServiceList'
+
+   ## Protocol Map for Service Discovery result
+       ProtocolMap-ServiceMap:
+         type: object
+         properties:
+           sdfProtocolMap:
+             oneOf:
+               - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
+   ocolMap-BLE-ServiceMap'
+               - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
+   rotocolMap-Zigbee-ServiceMap'
+
+   ## Protocol Map for Broadcasts
+       ProtocolMap-Broadcast:
+         type: object
+         properties:
+           sdfProtocolMap:
+             oneOf:
+               - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
+   ocolMap-BLE-Broadcast'
+               - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
+   rotocolMap-Zigbee-Broadcast'
+
+   ## Protocol Map for a property
+       ProtocolMap-Property:
+         type: object
+         properties:
+           sdfProtocolMap:
+             oneOf:
+               - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
+   ocolMap-BLE-Propmap'
+               - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
+   rotocolMap-Zigbee-Propmap'
+
+   ## Protocol Map for an event
+       ProtocolMap-Event:
+         type: object
+         properties:
+           sdfProtocolMap:
+             oneOf:
+               - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
+   ocolMap-BLE-Event'
+               - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
+   rotocolMap-Zigbee-Event'
+   <CODE ENDS>
+
+                                  Figure 9
+
+B.1.  Protocol map for BLE
+
+   <CODE BEGINS> file "ProtocolMap-BLE.yaml"
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   openapi: 3.0.3
+   info:
+     title: SDF Protocol Mapping for BLE
+     description: |-
+       SDF Protocol Mapping for BLE devices.
+     version: 0.10.0
+   externalDocs:
+     description: SDF Protocol Mapping IETF draft
+     url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
+   -mapping/
+
+   paths: {}
+
+   components:
+     schemas:
+   # BLE Protocol Mapping
+   ## A Service is a device with optional service IDs
+       ProtocolMap-BLE-ServiceList:
+         type: object
+         properties:
+           ble:
+             type: object
+             properties:
+               services:
+                 type: array
+                 items:
+                   type: object
+                   properties:
+                     serviceID:
+                       type: string
+                       format: uuid
+                       example: 00001809-0000-1000-8000-00805f9b34fb
+               cached:
+                 description: |-
+                   If we can cache information, then device doesn't need
+                   to be rediscovered before every connected.
+                 type: boolean
+                 default: false
+               cacheIdlePurge:
+                 description: cache expiry period, when device allows
+                 type: integer
+                 example: 3600 # default 1 hour
+               autoUpdate:
+                 description: |-
+                   autoupdate services if device supports it (default)
+                 type: boolean
+                 example: true
+               bonding: #optional, by default defined in SCIM object
+                 type: string
+                 example: default
+                 enum:
+                   - default
+                   - none
+                   - justworks
+                   - passkey
+                   - oob
+
+   ##  Protocol Mapping for BLE Service Map
+       ProtocolMap-BLE-ServiceMap:
+         required:
+           - services
+         type: object
+         properties:
+           ble:
+             type: array
+             items:
+               $ref: '#/components/schemas/ProtocolMap-BLE-Service'
+
+       ProtocolMap-BLE-Service:
+         required:
+           - serviceID
+           - characteristics
+         type: object
+         properties:
+           serviceID:
+             type: string
+             format: uuid
+             example: 00001809-0000-1000-8000-00805f9b34fb
+           characteristics:
+             type: array
+             items:
+               $ref: '#/components/schemas/ProtocolMap-BLE-Characterist\
+   ic'
+
+       ProtocolMap-BLE-Characteristic:
+         required:
+           - characteristicID
+           - flags
+           - descriptors
+         type: object
+         properties:
+           characteristicID:
+             type: string
+             format: uuid
+             example: 00002a1c-0000-1000-8000-00805f9b34fb
+           flags:
+             type: array
+             example:
+             - read
+             - write
+             items:
+               type: string
+               enum:
+                 - read
+                 - write
+                 - notify
+           descriptors:
+             type: array
+             items:
+               $ref: '#/components/schemas/ProtocolMap-BLE-Descriptor'
+
+       ProtocolMap-BLE-Descriptor:
+         required:
+           - descriptorID
+         type: object
+         properties:
+           descriptorID:
+             type: string
+             format: uuid
+             example: 00002902-0000-1000-8000-00805f9b34fb
+
+   ##  Protocol Mapping for BLE Broadcast
+       ProtocolMap-BLE-Broadcast:
+         required:
+           - ble
+         type: object
+         properties:
+           ble:
+             type: object
+             properties:
+               connectable:
+                 type: boolean
+
+   ## Protocol Mapping for BLE Property
+       ProtocolMap-BLE-Propmap:
+         required:
+           - ble
+         type: object
+         properties:
+           ble:
+             required:
+               - serviceID
+               - characteristicID
+             type: object
+             properties:
+               serviceID:
+                 type: string
+                 format: uuid
+                 example: 00001809-0000-1000-8000-00805f9b34fb
+               characteristicID:
+                 type: string
+                 format: uuid
+                 example: 00002a1c-0000-1000-8000-00805f9b34fb
+
+   ## Defines different types of BLE events
+       ProtocolMap-BLE-Event:
+         required:
+           - ble
+         type: object
+         properties:
+           ble:
+             required:
+               - type
+             type: object
+             properties:
+               type:
+                 type: string
+                 example: gatt
+                 enum:
+                   - gatt
+                   - connection_events
+                   - advertisements
+               serviceID:
+                 type: string
+                 example: 00001809-0000-1000-8000-00805f9b34fb
+               characteristicID:
+                 type: string
+                 example: 00002a1c-0000-1000-8000-00805f9b34fb
+   <CODE ENDS>
+
+                                 Figure 10
+
+B.2.  Protocol map for Zigbee
+
+   <CODE BEGINS> file "ProtocolMap-Zigbee.yaml"
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   openapi: 3.0.3
+   info:
+     title: SDF Protocol Mapping for Zigbee
+     description: |-
+       SDF Protocol Mapping for Zigbee devices.
+     version: 0.10.0
+   externalDocs:
+     description: SDF Protocol Mapping IETF draft
+     url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
+   -mapping/
+
+   paths: {}
+
+   components:
+     schemas:
+   # Zigbee Protocol Mapping
+   ##  Protocol Mapping for Zigbee Service Map
+       ProtocolMap-Zigbee-ServiceMap:
+         required:
+           - zigbee
+         type: object
+         properties:
+           zigbee:
+             type: array
+             items:
+               $ref: '#/components/schemas/ProtocolMap-Zigbee-Endpoint'
+
+       ProtocolMap-Zigbee-Endpoint:
+         required:
+           - endpointID
+           - clusters
+         type: object
+         properties:
+           endpointID:
+             type: integer
+             format: int32
+             example: 10
+           clusters:
+             type: array
+             items:
+               $ref: '#/components/schemas/ProtocolMap-Zigbee-Cluster'
+
+       ProtocolMap-Zigbee-Cluster:
+         required:
+           - clusterID
+           - properties
+         type: object
+         properties:
+           clusterID:
+             type: integer
+             format: int32
+             example: 0
+           properties:
+             type: array
+             items:
+               $ref: '#/components/schemas/ProtocolMap-Zigbee-Property'
+
+       ProtocolMap-Zigbee-Property:
+         required:
+           - attributeID
+           - propertyType
+         type: object
+         properties:
+           attributeID:
+             type: integer
+             format: int32
+             example: 1
+           propertyType:
+             type: integer
+             format: int32
+             example: 32
+
+   ## Protocol Mapping for Zigbee broadcast
+       ProtocolMap-Zigbee-Broadcast:
+         required:
+           - zigbee
+         type: object
+         properties:
+           zigbee:
+             type: object
+
+   ## Protocol mapping for Zigbee property
+       ProtocolMap-Zigbee-Propmap:
+         required:
+           - zigbee
+         type: object
+         properties:
+           zigbee:
+             required:
+               - endpointID
+               - clusterID
+               - attributeID
+             type: object
+             properties:
+               endpointID:
+                 type: integer
+                 format: int32
+                 example: 1
+               clusterID:
+                 type: integer
+                 format: int32
+                 example: 6
+               attributeID:
+                 type: integer
+                 format: int32
+                 example: 16
+               type:
+                 type: integer
+                 format: int32
+                 example: 1
+
+       ProtocolMap-Zigbee-Event:
+         allOf:
+           - $ref: '#/components/schemas/ProtocolMap-Zigbee-Propmap'
+   <CODE ENDS>
+
+                                 Figure 11
 
 Acknowledgments
 

@@ -13,7 +13,7 @@
 Format (SDF) to enable mapping of protocol-agnostic SDF affordances to
 protocol-specific operations. The protocol mapping mechanism allows SDF models
 to specify how properties, actions, and events should be accessed using specific
-IP and non-IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP. 
+non-IP protocols such as Bluetooth Low Energy and Zigbee. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="IoT" name="keyword">
@@ -1049,11 +1049,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">sdf-protocol-mapping</td>
-<td class="right">November 2025</td>
+<td class="right">December 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Mohan, et al.</td>
-<td class="center">Expires 9 May 2026</td>
+<td class="center">Expires 11 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-asdf-sdf-protocol-mapping-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-11-05" class="published">5 November 2025</time>
+<time datetime="2025-12-08" class="published">8 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-05-09">9 May 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-11">11 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1096,7 +1096,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 Format (SDF) to enable mapping of protocol-agnostic SDF affordances to
 protocol-specific operations. The protocol mapping mechanism allows SDF models
 to specify how properties, actions, and events should be accessed using specific
-IP and non-IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+non-IP protocols such as Bluetooth Low Energy and Zigbee.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1132,7 +1132,7 @@ IP and non-IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.<a
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1192,9 +1192,6 @@ IP and non-IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.<a
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-ip-based-protocol-mapping" class="internal xref">IP based Protocol Mapping</a></p>
-</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
@@ -1207,7 +1204,7 @@ IP and non-IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.<a
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-protocol-mapping" class="internal xref">Protocol mapping</a></p>
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-protocol-mapping" class="internal xref">Protocol Mapping</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
                 <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-scim-device-schema-sdf-exte" class="internal xref">SCIM Device Schema SDF Extension</a></p>
@@ -1229,10 +1226,21 @@ IP and non-IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.<a
             <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-cddl-definition" class="internal xref">CDDL Definition</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-openapi-definition" class="internal xref">OpenAPI Definition</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
+                <p id="section-toc.1-1.11.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-protocol-map-for-ble" class="internal xref">Protocol map for BLE</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-protocol-map-for-zigbee" class="internal xref">Protocol map for Zigbee</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1250,8 +1258,9 @@ affordances on actual devices using specific communication protocols, there
 needs to be a mechanism to map the protocol-agnostic SDF definitions to
 protocol-specific operations.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">These protocols can be non-IP protocols that are commonly used in IoT
-environments, such as <span>[<a href="#BLE53" class="cite xref">BLE53</a>]</span> and <span>[<a href="#Zigbee22" class="cite xref">Zigbee22</a>]</span>, or IP-based protocols, such as
-HTTP <span>[<a href="#RFC2616" class="cite xref">RFC2616</a>]</span> or CoAP <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span>.<a href="#section-1-2" class="pilcrow">¶</a></p>
+environments, such as <span>[<a href="#BLE53" class="cite xref">BLE53</a>]</span> and <span>[<a href="#Zigbee22" class="cite xref">Zigbee22</a>]</span>. The protocol mapping mechanism
+is designed to be extensible, allowing future specifications to define mappings
+for IP-based protocols such as HTTP <span>[<a href="#RFC2616" class="cite xref">RFC2616</a>]</span> or CoAP <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span>.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">To leverage an SDF model to perform protocol-specific operations on an instance
 of a device, a mapping of the SDF affordance to a protocol-specific attribute is
 required. This document defines the protocol mapping mechanism using the
@@ -1288,21 +1297,16 @@ in the IANA registry requested in <a href="#iana-prot-map" class="auto internal 
 <figure id="figure-1">
         <div id="section-3-3.1">
           <div class="alignLeft art-svg artwork" id="section-3-3.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="240" width="328" viewBox="0 0 328 240" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-              <path d="M 24,48 L 24,192" fill="none" stroke="black"></path>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="176" width="320" viewBox="0 0 320 176" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 24,48 L 24,128" fill="none" stroke="black"></path>
               <path d="M 96,80 L 96,96" fill="none" stroke="black"></path>
               <path d="M 96,144 L 96,160" fill="none" stroke="black"></path>
-              <path d="M 96,208 L 96,224" fill="none" stroke="black"></path>
               <path d="M 24,64 L 72,64" fill="none" stroke="black"></path>
               <path d="M 96,96 L 120,96" fill="none" stroke="black"></path>
               <path d="M 24,128 L 72,128" fill="none" stroke="black"></path>
               <path d="M 96,160 L 120,160" fill="none" stroke="black"></path>
-              <path d="M 24,192 L 72,192" fill="none" stroke="black"></path>
-              <path d="M 96,224 L 120,224" fill="none" stroke="black"></path>
-              <polygon class="arrowhead" points="128,224 116,218.4 116,229.6" fill="black" transform="rotate(0,120,224)"></polygon>
               <polygon class="arrowhead" points="128,160 116,154.4 116,165.6" fill="black" transform="rotate(0,120,160)"></polygon>
               <polygon class="arrowhead" points="128,96 116,90.4 116,101.6" fill="black" transform="rotate(0,120,96)"></polygon>
-              <polygon class="arrowhead" points="80,192 68,186.4 68,197.6" fill="black" transform="rotate(0,72,192)"></polygon>
               <polygon class="arrowhead" points="80,128 68,122.4 68,133.6" fill="black" transform="rotate(0,72,128)"></polygon>
               <polygon class="arrowhead" points="80,64 68,58.4 68,69.6" fill="black" transform="rotate(0,72,64)"></polygon>
               <g class="text">
@@ -1313,9 +1317,6 @@ in the IANA registry requested in <a href="#iana-prot-map" class="auto internal 
                 <text x="108" y="132">zigbee</text>
                 <text x="192" y="164">Zigbee-specific</text>
                 <text x="288" y="164">mapping</text>
-                <text x="112" y="196">openapi</text>
-                <text x="196" y="228">OpenAPI-specific</text>
-                <text x="296" y="228">mapping</text>
               </g>
             </svg><a href="#section-3-3.1.1" class="pilcrow">¶</a>
 </div>
@@ -1349,11 +1350,6 @@ sdfProtocolMap object, for example a "ble" or a "zigbee" object.<a href="#sectio
             <td class="text-left" rowspan="1" colspan="1">zigbee</td>
             <td class="text-left" rowspan="1" colspan="1">object</td>
             <td class="text-left" rowspan="1" colspan="1">an object with Zigbee-specific attributes</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">openapi</td>
-            <td class="text-left" rowspan="1" colspan="1">object</td>
-            <td class="text-left" rowspan="1" colspan="1">an object with OpenAPI-specific attributes</td>
           </tr>
         </tbody>
       </table>
@@ -1766,150 +1762,6 @@ zigbee-action-map = {
 </div>
 </section>
 </div>
-<div id="ip-based-protocol-mapping">
-<section id="section-5.3">
-        <h3 id="name-ip-based-protocol-mapping">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-ip-based-protocol-mapping" class="section-name selfRef">IP based Protocol Mapping</a>
-        </h3>
-<p id="section-5.3-1">The protocol mapping mechanism can potentially also be used for IP-based protocols
-such as HTTP or CoAP.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3-2">In the case of HTTP, SDF protocol mappings towards an SDF quality <span class="bcp14">MAY</span> be
-expressed by directly pointing to OpenAPI schema and/or component.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<div class="lang-cddl sourcecode" id="section-5.3-3">
-<pre>
-$$SDF-PROTOCOL-MAP //= (
-  openapi: openapi-protocol-map
-)
-
-openapi-protocol-map = {
-  ? openapi-property,
-  ? read: { openapi-property },
-  ? write: { openapi-property }
-}
-
-openapi-property = (
-  operationRef: text,
-  $ref: text
-)
-</pre><a href="#section-5.3-3" class="pilcrow">¶</a>
-</div>
-<p id="section-5.3-4">An example of a protocol mapping for a property using HTTP might look like:<a href="#section-5.3-4" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-5.3-5">
-<pre>
-=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
-  "sdfProperty": {
-    "heartrate": {
-      "sdfProtocolMap": {
-        "openapi": {
-            "operationRef": "https://example.com/openapi.json#/paths\
-/~1heartrate~1{id}~1current",
-            "$ref": "https://example.com/openapi.json#/components/sc\
-hema/HeartRate/properties/pulse"
-        }
-      }
-    }
-  }
-}
-</pre><a href="#section-5.3-5" class="pilcrow">¶</a>
-</div>
-<p id="section-5.3-6">The <code>operationRef</code> points to the OpenAPI operation that retrieves the
-current heart rate, and the <code>$ref</code> points to the OpenAPI schema that
-defines the heart rate property. An example of the OpenAPI schema
-might look like:<a href="#section-5.3-6" class="pilcrow">¶</a></p>
-<div class="breakable lang-yaml sourcecode" id="section-5.3-7">
-<pre>
-paths:
-  /heartrate/{id}/current:
-    get:
-      summary: Get current heart rate
-      description: |-
-        Retrieve the current heart rate for a specific user
-        identified by {id}.
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: |-
-            The ID of the user whose heart rate is being queried.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: |-
-            Successful response with current heart rate data.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/HeartRate"
-    put:
-      summary: Set current heart rate
-      description: |-
-        Set the current heart rate for a specific user
-        identified by {id}.
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: |-
-            The ID of the user whose heart rate is being set.
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/HeartRate"
-
-components:
-  schemas:
-    HeartRate:
-      type: object
-      properties:
-        pulse:
-          type: integer
-          description: The current heart rate in beats per minute.
-        spo2:
-          type: number
-          format: float
-          description: |-
-            The current body temperature in degrees Celsius.
-</pre><a href="#section-5.3-7" class="pilcrow">¶</a>
-</div>
-<p id="section-5.3-8">We assume that the readable properties will map to GET operations and the writable properties will map to PUT operations.
-If this is not the case, or if the API is different, the protocol mapping can be specified as such:<a href="#section-5.3-8" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-5.3-9">
-<pre>
-=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
-  "sdfProperty": {
-    "heartrate": {
-      "sdfProtocolMap": {
-        "openapi": {
-          "read": {
-            "operationRef": "https://example.com/openapi.json#/paths\
-/~1heartrate~1{id}~1current/get",
-            "$ref": "https://example.com/openapi.json#/components/sc\
-hema/HeartRate/properties/pulse"
-          },
-          "write": {
-            "operationRef": "https://example.com/openapi.json#/paths\
-/~1heartrate~1{id}~1current/put",
-            "$ref": "https://example.com/openapi.json#/components/sc\
-hema/HeartRate/properties/pulse"
-          }
-        }
-      }
-    }
-  }
-}
-</pre><a href="#section-5.3-9" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
 </section>
 </div>
 <div id="scim-sdf-extension">
@@ -1986,7 +1838,13 @@ ion:sdf:2.0:Device"
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">TODO Security<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">The security considerations of <span>[<a href="#I-D.ietf-asdf-sdf" class="cite xref">I-D.ietf-asdf-sdf</a>]</span> apply to this document as well.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">Each protocol mapped using this mechanism has its own security model.
+The protocol mapping mechanism defined in this document does not provide
+additional security beyond what is offered by the underlying protocols.
+Implementations <span class="bcp14">MUST</span> ensure that appropriate protocol-level security
+mechanisms are employed when accessing affordances through the mapped
+protocol operations.<a href="#section-7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -2000,10 +1858,10 @@ in accordance with <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</spa
 <div id="iana-prot-map">
 <section id="section-8.1">
         <h3 id="name-protocol-mapping">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-protocol-mapping" class="section-name selfRef">Protocol mapping</a>
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-protocol-mapping" class="section-name selfRef">Protocol Mapping</a>
         </h3>
-<p id="section-8.1-1">IANA is requested to create a new registry called "SDF Protocol mapping".<a href="#section-8.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1-2">The registry must contain following attributes:<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1-1">IANA is requested to create a new registry called "SDF Protocol Mapping".<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">The registry must contain the following attributes:<a href="#section-8.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-8.1-3.1">
             <p id="section-8.1-3.1.1">Protocol map name<a href="#section-8.1-3.1.1" class="pilcrow">¶</a></p>
@@ -2018,7 +1876,9 @@ in accordance with <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</spa
             <p id="section-8.1-3.4.1">Reference of the specification describing the protocol mapping. This specification must be reviewed by an expert.<a href="#section-8.1-3.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-8.1-4">Following protocol mappings are described in this document:<a href="#section-8.1-4" class="pilcrow">¶</a></p>
+<p id="section-8.1-4">The registrant of an existing entry may request updates to that entry, subject to the same expert review.
+They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
+<p id="section-8.1-5">Following protocol mappings are described in this document:<a href="#section-8.1-5" class="pilcrow">¶</a></p>
 <span id="name-protocol-mapping-registry"></span><div id="protmap-reg">
 <table class="center" id="table-2">
           <caption>
@@ -2044,12 +1904,6 @@ in accordance with <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</spa
               <td class="text-left" rowspan="1" colspan="1">zigbee</td>
               <td class="text-left" rowspan="1" colspan="1">Zigbee</td>
               <td class="text-left" rowspan="1" colspan="1">Protocol mapping for Zigbee devices</td>
-              <td class="text-left" rowspan="1" colspan="1">This document</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">openapi</td>
-              <td class="text-left" rowspan="1" colspan="1">OpenAPI</td>
-              <td class="text-left" rowspan="1" colspan="1">Protocol mapping for OpenAPI</td>
               <td class="text-left" rowspan="1" colspan="1">This document</td>
             </tr>
           </tbody>
@@ -2158,8 +2012,10 @@ Server-Related Schema URIs registry as described in <a href="#scim-sdf-extension
       <h2 id="name-cddl-definition">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-cddl-definition" class="section-name selfRef">CDDL Definition</a>
       </h2>
-<div class="breakable lang-cddl sourcecode" id="appendix-A-1">
+<p id="appendix-A-1">This appendix contains the combined CDDL definitions for the SDF protocol mappings.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<div class="breakable lang-cddl sourcecode" id="appendix-A-2">
 <pre>
+&lt;CODE BEGINS&gt; file "sdf-protocol-map.cddl"
 $$SDF-EXTENSION-DATA //= (
   sdfProtocolMap: {
     * $$SDF-PROTOCOL-MAP
@@ -2219,20 +2075,442 @@ zigbee-action-map = {
   clusterID: uint,
   commandID: uint,
 }
-</pre><a href="#appendix-A-1" class="pilcrow">¶</a>
+&lt;CODE ENDS&gt;
+</pre><a href="#appendix-A-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="openapi-definition">
+<section id="appendix-B">
+      <h2 id="name-openapi-definition">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-openapi-definition" class="section-name selfRef">OpenAPI Definition</a>
+      </h2>
+<p id="appendix-B-1">The following non-normative model is provided for convenience of the implementor.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<div id="protocolmapmodel">
+<figure id="figure-9">
+        <div class="breakable sourcecode" id="appendix-B-2.1">
+<pre>&lt;CODE BEGINS&gt; file "ProtocolMap.yaml"
+
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+openapi: 3.0.3
+info:
+  title: SDF Protocol Mapping
+  description: |-
+    SDF Protocol Mapping. When adding a
+    new protocol mapping please add a reference to the protocol map
+    for all the schemas in this file.
+  version: 0.10.0
+externalDocs:
+  description: SDF Protocol Mapping IETF draft
+  url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
+-mapping/
+
+paths: {}
+
+components:
+  schemas:
+# Protocol Mapping
+## Protocol Map for Service Discovery
+    ProtocolMap-ServiceList:
+      type: object
+      properties:
+        sdfProtocolMap:
+          oneOf:
+            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
+ocolMap-BLE-ServiceList'
+
+## Protocol Map for Service Discovery result
+    ProtocolMap-ServiceMap:
+      type: object
+      properties:
+        sdfProtocolMap:
+          oneOf:
+            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
+ocolMap-BLE-ServiceMap'
+            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
+rotocolMap-Zigbee-ServiceMap'
+
+## Protocol Map for Broadcasts
+    ProtocolMap-Broadcast:
+      type: object
+      properties:
+        sdfProtocolMap:
+          oneOf:
+            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
+ocolMap-BLE-Broadcast'
+            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
+rotocolMap-Zigbee-Broadcast'
+
+## Protocol Map for a property
+    ProtocolMap-Property:
+      type: object
+      properties:
+        sdfProtocolMap:
+          oneOf:
+            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
+ocolMap-BLE-Propmap'
+            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
+rotocolMap-Zigbee-Propmap'
+
+## Protocol Map for an event
+    ProtocolMap-Event:
+      type: object
+      properties:
+        sdfProtocolMap:
+          oneOf:
+            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
+ocolMap-BLE-Event'
+            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
+rotocolMap-Zigbee-Event'
+
+
+&lt;CODE ENDS&gt;</pre>
+</div>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a></figcaption></figure>
+</div>
+<div id="protocol-map-for-ble">
+<section id="appendix-B.1">
+        <h3 id="name-protocol-map-for-ble">
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-protocol-map-for-ble" class="section-name selfRef">Protocol map for BLE</a>
+        </h3>
+<div id="protocolmapble">
+<figure id="figure-10">
+          <div class="breakable sourcecode" id="appendix-B.1-1.1">
+<pre>&lt;CODE BEGINS&gt; file "ProtocolMap-BLE.yaml"
+
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+openapi: 3.0.3
+info:
+  title: SDF Protocol Mapping for BLE
+  description: |-
+    SDF Protocol Mapping for BLE devices.
+  version: 0.10.0
+externalDocs:
+  description: SDF Protocol Mapping IETF draft
+  url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
+-mapping/
+
+paths: {}
+
+components:
+  schemas:
+# BLE Protocol Mapping
+## A Service is a device with optional service IDs
+    ProtocolMap-BLE-ServiceList:
+      type: object
+      properties:
+        ble:
+          type: object
+          properties:
+            services:
+              type: array
+              items:
+                type: object
+                properties:
+                  serviceID:
+                    type: string
+                    format: uuid
+                    example: 00001809-0000-1000-8000-00805f9b34fb
+            cached:
+              description: |-
+                If we can cache information, then device doesn't need
+                to be rediscovered before every connected.
+              type: boolean
+              default: false
+            cacheIdlePurge:
+              description: cache expiry period, when device allows
+              type: integer
+              example: 3600 # default 1 hour
+            autoUpdate:
+              description: |-
+                autoupdate services if device supports it (default)
+              type: boolean
+              example: true
+            bonding: #optional, by default defined in SCIM object
+              type: string
+              example: default
+              enum:
+                - default
+                - none
+                - justworks
+                - passkey
+                - oob
+
+##  Protocol Mapping for BLE Service Map
+    ProtocolMap-BLE-ServiceMap:
+      required:
+        - services
+      type: object
+      properties:
+        ble:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProtocolMap-BLE-Service'
+
+    ProtocolMap-BLE-Service:
+      required:
+        - serviceID
+        - characteristics
+      type: object
+      properties:
+        serviceID:
+          type: string
+          format: uuid
+          example: 00001809-0000-1000-8000-00805f9b34fb
+        characteristics:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProtocolMap-BLE-Characterist\
+ic'
+
+    ProtocolMap-BLE-Characteristic:
+      required:
+        - characteristicID
+        - flags
+        - descriptors
+      type: object
+      properties:
+        characteristicID:
+          type: string
+          format: uuid
+          example: 00002a1c-0000-1000-8000-00805f9b34fb
+        flags:
+          type: array
+          example:
+          - read
+          - write
+          items:
+            type: string
+            enum:
+              - read
+              - write
+              - notify
+        descriptors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProtocolMap-BLE-Descriptor'
+
+    ProtocolMap-BLE-Descriptor:
+      required:
+        - descriptorID
+      type: object
+      properties:
+        descriptorID:
+          type: string
+          format: uuid
+          example: 00002902-0000-1000-8000-00805f9b34fb
+
+##  Protocol Mapping for BLE Broadcast
+    ProtocolMap-BLE-Broadcast:
+      required:
+        - ble
+      type: object
+      properties:
+        ble:
+          type: object
+          properties:
+            connectable:
+              type: boolean
+
+## Protocol Mapping for BLE Property
+    ProtocolMap-BLE-Propmap:
+      required:
+        - ble
+      type: object
+      properties:
+        ble:
+          required:
+            - serviceID
+            - characteristicID
+          type: object
+          properties:
+            serviceID:
+              type: string
+              format: uuid
+              example: 00001809-0000-1000-8000-00805f9b34fb
+            characteristicID:
+              type: string
+              format: uuid
+              example: 00002a1c-0000-1000-8000-00805f9b34fb
+
+## Defines different types of BLE events
+    ProtocolMap-BLE-Event:
+      required:
+        - ble
+      type: object
+      properties:
+        ble:
+          required:
+            - type
+          type: object
+          properties:
+            type:
+              type: string
+              example: gatt
+              enum:
+                - gatt
+                - connection_events
+                - advertisements
+            serviceID:
+              type: string
+              example: 00001809-0000-1000-8000-00805f9b34fb
+            characteristicID:
+              type: string
+              example: 00002a1c-0000-1000-8000-00805f9b34fb
+
+&lt;CODE ENDS&gt;</pre>
+</div>
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="protocol-map-for-zigbee">
+<section id="appendix-B.2">
+        <h3 id="name-protocol-map-for-zigbee">
+<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-protocol-map-for-zigbee" class="section-name selfRef">Protocol map for Zigbee</a>
+        </h3>
+<div id="protocolmapzigbee">
+<figure id="figure-11">
+          <div class="breakable sourcecode" id="appendix-B.2-1.1">
+<pre>&lt;CODE BEGINS&gt; file "ProtocolMap-Zigbee.yaml"
+
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+openapi: 3.0.3
+info:
+  title: SDF Protocol Mapping for Zigbee
+  description: |-
+    SDF Protocol Mapping for Zigbee devices.
+  version: 0.10.0
+externalDocs:
+  description: SDF Protocol Mapping IETF draft
+  url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
+-mapping/
+
+paths: {}
+
+components:
+  schemas:
+# Zigbee Protocol Mapping
+##  Protocol Mapping for Zigbee Service Map
+    ProtocolMap-Zigbee-ServiceMap:
+      required:
+        - zigbee
+      type: object
+      properties:
+        zigbee:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProtocolMap-Zigbee-Endpoint'
+
+    ProtocolMap-Zigbee-Endpoint:
+      required:
+        - endpointID
+        - clusters
+      type: object
+      properties:
+        endpointID:
+          type: integer
+          format: int32
+          example: 10
+        clusters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProtocolMap-Zigbee-Cluster'
+
+    ProtocolMap-Zigbee-Cluster:
+      required:
+        - clusterID
+        - properties
+      type: object
+      properties:
+        clusterID:
+          type: integer
+          format: int32
+          example: 0
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProtocolMap-Zigbee-Property'
+
+    ProtocolMap-Zigbee-Property:
+      required:
+        - attributeID
+        - propertyType
+      type: object
+      properties:
+        attributeID:
+          type: integer
+          format: int32
+          example: 1
+        propertyType:
+          type: integer
+          format: int32
+          example: 32
+
+## Protocol Mapping for Zigbee broadcast
+    ProtocolMap-Zigbee-Broadcast:
+      required:
+        - zigbee
+      type: object
+      properties:
+        zigbee:
+          type: object
+
+## Protocol mapping for Zigbee property
+    ProtocolMap-Zigbee-Propmap:
+      required:
+        - zigbee
+      type: object
+      properties:
+        zigbee:
+          required:
+            - endpointID
+            - clusterID
+            - attributeID
+          type: object
+          properties:
+            endpointID:
+              type: integer
+              format: int32
+              example: 1
+            clusterID:
+              type: integer
+              format: int32
+              example: 6
+            attributeID:
+              type: integer
+              format: int32
+              example: 16
+            type:
+              type: integer
+              format: int32
+              example: 1
+
+    ProtocolMap-Zigbee-Event:
+      allOf:
+        - $ref: '#/components/schemas/ProtocolMap-Zigbee-Propmap'
+
+&lt;CODE ENDS&gt;</pre>
+</div>
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a></figcaption></figure>
+</div>
+</section>
 </div>
 </section>
 </div>
 <div id="acknowledgments">
-<section id="appendix-B">
+<section id="appendix-C">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-B-1">TODO acknowledge.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-1">TODO acknowledge.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-C">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
