@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 11 June 2026                                          L. Corneo
+Expires: 12 June 2026                                          L. Corneo
                                                                 Ericsson
-                                                         8 December 2025
+                                                         9 December 2025
 
 
                         Protocol Mapping for SDF
@@ -19,8 +19,8 @@ Abstract
    Definition Format (SDF) to enable mapping of protocol-agnostic SDF
    affordances to protocol-specific operations.  The protocol mapping
    mechanism allows SDF models to specify how properties, actions, and
-   events should be accessed using specific non-IP protocols such as
-   Bluetooth Low Energy and Zigbee.
+   events should be accessed using specific non-IP and IP protocols such
+   as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
 
 About This Document
 
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 June 2026.
+   This Internet-Draft will expire on 12 June 2026.
 
 Copyright Notice
 
