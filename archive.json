@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-04T01:02:45.315656+00:00",
+  "timestamp": "2025-12-09T01:03:08.886031+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -64,7 +64,7 @@
       ],
       "body": "Suggesting improvement to add a CDDL snippet showing the delta between original SDF and the proposed protocol mapping extension.\n\n``` cddl\npropertyqualities = {\n ? observable: bool\n ? readable: bool\n ? writable: bool\n ? sdfProtocolMap ; this is the delta\n ~dataqualities\n}\n```\n\nJust saying that sdfProtocolMap can be added as named quality does not help much the implementors of the spec, imo.",
       "createdAt": "2025-08-07T10:07:48Z",
-      "updatedAt": "2025-12-02T18:48:05Z",
+      "updatedAt": "2025-12-07T22:25:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -108,6 +108,27 @@
           "body": "For actions and events, the the protocol map can also be a part of the `sdfInputData` or `sdfOutputData`, so we still need to use the `SDF-EXTENSION-DATA`. ",
           "createdAt": "2025-12-02T18:48:05Z",
           "updatedAt": "2025-12-02T18:48:05Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "body": "> For actions and events, the the protocol map can also be a part of the `sdfInputData` or `sdfOutputData`\n\nHmm, my feeling so far was that allowing the use of `sdfProtocolMap` only at the affordance level would be more intuitive. Could you give an example for when you might want to use different protocol maps for input and output data (and maybe additionally also at the affordance level)? If there is good reason to allow multiple protocol maps, then I think it would also be great to include the examples in the specification.",
+          "createdAt": "2025-12-07T21:23:11Z",
+          "updatedAt": "2025-12-07T21:23:11Z"
+        },
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "One of the examples in the draft is BLE events. GATT notifications can map only to the `sdfOutputData` of an event, for example. There could be other protocols where you might require a mapping for the input data instead. ",
+          "createdAt": "2025-12-07T21:36:18Z",
+          "updatedAt": "2025-12-07T21:36:18Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "body": "Hmm, but in the case of events, can't you generally just put the protocol map into the affordance itself? So this example:\n\n```json\n{\n  \"sdfEvent\": {\n    \"heartRate\": {\n      \"sdfOutputData\": {\n        \"sdfProtocolMap\": {\n          \"ble\": {\n            \"type\": \"gatt\",\n            \"serviceID\": \"12345678-1234-5678-1234-56789abcdef4\",\n            \"characteristicID\": \"12345678-1234-5678-1234-56789abcdef5\"\n          }\n        }\n      }\n    }\n  }\n}\n```\n\ncould simply become:\n\n```json\n{\n  \"sdfEvent\": {\n    \"heartRate\": {\n      \"sdfProtocolMap\": {\n        \"ble\": {\n          \"type\": \"gatt\",\n          \"serviceID\": \"12345678-1234-5678-1234-56789abcdef4\",\n          \"characteristicID\": \"12345678-1234-5678-1234-56789abcdef5\"\n        }\n      }\n    }\n  }\n}\n```\n\nIn the case of `sdfAction`, you would probably associate input and output data with the same protocol map (for example, you trigger an action with some input value and receive a status message as an output), so I am also wondering whether you could just put it into the affordance itself.\n\nIf there is a strong reason to put the protocol information into the definition of the input/output data, I am of course not objecting, but at the moment I see this as a potential point for simplification. I might be a little too influenced by the way Web of Things handles this, though.",
+          "createdAt": "2025-12-07T22:17:40Z",
+          "updatedAt": "2025-12-07T22:25:09Z"
         }
       ]
     },
@@ -264,6 +285,22 @@
           "updatedAt": "2025-12-02T00:10:38Z"
         }
       ]
+    },
+    {
+      "number": 15,
+      "id": "I_kwDOPSJ9A87dCVP7",
+      "title": "Add Security Considerations section",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/15",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-12-08T23:09:50Z",
+      "updatedAt": "2025-12-08T23:09:50Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -1161,6 +1198,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOPSJ9A863yvMf",
+      "title": "Remove IP mapping and added security considerations",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/16",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-12-08T23:59:48Z",
+      "updatedAt": "2025-12-08T23:59:48Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "0ea62bf1d1dd596c6132c99f445c16d453570d4b",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "remove-ip-mapping",
+      "headRefOid": "c31b2ec3d1dc039e56bd8e661571bd4cf7243bbf",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
