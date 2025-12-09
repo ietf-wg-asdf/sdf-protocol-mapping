@@ -69,7 +69,7 @@ This document defines protocol mapping extensions for the Semantic Definition
 Format (SDF) to enable mapping of protocol-agnostic SDF affordances to
 protocol-specific operations. The protocol mapping mechanism allows SDF models
 to specify how properties, actions, and events should be accessed using specific
-non-IP protocols such as Bluetooth Low Energy and Zigbee.
+non-IP and IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
 
 --- middle
 
