@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 5 June 2026                                           L. Corneo
+Expires: 13 June 2026                                          L. Corneo
                                                                 Ericsson
-                                                         2 December 2025
+                                                        10 December 2025
 
 
                         Protocol Mapping for SDF
@@ -19,7 +19,7 @@ Abstract
    Definition Format (SDF) to enable mapping of protocol-agnostic SDF
    affordances to protocol-specific operations.  The protocol mapping
    mechanism allows SDF models to specify how properties, actions, and
-   events should be accessed using specific IP and non-IP protocols such
+   events should be accessed using specific non-IP and IP protocols such
    as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
 
 About This Document
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 June 2026.
+   This Internet-Draft will expire on 13 June 2026.
 
 Copyright Notice
 
@@ -81,7 +81,6 @@ Table of Contents
        5.1.1.  BLE Protocol Mapping Structure
      5.2.  Zigbee Protocol Mapping
        5.2.1.  Zigbee Protocol Mapping Structure
-     5.3.  IP based Protocol Mapping
    6.  SCIM SDF Extension
    7.  Security Considerations
    8.  IANA Considerations
@@ -108,8 +107,10 @@ Table of Contents
    specific operations.
 
    These protocols can be non-IP protocols that are commonly used in IoT
-   environments, such as [BLE53] and [Zigbee22], or IP-based protocols,
-   such as HTTP [RFC2616] or CoAP [RFC7252].
+   environments, such as [BLE53] and [Zigbee22].  The protocol mapping
+   mechanism is designed to be extensible, allowing future
+   specifications to define mappings for IP-based protocols such as HTTP
+   [RFC2616] or CoAP [RFC7252].
 
    To leverage an SDF model to perform protocol-specific operations on
    an instance of a device, a mapping of the SDF affordance to a
@@ -147,12 +148,8 @@ Table of Contents
      |        +--> BLE-specific mapping
      |
      +-----> zigbee
-     |        |
-     |        +--> Zigbee-specific mapping
-     |
-     +-----> openapi
               |
-              +--> OpenAPI-specific mapping
+              +--> Zigbee-specific mapping
 
                          Figure 1: Property Mapping
 
@@ -160,17 +157,15 @@ Table of Contents
    in an sdfProtocolMap object, for example a "ble" or a "zigbee"
    object.
 
-    +===========+========+============================================+
-    | Attribute | Type   | Example                                    |
-    +===========+========+============================================+
-    | ble       | object | an object with BLE-specific attributes     |
-    +-----------+--------+--------------------------------------------+
-    | zigbee    | object | an object with Zigbee-specific attributes  |
-    +-----------+--------+--------------------------------------------+
-    | openapi   | object | an object with OpenAPI-specific attributes |
-    +-----------+--------+--------------------------------------------+
+    +===========+========+===========================================+
+    | Attribute | Type   | Example                                   |
+    +===========+========+===========================================+
+    | ble       | object | an object with BLE-specific attributes    |
+    +-----------+--------+-------------------------------------------+
+    | zigbee    | object | an object with Zigbee-specific attributes |
+    +-----------+--------+-------------------------------------------+
 
-                         Table 1: Protocol objects
+                        Table 1: Protocol objects
 
    where-
 
@@ -507,141 +502,6 @@ Table of Contents
      }
    }
 
-5.3.  IP based Protocol Mapping
-
-   The protocol mapping mechanism can potentially also be used for IP-
-   based protocols such as HTTP or CoAP.
-
-   In the case of HTTP, SDF protocol mappings towards an SDF quality MAY
-   be expressed by directly pointing to OpenAPI schema and/or component.
-
-   $$SDF-PROTOCOL-MAP //= (
-     openapi: openapi-protocol-map
-   )
-
-   openapi-protocol-map = {
-     ? openapi-property,
-     ? read: { openapi-property },
-     ? write: { openapi-property }
-   }
-
-   openapi-property = (
-     operationRef: text,
-     $ref: text
-   )
-
-   An example of a protocol mapping for a property using HTTP might look
-   like:
-
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
-   {
-     "sdfProperty": {
-       "heartrate": {
-         "sdfProtocolMap": {
-           "openapi": {
-               "operationRef": "https://example.com/openapi.json#/paths\
-   /~1heartrate~1{id}~1current",
-               "$ref": "https://example.com/openapi.json#/components/sc\
-   hema/HeartRate/properties/pulse"
-           }
-         }
-       }
-     }
-   }
-
-   The operationRef points to the OpenAPI operation that retrieves the
-   current heart rate, and the $ref points to the OpenAPI schema that
-   defines the heart rate property.  An example of the OpenAPI schema
-   might look like:
-
-   paths:
-     /heartrate/{id}/current:
-       get:
-         summary: Get current heart rate
-         description: |-
-           Retrieve the current heart rate for a specific user
-           identified by {id}.
-         parameters:
-           - name: id
-             in: path
-             required: true
-             description: |-
-               The ID of the user whose heart rate is being queried.
-             schema:
-               type: string
-         responses:
-           "200":
-             description: |-
-               Successful response with current heart rate data.
-             content:
-               application/json:
-                 schema:
-                   $ref: "#/components/schemas/HeartRate"
-       put:
-         summary: Set current heart rate
-         description: |-
-           Set the current heart rate for a specific user
-           identified by {id}.
-         parameters:
-           - name: id
-             in: path
-             required: true
-             description: |-
-               The ID of the user whose heart rate is being set.
-             schema:
-               type: string
-         requestBody:
-           required: true
-           content:
-             application/json:
-               schema:
-                 $ref: "#/components/schemas/HeartRate"
-
-   components:
-     schemas:
-       HeartRate:
-         type: object
-         properties:
-           pulse:
-             type: integer
-             description: The current heart rate in beats per minute.
-           spo2:
-             type: number
-             format: float
-             description: |-
-               The current body temperature in degrees Celsius.
-
-   We assume that the readable properties will map to GET operations and
-   the writable properties will map to PUT operations.  If this is not
-   the case, or if the API is different, the protocol mapping can be
-   specified as such:
-
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
-   {
-     "sdfProperty": {
-       "heartrate": {
-         "sdfProtocolMap": {
-           "openapi": {
-             "read": {
-               "operationRef": "https://example.com/openapi.json#/paths\
-   /~1heartrate~1{id}~1current/get",
-               "$ref": "https://example.com/openapi.json#/components/sc\
-   hema/HeartRate/properties/pulse"
-             },
-             "write": {
-               "operationRef": "https://example.com/openapi.json#/paths\
-   /~1heartrate~1{id}~1current/put",
-               "$ref": "https://example.com/openapi.json#/components/sc\
-   hema/HeartRate/properties/pulse"
-             }
-           }
-         }
-       }
-     }
-   }
-
 6.  SCIM SDF Extension
 
    While SDF provides a way to describe a device, a method is needed to
@@ -701,7 +561,15 @@ Table of Contents
 
 7.  Security Considerations
 
-   TODO Security
+   The security considerations of [I-D.ietf-asdf-sdf] apply to this
+   document as well.
+
+   Each protocol mapped using this mechanism has its own security model.
+   The protocol mapping mechanism defined in this document does not
+   provide additional security beyond what is offered by the underlying
+   protocols.  Implementations MUST ensure that appropriate protocol-
+   level security mechanisms are employed when accessing affordances
+   through the mapped protocol operations.
 
 8.  IANA Considerations
 
@@ -741,9 +609,6 @@ Table of Contents
      +--------------+---------------+--------------------+-----------+
      | zigbee       | Zigbee        | Protocol mapping   | This      |
      |              |               | for Zigbee devices | document  |
-     +--------------+---------------+--------------------+-----------+
-     | openapi      | OpenAPI       | Protocol mapping   | This      |
-     |              |               | for OpenAPI        | document  |
      +--------------+---------------+--------------------+-----------+
 
                      Table 2: Protocol Mapping Registry
