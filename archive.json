@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-09T01:03:08.886031+00:00",
+  "timestamp": "2025-12-11T01:05:25.506680+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -1204,24 +1204,26 @@
       "id": "PR_kwDOPSJ9A863yvMf",
       "title": "Remove IP mapping and added security considerations",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/16",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-12-08T23:59:48Z",
-      "updatedAt": "2025-12-08T23:59:48Z",
+      "updatedAt": "2025-12-10T13:13:31Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "0ea62bf1d1dd596c6132c99f445c16d453570d4b",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "remove-ip-mapping",
-      "headRefOid": "c31b2ec3d1dc039e56bd8e661571bd4cf7243bbf",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "9b3be9521b8e87400176cd2520af9bf6a331ab97",
+      "closedAt": "2025-12-10T13:13:31Z",
+      "mergedAt": "2025-12-10T13:13:30Z",
+      "mergedBy": "bbrinckman",
+      "mergeCommit": {
+        "oid": "30dad2a602e8cc8f49d04be0694ce581766f9ccc"
+      },
       "comments": [],
       "reviews": []
     }
