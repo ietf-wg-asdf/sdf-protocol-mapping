@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-11T01:05:25.506680+00:00",
+  "timestamp": "2025-12-14T01:09:37.665108+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -299,6 +299,22 @@
       "body": "",
       "createdAt": "2025-12-08T23:09:50Z",
       "updatedAt": "2025-12-08T23:09:50Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 17,
+      "id": "I_kwDOPSJ9A87d742V",
+      "title": "PRotocolmapping maps to an SDF affordance type",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/17",
+      "state": "OPEN",
+      "author": "bbrinckman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We do not detail in the text or the IANA registry that a specific protocolmap maps to an affordance type,\nfor example the BLE protocolmap with keyword 'ble' is different for properties, events and actions.\nThis needs to be explained in the text, and the affordance type needs to be registered in the IANA registry as well",
+      "createdAt": "2025-12-12T13:38:30Z",
+      "updatedAt": "2025-12-12T13:38:30Z",
       "closedAt": null,
       "comments": []
     }
