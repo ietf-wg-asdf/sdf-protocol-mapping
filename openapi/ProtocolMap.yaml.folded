@@ -17,38 +17,6 @@ paths: {}
 
 components:
   schemas:
-# Protocol Mapping
-## Protocol Map for Service Discovery
-    ProtocolMap-ServiceList:
-      type: object
-      properties:
-        sdfProtocolMap:
-          oneOf:
-            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
-ocolMap-BLE-ServiceList'
-
-## Protocol Map for Service Discovery result
-    ProtocolMap-ServiceMap:
-      type: object
-      properties:
-        sdfProtocolMap:
-          oneOf:
-            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
-ocolMap-BLE-ServiceMap'
-            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
-rotocolMap-Zigbee-ServiceMap'
-
-## Protocol Map for Broadcasts
-    ProtocolMap-Broadcast:
-      type: object
-      properties:
-        sdfProtocolMap:
-          oneOf:  
-            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
-ocolMap-BLE-Broadcast'
-            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
-rotocolMap-Zigbee-Broadcast'
-
 ## Protocol Map for a property
     ProtocolMap-Property:
       type: object
