@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-06T01:06:43.029872+00:00",
+  "timestamp": "2026-02-05T01:18:05.888904+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -179,7 +179,7 @@
       ],
       "body": "Protocol mappings is currently written in several inconsistent ways, e.g., Protocol Mapping, Protocol mapping. Let's decide on one way and make it consistent throughout the text.",
       "createdAt": "2025-08-07T10:31:44Z",
-      "updatedAt": "2025-12-02T00:09:56Z",
+      "updatedAt": "2026-02-04T08:12:46Z",
       "closedAt": null,
       "comments": [
         {
@@ -188,6 +188,13 @@
           "body": "The current version of the draft uses \"Protocol Mapping\" in titles such as section headings, tables and figures only. It is lowercase everywhere else. ",
           "createdAt": "2025-12-02T00:09:56Z",
           "updatedAt": "2025-12-02T00:09:56Z"
+        },
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@lorenzocorneo do you think this is resolved? Can we close this?",
+          "createdAt": "2026-02-04T08:12:46Z",
+          "updatedAt": "2026-02-04T08:12:46Z"
         }
       ]
     },
@@ -196,15 +203,15 @@
       "id": "I_kwDOPSJ9A87GmE4m",
       "title": "Add examples for HTTP and COAP",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/5",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "bbrinckman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The document talks about protocol mapping for IP and Non-IP protocols, with HTTP and CoAP as examples for IP.\nThere are no examples on IP-based mapping. We should add HTTP and CoAP examples.",
       "createdAt": "2025-08-18T19:36:10Z",
-      "updatedAt": "2025-11-10T03:13:24Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-04T08:12:23Z",
+      "closedAt": "2026-02-04T08:12:23Z",
       "comments": [
         {
           "author": "lorenzocorneo",
@@ -219,6 +226,13 @@
           "body": "We have section 5.3 (IP based protocol mapping) that defines an OpenAPI protocol mapping that can be used for HTTP, along with an example and formal CDDL definition. This is normative in the current draft. \nHere's what the example looks like: \n``` json\n{\n \"sdfProperty\": {\n   \"heartrate\": {\n     \"sdfProtocolMap\": {\n      \"openapi\": {\n         \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current\",\n         \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\n       }\n     }\n   }\n }\n} \n```\n\nThere were some concerns in the IETF124 meeting regarding this. @cabo's suggestion was to make this particular mapping non-normative and move the example to the appendix.\n\nOne of the suggestions we proposed to keep it normative was to use `http` as the protocol and have a type field that says that we are using openapi to map it. \n```diff\n {\n   \"sdfProperty\": {\n     \"heartrate\": {\n       \"sdfProtocolMap\": {\n-        \"openapi\": {\n+        \"http\": {\n+          \"type\": \"openapi\",\n           \"operationRef\": \"https://example.com/openapi.json#/paths/~1heartrate~1{id}~1current\",\n           \"$ref\": \"https://example.com/openapi.json#/components/schema/HeartRate/properties/pulse\"\n         }\n       }\n     }\n   }\n } \n```\n\n@elear suggested that we take a to digest this. We can use this issue to discuss on it further.",
           "createdAt": "2025-11-10T03:13:24Z",
           "updatedAt": "2025-11-10T03:13:24Z"
+        },
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In one of the previous interims, we decided not to include a http/openapi/coap mapping in this draft. ",
+          "createdAt": "2026-02-04T08:12:23Z",
+          "updatedAt": "2026-02-04T08:12:23Z"
         }
       ]
     },
@@ -227,7 +241,7 @@
       "id": "I_kwDOPSJ9A87IKbQg",
       "title": "Is protocol mapping the right name?",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lorenzocorneo",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -236,8 +250,8 @@
       ],
       "body": "During the last interim the working group members suggested to spend some time pondering on whether protocol mapping is the terminology we want to use. Let's use this issue to discuss.",
       "createdAt": "2025-08-27T06:32:29Z",
-      "updatedAt": "2025-12-02T06:55:39Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-04T08:08:51Z",
+      "closedAt": "2026-02-04T08:08:51Z",
       "comments": [
         {
           "author": "rohitmohan96",
@@ -298,9 +312,17 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-12-08T23:09:50Z",
-      "updatedAt": "2025-12-08T23:09:50Z",
+      "updatedAt": "2026-02-04T08:02:55Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Added in draft-03. ",
+          "createdAt": "2026-02-04T08:02:55Z",
+          "updatedAt": "2026-02-04T08:02:55Z"
+        }
+      ]
     },
     {
       "number": 17,
@@ -1268,6 +1290,32 @@
       "mergeCommit": {
         "oid": "272b3b4d0e6f61adf7ef5d166cdf96bc6d9311fc"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOPSJ9A87BZebR",
+      "title": "Update SDF reference from draft-ietf-asdf-sdf to RFC9880",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/19",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-04T08:05:09Z",
+      "updatedAt": "2026-02-04T08:05:09Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "272b3b4d0e6f61adf7ef5d166cdf96bc6d9311fc",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "sdf-rfc",
+      "headRefOid": "a9dba09172a554550d24e0b16a6d3b8699218672",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
