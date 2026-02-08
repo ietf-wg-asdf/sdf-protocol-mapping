@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-05T01:18:05.888904+00:00",
+  "timestamp": "2026-02-08T01:54:30.850486+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -170,7 +170,7 @@
       "id": "I_kwDOPSJ9A87EsQF6",
       "title": "Protocol mapping usage",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lorenzocorneo",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -179,8 +179,8 @@
       ],
       "body": "Protocol mappings is currently written in several inconsistent ways, e.g., Protocol Mapping, Protocol mapping. Let's decide on one way and make it consistent throughout the text.",
       "createdAt": "2025-08-07T10:31:44Z",
-      "updatedAt": "2026-02-04T08:12:46Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-05T18:42:43Z",
+      "closedAt": "2026-02-05T18:42:43Z",
       "comments": [
         {
           "author": "rohitmohan96",
@@ -195,6 +195,13 @@
           "body": "@lorenzocorneo do you think this is resolved? Can we close this?",
           "createdAt": "2026-02-04T08:12:46Z",
           "updatedAt": "2026-02-04T08:12:46Z"
+        },
+        {
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "body": "> [@lorenzocorneo](https://github.com/lorenzocorneo) do you think this is resolved? Can we close this?\n\nYes, I close the issue",
+          "createdAt": "2026-02-05T18:42:43Z",
+          "updatedAt": "2026-02-05T18:42:43Z"
         }
       ]
     },
