@@ -45,7 +45,7 @@ author:
    email: lorenzo.corneo@ericsson.com
 
 normative:
-  I-D.ietf-asdf-sdf: sdf
+  RFC9880: sdf
 
 informative:
   BLE53:
