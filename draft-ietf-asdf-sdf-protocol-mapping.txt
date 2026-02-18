@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 9 July 2026                                           L. Corneo
+Expires: 22 August 2026                                        L. Corneo
                                                                 Ericsson
-                                                          5 January 2026
+                                                        18 February 2026
 
 
                         Protocol Mapping for SDF
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 July 2026.
+   This Internet-Draft will expire on 22 August 2026.
 
 Copyright Notice
 
@@ -98,13 +98,13 @@ Table of Contents
 
 1.  Introduction
 
-   The Semantic Definition Format (SDF) [I-D.ietf-asdf-sdf] provides a
-   protocol-agnostic way to describe IoT devices and their capabilities
-   through properties, actions, and events (collectively called
-   affordances).  However, when implementing these affordances on actual
-   devices using specific communication protocols, there needs to be a
-   mechanism to map the protocol-agnostic SDF definitions to protocol-
-   specific operations.
+   The Semantic Definition Format (SDF) [RFC9880] provides a protocol-
+   agnostic way to describe IoT devices and their capabilities through
+   properties, actions, and events (collectively called affordances).
+   However, when implementing these affordances on actual devices using
+   specific communication protocols, there needs to be a mechanism to
+   map the protocol-agnostic SDF definitions to protocol-specific
+   operations.
 
    These protocols can be non-IP protocols that are commonly used in IoT
    environments, such as [BLE53] and [Zigbee22].  The protocol mapping
@@ -243,8 +243,8 @@ Table of Contents
 
    A protocol map MAY be provided as part of the SDF model, specifically
    in the SDF affordance definition.  The extension points in the SDF
-   affordance definition defined in [I-D.ietf-asdf-sdf] are used to
-   specify the protocol mapping information as a part of the SDF model.
+   affordance definition defined in [RFC9880] are used to specify the
+   protocol mapping information as a part of the SDF model.
 
    For SDF properties, the protocol mapping is specified as an extension
    to a named property quality using the sdfProtocolMap keyword.  For
@@ -561,8 +561,8 @@ Table of Contents
 
 7.  Security Considerations
 
-   The security considerations of [I-D.ietf-asdf-sdf] apply to this
-   document as well.
+   The security considerations of [RFC9880] apply to this document as
+   well.
 
    Each protocol mapped using this mechanism has its own security model.
    The protocol mapping mechanism defined in this document does not
@@ -633,14 +633,6 @@ Table of Contents
 
 9.1.  Normative References
 
-   [I-D.ietf-asdf-sdf]
-              Koster, M., Bormann, C., and A. Keränen, "Semantic
-              Definition Format (SDF) for Data and Interactions of
-              Things", Work in Progress, Internet-Draft, draft-ietf-
-              asdf-sdf-25, 13 October 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
-              sdf-25>.
-
    [I-D.ietf-scim-device-model]
               Shahzad, M., Iqbal, H., and E. Lear, "Device Schema
               Extensions to the SCIM model", Work in Progress, Internet-
@@ -666,6 +658,11 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC9880]  Koster, M., Ed., Bormann, C., Ed., and A. Keränen,
+              "Semantic Definition Format (SDF) for Data and
+              Interactions of Things", RFC 9880, DOI 10.17487/RFC9880,
+              January 2026, <https://www.rfc-editor.org/rfc/rfc9880>.
 
 9.2.  Informative References
 

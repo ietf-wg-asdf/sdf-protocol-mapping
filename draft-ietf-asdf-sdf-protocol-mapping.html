@@ -30,7 +30,7 @@ non-IP and IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.2.14
+    wcwidth 0.3.0
 -->
 <link href="draft-ietf-asdf-sdf-protocol-mapping.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -171,7 +171,7 @@ non-IP and IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: 'Oxygen Mono';
@@ -179,7 +179,8 @@ non-IP and IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 }
 
 @font-face {
@@ -571,6 +572,7 @@ aside, blockquote {
 }
 blockquote {
   margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
 }
 cite {
   display: block;
@@ -641,7 +643,7 @@ a.pilcrow {
   }
 }
 @media not print {
-  :hover > a.pilcrow {
+  :hover > a.pilcrow, a.pilcrow:focus {
     opacity: 1;
   }
   a.pilcrow[href]:hover {
@@ -1049,11 +1051,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">sdf-protocol-mapping</td>
-<td class="right">January 2026</td>
+<td class="right">February 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Mohan, et al.</td>
-<td class="center">Expires 9 July 2026</td>
+<td class="center">Expires 22 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1068,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-asdf-sdf-protocol-mapping-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-01-05" class="published">5 January 2026</time>
+<time datetime="2026-02-18" class="published">18 February 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-07-09">9 July 2026</time></dd>
+<dd class="expires"><time datetime="2026-08-22">22 August 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1132,7 +1134,7 @@ non-IP and IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.<a
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1251,7 +1253,7 @@ non-IP and IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.<a
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The Semantic Definition Format (SDF) <span>[<a href="#I-D.ietf-asdf-sdf" class="cite xref">I-D.ietf-asdf-sdf</a>]</span> provides a protocol-agnostic way
+<p id="section-1-1">The Semantic Definition Format (SDF) <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> provides a protocol-agnostic way
 to describe IoT devices and their capabilities through properties, actions, and
 events (collectively called affordances). However, when implementing these
 affordances on actual devices using specific communication protocols, there
@@ -1450,7 +1452,7 @@ object<a href="#section-3-7.3.1" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-4-1">A protocol map <span class="bcp14">MAY</span> be provided as part of the SDF model, specifically in the SDF
 affordance definition. The extension points in the SDF affordance definition
-defined in <span>[<a href="#I-D.ietf-asdf-sdf" class="cite xref">I-D.ietf-asdf-sdf</a>]</span> are used to specify the protocol mapping information as a
+defined in <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> are used to specify the protocol mapping information as a
 part of the SDF model.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">For SDF properties, the protocol mapping is specified as an
 extension to a named property quality using the <code>sdfProtocolMap</code> keyword.
@@ -1838,7 +1840,7 @@ ion:sdf:2.0:Device"
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">The security considerations of <span>[<a href="#I-D.ietf-asdf-sdf" class="cite xref">I-D.ietf-asdf-sdf</a>]</span> apply to this document as well.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">The security considerations of <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> apply to this document as well.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">Each protocol mapped using this mechanism has its own security model.
 The protocol mapping mechanism defined in this document does not provide
 additional security beyond what is offered by the underlying protocols.
@@ -1953,10 +1955,6 @@ Server-Related Schema URIs registry as described in <a href="#scim-sdf-extension
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
-<dt id="I-D.ietf-asdf-sdf">[I-D.ietf-asdf-sdf]</dt>
-        <dd>
-<span class="refAuthor">Koster, M.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">A. Keränen</span>, <span class="refTitle">"Semantic Definition Format (SDF) for Data and Interactions of Things"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-asdf-sdf-25</span>, <time datetime="2025-10-13" class="refDate">13 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-25">https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-25</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.ietf-scim-device-model">[I-D.ietf-scim-device-model]</dt>
         <dd>
 <span class="refAuthor">Shahzad, M.</span>, <span class="refAuthor">Iqbal, H.</span>, and <span class="refAuthor">E. Lear</span>, <span class="refTitle">"Device Schema Extensions to the SCIM model"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scim-device-model-18</span>, <time datetime="2025-09-03" class="refDate">3 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scim-device-model-18">https://datatracker.ietf.org/doc/html/draft-ietf-scim-device-model-18</a>&gt;</span>. </dd>
@@ -1974,8 +1972,12 @@ Server-Related Schema URIs registry as described in <a href="#scim-sdf-extension
 <span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8126">https://www.rfc-editor.org/rfc/rfc8126</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9880">[RFC9880]</dt>
+      <dd>
+<span class="refAuthor">Koster, M., Ed.</span>, <span class="refAuthor">Bormann, C., Ed.</span>, and <span class="refAuthor">A. Keränen</span>, <span class="refTitle">"Semantic Definition Format (SDF) for Data and Interactions of Things"</span>, <span class="seriesInfo">RFC 9880</span>, <span class="seriesInfo">DOI 10.17487/RFC9880</span>, <time datetime="2026-01" class="refDate">January 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9880">https://www.rfc-editor.org/rfc/rfc9880</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
