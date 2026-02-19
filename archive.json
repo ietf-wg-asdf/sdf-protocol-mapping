@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-08T01:54:30.850486+00:00",
+  "timestamp": "2026-02-19T01:23:16.494200+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -64,7 +64,7 @@
       ],
       "body": "Suggesting improvement to add a CDDL snippet showing the delta between original SDF and the proposed protocol mapping extension.\n\n``` cddl\npropertyqualities = {\n ? observable: bool\n ? readable: bool\n ? writable: bool\n ? sdfProtocolMap ; this is the delta\n ~dataqualities\n}\n```\n\nJust saying that sdfProtocolMap can be added as named quality does not help much the implementors of the spec, imo.",
       "createdAt": "2025-08-07T10:07:48Z",
-      "updatedAt": "2025-12-07T22:25:09Z",
+      "updatedAt": "2026-02-18T20:50:56Z",
       "closedAt": null,
       "comments": [
         {
@@ -77,9 +77,9 @@
         {
           "author": "JKRhb",
           "authorAssociation": "NONE",
-          "body": "I guess for defining the extensions, you could (or should?) also use the mechanisms defined in the CDDL RFC: https://datatracker.ietf.org/doc/html/rfc8610#section-3.9\n\n(I tried to apply the syntax in [PR](https://github.com/ietf-wg-asdf/sdf-relations/pull/6) against the `sdf-relations` repository, but I am not entirely sure if I used it correctly.)",
+          "body": "I guess for defining the extensions, you could (or should?) also use the mechanisms defined in the CDDL RFC: https://datatracker.ietf.org/doc/html/rfc8610#section-3.9\n\n(I tried to apply the syntax in [PR \\#6](https://github.com/ietf-wg-asdf/sdf-relations/pull/6) against the `sdf-relations` repository, but I am not entirely sure if I used it correctly.)",
           "createdAt": "2025-08-16T11:41:25Z",
-          "updatedAt": "2025-08-16T11:41:25Z"
+          "updatedAt": "2026-02-18T17:05:36Z"
         },
         {
           "author": "rohitmohan96",
@@ -129,6 +129,20 @@
           "body": "Hmm, but in the case of events, can't you generally just put the protocol map into the affordance itself? So this example:\n\n```json\n{\n  \"sdfEvent\": {\n    \"heartRate\": {\n      \"sdfOutputData\": {\n        \"sdfProtocolMap\": {\n          \"ble\": {\n            \"type\": \"gatt\",\n            \"serviceID\": \"12345678-1234-5678-1234-56789abcdef4\",\n            \"characteristicID\": \"12345678-1234-5678-1234-56789abcdef5\"\n          }\n        }\n      }\n    }\n  }\n}\n```\n\ncould simply become:\n\n```json\n{\n  \"sdfEvent\": {\n    \"heartRate\": {\n      \"sdfProtocolMap\": {\n        \"ble\": {\n          \"type\": \"gatt\",\n          \"serviceID\": \"12345678-1234-5678-1234-56789abcdef4\",\n          \"characteristicID\": \"12345678-1234-5678-1234-56789abcdef5\"\n        }\n      }\n    }\n  }\n}\n```\n\nIn the case of `sdfAction`, you would probably associate input and output data with the same protocol map (for example, you trigger an action with some input value and receive a status message as an output), so I am also wondering whether you could just put it into the affordance itself.\n\nIf there is a strong reason to put the protocol information into the definition of the input/output data, I am of course not objecting, but at the moment I see this as a potential point for simplification. I might be a little too influenced by the way Web of Things handles this, though.",
           "createdAt": "2025-12-07T22:17:40Z",
           "updatedAt": "2025-12-07T22:25:09Z"
+        },
+        {
+          "author": "bbrinckman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Both should be possible @JKRhb ",
+          "createdAt": "2026-02-18T17:20:18Z",
+          "updatedAt": "2026-02-18T17:20:18Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "body": "> Both should be possible [@JKRhb](https://github.com/JKRhb)\n\nHm, okay, I see. Maybe we can discuss this issue briefly during the interim meeting? I don't want it to be a blocker, but maybe giving an example in the draft regarding when to use which would be helpful, also as guidance for future protocol mapping specifications.\n\nIn my understanding, `sdfInputData` and `sdfOutputData` should only describe the shape of the input or output data, respectively, which is why I got a bit confused why you would want to put a `sdfProtocolMap` there. But I guess the rationale for BLE is that the characteristicID, serviceID, and type are the only event data that are emitted..?",
+          "createdAt": "2026-02-18T20:50:56Z",
+          "updatedAt": "2026-02-18T20:50:56Z"
         }
       ]
     },
@@ -137,7 +151,7 @@
       "id": "I_kwDOPSJ9A87EsNvp",
       "title": "Inclusion of protocol mappings models in this draft",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lorenzocorneo",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -146,8 +160,8 @@
       ],
       "body": "Creating this issue to discuss on wether to include the BLE, Zigbee, HTTP protocol mappings in this draft. One alternative could be to just describe sdf protocol mappings in this draft, and having separate drafts for BLE, Zigbee, HTTP, etc...",
       "createdAt": "2025-08-07T10:28:11Z",
-      "updatedAt": "2025-11-26T22:03:23Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-18T17:21:35Z",
+      "closedAt": "2026-02-18T17:21:35Z",
       "comments": [
         {
           "author": "rohitmohan96",
@@ -162,6 +176,13 @@
           "body": "#5 relates to this. We need to take a call if we want to include any IP based protocol mappings in the draft. ",
           "createdAt": "2025-11-26T22:03:23Z",
           "updatedAt": "2025-11-26T22:03:23Z"
+        },
+        {
+          "author": "bbrinckman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Call was made in WG meeting, we will only include BLE and Zigbee",
+          "createdAt": "2026-02-18T17:21:10Z",
+          "updatedAt": "2026-02-18T17:21:10Z"
         }
       ]
     },
@@ -288,15 +309,15 @@
       "id": "I_kwDOPSJ9A87VRS-b",
       "title": "Update procedure and versioning of registry entries",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/11",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JKRhb",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Reading through the draft again, I noticed that (especially in the case of protocols such as CoAP and HTTP) there might the case where additional features are added via extensions and the protocol mapping specification needs to be updated or replaced.\n\nI guess the draft should deal with this question, at least shortly, and may need to define a policy for how this process should be carried out. Whether such an update constitutes a breaking or non-breaking change may need to be taken into account here as well.",
       "createdAt": "2025-11-01T14:46:28Z",
-      "updatedAt": "2025-12-02T00:10:38Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-18T17:22:06Z",
+      "closedAt": "2026-02-18T17:22:06Z",
       "comments": [
         {
           "author": "rohitmohan96",
@@ -304,6 +325,13 @@
           "body": "Added a line to address this in #14. ",
           "createdAt": "2025-12-02T00:10:38Z",
           "updatedAt": "2025-12-02T00:10:38Z"
+        },
+        {
+          "author": "bbrinckman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closed as per previous comment",
+          "createdAt": "2026-02-18T17:22:05Z",
+          "updatedAt": "2026-02-18T17:22:05Z"
         }
       ]
     },
@@ -312,15 +340,15 @@
       "id": "I_kwDOPSJ9A87dCVP7",
       "title": "Add Security Considerations section",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/15",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-12-08T23:09:50Z",
-      "updatedAt": "2026-02-04T08:02:55Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-18T01:26:28Z",
+      "closedAt": "2026-02-18T01:26:28Z",
       "comments": [
         {
           "author": "rohitmohan96",
@@ -1305,24 +1333,26 @@
       "id": "PR_kwDOPSJ9A87BZebR",
       "title": "Update SDF reference from draft-ietf-asdf-sdf to RFC9880",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/19",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-02-04T08:05:09Z",
-      "updatedAt": "2026-02-04T08:05:09Z",
+      "updatedAt": "2026-02-18T17:04:02Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "272b3b4d0e6f61adf7ef5d166cdf96bc6d9311fc",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "sdf-rfc",
       "headRefOid": "a9dba09172a554550d24e0b16a6d3b8699218672",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-18T17:04:02Z",
+      "mergedAt": "2026-02-18T17:04:02Z",
+      "mergedBy": "bbrinckman",
+      "mergeCommit": {
+        "oid": "91d11b2c19642b6811afb53677d0e02490f99aa9"
+      },
       "comments": [],
       "reviews": []
     }
