@@ -317,13 +317,24 @@ The corresponding JSON in an SDF model would look like:
 ~~~
 {: #event-ext-json-example title="Example Event Protocol Map in JSON"}
 
-## Protocol Registration
+## Protocol Registration {#protocol-registration}
 
 Protocol names used as keys in the `sdfProtocolMap` object (e.g., "ble",
 "zigbee") MUST be registered in the IANA registry defined in
-{{iana-prot-map}}. New protocol mappings extend the appropriate group socket
-(e.g., `$$SDF-PROPERTY-PROTOCOL-MAP`) with their protocol-specific
-attributes.
+{{iana-prot-map}}.
+
+A new protocol mapping MUST be defined by a specification that includes:
+
+- A CDDL definition that extends at least one of the group sockets
+  defined in this document:
+  `$$SDF-PROPERTY-PROTOCOL-MAP` ({{property-extension}}),
+  `$$SDF-ACTION-PROTOCOL-MAP` ({{action-extension}}), or
+  `$$SDF-EVENT-PROTOCOL-MAP` ({{event-extension}}).
+  Property mappings SHOULD use the `property-protocol-map` generic
+  ({{property-extension}}) to ensure a consistent structure.
+- A description of the protocol-specific attributes introduced by the
+  CDDL extension, including their semantics and how they relate to the
+  underlying protocol operations.
 
 # Registered Protocol Mappings
 
@@ -615,6 +626,11 @@ The registry must contain the following attributes:
 - Protocol name
 - Description
 - Reference of the specification describing the protocol mapping.
+
+The specification requirements for a registration request are
+defined in {{protocol-registration}}.
+
+The designated expert(s) SHOULD verify that the protocol map name is appropriate and not likely to cause confusion with existing entries.
 
 The registrant of an existing entry may request updates to that entry, subject to the same expert review.
 They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.
