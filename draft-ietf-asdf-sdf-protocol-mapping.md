@@ -45,6 +45,7 @@ author:
    email: lorenzo.corneo@ericsson.com
 
 normative:
+  RFC8610: cddl
   RFC9880: sdf
 
 informative:
@@ -54,12 +55,12 @@ informative:
       org: Bluetooth SIG
     date: 2021-07-13
     target: https://www.bluetooth.com/specifications/specs/core-specification-5-3/
-  Zigbee22:
+  Zigbee30:
     title: "Zigbee 3.0 Specification"
     author:
-      org: Zigbee Alliance
-    date: 2022
-    target: https://zigbeealliance.org/solution/zigbee/
+      org: CSA IoT
+    date: 2026
+    target: https://csa-iot.org/all-solutions/zigbee/
 
 ...
 
@@ -82,16 +83,18 @@ affordances on actual devices using specific communication protocols, there
 needs to be a mechanism to map the protocol-agnostic SDF definitions to
 protocol-specific operations.
 
-These protocols can be non-IP protocols that are commonly used in IoT
-environments, such as {{BLE53}} and {{Zigbee22}}. The protocol mapping mechanism
-is designed to be extensible, allowing future specifications to define mappings
-for IP-based protocols such as HTTP {{?RFC2616}} or CoAP {{?RFC7252}}.
+This document defines such a mechanism using the `sdfProtocolMap` keyword,
+which allows SDF models to include protocol-specific mapping information
+alongside the protocol-agnostic definitions. The mapping enables use cases
+such as multi-protocol gateways that translate between different IoT protocols,
+automated generation of protocol-specific implementations from SDF models, and
+interoperability across heterogeneous device ecosystems.
 
-To leverage an SDF model to perform protocol-specific operations on an instance
-of a device, a mapping of the SDF affordance to a protocol-specific attribute is
-required. This document defines the protocol mapping mechanism using the
-`sdfProtocolMap` keyword, which allows SDF models to include protocol-specific
-mapping information alongside the protocol-agnostic definitions.
+The protocol mapping mechanism is designed to be extensible: target protocols
+include non-IP protocols commonly used in IoT environments, such as {{BLE53}}
+and {{Zigbee30}}, as well as IP-based protocols such as HTTP {{?RFC9110}} or
+CoAP {{?RFC7252}}. This document registers mappings for BLE and Zigbee; future
+specifications can define mappings for additional protocols.
 
 
 # Conventions and Definitions
@@ -100,68 +103,125 @@ mapping information alongside the protocol-agnostic definitions.
 
 # Structure
 
-Protocol mapping is required to map a protocol-agnostic affordance to
-a protocol-specific operation, as implementations of the same affordance
-will differ between protocols. For example, BLE will address a property
-as a service characteristic, while a property in Zigbee is addressed
-as an attribute in a cluster of an endpoint.
+This section defines the structure of the protocol mapping mechanism.
+Because each protocol has its own addressing model, a single SDF
+affordance requires a distinct mapping per protocol. For example, BLE
+addresses a property as a service characteristic, while Zigbee addresses
+it as an attribute in a cluster of an endpoint.
 
 A protocol mapping object is a JSON object identified by the `sdfProtocolMap`
-keyword. Protocol-specific properties are embedded within this object, organized
-by protocol name, e.g., "ble" or "zigbee". The protocol name MUST be specified
-in the IANA registry requested in {{iana-prot-map}}.
+keyword, inside an SDF affordance definition (sdfProperty, sdfAction,
+or sdfEvent). Protocol-specific attributes are embedded within this object,
+keyed by a registered protocol name, e.g., "ble" or "zigbee".
 
 ~~~ aasvg
-sdfProtocolMap
+sdfProperty / sdfAction / sdfEvent
   |
-  +-----> ble
-  |        |
-  |        +--> BLE-specific mapping
-  |
-  +-----> zigbee
-           |
-           +--> Zigbee-specific mapping
+  +-----> sdfProtocolMap
+            |
+            +-----> ble
+            |        |
+            |        +--> BLE-specific mapping
+            |
+            +-----> zigbee
+            |        |
+            |        +--> Zigbee-specific mapping
+            |
+            +-----> ...
 ~~~
-{: #protmap title="Property Mapping"}
+{: #protmap title="Protocol Mapping Structure"}
 
-As shown in {{protmap}}, protocol-specific properties must be embedded in an
-sdfProtocolMap object, for example a "ble" or a "zigbee" object.
+## SDF Extension Points
 
+The `sdfProtocolMap` keyword is introduced into SDF affordance definitions
+through the extension points defined in the formal syntax of {{-sdf}}
+(Appendix A). For each affordance type, an `sdfProtocolMap` entry is added
+via the corresponding CDDL group socket. The contents of the
+`sdfProtocolMap` object are in turn extensible through a
+protocol-mapping-specific group socket.
 
-| Attribute |  Type  |          Example                           |
-+-----------+--------+--------------------------------------------|
-| ble       | object | an object with BLE-specific attributes     |
-| zigbee    | object | an object with Zigbee-specific attributes  |
-{: #proobj title="Protocol objects"}
+A protocol MAY choose to extend only the affordance types that are
+applicable to it. For example, the BLE protocol mapping defines extensions
+for properties and events but not for actions.
 
-where-
+### Property Extension {#property-extension}
 
- - "ble" is an object containing properties that are specific to the BLE
-   protocol.
- - "zigbee" is an object containing properties that are specific to the
-   Zigbee protocol.
- - Other protocol mapping objects can be added by creating a new protocol
-   object
+The `$$SDF-EXTENSION-PROPERTY` group socket in the `propertyqualities`
+rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
+sdfProperty definitions:
 
-Example protocol mapping:
+~~~ cddl
+{::include cddl/sdf-property-protocol-map.cddl}
+~~~
+{: #sdf-prop-ext title="SDF Property Extension Point for Protocol Mapping"}
+
+The `property-protocol-map` generic ({{sdf-prop-ext}}) captures the common
+structure of property protocol mappings. The `name` parameter is the
+registered protocol name and `props` is the protocol-specific map of
+attributes. A protocol can provide either:
+
+- A single mapping that applies to both read and write operations, or
+- Separate `read` and `write` mappings when the protocol uses different
+  attributes for each direction.
+
+To extend `$$SDF-PROPERTY-PROTOCOL-MAP` for a new protocol (e.g., "new-protocol"),
+ use the `property-protocol-map` generic with the protocol name and a map type
+defining the protocol-specific attributes. The protocol name
+("new-protocol") MUST be registered in the IANA registry defined in
+{{iana-prot-map}}.
+
+For example:
+
+~~~ cddl
+$$SDF-PROPERTY-PROTOCOL-MAP //= (
+  property-protocol-map<"new-protocol", new-protocol-property>
+)
+
+new-protocol-property = {
+  attributeA: text,
+  attributeB: uint
+}
+~~~
+{: #prop-ext-example title="Example Property Protocol Map Extension"}
+
+The corresponding JSON in an SDF model would look like:
 
 ~~~ json
 {
-  "sdfObject": {
-    "healthsensor": {
-      "sdfProperty": {
-        "heartrate": {
-          "description": "The current measured heart rate",
-          "type": "number",
-          "unit": "beat/min",
-          "observable": false,
-          "writable": false,
-          "sdfProtocolMap": {
-            "ble": {
-              "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-              "characteristicID":
-                "12345678-1234-5678-1234-56789abcdef4"
-            }
+  "sdfProperty": {
+    "temperature": {
+      "type": "number",
+      "unit": "Cel",
+      "sdfProtocolMap": {
+        "new-protocol": {
+          "attributeA": "temperature-service",
+          "attributeB": 1
+        }
+      }
+    }
+  }
+}
+~~~
+{: #prop-ext-json-example title="Example Property Protocol Map in JSON"}
+
+When a property uses different protocol attributes for read and write
+operations, the mapping can be split:
+
+~~~ json
+{
+  "sdfProperty": {
+    "temperature": {
+      "type": "number",
+      "unit": "Cel",
+      "sdfProtocolMap": {
+        "new-protocol": {
+          "read": {
+            "attributeA": "temperature-read-service",
+            "attributeB": 1
+          },
+          "write": {
+            "attributeA": "temperature-write-service",
+            "attributeB": 2
           }
         }
       }
@@ -169,78 +229,127 @@ Example protocol mapping:
   }
 }
 ~~~
-{: #exprotmap title="Example property mapping"}
+{: #prop-ext-rw-json-example title="Example Property Protocol Map with Read/Write in JSON"}
 
-For properties that have a different protocol mapping for read and write operations, the protocol mapping can be specified as such:
+### Action Extension {#action-extension}
+
+The `$$SDF-EXTENSION-ACTION` group socket in the `actionqualities`
+rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
+sdfAction definitions:
+
+~~~ cddl
+{::include cddl/sdf-action-protocol-map.cddl}
+~~~
+{: #sdf-action-ext title="SDF Action Extension Point for Protocol Mapping"}
+
+Actions use a simpler structure than properties, as they do not require
+the read/write distinction. To extend `$$SDF-ACTION-PROTOCOL-MAP` for a
+new protocol, add a group entry mapping the protocol name to the
+protocol-specific attributes:
+
+~~~ cddl
+$$SDF-ACTION-PROTOCOL-MAP //= (
+  "new-protocol": new-protocol-action
+)
+
+new-protocol-action = {
+  commandID: uint
+}
+~~~
+{: #action-ext-example title="Example Action Protocol Map Extension"}
+
+The corresponding JSON in an SDF model would look like:
 
 ~~~ json
 {
-  "sdfObject": {
-    "healthsensor": {
-      "sdfProperty": {
-        "heartrate": {
-          "description": "The current measured heart rate",
-          "type": "number",
-          "unit": "beat/min",
-          "observable": false,
-          "sdfProtocolMap": {
-            "ble": {
-              "read": {
-                "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-                "characteristicID":
-                  "12345678-1234-5678-1234-56789abcdef5"
-              },
-              "write": {
-                "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-                "characteristicID":
-                  "12345678-1234-5678-1234-56789abcdef6"
-              }
-            }
-          }
+  "sdfAction": {
+    "reset": {
+      "sdfProtocolMap": {
+        "new-protocol": {
+          "commandID": 42
         }
       }
     }
   }
 }
 ~~~
-{: #exprotmap2 title="Example property mapping"}
+{: #action-ext-json-example title="Example Action Protocol Map in JSON"}
 
-# Usage
+### Event Extension {#event-extension}
 
-A protocol map MAY be provided as part of the SDF model, specifically in the SDF
-affordance definition. The extension points in the SDF affordance definition
-defined in {{-sdf}} are used to specify the protocol mapping information as a
-part of the SDF model.
+The `$$SDF-EXTENSION-EVENT` group socket in the `eventqualities`
+rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
+sdfEvent definitions:
 
-For SDF properties, the protocol mapping is specified as an
-extension to a named property quality using the `sdfProtocolMap` keyword.
-For SDF actions and events, the protocol mapping can be specified
-as an extension to the named quality or as part of the `sdfInputData` or
-`sdfOutputData` objects.
+~~~ cddl
+{::include cddl/sdf-event-protocol-map.cddl}
+~~~
+{: #sdf-event-ext title="SDF Event Extension Point for Protocol Mapping"}
 
-# Examples
+Events follow the same simple pattern as actions. To extend
+`$$SDF-EVENT-PROTOCOL-MAP` for a new protocol:
 
-## BLE Protocol Mapping
+~~~ cddl
+$$SDF-EVENT-PROTOCOL-MAP //= (
+  "new-protocol": new-protocol-event
+)
 
-The BLE protocol mapping allows SDF models to specify how properties,
-actions, and events should be accessed using Bluetooth Low Energy (BLE)
+new-protocol-event = {
+  eventID: uint
+}
+~~~
+{: #event-ext-example title="Example Event Protocol Map Extension"}
+
+The corresponding JSON in an SDF model would look like:
+
+~~~ json
+{
+  "sdfEvent": {
+    "alert": {
+      "sdfProtocolMap": {
+        "new-protocol": {
+          "eventID": 3
+        }
+      }
+    }
+  }
+}
+~~~
+{: #event-ext-json-example title="Example Event Protocol Map in JSON"}
+
+## Protocol Registration
+
+Protocol names used as keys in the `sdfProtocolMap` object (e.g., "ble",
+"zigbee") MUST be registered in the IANA registry defined in
+{{iana-prot-map}}. New protocol mappings extend the appropriate group socket
+(e.g., `$$SDF-PROPERTY-PROTOCOL-MAP`) with their protocol-specific
+attributes.
+
+# Registered Protocol Mappings
+
+This section defines the protocol mappings registered by this document.
+
+## BLE
+
+The BLE protocol mapping allows SDF models to specify how properties
+and events should be accessed using Bluetooth Low Energy (BLE)
 protocol. The mapping includes details such as service IDs and characteristic
 IDs that are used to access the corresponding SDF affordances.
 
-### BLE Protocol Mapping Structure
+### Properties
 
-For SDF properties and actions, the BLE protocol mapping structure
+For SDF properties, the BLE protocol mapping structure
 is defined as follows:
 
 ~~~ cddl
 {::include cddl/ble-protocol-map.cddl}
 ~~~
-{: #blemap1 title="CDDL definition for BLE Protocol Mapping for properties and actions"}
+{: #blemap1 title="CDDL definition for BLE Protocol Mapping for properties"}
 
 Where:
 
-- `serviceID` is the BLE service ID that corresponds to the SDF property or action.
-- `characteristicID` is the BLE characteristic ID that corresponds to the SDF property or action.
+- `serviceID` is the BLE service ID that corresponds to the SDF property.
+- `characteristicID` is the BLE characteristic ID that corresponds to the SDF property.
 
 For example, a BLE protocol mapping for a temperature property might look like:
 
@@ -283,6 +392,8 @@ the BLE protocol mapping might look like:
 }
 ~~~
 
+### Events
+
 For SDF events, the BLE protocol mapping structure is similar, but it may
 include additional attributes such as the type of the event.
 
@@ -305,13 +416,11 @@ For example, a BLE event mapping for a heart rate measurement event might look l
 {
   "sdfEvent": {
     "heartRate": {
-      "sdfOutputData": {
-        "sdfProtocolMap": {
-          "ble": {
-            "type": "gatt",
-            "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-            "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
-          }
+      "sdfProtocolMap": {
+        "ble": {
+          "type": "gatt",
+          "serviceID": "12345678-1234-5678-1234-56789abcdef4",
+          "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
         }
       }
     }
@@ -325,11 +434,9 @@ Another example of an `isPresent` event using BLE advertisements:
 {
   "sdfEvent": {
     "isPresent": {
-      "sdfOutputData": {
-        "sdfProtocolMap": {
-          "ble": {
-            "type": "advertisements"
-          }
+      "sdfProtocolMap": {
+        "ble": {
+          "type": "advertisements"
         }
       }
     }
@@ -337,31 +444,29 @@ Another example of an `isPresent` event using BLE advertisements:
 }
 ~~~
 
-## Zigbee Protocol Mapping
+## Zigbee
 
 The Zigbee protocol mapping allows SDF models to specify how properties,
 actions, and events should be accessed using the Zigbee protocol. The
 mapping includes details such as cluster IDs and attribute IDs that are
 used to access the corresponding SDF affordances.
 
-### Zigbee Protocol Mapping Structure
+### Properties
 
-For SDF properties and events, the Zigbee protocol mapping structure
-is defined as follows:
+SDF properties are mapped to Zigbee cluster attributes. The Zigbee
+property protocol mapping structure is defined as follows:
 
 ~~~ cddl
 {::include cddl/zigbee-protocol-map.cddl}
 ~~~
-{: #zigmap1 title="CDDL definition for Zigbee Protocol Mapping for properties and actions"}
+{: #zigmap1 title="CDDL definition for Zigbee Protocol Mapping for properties"}
 
 Where:
 
-- `endpointID` is the Zigbee endpoint ID that corresponds to the SDF affordance.
-- `clusterID` is the Zigbee cluster ID that corresponds to the SDF affordance.
-- `attributeID` is the Zigbee attribute ID that corresponds to the SDF affordance.
-- `type` is the Zigbee data type of the attribute.
-
-SDF properties are mapped to Zigbee cluster attributes and events are mapped to Zigbee cluster attribute reporting.
+- `endpointID` is the Zigbee endpoint ID that corresponds to the SDF property.
+- `clusterID` is the Zigbee cluster ID that corresponds to the SDF property.
+- `attributeID` is the Zigbee attribute ID that corresponds to the SDF property.
+- `attributeType` is the Zigbee data type of the attribute.
 
 For example, a Zigbee protocol mapping for a temperature property might look like:
 
@@ -374,13 +479,44 @@ For example, a Zigbee protocol mapping for a temperature property might look lik
           "endpointID": 1,
           "clusterID": 1026, // 0x0402
           "attributeID": 0, // 0x0000
-          "type": 41 // 0x29
+          "attributeType": 41 // 0x29
         }
       }
     }
   }
 }
 ~~~
+
+### Events
+
+SDF events are mapped to Zigbee cluster attribute reporting. The Zigbee
+event protocol mapping structure is defined as follows:
+
+~~~ cddl
+{::include cddl/zigbee-event-map.cddl}
+~~~
+{: #zigmap-event title="CDDL definition for Zigbee Protocol Mapping for events"}
+
+For example, a Zigbee event mapping for a temperature change report might look like:
+
+~~~ jsonc
+{
+  "sdfEvent": {
+    "temperatureChange": {
+      "sdfProtocolMap": {
+        "zigbee": {
+          "endpointID": 1,
+          "clusterID": 1026, // 0x0402
+          "attributeID": 0, // 0x0000
+          "attributeType": 41 // 0x29
+        }
+      }
+    }
+  }
+}
+~~~
+
+### Actions
 
 SDF actions are mapped to Zigbee cluster commands. The Zigbee protocol mapping structure for actions is defined as follows:
 
@@ -425,7 +561,7 @@ functionality defined in the rest of this document.
 The SCIM schema attributes used here are described in Section 7 of {{!RFC7643}}.
 
 ~~~
-{::include scim/scim-sdf-extension.json.folded}
+{::include generated/scim/scim-sdf-extension.json.folded}
 ~~~
 {: #scim-sdf-extension-schema title="SCIM SDF Extension Schema"}
 
@@ -470,12 +606,15 @@ in accordance with {{!RFC8126}}.
 
 IANA is requested to create a new registry called "SDF Protocol Mapping".
 
+The registration policy for this registry is "Specification Required" as
+defined in Section 4.6 of {{!RFC8126}}.
+
 The registry must contain the following attributes:
 
 - Protocol map name
 - Protocol name
 - Description
-- Reference of the specification describing the protocol mapping. This specification must be reviewed by an expert.
+- Reference of the specification describing the protocol mapping.
 
 The registrant of an existing entry may request updates to that entry, subject to the same expert review.
 They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.
@@ -506,15 +645,7 @@ This appendix contains the combined CDDL definitions for the SDF protocol mappin
 
 ~~~ cddl
 <CODE BEGINS> file "sdf-protocol-map.cddl"
-{::include cddl/sdf-protocol-map.cddl}
-
-{::include cddl/ble-protocol-map.cddl}
-
-{::include cddl/ble-event-map.cddl}
-
-{::include cddl/zigbee-protocol-map.cddl}
-
-{::include cddl/zigbee-action-map.cddl}
+{::include generated/combined.cddl.folded}
 <CODE ENDS>
 ~~~
 
@@ -524,7 +655,7 @@ The following non-normative model is provided for convenience of the implementor
 
 ~~~~~~
 <CODE BEGINS> file "ProtocolMap.yaml"
-{::include openapi/ProtocolMap.yaml.folded}
+{::include generated/openapi/ProtocolMap.yaml.folded}
 <CODE ENDS>
 ~~~~~~
 {: #protocolmapmodel}
@@ -533,7 +664,7 @@ The following non-normative model is provided for convenience of the implementor
 
 ~~~~~
 <CODE BEGINS> file "ProtocolMap-BLE.yaml"
-{::include openapi/ProtocolMap-BLE.yaml.folded}
+{::include generated/openapi/ProtocolMap-BLE.yaml.folded}
 <CODE ENDS>
 ~~~~~
 {: #protocolmapble}
@@ -542,7 +673,7 @@ The following non-normative model is provided for convenience of the implementor
 
 ~~~~~
 <CODE BEGINS> file "ProtocolMap-Zigbee.yaml"
-{::include openapi/ProtocolMap-Zigbee.yaml.folded}
+{::include generated/openapi/ProtocolMap-Zigbee.yaml.folded}
 <CODE ENDS>
 ~~~~~~
 {: #protocolmapzigbee}

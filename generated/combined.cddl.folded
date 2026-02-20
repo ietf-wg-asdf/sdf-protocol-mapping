@@ -1,0 +1,80 @@
+$$SDF-EXTENSION-PROPERTY //= (
+  sdfProtocolMap: {
+    * $$SDF-PROPERTY-PROTOCOL-MAP
+  }
+)
+
+property-protocol-map<name, props> = (
+  name => props /
+    {
+      read: props,
+      write: props
+    }
+)
+
+$$SDF-EXTENSION-ACTION //= (
+  sdfProtocolMap: {
+    * $$SDF-ACTION-PROTOCOL-MAP
+  }
+)
+
+$$SDF-EXTENSION-EVENT //= (
+  sdfProtocolMap: {
+    * $$SDF-EVENT-PROTOCOL-MAP
+  }
+)
+
+$$SDF-PROPERTY-PROTOCOL-MAP //= (
+  property-protocol-map<"ble", ble-property>
+)
+
+ble-property = {
+  serviceID: text,
+  characteristicID: text
+}
+
+$$SDF-EVENT-PROTOCOL-MAP //= (
+  ble: ble-event-map
+)
+
+ble-event-map = {
+  type: "gatt" / "advertisements" / "connection_events",
+  ? serviceID: text,
+  ? characteristicID: text
+}
+
+$$SDF-PROPERTY-PROTOCOL-MAP //= (
+  property-protocol-map<"zigbee", zigbee-property>
+)
+
+zigbee-property = {
+  endpointID: uint,
+  ? manufacturerCode: uint,
+  clusterID: uint,
+  attributeID: uint,
+  attributeType: uint
+}
+
+$$SDF-EVENT-PROTOCOL-MAP //= (
+  zigbee: zigbee-event-map
+)
+
+zigbee-event-map = {
+  endpointID: uint,
+  manufacturerCode: uint,
+  clusterID: uint,
+  attributeID: uint,
+  attributeType: uint
+}
+
+$$SDF-ACTION-PROTOCOL-MAP //= (
+  zigbee: zigbee-action-map
+)
+
+zigbee-action-map = {
+  endpointID: uint,
+  manufacturerCode: uint,
+  clusterID: uint,
+  commandID: uint,
+}
+

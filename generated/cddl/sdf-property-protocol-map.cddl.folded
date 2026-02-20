@@ -1,0 +1,13 @@
+$$SDF-EXTENSION-PROPERTY //= (
+  sdfProtocolMap: {
+    * $$SDF-PROPERTY-PROTOCOL-MAP
+  }
+)
+
+property-protocol-map<name, props> = (
+  name => props /
+    {
+      read: props,
+      write: props
+    }
+)
