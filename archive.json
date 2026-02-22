@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-19T01:23:16.494200+00:00",
+  "timestamp": "2026-02-22T01:22:45.412916+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -55,7 +55,7 @@
       "id": "I_kwDOPSJ9A87Er91H",
       "title": "CDDL for protocol mapping placement in SDF docs",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lorenzocorneo",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -64,8 +64,8 @@
       ],
       "body": "Suggesting improvement to add a CDDL snippet showing the delta between original SDF and the proposed protocol mapping extension.\n\n``` cddl\npropertyqualities = {\n ? observable: bool\n ? readable: bool\n ? writable: bool\n ? sdfProtocolMap ; this is the delta\n ~dataqualities\n}\n```\n\nJust saying that sdfProtocolMap can be added as named quality does not help much the implementors of the spec, imo.",
       "createdAt": "2025-08-07T10:07:48Z",
-      "updatedAt": "2026-02-18T20:50:56Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-20T20:23:55Z",
+      "closedAt": "2026-02-20T20:23:55Z",
       "comments": [
         {
           "author": "rohitmohan96",
@@ -143,6 +143,20 @@
           "body": "> Both should be possible [@JKRhb](https://github.com/JKRhb)\n\nHm, okay, I see. Maybe we can discuss this issue briefly during the interim meeting? I don't want it to be a blocker, but maybe giving an example in the draft regarding when to use which would be helpful, also as guidance for future protocol mapping specifications.\n\nIn my understanding, `sdfInputData` and `sdfOutputData` should only describe the shape of the input or output data, respectively, which is why I got a bit confused why you would want to put a `sdfProtocolMap` there. But I guess the rationale for BLE is that the characteristicID, serviceID, and type are the only event data that are emitted..?",
           "createdAt": "2026-02-18T20:50:56Z",
           "updatedAt": "2026-02-18T20:50:56Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "body": "From my side, this issue is now resolved \u2013 I think #20 has improved the document a lot! :) Thank you very much for addressing the points above!",
+          "createdAt": "2026-02-20T20:22:11Z",
+          "updatedAt": "2026-02-20T20:22:11Z"
+        },
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks @JKRhb! I'll close the issue. ",
+          "createdAt": "2026-02-20T20:23:55Z",
+          "updatedAt": "2026-02-20T20:23:55Z"
         }
       ]
     },
@@ -1353,6 +1367,60 @@
       "mergeCommit": {
         "oid": "91d11b2c19642b6811afb53677d0e02490f99aa9"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOPSJ9A87FGAYO",
+      "title": "Add CDDL definitions and restructure protocol mapping for properties, actions, and events",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/20",
+      "state": "MERGED",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-20T08:03:04Z",
+      "updatedAt": "2026-02-20T09:27:34Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "91d11b2c19642b6811afb53677d0e02490f99aa9",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "sdf-extension-points",
+      "headRefOid": "45ce58fc4a35913d1f5f3cfaad346ffe059c83c2",
+      "closedAt": "2026-02-20T09:27:34Z",
+      "mergedAt": "2026-02-20T09:27:34Z",
+      "mergedBy": "bbrinckman",
+      "mergeCommit": {
+        "oid": "5f59ac99b1191d433026f226d0dd7828941b6944"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOPSJ9A87FQrDh",
+      "title": "Add protocol IANA registration requirements  to specification",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/21",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Changes to fix #17. \r\nInstead of having multiple entries for each affordance type, we define the protocol in IANA to point to a spec that defines how the different affordance types are extended. \r\n",
+      "createdAt": "2026-02-20T21:09:09Z",
+      "updatedAt": "2026-02-20T21:09:09Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "5f59ac99b1191d433026f226d0dd7828941b6944",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "sdf-extension-points",
+      "headRefOid": "f99e2e86704c75de55f069b2ed035328690f4c67",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
