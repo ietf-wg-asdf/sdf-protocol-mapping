@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 24 August 2026                                        L. Corneo
+Expires: 27 August 2026                                        L. Corneo
                                                                 Ericsson
-                                                        20 February 2026
+                                                        23 February 2026
 
 
                         Protocol Mapping for SDF
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 August 2026.
+   This Internet-Draft will expire on 27 August 2026.
 
 Copyright Notice
 
@@ -368,9 +368,21 @@ Table of Contents
 
    Protocol names used as keys in the sdfProtocolMap object (e.g.,
    "ble", "zigbee") MUST be registered in the IANA registry defined in
-   Section 7.1.  New protocol mappings extend the appropriate group
-   socket (e.g., $$SDF-PROPERTY-PROTOCOL-MAP) with their protocol-
-   specific attributes.
+   Section 7.1.
+
+   A new protocol mapping MUST be defined by a specification that
+   includes:
+
+   *  A CDDL definition that extends at least one of the group sockets
+      defined in this document: $$SDF-PROPERTY-PROTOCOL-MAP
+      (Section 3.1.1), $$SDF-ACTION-PROTOCOL-MAP (Section 3.1.2), or
+      $$SDF-EVENT-PROTOCOL-MAP (Section 3.1.3).  Property mappings
+      SHOULD use the property-protocol-map generic (Section 3.1.1) to
+      ensure a consistent structure.
+
+   *  A description of the protocol-specific attributes introduced by
+      the CDDL extension, including their semantics and how they relate
+      to the underlying protocol operations.
 
 4.  Registered Protocol Mappings
 
@@ -737,6 +749,12 @@ Table of Contents
    *  Description
 
    *  Reference of the specification describing the protocol mapping.
+
+   The specification requirements for a registration request are defined
+   in Section 3.2.
+
+   The designated expert(s) SHOULD verify that the protocol map name is
+   appropriate and not likely to cause confusion with existing entries.
 
    The registrant of an existing entry may request updates to that
    entry, subject to the same expert review.  They should verify that
