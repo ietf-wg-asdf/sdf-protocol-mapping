@@ -14,7 +14,7 @@ Format (SDF) to enable mapping of protocol-agnostic SDF affordances to
 protocol-specific operations. The protocol mapping mechanism allows SDF models
 to specify how properties, actions, and events should be accessed using specific
 non-IP and IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
-This document also describes a method to extend SCIM with an SDF model mappping. 
+This document also describes a method to extend SCIM with an SDF model mapping. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="IoT" name="keyword">
@@ -1100,7 +1100,7 @@ Format (SDF) to enable mapping of protocol-agnostic SDF affordances to
 protocol-specific operations. The protocol mapping mechanism allows SDF models
 to specify how properties, actions, and events should be accessed using specific
 non-IP and IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
-This document also describes a method to extend SCIM with an SDF model mappping.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+This document also describes a method to extend SCIM with an SDF model mapping.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1274,7 +1274,7 @@ This document also describes a method to extend SCIM with an SDF model mappping.
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
             <p id="section-toc.1-1.12.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
@@ -1302,7 +1302,7 @@ protocol-specific operations, translating the model into a real-world implementa
 <p id="section-1.1-2">This document defines such a mechanism using the <code>sdfProtocolMap</code> keyword,
 which allows SDF models to include protocol-specific mapping information
 attached to the protocol-agnostic definitions. An <code>sdfProtocolMap</code> can be applied to
-an sdfAffordance, be it an sdfProperty, sdfEvent and sdfAction. The mapping enables use cases
+an sdfAffordance, be it an sdfProperty, sdfEvent or sdfAction. The mapping enables use cases
 such as application gateways or multi-protocol gateways that translate between different IoT protocols,
 automated generation of protocol-specific implementations from SDF models, and
 interoperability across heterogeneous device ecosystems.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
@@ -1318,7 +1318,7 @@ specifications can define mappings for additional protocols.<a href="#section-1.
         <h3 id="name-scim-sdf-model-extension">
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-scim-sdf-model-extension" class="section-name selfRef">SCIM SDF model extension</a>
         </h3>
-<p id="section-1.2-1">SDF providers a way to describe a class of devices and SCIM describes a device instance. The SDF model extension in this document defines a SCIM extension that enables inclusion of the SDF model for the class of devices a device belongs to in the SCIM object for that device.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-1">SDF provides a way to describe a class of devices and SCIM describes a device instance. The SDF model extension in this document defines a SCIM extension that enables inclusion of the SDF model for the class of devices a device belongs to in the SCIM object for that device.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1339,7 +1339,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-structure">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-structure" class="section-name selfRef">Structure</a>
       </h2>
-<p id="section-3-1">This section defines the structure of  an <code>sdfProtocolMap</code>.
+<p id="section-3-1">This section defines the structure of an <code>sdfProtocolMap</code>.
 Because each protocol has its own addressing model, a single SDF
 affordance requires a distinct mapping per protocol. For example, BLE
 addresses a property as a service characteristic, while Zigbee addresses
@@ -1916,6 +1916,9 @@ zigbee-property = {
             <li class="normal" id="section-4.2.1-4.4">
               <p id="section-4.2.1-4.4.1"><code>attributeType</code> is the Zigbee data type of the attribute.<a href="#section-4.2.1-4.4.1" class="pilcrow">¶</a></p>
 </li>
+            <li class="normal" id="section-4.2.1-4.5">
+              <p id="section-4.2.1-4.5.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the attribute (optional).<a href="#section-4.2.1-4.5.1" class="pilcrow">¶</a></p>
+</li>
           </ul>
 <p id="section-4.2.1-5">For example, a Zigbee protocol mapping for a temperature property:<a href="#section-4.2.1-5" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.2.1-6">
@@ -1955,7 +1958,7 @@ $$SDF-EVENT-PROTOCOL-MAP //= (
 
 zigbee-event-map = {
   endpointID: uint,
-  manufacturerCode: uint,
+  ? manufacturerCode: uint,
   clusterID: uint,
   attributeID: uint,
   attributeType: uint
@@ -2003,9 +2006,9 @@ $$SDF-ACTION-PROTOCOL-MAP //= (
 
 zigbee-action-map = {
   endpointID: uint,
-  manufacturerCode: uint,
+  ? manufacturerCode: uint,
   clusterID: uint,
-  commandID: uint,
+  commandID: uint
 }
 </pre>
 </div>
@@ -2116,7 +2119,7 @@ ion:sdf:2.0:Device"
 }
 </pre><a href="#section-5-4" class="pilcrow">¶</a>
 </div>
-<p id="section-5-5">An SDF model must be referenced with the <code>sdf</code> keyword inside the SCIM device schema as described in <span>[<a href="#I-D.ietf-scim-device-model" class="cite xref">I-D.ietf-scim-device-model</a>]</span><a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-5">An SDF model must be referenced with the <code>sdf</code> keyword inside the SCIM device schema as described in <span>[<a href="#I-D.ietf-scim-device-model" class="cite xref">I-D.ietf-scim-device-model</a>]</span>.<a href="#section-5-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -2169,7 +2172,7 @@ defined in <a href="#protocol-registration" class="auto internal xref">Section 3
 <p id="section-7.1-6">The designated expert(s) <span class="bcp14">SHOULD</span> verify that the protocol map name is appropriate and not likely to cause confusion with existing entries.<a href="#section-7.1-6" class="pilcrow">¶</a></p>
 <p id="section-7.1-7">The registrant of an existing entry may request updates to that entry, subject to the same expert review.
 They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
-<p id="section-7.1-8">Following protocol mappings are described in this document:<a href="#section-7.1-8" class="pilcrow">¶</a></p>
+<p id="section-7.1-8">The following protocol mappings are described in this document:<a href="#section-7.1-8" class="pilcrow">¶</a></p>
 <span id="name-protocol-mapping-registry"></span><div id="protmap-reg">
 <table class="center" id="table-1">
           <caption>
@@ -2374,7 +2377,7 @@ $$SDF-EVENT-PROTOCOL-MAP //= (
 
 zigbee-event-map = {
   endpointID: uint,
-  manufacturerCode: uint,
+  ? manufacturerCode: uint,
   clusterID: uint,
   attributeID: uint,
   attributeType: uint
@@ -2386,9 +2389,9 @@ $$SDF-ACTION-PROTOCOL-MAP //= (
 
 zigbee-action-map = {
   endpointID: uint,
-  manufacturerCode: uint,
+  ? manufacturerCode: uint,
   clusterID: uint,
-  commandID: uint,
+  commandID: uint
 }
 
 &lt;CODE ENDS&gt;
@@ -2604,7 +2607,7 @@ components:
 <div id="acknowledgements">
 <section id="appendix-C">
       <h2 id="name-acknowledgements">
-<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
+<a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
 <p id="appendix-C-1">This document relies on SDF models described in <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span>, as such, we are grateful to the authors of this document for putting their time and effort into defining SDF in depth, allowing us to make use of it. The authors would also like to thank the ASDF working group for their excellent feedback and steering of the document.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 </section>

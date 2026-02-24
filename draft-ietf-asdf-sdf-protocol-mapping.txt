@@ -21,7 +21,7 @@ Abstract
    mechanism allows SDF models to specify how properties, actions, and
    events should be accessed using specific non-IP and IP protocols such
    as Bluetooth Low Energy, Zigbee or HTTP and CoAP.  This document also
-   describes a method to extend SCIM with an SDF model mappping.
+   describes a method to extend SCIM with an SDF model mapping.
 
 About This Document
 
@@ -103,7 +103,7 @@ Table of Contents
    Appendix B.  OpenAPI Definition
      B.1.  Protocol map for BLE
      B.2.  Protocol map for Zigbee
-   Appendix C.  Acknowledgements
+   Acknowledgements
    Authors' Addresses
 
 1.  Introduction
@@ -123,7 +123,7 @@ Table of Contents
    keyword, which allows SDF models to include protocol-specific mapping
    information attached to the protocol-agnostic definitions.  An
    sdfProtocolMap can be applied to an sdfAffordance, be it an
-   sdfProperty, sdfEvent and sdfAction.  The mapping enables use cases
+   sdfProperty, sdfEvent or sdfAction.  The mapping enables use cases
    such as application gateways or multi-protocol gateways that
    translate between different IoT protocols, automated generation of
    protocol-specific implementations from SDF models, and
@@ -138,7 +138,7 @@ Table of Contents
 
 1.2.  SCIM SDF model extension
 
-   SDF providers a way to describe a class of devices and SCIM describes
+   SDF provides a way to describe a class of devices and SCIM describes
    a device instance.  The SDF model extension in this document defines
    a SCIM extension that enables inclusion of the SDF model for the
    class of devices a device belongs to in the SCIM object for that
@@ -571,6 +571,9 @@ Table of Contents
 
    *  attributeType is the Zigbee data type of the attribute.
 
+   *  manufacturerCode is the Zigbee manufacturer code of the attribute
+      (optional).
+
    For example, a Zigbee protocol mapping for a temperature property:
 
    {
@@ -599,7 +602,7 @@ Table of Contents
 
    zigbee-event-map = {
      endpointID: uint,
-     manufacturerCode: uint,
+     ? manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
      attributeType: uint
@@ -635,9 +638,9 @@ Table of Contents
 
    zigbee-action-map = {
      endpointID: uint,
-     manufacturerCode: uint,
+     ? manufacturerCode: uint,
      clusterID: uint,
-     commandID: uint,
+     commandID: uint
    }
 
      Figure 16: CDDL definition for Zigbee Protocol Mapping for actions
@@ -727,7 +730,7 @@ Table of Contents
    }
 
    An SDF model must be referenced with the sdf keyword inside the SCIM
-   device schema as described in [I-D.ietf-scim-device-model]
+   device schema as described in [I-D.ietf-scim-device-model].
 
 6.  Security Considerations
 
@@ -777,7 +780,7 @@ Table of Contents
    implementations, or if breaking changes are necessary, consider
    whether a new registry entry is more appropriate.
 
-   Following protocol mappings are described in this document:
+   The following protocol mappings are described in this document:
 
      +==============+===============+====================+===========+
      | Protocol map | Protocol Name | Description        | Reference |
@@ -937,7 +940,7 @@ Appendix A.  CDDL Definition
 
    zigbee-event-map = {
      endpointID: uint,
-     manufacturerCode: uint,
+     ? manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
      attributeType: uint
@@ -949,9 +952,9 @@ Appendix A.  CDDL Definition
 
    zigbee-action-map = {
      endpointID: uint,
-     manufacturerCode: uint,
+     ? manufacturerCode: uint,
      clusterID: uint,
-     commandID: uint,
+     commandID: uint
    }
 
    <CODE ENDS>
@@ -1132,7 +1135,7 @@ B.2.  Protocol map for Zigbee
 
                                  Figure 20
 
-Appendix C.  Acknowledgements
+Acknowledgements
 
    This document relies on SDF models described in [RFC9880], as such,
    we are grateful to the authors of this document for putting their
