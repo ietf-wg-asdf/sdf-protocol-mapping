@@ -90,7 +90,7 @@ This document defines such a mechanism using the `sdfProtocolMap` keyword,
 which allows SDF models to include protocol-specific mapping information
 attached to the protocol-agnostic definitions. An `sdfProtocolMap` can be applied to
 an sdfAffordance, be it an sdfProperty, sdfEvent and sdfAction. The mapping enables use cases
-such as iapplication gateways or multi-protocol gateways that translate between different IoT protocols,
+such as application gateways or multi-protocol gateways that translate between different IoT protocols,
 automated generation of protocol-specific implementations from SDF models, and
 interoperability across heterogeneous device ecosystems.
 
