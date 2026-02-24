@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-22T01:22:45.412916+00:00",
+  "timestamp": "2026-02-24T01:20:57.224258+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -378,15 +378,15 @@
       "id": "I_kwDOPSJ9A87d742V",
       "title": "PRotocolmapping maps to an SDF affordance type",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/17",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "bbrinckman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "We do not detail in the text or the IANA registry that a specific protocolmap maps to an affordance type,\nfor example the BLE protocolmap with keyword 'ble' is different for properties, events and actions.\nThis needs to be explained in the text, and the affordance type needs to be registered in the IANA registry as well",
       "createdAt": "2025-12-12T13:38:30Z",
-      "updatedAt": "2025-12-12T13:38:30Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-23T11:39:49Z",
+      "closedAt": "2026-02-23T11:39:49Z",
       "comments": []
     }
   ],
@@ -1403,24 +1403,26 @@
       "id": "PR_kwDOPSJ9A87FQrDh",
       "title": "Add protocol IANA registration requirements  to specification",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/21",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Changes to fix #17. \r\nInstead of having multiple entries for each affordance type, we define the protocol in IANA to point to a spec that defines how the different affordance types are extended. \r\n",
       "createdAt": "2026-02-20T21:09:09Z",
-      "updatedAt": "2026-02-20T21:09:09Z",
+      "updatedAt": "2026-02-23T11:39:48Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "5f59ac99b1191d433026f226d0dd7828941b6944",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "sdf-extension-points",
       "headRefOid": "f99e2e86704c75de55f069b2ed035328690f4c67",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-23T11:39:48Z",
+      "mergedAt": "2026-02-23T11:39:48Z",
+      "mergedBy": "bbrinckman",
+      "mergeCommit": {
+        "oid": "94725906b9333e1028d480c065d0342dff7224e5"
+      },
       "comments": [],
       "reviews": []
     }
