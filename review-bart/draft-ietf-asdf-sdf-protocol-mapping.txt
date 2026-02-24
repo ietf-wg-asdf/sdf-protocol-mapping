@@ -122,7 +122,7 @@ Table of Contents
    This document defines such a mechanism using the sdfProtocolMap
    keyword, which allows SDF models to include protocol-specific mapping
    information attached to the protocol-agnostic definitions.  An
-   sdfProtocolMap can be applied to an sdfAffordance, bit it an
+   sdfProtocolMap can be applied to an sdfAffordance, be it an
    sdfProperty, sdfEvent and sdfAction.  The mapping enables use cases
    such as iapplication gateways or multi-protocol gateways that
    translate between different IoT protocols, automated generation of
@@ -154,7 +154,7 @@ Table of Contents
 
 3.  Structure
 
-   This section defines the structure of am sdfProtocolMap.  Because
+   This section defines the structure of an sdfProtocolMap.  Because
    each protocol has its own addressing model, a single SDF affordance
    requires a distinct mapping per protocol.  For example, BLE addresses
    a property as a service characteristic, while Zigbee addresses it as
@@ -453,7 +453,7 @@ Table of Contents
    }
 
    For a temperature property that has different mappings for read and
-   write operations, he is an example of the BLE protocol mapping:
+   write operations, here is an example of the BLE protocol mapping:
 
    {
      "sdfProperty": {
@@ -672,7 +672,7 @@ Table of Contents
 5.  SCIM SDF Extension
 
    While SDF provides a way to describe a device class and SCIM defines
-   a deivce instance, a method is needed to associate a mapping between
+   a device instance, a method is needed to associate a mapping between
    an instance of a device and its associated SDF models.  To accomplish
    this, we define a SCIM extension that can be used in conjunction with
    [I-D.ietf-scim-device-model] in Figure 17.  Implementation of this
