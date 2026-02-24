@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 27 August 2026                                        L. Corneo
+Expires: 28 August 2026                                        L. Corneo
                                                                 Ericsson
-                                                        23 February 2026
+                                                        24 February 2026
 
 
                         Protocol Mapping for SDF
@@ -20,7 +20,8 @@ Abstract
    affordances to protocol-specific operations.  The protocol mapping
    mechanism allows SDF models to specify how properties, actions, and
    events should be accessed using specific non-IP and IP protocols such
-   as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
+   as Bluetooth Low Energy, Zigbee or HTTP and CoAP.  This document also
+   describes a method to extend SCIM with an SDF model mappping.
 
 About This Document
 
@@ -54,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 August 2026.
+   This Internet-Draft will expire on 28 August 2026.
 
 Copyright Notice
 
@@ -73,6 +74,8 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
+     1.1.  Protocol Mapping
+     1.2.  SCIM SDF model extension
    2.  Conventions and Definitions
    3.  Structure
      3.1.  SDF Extension Points
@@ -100,26 +103,31 @@ Table of Contents
    Appendix B.  OpenAPI Definition
      B.1.  Protocol map for BLE
      B.2.  Protocol map for Zigbee
-   Acknowledgments
+   Appendix C.  Acknowledgements
    Authors' Addresses
 
 1.  Introduction
 
+1.1.  Protocol Mapping
+
    The Semantic Definition Format (SDF) [RFC9880] provides a protocol-
    agnostic way to describe IoT devices and their capabilities through
    properties, actions, and events (collectively called affordances).
-   However, when implementing these affordances on actual devices using
-   specific communication protocols, there needs to be a mechanism to
-   map the protocol-agnostic SDF definitions to protocol-specific
-   operations.
+   When implementing the SDF model for a device on an actual
+   implementation using specific communication protocols, there needs to
+   be a mechanism to map the protocol-agnostic SDF definitions to
+   protocol-specific operations, translating the model into a real-world
+   implementation.
 
    This document defines such a mechanism using the sdfProtocolMap
    keyword, which allows SDF models to include protocol-specific mapping
-   information alongside the protocol-agnostic definitions.  The mapping
-   enables use cases such as multi-protocol gateways that translate
-   between different IoT protocols, automated generation of protocol-
-   specific implementations from SDF models, and interoperability across
-   heterogeneous device ecosystems.
+   information attached to the protocol-agnostic definitions.  An
+   sdfProtocolMap can be applied to an sdfAffordance, be it an
+   sdfProperty, sdfEvent and sdfAction.  The mapping enables use cases
+   such as application gateways or multi-protocol gateways that
+   translate between different IoT protocols, automated generation of
+   protocol-specific implementations from SDF models, and
+   interoperability across heterogeneous device ecosystems.
 
    The protocol mapping mechanism is designed to be extensible: target
    protocols include non-IP protocols commonly used in IoT environments,
@@ -127,6 +135,14 @@ Table of Contents
    HTTP [RFC9110] or CoAP [RFC7252].  This document registers mappings
    for BLE and Zigbee; future specifications can define mappings for
    additional protocols.
+
+1.2.  SCIM SDF model extension
+
+   SDF providers a way to describe a class of devices and SCIM describes
+   a device instance.  The SDF model extension in this document defines
+   a SCIM extension that enables inclusion of the SDF model for the
+   class of devices a device belongs to in the SCIM object for that
+   device.
 
 2.  Conventions and Definitions
 
@@ -138,17 +154,17 @@ Table of Contents
 
 3.  Structure
 
-   This section defines the structure of the protocol mapping mechanism.
-   Because each protocol has its own addressing model, a single SDF
-   affordance requires a distinct mapping per protocol.  For example,
-   BLE addresses a property as a service characteristic, while Zigbee
-   addresses it as an attribute in a cluster of an endpoint.
+   This section defines the structure of an sdfProtocolMap.  Because
+   each protocol has its own addressing model, a single SDF affordance
+   requires a distinct mapping per protocol.  For example, BLE addresses
+   a property as a service characteristic, while Zigbee addresses it as
+   an attribute in a cluster of an endpoint.
 
    A protocol mapping object is a JSON object identified by the
-   sdfProtocolMap keyword, inside an SDF affordance definition
+   sdfProtocolMap keyword, nested inside an SDF affordance definition
    (sdfProperty, sdfAction, or sdfEvent).  Protocol-specific attributes
-   are embedded within this object, keyed by a registered protocol name,
-   e.g., "ble" or "zigbee".
+   are embedded within this object, keyed by an IANA registered protocol
+   name, e.g., "ble" or "zigbee".
 
    sdfProperty / sdfAction / sdfEvent
      |
@@ -231,7 +247,7 @@ Table of Contents
 
              Figure 3: Example Property Protocol Map Extension
 
-   The corresponding JSON in an SDF model would look like:
+   The corresponding JSON in an SDF model looks like:
 
    {
      "sdfProperty": {
@@ -348,7 +364,7 @@ Table of Contents
 
               Figure 10: Example Event Protocol Map Extension
 
-   The corresponding JSON in an SDF model would look like:
+   The corresponding JSON in an SDF model looks like:
 
    {
      "sdfEvent": {
@@ -421,8 +437,7 @@ Table of Contents
    *  characteristicID is the BLE characteristic ID that corresponds to
       the SDF property.
 
-   For example, a BLE protocol mapping for a temperature property might
-   look like:
+   For example, a BLE protocol mapping for a temperature property:
 
    {
      "sdfProperty": {
@@ -438,7 +453,7 @@ Table of Contents
    }
 
    For a temperature property that has different mappings for read and
-   write operations, the BLE protocol mapping might look like:
+   write operations, here is an example of the BLE protocol mapping:
 
    {
      "sdfProperty": {
@@ -461,8 +476,9 @@ Table of Contents
 
 4.1.2.  Events
 
-   For SDF events, the BLE protocol mapping structure is similar, but it
-   may include additional attributes such as the type of the event.
+   For SDF events, the BLE protocol mapping structure is similar to SDF
+   properties, but it must include additional attributes such as the
+   type of the event.
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
      ble: ble-event-map
@@ -485,8 +501,7 @@ Table of Contents
    *  serviceID and characteristicID are optional attributes that are
       specified if the type is "gatt".
 
-   For example, a BLE event mapping for a heart rate measurement event
-   might look like:
+   For example, a BLE event mapping for a heart rate measurement event:
 
    {
      "sdfEvent": {
@@ -502,7 +517,7 @@ Table of Contents
      }
    }
 
-   Another example of an isPresent event using BLE advertisements:
+   Here is an example of an isPresent event using BLE advertisements:
 
    {
      "sdfEvent": {
@@ -556,8 +571,7 @@ Table of Contents
 
    *  attributeType is the Zigbee data type of the attribute.
 
-   For example, a Zigbee protocol mapping for a temperature property
-   might look like:
+   For example, a Zigbee protocol mapping for a temperature property:
 
    {
      "sdfProperty": {
@@ -593,8 +607,7 @@ Table of Contents
 
      Figure 15: CDDL definition for Zigbee Protocol Mapping for events
 
-   For example, a Zigbee event mapping for a temperature change report
-   might look like:
+   For example, a Zigbee event mapping for a temperature change report:
 
    {
      "sdfEvent": {
@@ -640,8 +653,7 @@ Table of Contents
    *  commandID is the Zigbee command ID that corresponds to the SDF
       action.
 
-   For example, a Zigbee protocol mapping to set a temperature might
-   look like:
+   For example, a Zigbee protocol mapping to set a temperature:
 
    {
      "sdfAction": {
@@ -659,10 +671,10 @@ Table of Contents
 
 5.  SCIM SDF Extension
 
-   While SDF provides a way to describe a device, a method is needed to
-   associate a mapping between an instance of a device and its
-   associated SDF models.  To accomplish this, we define a SCIM
-   extension that can be used in conjunction with
+   While SDF provides a way to describe a device class and SCIM defines
+   a device instance, a method is needed to associate a mapping between
+   an instance of a device and its associated SDF models.  To accomplish
+   this, we define a SCIM extension that can be used in conjunction with
    [I-D.ietf-scim-device-model] in Figure 17.  Implementation of this
    SCIM extension is OPTIONAL and independent of the protocol mapping
    functionality defined in the rest of this document.  The SCIM schema
@@ -696,7 +708,7 @@ Table of Contents
 
                     Figure 17: SCIM SDF Extension Schema
 
-   An example SCIM device schema extension might look like:
+   Here is an example SCIM device schema extension with SDF models:
 
    {
        "schemas": [
@@ -713,6 +725,9 @@ Table of Contents
            ]
        }
    }
+
+   An SDF model must be referenced with the sdf keyword inside the SCIM
+   device schema as described in [I-D.ietf-scim-device-model]
 
 6.  Security Considerations
 
@@ -1117,9 +1132,13 @@ B.2.  Protocol map for Zigbee
 
                                  Figure 20
 
-Acknowledgments
+Appendix C.  Acknowledgements
 
-   TODO acknowledge.
+   This document relies on SDF models described in [RFC9880], as such,
+   we are grateful to the authors of this document for putting their
+   time and effort into defining SDF in depth, allowing us to make use
+   of it.  The authors would also like to thank the ASDF working group
+   for their excellent feedback and steering of the document.
 
 Authors' Addresses
 
