@@ -71,7 +71,7 @@ Format (SDF) to enable mapping of protocol-agnostic SDF affordances to
 protocol-specific operations. The protocol mapping mechanism allows SDF models
 to specify how properties, actions, and events should be accessed using specific
 non-IP and IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
-This document also describes a method to extend SCIM with an SDF model mappping.
+This document also describes a method to extend SCIM with an SDF model mapping.
 
 --- middle
 
@@ -89,7 +89,7 @@ protocol-specific operations, translating the model into a real-world implementa
 This document defines such a mechanism using the `sdfProtocolMap` keyword,
 which allows SDF models to include protocol-specific mapping information
 attached to the protocol-agnostic definitions. An `sdfProtocolMap` can be applied to
-an sdfAffordance, be it an sdfProperty, sdfEvent and sdfAction. The mapping enables use cases
+an sdfAffordance, be it an sdfProperty, sdfEvent or sdfAction. The mapping enables use cases
 such as application gateways or multi-protocol gateways that translate between different IoT protocols,
 automated generation of protocol-specific implementations from SDF models, and
 interoperability across heterogeneous device ecosystems.
@@ -102,7 +102,7 @@ specifications can define mappings for additional protocols.
 
 ## SCIM SDF model extension
 
-SDF providers a way to describe a class of devices and SCIM describes a device instance. The SDF model extension in this document defines a SCIM extension that enables inclusion of the SDF model for the class of devices a device belongs to in the SCIM object for that device.
+SDF provides a way to describe a class of devices and SCIM describes a device instance. The SDF model extension in this document defines a SCIM extension that enables inclusion of the SDF model for the class of devices a device belongs to in the SCIM object for that device.
 
 # Conventions and Definitions
 
@@ -110,7 +110,7 @@ SDF providers a way to describe a class of devices and SCIM describes a device i
 
 # Structure
 
-This section defines the structure of  an `sdfProtocolMap`.
+This section defines the structure of an `sdfProtocolMap`.
 Because each protocol has its own addressing model, a single SDF
 affordance requires a distinct mapping per protocol. For example, BLE
 addresses a property as a service characteristic, while Zigbee addresses
@@ -485,6 +485,7 @@ Where:
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF property.
 - `attributeID` is the Zigbee attribute ID that corresponds to the SDF property.
 - `attributeType` is the Zigbee data type of the attribute.
+- `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
 
 For example, a Zigbee protocol mapping for a temperature property:
 
@@ -602,7 +603,7 @@ Here is an example SCIM device schema extension with SDF models:
 }
 ~~~
 
-An SDF model must be referenced with the `sdf` keyword inside the SCIM device schema as described in {{!I-D.ietf-scim-device-model}}
+An SDF model must be referenced with the `sdf` keyword inside the SCIM device schema as described in {{!I-D.ietf-scim-device-model}}.
 
 # Security Considerations
 
@@ -643,7 +644,7 @@ The designated expert(s) SHOULD verify that the protocol map name is appropriate
 The registrant of an existing entry may request updates to that entry, subject to the same expert review.
 They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.
 
-Following protocol mappings are described in this document:
+The following protocol mappings are described in this document:
 
 | Protocol map | Protocol Name               | Description                                 | Reference       |
 |--------------|-----------------------------|---------------------------------------------|-----------------|
@@ -699,9 +700,10 @@ The following non-normative model is provided for convenience of the implementor
 <CODE BEGINS> file "ProtocolMap-Zigbee.yaml"
 {::include generated/openapi/ProtocolMap-Zigbee.yaml.folded}
 <CODE ENDS>
-~~~~~~
+~~~~~
 {: #protocolmapzigbee}
 
 # Acknowledgements
+{:numbered="false"}
 
-This document relies on SDF models described in {{!RFC9880}}, as such, we are grateful to the authors of this document for putting their time and effort into defining SDF in depth, allowing us to make use of it. The authors would also like to thank the ASDF working group for their excellent feedback and steering of the document.
+This document relies on SDF models described in {{-sdf}}, as such, we are grateful to the authors of this document for putting their time and effort into defining SDF in depth, allowing us to make use of it. The authors would also like to thank the ASDF working group for their excellent feedback and steering of the document.
