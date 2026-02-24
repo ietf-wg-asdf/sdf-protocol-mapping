@@ -89,7 +89,7 @@ protocol-specific operations, translating the model into a real-world implementa
 This document defines such a mechanism using the `sdfProtocolMap` keyword,
 which allows SDF models to include protocol-specific mapping information
 attached to the protocol-agnostic definitions. An `sdfProtocolMap` can be applied to
-an sdfAffordance, bit it an sdfProperty, sdfEvent and sdfAction. The mapping enables use cases
+an sdfAffordance, be it an sdfProperty, sdfEvent and sdfAction. The mapping enables use cases
 such as iapplication gateways or multi-protocol gateways that translate between different IoT protocols,
 automated generation of protocol-specific implementations from SDF models, and
 interoperability across heterogeneous device ecosystems.
@@ -110,7 +110,7 @@ SDF providers a way to describe a class of devices and SCIM describes a device i
 
 # Structure
 
-This section defines the structure of  am `sdfProtocolMap`.
+This section defines the structure of  an `sdfProtocolMap`.
 Because each protocol has its own addressing model, a single SDF
 affordance requires a distinct mapping per protocol. For example, BLE
 addresses a property as a service characteristic, while Zigbee addresses
@@ -387,7 +387,7 @@ For example, a BLE protocol mapping for a temperature property:
 ~~~
 
 For a temperature property that has different mappings for read and write operations,
-he is an example of the BLE protocol mapping:
+here is an example of the BLE protocol mapping:
 
 ~~~ json
 {
@@ -569,7 +569,7 @@ For example, a Zigbee protocol mapping to set a temperature:
 
 # SCIM SDF Extension {#scim-sdf-extension}
 
-While SDF provides a way to describe a device class and SCIM defines a deivce instance, a method is needed to associate a
+While SDF provides a way to describe a device class and SCIM defines a device instance, a method is needed to associate a
 mapping between an instance of a device and its associated SDF models. To
 accomplish this, we define a SCIM extension that can be used in conjunction with
 {{!I-D.ietf-scim-device-model}} in {{scim-sdf-extension-schema}}. Implementation
