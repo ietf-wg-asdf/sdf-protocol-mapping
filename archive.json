@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-24T01:20:57.224258+00:00",
+  "timestamp": "2026-02-26T01:19:55.029310+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -1422,6 +1422,120 @@
       "mergedBy": "bbrinckman",
       "mergeCommit": {
         "oid": "94725906b9333e1028d480c065d0342dff7224e5"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOPSJ9A87F_M96",
+      "title": "review edits",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/22",
+      "state": "MERGED",
+      "author": "bbrinckman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-24T16:52:30Z",
+      "updatedAt": "2026-02-24T17:59:37Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "94725906b9333e1028d480c065d0342dff7224e5",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "review-bart",
+      "headRefOid": "4013632ee15fb6edb7ca89801aa108ffd01d49b2",
+      "closedAt": "2026-02-24T17:59:37Z",
+      "mergedAt": "2026-02-24T17:59:37Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "23ea723ab45fcf7975523aae8cdbbd98199ba56c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A87lciaQ",
+          "commit": {
+            "abbreviatedOid": "3823d13"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-24T17:29:03Z",
+          "updatedAt": "2026-02-24T17:31:31Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\nan sdfAffordance, be it an sdfProperty, sdfEvent and sdfAction. The mapping enables use cases\n```",
+              "createdAt": "2026-02-24T17:29:03Z",
+              "updatedAt": "2026-02-24T17:31:31Z"
+            },
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\nsuch as application gateways or multi-protocol gateways that translate between different IoT protocols,\n```",
+              "createdAt": "2026-02-24T17:29:31Z",
+              "updatedAt": "2026-02-24T17:58:11Z"
+            },
+            {
+              "originalPosition": 47,
+              "body": "```suggestion\nThis section defines the structure of  an `sdfProtocolMap`.\n```",
+              "createdAt": "2026-02-24T17:30:17Z",
+              "updatedAt": "2026-02-24T17:31:31Z"
+            },
+            {
+              "originalPosition": 94,
+              "body": "```suggestion\nhere is an example of the BLE protocol mapping:\n```",
+              "createdAt": "2026-02-24T17:30:55Z",
+              "updatedAt": "2026-02-24T17:55:59Z"
+            },
+            {
+              "originalPosition": 169,
+              "body": "```suggestion\nWhile SDF provides a way to describe a device class and SCIM defines a device instance, a method is needed to associate a\n```",
+              "createdAt": "2026-02-24T17:31:19Z",
+              "updatedAt": "2026-02-24T17:31:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87ldTY9",
+          "commit": {
+            "abbreviatedOid": "4013632"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-24T17:59:12Z",
+          "updatedAt": "2026-02-24T17:59:12Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOPSJ9A87GAWo-",
+      "title": "Fix typos",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/23",
+      "state": "MERGED",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-24T18:07:27Z",
+      "updatedAt": "2026-02-24T18:08:02Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "23ea723ab45fcf7975523aae8cdbbd98199ba56c",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "fixes-before-publishing",
+      "headRefOid": "b38595d40592f024146f1ad1d8456e715638b085",
+      "closedAt": "2026-02-24T18:08:02Z",
+      "mergedAt": "2026-02-24T18:08:02Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "87e7425617c8af961fe0a71724dbe383c9e08d4f"
       },
       "comments": [],
       "reviews": []
