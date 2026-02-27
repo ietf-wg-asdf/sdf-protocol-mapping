@@ -118,7 +118,7 @@ mechanism by defining:
 
 {::boilerplate bcp14-tagged}
 
-# Structure {#sdf-pm}
+# SDF Protocol Mapping Structure {#sdf-pm}
 
 This section defines the structure of an `sdfProtocolMap`. Because each protocol
 has its own addressing model, a single SDF affordance requires a distinct
@@ -355,13 +355,14 @@ The corresponding JSON in an SDF model looks like:
 section dedicated to protocol mapping structure. Perhaps should it be a top
 level header, e.g., # Protocol Registration,? -->
 
-## Protocol Registration {#protocol-registration}
+# New Protocol Registration Procedure {#protocol-registration}
 
 Protocol names used as keys in the `sdfProtocolMap` object (e.g., "ble",
 "zigbee") MUST be registered in the IANA registry defined in
 {{iana-prot-map}}.
 
-A new protocol mapping MUST be defined by a specification that includes:
+A new SDF protocol mapping MUST be defined by a specification that mandatorily
+includes:
 
 - A CDDL definition that extends at least one of the group sockets
   defined in this document:
@@ -383,10 +384,11 @@ This section defines the protocol mappings registered by this document.
 
 ## BLE {#ble-pm}
 
-<!-- LC: ...how properties and events should... is it normative SHOULD? -->
+<!-- LC: ...how properties and events should... is it normative SHOULD? Please
+review and change if incorrect. -->
 
 The BLE protocol mapping allows SDF models to specify how properties and events
-should be accessed using Bluetooth Low Energy (BLE) protocol {{BLE53}}. The
+SHOULD be accessed using Bluetooth Low Energy (BLE) protocol {{BLE53}}. The
 mapping includes details such as service IDs and characteristic IDs that are
 used to access the corresponding SDF affordances.
 
