@@ -388,13 +388,12 @@ provides a connection to the SDF keyword without loss of semantic.
 
 If agreed, change this consistently through the remaining sections. -->
 
-For SDF properties, the BLE protocol mapping structure
-is defined as follows:
+For `sdfProperty`, the BLE protocol mapping structure is defined as follows:
 
 ~~~ cddl
 {::include cddl/ble-protocol-map.cddl}
 ~~~
-{: #blemap1 title="CDDL definition for BLE Protocol Mapping for properties"}
+{: #blemap1 title="CDDL definition for BLE Protocol Mapping for sdfProperty"}
 
 <!-- LC: It the figure caption above, I would use `sdfProperty` instead of
 properties. Better connection to SDF. If agreed, should do the same for other
@@ -453,13 +452,14 @@ here is an example of the BLE protocol mapping:
 
 ### Events
 
-For SDF events, the BLE protocol mapping structure is similar to SDF properties,
-but it MUST include additional attributes such as the `type` of the event.
+For `sdfEvent`s, the BLE protocol mapping structure is similar to
+`sdfProperties`, but it MUST include additional attributes such as the `type` of
+the event.
 
 ~~~ cddl
 {::include cddl/ble-event-map.cddl}
 ~~~
-{: #blemap2 title="BLE Protocol Mapping for events"}
+{: #blemap2 title="BLE Protocol Mapping for sdfEvents"}
 
 Where:
 
@@ -516,13 +516,13 @@ to access the corresponding SDF affordances.
 
 ### Properties
 
-SDF properties are mapped to Zigbee cluster attributes. The Zigbee
-property protocol mapping structure is defined as follows:
+An `sdfProperties` is mapped to Zigbee cluster attributes. The Zigbee property
+protocol mapping structure is defined as follows:
 
 ~~~ cddl
 {::include cddl/zigbee-protocol-map.cddl}
 ~~~
-{: #zigmap1 title="CDDL definition for Zigbee Protocol Mapping for properties"}
+{: #zigmap1 title="CDDL definition for Zigbee Protocol Mapping for sdfProperty"}
 
 Where:
 
@@ -560,13 +560,13 @@ follows:
 
 ### Events
 
-SDF events are mapped to Zigbee cluster attribute reporting. The Zigbee
-event protocol mapping structure is defined as follows:
+An `sdfEvents` is mapped to Zigbee cluster attribute reporting. The Zigbee event
+protocol mapping structure is defined as follows:
 
 ~~~ cddl
 {::include cddl/zigbee-event-map.cddl}
 ~~~
-{: #zigmap-event title="CDDL definition for Zigbee Protocol Mapping for events"}
+{: #zigmap-event title="CDDL definition for Zigbee Protocol Mapping for sdfEvents"}
 
 Where:
 
@@ -596,20 +596,16 @@ For example, a Zigbee event mapping for a temperature change report:
 }
 ~~~
 
-<!-- LC: Both Properties and Actions have a list of of the CDDL fields with the
-description, but Events has not. It should be added for consistency, or removed
-from Action and mention in Properties that the same fields are valid for Events
-and Actions. -->
 
 ### Actions
 
-SDF actions SHOULD be mapped to Zigbee cluster commands. The Zigbee protocol
+An `sdfAction` SHOULD be mapped to Zigbee cluster commands. The Zigbee protocol
 mapping structure for actions is defined as follows:
 
 ~~~ cddl
 {::include cddl/zigbee-action-map.cddl}
 ~~~
-{: #zigmap2 title="CDDL definition for Zigbee Protocol Mapping for actions"}
+{: #zigmap2 title="CDDL definition for Zigbee Protocol Mapping for sdfAction"}
 
 Where:
 
