@@ -261,14 +261,6 @@ rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
 {: #sdf-action-ext title="SDF Action Extension Point for Protocol Mapping"}
 
 
-<!-- LC: Should we use MUST below? If so, add this consistently across Section
-3.x.
-
-Example:
-
-...a group entry mapping the protocol name MUST be added to the
-protocol-specific attributes: -->
-
 Actions use a simpler structure than properties, as they do not require the
 read/write distinction. To extend `$$SDF-ACTION-PROTOCOL-MAP` for a new
 protocol, implementors MUST add a group entry that maps the protocol name to the
@@ -373,9 +365,6 @@ This section defines the protocol mappings registered by this document.
 
 ## BLE {#ble-pm}
 
-<!-- LC: ...how properties and events should... is it normative SHOULD? Please
-review and change if incorrect. -->
-
 The BLE protocol mapping allows SDF models to specify how properties and events
 SHOULD be accessed using Bluetooth Low Energy (BLE) protocol {{BLE53}}. The
 mapping includes details such as service IDs and characteristic IDs that are
@@ -383,21 +372,12 @@ used to access the corresponding SDF affordances.
 
 ### Properties
 
-<!-- LC: Should we use `sdfProperty` instead of SDF properties? It already
-provides a connection to the SDF keyword without loss of semantic.
-
-If agreed, change this consistently through the remaining sections. -->
-
 For `sdfProperty`, the BLE protocol mapping structure is defined as follows:
 
 ~~~ cddl
 {::include cddl/ble-protocol-map.cddl}
 ~~~
 {: #blemap1 title="CDDL definition for BLE Protocol Mapping for sdfProperty"}
-
-<!-- LC: It the figure caption above, I would use `sdfProperty` instead of
-properties. Better connection to SDF. If agreed, should do the same for other
-captions as well. -->
 
 Where:
 
@@ -525,12 +505,6 @@ protocol mapping structure is defined as follows:
 {: #zigmap1 title="CDDL definition for Zigbee Protocol Mapping for sdfProperty"}
 
 Where:
-
-<!-- LC: s/SDF property/`sdfProperty`? -->
-
-<!-- LC: The position of manufacturerCode is inconsistent with the CDDL. As this
-field is optional, I would move it as last in the CDDL. Same fro Events and
-Actions. -->
 
 - `endpointID` is the Zigbee endpoint ID that corresponds to the SDF property.
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF property.
@@ -697,9 +671,7 @@ defined in Section 4.6 of {{!RFC8126}}.
 
 The registry must contain the following attributes:
 
-<!-- LC: SDF Protocol Map name? Maybe even `sdfProtocolMap` name? -->
-
-- Protocol map name
+- Protocol map name, as per `sdfProtocolMap`
 - Protocol name
 - Description
 - Reference of the specification describing the protocol mapping.
