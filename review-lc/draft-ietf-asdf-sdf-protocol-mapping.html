@@ -1434,9 +1434,9 @@ property-protocol-map&lt;name, props&gt; = (
             </figcaption></figure>
 </div>
 <p id="section-3.1.1-3">The <code>property-protocol-map</code> generic (<a href="#sdf-prop-ext" class="auto internal xref">Figure 2</a>) captures the common
-structure of property protocol mappings. The <code>name</code> parameter is the registered
-protocol name and <code>props</code> is the protocol-specific map of attributes. A protocol
-can provide either:<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+structure of property protocol mappings. The <code>name</code> parameter is the protocol
+name and <code>props</code> is the protocol-specific map of attributes. A protocol can
+provide either:<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1.1-4.1">
               <p id="section-3.1.1-4.1.1">A single mapping that applies to both read and write operations, or<a href="#section-3.1.1-4.1.1" class="pilcrow">¶</a></p>
@@ -1446,15 +1446,15 @@ can provide either:<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
 attributes for each direction.<a href="#section-3.1.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.1.1-5">To extend <code>$$SDF-PROPERTY-PROTOCOL-MAP</code> for a new protocol (e.g., "new-protocol"),
- use the <code>property-protocol-map</code> generic with the protocol name and a map type
-defining the protocol-specific attributes. The protocol name
-("new-protocol") <span class="bcp14">MUST</span> be registered in the IANA registry defined in
-<a href="#iana-prot-map" class="auto internal xref">Section 8.1</a>.<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-6">For example:<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-5">To extend <code>$$SDF-PROPERTY-PROTOCOL-MAP</code> for a new protocol (e.g.,
+"new-protocol"), implementors <span class="bcp14">MUST</span> use the <code>property-protocol-map</code> generic with
+the protocol name and a map type defining the protocol-specific attributes.<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-6">It is to be noted that the protocol <code>name</code> (e.g., "new-protocol") <span class="bcp14">MUST</span> be
+registered in the IANA registry defined in <a href="#iana-prot-map" class="auto internal xref">Section 8.1</a>.<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-7">For example:<a href="#section-3.1.1-7" class="pilcrow">¶</a></p>
 <span id="name-example-property-protocol-m"></span><div id="prop-ext-example">
 <figure id="figure-3">
-            <div class="lang-cddl sourcecode" id="section-3.1.1-7.1">
+            <div class="lang-cddl sourcecode" id="section-3.1.1-8.1">
 <pre>
 $$SDF-PROPERTY-PROTOCOL-MAP //= (
   property-protocol-map&lt;"new-protocol", new-protocol-property&gt;
@@ -1470,10 +1470,10 @@ new-protocol-property = {
 <a href="#name-example-property-protocol-m" class="selfRef">Example Property Protocol Map Extension</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.1-8">The corresponding JSON in an SDF model looks like:<a href="#section-3.1.1-8" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-9">The corresponding JSON in an SDF model looks like:<a href="#section-3.1.1-9" class="pilcrow">¶</a></p>
 <span id="name-example-property-protocol-ma"></span><div id="prop-ext-json-example">
 <figure id="figure-4">
-            <div class="lang-json sourcecode" id="section-3.1.1-9.1">
+            <div class="lang-json sourcecode" id="section-3.1.1-10.1">
 <pre>
 {
   "sdfProperty": {
@@ -1495,11 +1495,11 @@ new-protocol-property = {
 <a href="#name-example-property-protocol-ma" class="selfRef">Example Property Protocol Map in JSON</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.1-10">When a property uses different protocol attributes for read and write
-operations, the mapping can be split:<a href="#section-3.1.1-10" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-11">When a property uses different protocol attributes for read and write
+operations, the mapping can be split:<a href="#section-3.1.1-11" class="pilcrow">¶</a></p>
 <span id="name-example-property-protocol-map"></span><div id="prop-ext-rw-json-example">
 <figure id="figure-5">
-            <div class="lang-json sourcecode" id="section-3.1.1-11.1">
+            <div class="lang-json sourcecode" id="section-3.1.1-12.1">
 <pre>
 {
   "sdfProperty": {
@@ -1554,8 +1554,8 @@ $$SDF-EXTENSION-ACTION //= (
 </div>
 <p id="section-3.1.2-3">Actions use a simpler structure than properties, as they do not require the
 read/write distinction. To extend <code>$$SDF-ACTION-PROTOCOL-MAP</code> for a new
-protocol, add a group entry mapping the protocol name to the protocol-specific
-attributes:<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
+protocol, implementors <span class="bcp14">MUST</span> add a group entry that maps the protocol name to the
+protocol-specific attributes:<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
 <span id="name-example-action-protocol-map"></span><div id="action-ext-example">
 <figure id="figure-7">
             <div class="lang-cddl sourcecode" id="section-3.1.2-4.1">
@@ -1792,8 +1792,8 @@ here is an example of the BLE protocol mapping:<a href="#section-5.1.1-7" class=
           <h4 id="name-events">
 <a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-events" class="section-name selfRef">Events</a>
           </h4>
-<p id="section-5.1.2-1">For SDF events, the BLE protocol mapping structure is similar to SDF properties, but it must
-include additional attributes such as the type of the event.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-1">For SDF events, the BLE protocol mapping structure is similar to SDF properties,
+but it <span class="bcp14">MUST</span> include additional attributes such as the <code>type</code> of the event.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
 <span id="name-ble-protocol-mapping-for-ev"></span><div id="blemap2">
 <figure id="figure-13">
             <div class="lang-cddl sourcecode" id="section-5.1.2-2.1">
@@ -1968,8 +1968,26 @@ zigbee-event-map = {
 <a href="#name-cddl-definition-for-zigbee-p" class="selfRef">CDDL definition for Zigbee Protocol Mapping for events</a>
             </figcaption></figure>
 </div>
-<p id="section-5.2.2-3">For example, a Zigbee event mapping for a temperature change report:<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-5.2.2-4">
+<p id="section-5.2.2-3">Where:<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2.2-4.1">
+              <p id="section-5.2.2-4.1.1"><code>endpointID</code> is the Zigbee endpoint ID that corresponds to the SDF property.<a href="#section-5.2.2-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.2-4.2">
+              <p id="section-5.2.2-4.2.1"><code>clusterID</code> is the Zigbee cluster ID that corresponds to the SDF property.<a href="#section-5.2.2-4.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.2-4.3">
+              <p id="section-5.2.2-4.3.1"><code>attributeID</code> is the Zigbee attribute ID that corresponds to the SDF property.<a href="#section-5.2.2-4.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.2-4.4">
+              <p id="section-5.2.2-4.4.1"><code>attributeType</code> is the Zigbee data type of the attribute.<a href="#section-5.2.2-4.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.2-4.5">
+              <p id="section-5.2.2-4.5.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the attribute (optional).<a href="#section-5.2.2-4.5.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-5.2.2-5">For example, a Zigbee event mapping for a temperature change report:<a href="#section-5.2.2-5" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.2.2-6">
 <pre>
 {
   "sdfEvent": {
@@ -1985,7 +2003,7 @@ zigbee-event-map = {
     }
   }
 }
-</pre><a href="#section-5.2.2-4" class="pilcrow">¶</a>
+</pre><a href="#section-5.2.2-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1994,7 +2012,8 @@ zigbee-event-map = {
           <h4 id="name-actions">
 <a href="#section-5.2.3" class="section-number selfRef">5.2.3. </a><a href="#name-actions" class="section-name selfRef">Actions</a>
           </h4>
-<p id="section-5.2.3-1">SDF actions are mapped to Zigbee cluster commands. The Zigbee protocol mapping structure for actions is defined as follows:<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.3-1">SDF actions <span class="bcp14">SHOULD</span> be mapped to Zigbee cluster commands. The Zigbee protocol
+mapping structure for actions is defined as follows:<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-pr"></span><div id="zigmap2">
 <figure id="figure-16">
             <div class="lang-cddl sourcecode" id="section-5.2.3-2.1">
@@ -2026,6 +2045,9 @@ zigbee-action-map = {
             <li class="normal" id="section-5.2.3-4.3">
               <p id="section-5.2.3-4.3.1"><code>commandID</code> is the Zigbee command ID that corresponds to the SDF action.<a href="#section-5.2.3-4.3.1" class="pilcrow">¶</a></p>
 </li>
+            <li class="normal" id="section-5.2.3-4.4">
+              <p id="section-5.2.3-4.4.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the attribute (optional).<a href="#section-5.2.3-4.4.1" class="pilcrow">¶</a></p>
+</li>
           </ul>
 <p id="section-5.2.3-5">For example, a Zigbee protocol mapping to set a temperature:<a href="#section-5.2.3-5" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-5.2.3-6">
@@ -2056,13 +2078,14 @@ zigbee-action-map = {
       <h2 id="name-scim-sdf-extension">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-scim-sdf-extension" class="section-name selfRef">SCIM SDF Extension</a>
       </h2>
-<p id="section-6-1">While SDF provides a way to describe a device class and SCIM defines a device instance, a method is needed to associate a
-mapping between an instance of a device and its associated SDF models. To
-accomplish this, we define a SCIM extension that can be used in conjunction with
+<p id="section-6-1">While SDF provides a way to describe a device class and SCIM defines a device
+instance, a method is needed to associate a mapping between an instance of a
+device and its associated SDF models. To accomplish this, This document defines
+a SCIM extension that <span class="bcp14">MAY</span> be used in conjunction with
 <span>[<a href="#I-D.ietf-scim-device-model" class="cite xref">I-D.ietf-scim-device-model</a>]</span> in <a href="#scim-sdf-extension-schema" class="auto internal xref">Figure 17</a>. Implementation
 of this SCIM extension is <span class="bcp14">OPTIONAL</span> and independent of the protocol mapping
-functionality defined in the rest of this document.
-The SCIM schema attributes used here are described in Section 7 of <span>[<a href="#RFC7643" class="cite xref">RFC7643</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+functionality defined in the rest of this document. The SCIM schema attributes
+used here are described in Section 7 of <span>[<a href="#RFC7643" class="cite xref">RFC7643</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <span id="name-scim-sdf-extension-schema"></span><div id="scim-sdf-extension-schema">
 <figure id="figure-17">
         <div class="alignLeft art-text artwork" id="section-6-2.1">
@@ -2118,7 +2141,8 @@ ion:sdf:2.0:Device"
 }
 </pre><a href="#section-6-4" class="pilcrow">¶</a>
 </div>
-<p id="section-6-5">An SDF model must be referenced with the <code>sdf</code> keyword inside the SCIM device schema as described in <span>[<a href="#I-D.ietf-scim-device-model" class="cite xref">I-D.ietf-scim-device-model</a>]</span>.<a href="#section-6-5" class="pilcrow">¶</a></p>
+<p id="section-6-5">An SDF model <span class="bcp14">MUST</span> be referenced with the <code>sdf</code> keyword inside the SCIM device
+schema as described in <span>[<a href="#I-D.ietf-scim-device-model" class="cite xref">I-D.ietf-scim-device-model</a>]</span>.<a href="#section-6-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
