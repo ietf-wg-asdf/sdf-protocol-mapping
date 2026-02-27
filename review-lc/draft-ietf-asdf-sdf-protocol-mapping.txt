@@ -417,7 +417,7 @@ Table of Contents
 
 5.1.1.  Properties
 
-   For SDF properties, the BLE protocol mapping structure is defined as
+   For sdfProperty, the BLE protocol mapping structure is defined as
    follows:
 
    $$SDF-PROPERTY-PROTOCOL-MAP //= (
@@ -429,7 +429,7 @@ Table of Contents
      characteristicID: text
    }
 
-     Figure 12: CDDL definition for BLE Protocol Mapping for properties
+    Figure 12: CDDL definition for BLE Protocol Mapping for sdfProperty
 
    Where:
 
@@ -478,8 +478,8 @@ Table of Contents
 
 5.1.2.  Events
 
-   For SDF events, the BLE protocol mapping structure is similar to SDF
-   properties, but it MUST include additional attributes such as the
+   For sdfEvents, the BLE protocol mapping structure is similar to
+   sdfProperties, but it MUST include additional attributes such as the
    type of the event.
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
@@ -492,7 +492,7 @@ Table of Contents
      ? characteristicID: text
    }
 
-                 Figure 13: BLE Protocol Mapping for events
+               Figure 13: BLE Protocol Mapping for sdfEvents
 
    Where:
 
@@ -543,7 +543,7 @@ Table of Contents
 
 5.2.1.  Properties
 
-   SDF properties are mapped to Zigbee cluster attributes.  The Zigbee
+   An sdfProperties is mapped to Zigbee cluster attributes.  The Zigbee
    property protocol mapping structure is defined as follows:
 
    $$SDF-PROPERTY-PROTOCOL-MAP //= (
@@ -558,7 +558,8 @@ Table of Contents
      ? manufacturerCode: uint,
    }
 
-   Figure 14: CDDL definition for Zigbee Protocol Mapping for properties
+         Figure 14: CDDL definition for Zigbee Protocol Mapping for
+                                sdfProperty
 
    Where:
 
@@ -596,7 +597,7 @@ Table of Contents
 
 5.2.2.  Events
 
-   SDF events are mapped to Zigbee cluster attribute reporting.  The
+   An sdfEvents is mapped to Zigbee cluster attribute reporting.  The
    Zigbee event protocol mapping structure is defined as follows:
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
@@ -611,7 +612,7 @@ Table of Contents
      ? manufacturerCode: uint,
    }
 
-     Figure 15: CDDL definition for Zigbee Protocol Mapping for events
+    Figure 15: CDDL definition for Zigbee Protocol Mapping for sdfEvents
 
    Where:
 
@@ -648,7 +649,7 @@ Table of Contents
 
 5.2.3.  Actions
 
-   SDF actions SHOULD be mapped to Zigbee cluster commands.  The Zigbee
+   An sdfAction SHOULD be mapped to Zigbee cluster commands.  The Zigbee
    protocol mapping structure for actions is defined as follows:
 
    $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -662,7 +663,7 @@ Table of Contents
      ? manufacturerCode: uint,
    }
 
-     Figure 16: CDDL definition for Zigbee Protocol Mapping for actions
+    Figure 16: CDDL definition for Zigbee Protocol Mapping for sdfAction
 
    Where:
 
@@ -951,10 +952,10 @@ Appendix A.  CDDL Definition
 
    zigbee-property = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
      attributeType: uint
+     ? manufacturerCode: uint,
    }
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
@@ -963,10 +964,10 @@ Appendix A.  CDDL Definition
 
    zigbee-event-map = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
      attributeType: uint
+     ? manufacturerCode: uint,
    }
 
    $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -975,9 +976,9 @@ Appendix A.  CDDL Definition
 
    zigbee-action-map = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
      commandID: uint
+     ? manufacturerCode: uint,
    }
 
    <CODE ENDS>
