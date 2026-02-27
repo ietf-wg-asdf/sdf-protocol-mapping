@@ -586,7 +586,7 @@ Where:
 - `endpointID` is the Zigbee endpoint ID that corresponds to the SDF action.
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF action.
 - `commandID` is the Zigbee command ID that corresponds to the SDF action.
-- `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
+- `manufacturerCode` is the Zigbee manufacturer code of the command (optional).
 
 For example, a Zigbee protocol mapping to set a temperature:
 
