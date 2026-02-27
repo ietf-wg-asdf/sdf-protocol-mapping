@@ -80,57 +80,45 @@ also match the keyword. -->
 
 # Introduction
 
-<!-- LC: I would not split the introduction into 2 subsections, I'd rather have
-a bullet list with the contributions of this document, namely, the
-sdfProtocolMap keyword, two protocol mappings (BLE and Zigbee), a SCIM
-extension,extension and a IANA registry for registering additional protocol
-mappings. -->
-
-## Protocol Mapping
-
 The Semantic Definition Format (SDF) {{-sdf}} provides a protocol-agnostic way
 to describe IoT devices and their capabilities through properties, actions, and
 events (collectively called affordances). When implementing an SDF model for a
 device using specific communication protocols, there needs to be a mechanism to
 map the protocol-agnostic SDF definitions to protocol-specific operations,
-translating the model into a real-world implementation.
+translating the model into a real-world implementation. Moreover, such mechanism
+needs to be extensible for enabling implementors to provide novel SDF protocol
+mappings to expand the SDF ecosystem. SDF protocol mappings may target a variety
+of protocols spanning from non-IP protocols commonly used in IoT environments,
+such as {{BLE53}} and {{Zigbee30}}, to IP-based protocols such as HTTP
+{{?RFC9110}} and CoAP {{?RFC7252}}. This document provides the required
+mechanism by defining:
 
-This document defines such a mechanism using the `sdfProtocolMap` keyword, which
-allows SDF models to include protocol-specific mapping information attached to
-the protocol-agnostic definitions. An `sdfProtocolMap` can be applied to an
-`sdfAffordance`, be it an `sdfProperty`, `sdfEvent` or `sdfAction`. The mapping
-enables use cases such as application gateways or multi-protocol gateways that
-translate between different IoT protocols, automated generation of
-protocol-specific implementations from SDF models, and interoperability across
-heterogeneous device ecosystems.
+<!-- LC: Introduced MAY as `sdfProtocolMap` is optional for SDF affordances -->
+- The `sdfProtocolMap` keyword, which allows SDF models to include
+  protocol-specific mapping information attached to the protocol-agnostic
+  definitions, see {{sdf-pm}}. An `sdfProtocolMap` MAY be applied to an SDF
+  affordance, be it an `sdfProperty`, `sdfEvent` or `sdfAction`. The mapping
+  enables use cases such as application gateways or multi-protocol gateways that
+  translate between different IoT protocols, automated generation of
+  protocol-specific implementations from SDF models, and interoperability across
+  heterogeneous device ecosystems.
 
-The protocol mapping mechanism is designed to be extensible: target protocols
-include non-IP protocols commonly used in IoT environments, such as {{BLE53}}
-and {{Zigbee30}}, as well as IP-based protocols such as HTTP {{?RFC9110}} or
-CoAP {{?RFC7252}}. This document registers mappings for BLE and Zigbee; future
-specifications can define mappings for additional protocols.
+- Two SDF protocol mappings for Bluetooth and Zigbee protocols, see {{ble-pm}}
+  and {{zigbee-pm}} respectively.
 
+- An SDF model extension for SCIM. While SDF provides a way to describe a class
+  of devices, SCIM describes a device instance. The SDF model extension for SCIM
+  enables the inclusion of SDF models for the class of devices a device belongs
+  to in the SCIM object, see {{scim-sdf-extension}}.
 
-<!-- LC: We should explicitly mention that this document also provide a IANA
-registry to register additional SDF protocol mappings that are not in this
-document. -->
-
-<!-- LC: I would add links to the sections when mentioning BLE, Zigbee, and IANA
-registry -->
-
-
-## SCIM SDF model extension
-
-SDF provides a way to describe a class of devices and SCIM describes a device
-instance. The SDF model extension in this document defines a SCIM extension that
-enables inclusion of the SDF model for the class of devices a device belongs to
-in the SCIM object for that device.
+- A IANA registry for defining additional SDF protocol mappings (in addition to
+  the BLE and Zigbee provided in this document), see {{iana-prot-map}}.
 
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
 
-# Structure
+# Structure {#sdf-pm}
 
 This section defines the structure of an `sdfProtocolMap`. Because each protocol
 has its own addressing model, a single SDF affordance requires a distinct
@@ -393,7 +381,7 @@ create a fictitious new protocol? It may be of help to implementors. -->
 
 This section defines the protocol mappings registered by this document.
 
-## BLE
+## BLE {#ble-pm}
 
 <!-- LC: ...how properties and events should... is it normative SHOULD? -->
 
@@ -528,7 +516,7 @@ Here is an example of an `isPresent` event using BLE advertisements:
 }
 ~~~
 
-## Zigbee
+## Zigbee {#zigbee-pm}
 
 The Zigbee protocol mapping allows SDF models to specify how properties,
 actions, and events should be accessed using the Zigbee protocol {{Zigbee30}}.
