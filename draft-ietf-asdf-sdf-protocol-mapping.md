@@ -172,28 +172,21 @@ rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
 ~~~
 {: #sdf-prop-ext title="SDF Property Extension Point for Protocol Mapping"}
 
-<!-- LC: Does the `name` parameter refers to the IANA register defined in this
-document? If yes, this should be written explicitly for clarity.
-
-Example:
-
-The `name` parameter is the registered protocol name (in the IANA registry
-defined in this document, Section 7.1)... -->
-
 The `property-protocol-map` generic ({{sdf-prop-ext}}) captures the common
-structure of property protocol mappings. The `name` parameter is the registered
-protocol name and `props` is the protocol-specific map of attributes. A protocol
-can provide either:
+structure of property protocol mappings. The `name` parameter is the protocol
+name and `props` is the protocol-specific map of attributes. A protocol can
+provide either:
 
 - A single mapping that applies to both read and write operations, or
 - Separate `read` and `write` mappings when the protocol uses different
   attributes for each direction.
 
-To extend `$$SDF-PROPERTY-PROTOCOL-MAP` for a new protocol (e.g., "new-protocol"),
- use the `property-protocol-map` generic with the protocol name and a map type
-defining the protocol-specific attributes. The protocol name
-("new-protocol") MUST be registered in the IANA registry defined in
-{{iana-prot-map}}.
+To extend `$$SDF-PROPERTY-PROTOCOL-MAP` for a new protocol (e.g.,
+"new-protocol"), implementors MUST use the `property-protocol-map` generic with
+the protocol name and a map type defining the protocol-specific attributes.
+
+It is to be noted that the protocol `name` (e.g., "new-protocol") MUST be
+registered in the IANA registry defined in {{iana-prot-map}}.
 
 For example:
 
@@ -278,8 +271,8 @@ protocol-specific attributes: -->
 
 Actions use a simpler structure than properties, as they do not require the
 read/write distinction. To extend `$$SDF-ACTION-PROTOCOL-MAP` for a new
-protocol, add a group entry mapping the protocol name to the protocol-specific
-attributes:
+protocol, implementors MUST add a group entry that maps the protocol name to the
+protocol-specific attributes:
 
 ~~~ cddl
 $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -350,10 +343,6 @@ The corresponding JSON in an SDF model looks like:
 }
 ~~~
 {: #event-ext-json-example title="Example Event Protocol Map in JSON"}
-
-<!-- LC: I am not sure that "Protocol Registration" should be part of the
-section dedicated to protocol mapping structure. Perhaps should it be a top
-level header, e.g., # Protocol Registration,? -->
 
 # New Protocol Registration Procedure {#protocol-registration}
 
@@ -464,8 +453,8 @@ here is an example of the BLE protocol mapping:
 
 ### Events
 
-For SDF events, the BLE protocol mapping structure is similar to SDF properties, but it must
-include additional attributes such as the type of the event.
+For SDF events, the BLE protocol mapping structure is similar to SDF properties,
+but it MUST include additional attributes such as the `type` of the event.
 
 ~~~ cddl
 {::include cddl/ble-event-map.cddl}
@@ -579,6 +568,15 @@ event protocol mapping structure is defined as follows:
 ~~~
 {: #zigmap-event title="CDDL definition for Zigbee Protocol Mapping for events"}
 
+Where:
+
+- `endpointID` is the Zigbee endpoint ID that corresponds to the SDF property.
+- `clusterID` is the Zigbee cluster ID that corresponds to the SDF property.
+- `attributeID` is the Zigbee attribute ID that corresponds to the SDF property.
+- `attributeType` is the Zigbee data type of the attribute.
+- `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
+
+
 For example, a Zigbee event mapping for a temperature change report:
 
 ~~~ json
@@ -605,7 +603,8 @@ and Actions. -->
 
 ### Actions
 
-SDF actions are mapped to Zigbee cluster commands. The Zigbee protocol mapping structure for actions is defined as follows:
+SDF actions SHOULD be mapped to Zigbee cluster commands. The Zigbee protocol
+mapping structure for actions is defined as follows:
 
 ~~~ cddl
 {::include cddl/zigbee-action-map.cddl}
@@ -617,6 +616,7 @@ Where:
 - `endpointID` is the Zigbee endpoint ID that corresponds to the SDF action.
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF action.
 - `commandID` is the Zigbee command ID that corresponds to the SDF action.
+- `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
 
 For example, a Zigbee protocol mapping to set a temperature:
 
@@ -638,13 +638,14 @@ For example, a Zigbee protocol mapping to set a temperature:
 
 # SCIM SDF Extension {#scim-sdf-extension}
 
-While SDF provides a way to describe a device class and SCIM defines a device instance, a method is needed to associate a
-mapping between an instance of a device and its associated SDF models. To
-accomplish this, we define a SCIM extension that can be used in conjunction with
+While SDF provides a way to describe a device class and SCIM defines a device
+instance, a method is needed to associate a mapping between an instance of a
+device and its associated SDF models. To accomplish this, This document defines
+a SCIM extension that MAY be used in conjunction with
 {{!I-D.ietf-scim-device-model}} in {{scim-sdf-extension-schema}}. Implementation
 of this SCIM extension is OPTIONAL and independent of the protocol mapping
-functionality defined in the rest of this document.
-The SCIM schema attributes used here are described in Section 7 of {{!RFC7643}}.
+functionality defined in the rest of this document. The SCIM schema attributes
+used here are described in Section 7 of {{!RFC7643}}.
 
 ~~~
 {::include generated/scim/scim-sdf-extension.json.folded}
@@ -671,7 +672,8 @@ Here is an example SCIM device schema extension with SDF models:
 }
 ~~~
 
-An SDF model must be referenced with the `sdf` keyword inside the SCIM device schema as described in {{!I-D.ietf-scim-device-model}}.
+An SDF model MUST be referenced with the `sdf` keyword inside the SCIM device
+schema as described in {{!I-D.ietf-scim-device-model}}.
 
 # Security Considerations
 
