@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 30 August 2026                                        L. Corneo
+Expires: 31 August 2026                                        L. Corneo
                                                                 Ericsson
-                                                        26 February 2026
+                                                        27 February 2026
 
 
                         Protocol Mapping for SDF
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 August 2026.
+   This Internet-Draft will expire on 31 August 2026.
 
 Copyright Notice
 
@@ -74,8 +74,6 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  Protocol Mapping
-     1.2.  SCIM SDF model extension
    2.  Conventions and Definitions
    3.  Structure
      3.1.  SDF Extension Points
@@ -108,40 +106,43 @@ Table of Contents
 
 1.  Introduction
 
-1.1.  Protocol Mapping
-
    The Semantic Definition Format (SDF) [RFC9880] provides a protocol-
    agnostic way to describe IoT devices and their capabilities through
    properties, actions, and events (collectively called affordances).
    When implementing an SDF model for a device using specific
    communication protocols, there needs to be a mechanism to map the
    protocol-agnostic SDF definitions to protocol-specific operations,
-   translating the model into a real-world implementation.
+   translating the model into a real-world implementation.  Moreover,
+   such mechanism needs to be extensible for enabling implementors to
+   provide novel SDF protocol mappings to expand the SDF ecosystem.  SDF
+   protocol mappings may target a variety of protocols spanning from
+   non-IP protocols commonly used in IoT environments, such as [BLE53]
+   and [Zigbee30], to IP-based protocols such as HTTP [RFC9110] and CoAP
+   [RFC7252].  This document provides the required mechanism by
+   defining:
 
-   This document defines such a mechanism using the sdfProtocolMap
-   keyword, which allows SDF models to include protocol-specific mapping
-   information attached to the protocol-agnostic definitions.  An
-   sdfProtocolMap can be applied to an sdfAffordance, be it an
-   sdfProperty, sdfEvent or sdfAction.  The mapping enables use cases
-   such as application gateways or multi-protocol gateways that
-   translate between different IoT protocols, automated generation of
-   protocol-specific implementations from SDF models, and
-   interoperability across heterogeneous device ecosystems.
+   *  The sdfProtocolMap keyword, which allows SDF models to include
+      protocol-specific mapping information attached to the protocol-
+      agnostic definitions, see Section 3.  An sdfProtocolMap MAY be
+      applied to an SDF affordance, be it an sdfProperty, sdfEvent or
+      sdfAction.  The mapping enables use cases such as application
+      gateways or multi-protocol gateways that translate between
+      different IoT protocols, automated generation of protocol-specific
+      implementations from SDF models, and interoperability across
+      heterogeneous device ecosystems.
 
-   The protocol mapping mechanism is designed to be extensible: target
-   protocols include non-IP protocols commonly used in IoT environments,
-   such as [BLE53] and [Zigbee30], as well as IP-based protocols such as
-   HTTP [RFC9110] or CoAP [RFC7252].  This document registers mappings
-   for BLE and Zigbee; future specifications can define mappings for
-   additional protocols.
+   *  Two SDF protocol mappings for Bluetooth and Zigbee protocols, see
+      Section 4.1 and Section 4.2 respectively.
 
-1.2.  SCIM SDF model extension
+   *  An SDF model extension for SCIM.  While SDF provides a way to
+      describe a class of devices, SCIM describes a device instance.
+      The SDF model extension for SCIM enables the inclusion of SDF
+      models for the class of devices a device belongs to in the SCIM
+      object, see Section 5.
 
-   SDF provides a way to describe a class of devices and SCIM describes
-   a device instance.  The SDF model extension in this document defines
-   a SCIM extension that enables inclusion of the SDF model for the
-   class of devices a device belongs to in the SCIM object for that
-   device.
+   *  A IANA registry for defining additional SDF protocol mappings (in
+      addition to the BLE and Zigbee provided in this document), see
+      Section 7.1.
 
 2.  Conventions and Definitions
 
