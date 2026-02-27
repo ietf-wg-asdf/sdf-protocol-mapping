@@ -784,7 +784,7 @@ Table of Contents
 
    The registry must contain the following attributes:
 
-   *  Protocol map name
+   *  Protocol map name, as per sdfProtocolMap
 
    *  Protocol name
 
