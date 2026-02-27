@@ -659,7 +659,7 @@ Table of Contents
    zigbee-action-map = {
      endpointID: uint,
      clusterID: uint,
-     commandID: uint
+     commandID: uint,
      ? manufacturerCode: uint,
    }
 
