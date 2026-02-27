@@ -610,7 +610,7 @@ For example, a Zigbee protocol mapping to set a temperature:
 
 While SDF provides a way to describe a device class and SCIM defines a device
 instance, a method is needed to associate a mapping between an instance of a
-device and its associated SDF models. To accomplish this, This document defines
+device and its associated SDF models. To accomplish so, this document defines
 a SCIM extension that MAY be used in conjunction with
 {{!I-D.ietf-scim-device-model}} in {{scim-sdf-extension-schema}}. Implementation
 of this SCIM extension is OPTIONAL and independent of the protocol mapping
