@@ -552,10 +552,10 @@ Table of Contents
 
    zigbee-property = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
      attributeType: uint
+     ? manufacturerCode: uint,
    }
 
    Figure 14: CDDL definition for Zigbee Protocol Mapping for properties
@@ -605,10 +605,10 @@ Table of Contents
 
    zigbee-event-map = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
      attributeType: uint
+     ? manufacturerCode: uint,
    }
 
      Figure 15: CDDL definition for Zigbee Protocol Mapping for events
@@ -657,9 +657,9 @@ Table of Contents
 
    zigbee-action-map = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
      commandID: uint
+     ? manufacturerCode: uint,
    }
 
      Figure 16: CDDL definition for Zigbee Protocol Mapping for actions
