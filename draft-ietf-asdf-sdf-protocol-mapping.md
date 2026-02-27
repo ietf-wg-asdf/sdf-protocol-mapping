@@ -111,7 +111,7 @@ mechanism by defining:
   enables the inclusion of SDF models for the class of devices a device belongs
   to in the SCIM object, see {{scim-sdf-extension}}.
 
-- A IANA registry for defining additional SDF protocol mappings (in addition to
+- An IANA registry for defining additional SDF protocol mappings (in addition to
   the BLE and Zigbee provided in this document), see {{iana-prot-map}}.
 
 # Conventions and Definitions
