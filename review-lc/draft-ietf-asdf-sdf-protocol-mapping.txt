@@ -617,13 +617,13 @@ Table of Contents
    Where:
 
    *  endpointID is the Zigbee endpoint ID that corresponds to the SDF
-      property.
+      event.
 
    *  clusterID is the Zigbee cluster ID that corresponds to the SDF
-      property.
+      event.
 
    *  attributeID is the Zigbee attribute ID that corresponds to the SDF
-      property.
+      event.
 
    *  attributeType is the Zigbee data type of the attribute.
 
