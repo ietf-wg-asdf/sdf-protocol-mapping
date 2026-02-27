@@ -49,10 +49,10 @@ $$SDF-PROPERTY-PROTOCOL-MAP //= (
 
 zigbee-property = {
   endpointID: uint,
-  ? manufacturerCode: uint,
   clusterID: uint,
   attributeID: uint,
   attributeType: uint
+  ? manufacturerCode: uint,
 }
 
 $$SDF-EVENT-PROTOCOL-MAP //= (
@@ -61,10 +61,10 @@ $$SDF-EVENT-PROTOCOL-MAP //= (
 
 zigbee-event-map = {
   endpointID: uint,
-  ? manufacturerCode: uint,
   clusterID: uint,
   attributeID: uint,
   attributeType: uint
+  ? manufacturerCode: uint,
 }
 
 $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -73,8 +73,8 @@ $$SDF-ACTION-PROTOCOL-MAP //= (
 
 zigbee-action-map = {
   endpointID: uint,
-  ? manufacturerCode: uint,
   clusterID: uint,
   commandID: uint
+  ? manufacturerCode: uint,
 }
 
