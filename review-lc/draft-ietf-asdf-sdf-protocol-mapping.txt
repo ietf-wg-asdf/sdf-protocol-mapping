@@ -676,7 +676,7 @@ Table of Contents
    *  commandID is the Zigbee command ID that corresponds to the SDF
       action.
 
-   *  manufacturerCode is the Zigbee manufacturer code of the attribute
+   *  manufacturerCode is the Zigbee manufacturer code of the command
       (optional).
 
    For example, a Zigbee protocol mapping to set a temperature:
