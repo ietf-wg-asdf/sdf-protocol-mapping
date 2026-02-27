@@ -544,9 +544,9 @@ protocol mapping structure is defined as follows:
 
 Where:
 
-- `endpointID` is the Zigbee endpoint ID that corresponds to the SDF property.
-- `clusterID` is the Zigbee cluster ID that corresponds to the SDF property.
-- `attributeID` is the Zigbee attribute ID that corresponds to the SDF property.
+- `endpointID` is the Zigbee endpoint ID that corresponds to the SDF event.
+- `clusterID` is the Zigbee cluster ID that corresponds to the SDF event.
+- `attributeID` is the Zigbee attribute ID that corresponds to the SDF event.
 - `attributeType` is the Zigbee data type of the attribute.
 - `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
 
