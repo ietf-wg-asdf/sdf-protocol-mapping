@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-26T01:19:55.029310+00:00",
+  "timestamp": "2026-03-01T01:28:21.772744+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -447,7 +447,7 @@
       "labels": [],
       "body": "# HTTP and CoAP SDF Protocol Mappings\n\nThis PR aim is to add SDF Protocol Mappings for HTTP and CoAP. It addresses the issue #5.\n\nCoAP is still missing.\n\nThis PR currently features:\n- **OpenAPI CDDL and structure change**\n- **Draft of HTTP protocol mapping**\n",
       "createdAt": "2025-08-27T09:50:05Z",
-      "updatedAt": "2025-10-06T10:19:15Z",
+      "updatedAt": "2026-02-26T19:30:17Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "c9593aa5d2825b8fffc2b040ee8d1e7f5df6f31d",
@@ -472,6 +472,27 @@
           "body": "One of the issues with having an http or coap protocol map is that we need to come up with a way to represent the body or payload that is used to read or write a property. We also need a way to describe the variables in the request path for example. \r\n\r\nI think we should keep things simple by having only an openapi protocol map which is already used widely to describe HTTP APIs. \r\n\r\nFor CoAP, I am not aware if something similar exists. Ari did mention during the last hackathon that we could probably use OpenAPI (although it might not cover all the options that CoAP supports). ",
           "createdAt": "2025-09-18T02:20:30Z",
           "updatedAt": "2025-09-18T02:20:30Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "body": "Hi @rohitmohan96 and @lorenzocorneo, would it be okay for you if I spun off the CoAP protocol mapping into a separate document? If you like, I would add you as co-authors and invite you to the repository.",
+          "createdAt": "2026-02-26T17:11:26Z",
+          "updatedAt": "2026-02-26T17:11:26Z"
+        },
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes please. ",
+          "createdAt": "2026-02-26T17:27:06Z",
+          "updatedAt": "2026-02-26T17:27:06Z"
+        },
+        {
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "body": "> Hi @rohitmohan96 and @lorenzocorneo, would it be okay for you if I spun off the CoAP protocol mapping into a separate document? If you like, I would add you as co-authors and invite you to the repository.\r\n\r\nAbsolutely, thanks!",
+          "createdAt": "2026-02-26T19:30:17Z",
+          "updatedAt": "2026-02-26T19:30:17Z"
         }
       ],
       "reviews": [
@@ -1539,6 +1560,225 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOPSJ9A87GgvMI",
+      "title": "General comments and minor edits",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/24",
+      "state": "OPEN",
+      "author": "lorenzocorneo",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Added general comments in the document, just search for \"LC:\". Also made a few minor editorial changes.",
+      "createdAt": "2026-02-26T11:20:54Z",
+      "updatedAt": "2026-02-27T21:19:21Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "87e7425617c8af961fe0a71724dbe383c9e08d4f",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "review-lc",
+      "headRefOid": "75644898a8d01058cdd46efd6222666933a88ccc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A87mO6wN",
+          "commit": {
+            "abbreviatedOid": "d6aee47"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-26T17:57:22Z",
+          "updatedAt": "2026-02-26T18:05:14Z",
+          "comments": [
+            {
+              "originalPosition": 256,
+              "body": "I wasn't sure how to do it in cddl. I guess it would be: \n```cddl\n{\n  type: \"gatt\",\n  serviceID: text,\n  characteristicID: text\n} / { type: \"advertisements\" / \"connection_events\" }\n```",
+              "createdAt": "2026-02-26T17:57:22Z",
+              "updatedAt": "2026-02-26T18:05:14Z"
+            },
+            {
+              "originalPosition": 324,
+              "body": "I guess it is more of a json schema than an openapi spec. ",
+              "createdAt": "2026-02-26T17:58:41Z",
+              "updatedAt": "2026-02-26T18:05:14Z"
+            },
+            {
+              "originalPosition": 125,
+              "body": "Yes.",
+              "createdAt": "2026-02-26T17:59:08Z",
+              "updatedAt": "2026-02-26T18:05:14Z"
+            },
+            {
+              "originalPosition": 199,
+              "body": "There is a \"new-protocol\" registration step by step in \u00a73.1. Are you referring to a combined one in the appendix?",
+              "createdAt": "2026-02-26T18:00:40Z",
+              "updatedAt": "2026-02-26T18:05:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87mQuOu",
+          "commit": {
+            "abbreviatedOid": "d6aee47"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-26T19:33:06Z",
+          "updatedAt": "2026-02-26T19:33:06Z",
+          "comments": [
+            {
+              "originalPosition": 199,
+              "body": "Yes, a combined one in the appendix as we have for the protocol mappings defined in the document",
+              "createdAt": "2026-02-26T19:33:06Z",
+              "updatedAt": "2026-02-26T19:33:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87mQ0EG",
+          "commit": {
+            "abbreviatedOid": "d6aee47"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-26T19:38:53Z",
+          "updatedAt": "2026-02-26T19:38:54Z",
+          "comments": [
+            {
+              "originalPosition": 324,
+              "body": "Yes, a JSON Schema. Still, I would not expect an OpenAPI section in the appendix out of the blue. We should provide some motivation for that. Otherwise why not providing a JSON Schema instead?",
+              "createdAt": "2026-02-26T19:38:53Z",
+              "updatedAt": "2026-02-26T19:38:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87mkp4X",
+          "commit": {
+            "abbreviatedOid": "b68514a"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-27T18:20:01Z",
+          "updatedAt": "2026-02-27T18:44:20Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\n  commandID: uint,\n```",
+              "createdAt": "2026-02-27T18:20:01Z",
+              "updatedAt": "2026-02-27T18:44:20Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\n  attributeType: uint,\n```",
+              "createdAt": "2026-02-27T18:20:09Z",
+              "updatedAt": "2026-02-27T18:44:20Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\n  attributeType: uint,\n```",
+              "createdAt": "2026-02-27T18:20:15Z",
+              "updatedAt": "2026-02-27T18:44:20Z"
+            },
+            {
+              "originalPosition": 338,
+              "body": "```suggestion\n- `endpointID` is the Zigbee endpoint ID that corresponds to the SDF event.\n- `clusterID` is the Zigbee cluster ID that corresponds to the SDF event.\n- `attributeID` is the Zigbee attribute ID that corresponds to the SDF event.\n- `attributeType` is the Zigbee data type of the attribute.\n- `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).\n```",
+              "createdAt": "2026-02-27T18:30:35Z",
+              "updatedAt": "2026-02-27T18:44:20Z"
+            },
+            {
+              "originalPosition": 365,
+              "body": "```suggestion\n- `manufacturerCode` is the Zigbee manufacturer code of the command (optional).\n```",
+              "createdAt": "2026-02-27T18:31:24Z",
+              "updatedAt": "2026-02-27T18:44:20Z"
+            },
+            {
+              "originalPosition": 378,
+              "body": "```suggestion\r\ndevice and its associated SDF models. To accomplish so, this document defines\r\n```",
+              "createdAt": "2026-02-27T18:32:39Z",
+              "updatedAt": "2026-02-27T21:16:12Z"
+            },
+            {
+              "originalPosition": 64,
+              "body": "```suggestion\n- An IANA registry for defining additional SDF protocol mappings (in addition to\n```",
+              "createdAt": "2026-02-27T18:33:08Z",
+              "updatedAt": "2026-02-27T18:44:20Z"
+            },
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\ntranslating the model into a real-world implementation. Moreover, such a mechanism\n```",
+              "createdAt": "2026-02-27T18:35:08Z",
+              "updatedAt": "2026-02-27T18:44:20Z"
+            },
+            {
+              "originalPosition": 296,
+              "body": "Should it say \"An `sdfProperty`\" instead?",
+              "createdAt": "2026-02-27T18:37:43Z",
+              "updatedAt": "2026-02-27T18:44:20Z"
+            },
+            {
+              "originalPosition": 351,
+              "body": "Why SHOULD? We are not using that above in the property and action subsections.",
+              "createdAt": "2026-02-27T18:38:51Z",
+              "updatedAt": "2026-02-27T18:44:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87mnjJQ",
+          "commit": {
+            "abbreviatedOid": "b68514a"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-27T21:18:14Z",
+          "updatedAt": "2026-02-27T21:18:15Z",
+          "comments": [
+            {
+              "originalPosition": 296,
+              "body": "Yes, correct!",
+              "createdAt": "2026-02-27T21:18:14Z",
+              "updatedAt": "2026-02-27T21:18:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87mnj85",
+          "commit": {
+            "abbreviatedOid": "b68514a"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-27T21:19:21Z",
+          "updatedAt": "2026-02-27T21:19:21Z",
+          "comments": [
+            {
+              "originalPosition": 351,
+              "body": "> We are not using that above in the property and action subsections.\r\n\r\nBut should we use it also above? Otherwise we can revert to the old text.",
+              "createdAt": "2026-02-27T21:19:21Z",
+              "updatedAt": "2026-02-27T21:19:21Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
