@@ -4,7 +4,7 @@ $$SDF-ACTION-PROTOCOL-MAP //= (
 
 zigbee-action-map = {
   endpointID: uint,
-  ? manufacturerCode: uint,
   clusterID: uint,
-  commandID: uint
+  commandID: uint,
+  ? manufacturerCode: uint,
 }

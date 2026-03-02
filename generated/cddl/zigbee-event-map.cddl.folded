@@ -4,8 +4,8 @@ $$SDF-EVENT-PROTOCOL-MAP //= (
 
 zigbee-event-map = {
   endpointID: uint,
-  ? manufacturerCode: uint,
   clusterID: uint,
   attributeID: uint,
   attributeType: uint
+  ? manufacturerCode: uint,
 }

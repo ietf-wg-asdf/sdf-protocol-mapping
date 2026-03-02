@@ -4,8 +4,8 @@ $$SDF-PROPERTY-PROTOCOL-MAP //= (
 
 zigbee-property = {
   endpointID: uint,
-  ? manufacturerCode: uint,
   clusterID: uint,
   attributeID: uint,
-  attributeType: uint
+  attributeType: uint,
+  ? manufacturerCode: uint,
 }
