@@ -1,5 +1,5 @@
 ---
-title: "Protocol Mapping for SDF"
+title: "SDF Protocol Mapping"
 abbrev: "sdf-protocol-mapping"
 category: std
 
@@ -75,9 +75,6 @@ This document also describes a method to extend SCIM with an SDF model mapping.
 
 --- middle
 
-<!-- LC: Question about the title, how about SDF Protocol Mapping? This would
-also match the keyword. -->
-
 # Introduction
 
 The Semantic Definition Format (SDF) {{-sdf}} provides a protocol-agnostic way
@@ -93,7 +90,6 @@ such as {{BLE53}} and {{Zigbee30}}, to IP-based protocols such as HTTP
 {{?RFC9110}} and CoAP {{?RFC7252}}. This document provides the required
 mechanism by defining:
 
-<!-- LC: Introduced MAY as `sdfProtocolMap` is optional for SDF affordances -->
 - The `sdfProtocolMap` keyword, which allows SDF models to include
   protocol-specific mapping information attached to the protocol-agnostic
   definitions, see {{sdf-pm}}. An `sdfProtocolMap` MAY be applied to an SDF
@@ -386,19 +382,14 @@ Where:
 
 For example, a BLE protocol mapping for a temperature property:
 
-<!-- LC: I noticed that the UUIDs are too similar (only one character is
-different); this may lead to confusion, e.g., implementors may think they should
-use the same UUID for serviceID and characteristicID if they misread. I
-recommend making the UUIDs sufficiently different (throughout all the examles). -->
-
 ~~~ json
 {
   "sdfProperty": {
     "temperature": {
       "sdfProtocolMap": {
         "ble": {
-          "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-          "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+          "serviceID": "00001809-0000-1000-8000-00805f9b34fb",
+          "characteristicID": "00002a1c-0000-1000-8000-00805f9b34fb"
         }
       }
     }
@@ -416,12 +407,12 @@ here is an example of the BLE protocol mapping:
       "sdfProtocolMap": {
         "ble": {
           "read": {
-            "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-            "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+            "serviceID": "00001809-0000-1000-8000-00805f9b34fb",
+            "characteristicID": "00002a1c-0000-1000-8000-00805f9b34fb"
           },
           "write": {
-            "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-            "characteristicID": "12345678-1234-5678-1234-56789abcdef6"
+            "serviceID": "00001809-0000-1000-8000-00805f9b34fb",
+            "characteristicID": "00002a51-0000-1000-8000-00805f9b34fb"
           }
         }
       }
@@ -462,8 +453,8 @@ For example, a BLE event mapping for a heart rate measurement event:
       "sdfProtocolMap": {
         "ble": {
           "type": "gatt",
-          "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-          "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+          "serviceID": "0000180d-0000-1000-8000-00805f9b34fb",
+          "characteristicID": "00002a37-0000-1000-8000-00805f9b34fb"
         }
       }
     }
@@ -496,7 +487,7 @@ to access the corresponding SDF affordances.
 
 ### Properties
 
-An `sdfProperties` is mapped to Zigbee cluster attributes. The Zigbee property
+An `sdfProperty` SHOULD be mapped to a Zigbee cluster attribute. The Zigbee property
 protocol mapping structure is defined as follows:
 
 ~~~ cddl
@@ -534,7 +525,7 @@ follows:
 
 ### Events
 
-An `sdfEvents` is mapped to Zigbee cluster attribute reporting. The Zigbee event
+An `sdfEvent` SHOULD be mapped to Zigbee cluster attribute reporting. The Zigbee event
 protocol mapping structure is defined as follows:
 
 ~~~ cddl
@@ -573,7 +564,7 @@ For example, a Zigbee event mapping for a temperature change report:
 
 ### Actions
 
-An `sdfAction` SHOULD be mapped to Zigbee cluster commands. The Zigbee protocol
+An `sdfAction` SHOULD be mapped to a Zigbee cluster command. The Zigbee protocol
 mapping structure for actions is defined as follows:
 
 ~~~ cddl
@@ -694,7 +685,7 @@ The following protocol mappings are described in this document:
 
 ## SCIM Device Schema SDF Extension
 
-IANA is requested to create the following extensions in the SCIM
+IANA is requested to create the following extension in the SCIM
 Server-Related Schema URIs registry as described in {{scim-sdf-extension}}:
 
 | URN | Description | Resource Type | Reference |
