@@ -43,20 +43,39 @@ components:
       type: object
       properties:
         ble:
-          required:
-            - type
-          type: object
-          properties:
-            type:
-              type: string
-              example: gatt
-              enum:
-                - gatt
-                - connection_events
-                - advertisements
-            serviceID:
-              type: string
-              example: 00001809-0000-1000-8000-00805f9b34fb
-            characteristicID:
-              type: string
-              example: 00002a1c-0000-1000-8000-00805f9b34fb
+          oneOf:
+            - type: object
+              required:
+                - type
+                - serviceID
+                - characteristicID
+              properties:
+                type:
+                  type: string
+                  example: gatt
+                  enum:
+                    - gatt
+                serviceID:
+                  type: string
+                  example: 00001809-0000-1000-8000-00805f9b34fb
+                characteristicID:
+                  type: string
+                  example: 00002a1c-0000-1000-8000-00805f9b34fb
+            - type: object
+              required:
+                - type
+              properties:
+                type:
+                  type: string
+                  example: advertisements
+                  enum:
+                    - advertisements
+            - type: object
+              required:
+                - type
+              properties:
+                type:
+                  type: string
+                  example: connection_events
+                  enum:
+                    - connection_events
