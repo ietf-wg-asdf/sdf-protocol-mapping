@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>Protocol Mapping for SDF</title>
+<title>SDF Protocol Mapping</title>
 <meta content="Rohit Mohan" name="author">
 <meta content="Bart Brinckman" name="author">
 <meta content="Lorenzo Corneo" name="author">
@@ -1092,7 +1092,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">Protocol Mapping for SDF</h1>
+<h1 id="title">SDF Protocol Mapping</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document defines protocol mapping extensions for the Semantic Definition
@@ -1751,8 +1751,8 @@ ble-property = {
     "temperature": {
       "sdfProtocolMap": {
         "ble": {
-          "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-          "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+          "serviceID": "00001809-0000-1000-8000-00805f9b34fb",
+          "characteristicID": "00002a1c-0000-1000-8000-00805f9b34fb"
         }
       }
     }
@@ -1770,12 +1770,12 @@ here is an example of the BLE protocol mapping:<a href="#section-5.1.1-7" class=
       "sdfProtocolMap": {
         "ble": {
           "read": {
-            "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-            "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+            "serviceID": "00001809-0000-1000-8000-00805f9b34fb",
+            "characteristicID": "00002a1c-0000-1000-8000-00805f9b34fb"
           },
           "write": {
-            "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-            "characteristicID": "12345678-1234-5678-1234-56789abcdef6"
+            "serviceID": "00001809-0000-1000-8000-00805f9b34fb",
+            "characteristicID": "00002a51-0000-1000-8000-00805f9b34fb"
           }
         }
       }
@@ -1803,10 +1803,10 @@ $$SDF-EVENT-PROTOCOL-MAP //= (
 )
 
 ble-event-map = {
-  type: "gatt" / "advertisements" / "connection_events",
-  ? serviceID: text,
-  ? characteristicID: text
-}
+  type: "gatt",
+  serviceID: text,
+  characteristicID: text
+} / { type: "advertisements" } / { type: "connection_events" }
 </pre>
 </div>
 <figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
@@ -1834,8 +1834,8 @@ specified if the type is "gatt".<a href="#section-5.1.2-4.2.1" class="pilcrow">�
       "sdfProtocolMap": {
         "ble": {
           "type": "gatt",
-          "serviceID": "12345678-1234-5678-1234-56789abcdef4",
-          "characteristicID": "12345678-1234-5678-1234-56789abcdef5"
+          "serviceID": "0000180d-0000-1000-8000-00805f9b34fb",
+          "characteristicID": "00002a37-0000-1000-8000-00805f9b34fb"
         }
       }
     }
@@ -1877,7 +1877,7 @@ to access the corresponding SDF affordances.<a href="#section-5.2-1" class="pilc
           <h4 id="name-properties-2">
 <a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-properties-2" class="section-name selfRef">Properties</a>
           </h4>
-<p id="section-5.2.1-1">An <code>sdfProperties</code> is mapped to Zigbee cluster attributes. The Zigbee property
+<p id="section-5.2.1-1">An <code>sdfProperty</code> <span class="bcp14">SHOULD</span> be mapped to a Zigbee cluster attribute. The Zigbee property
 protocol mapping structure is defined as follows:<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-"></span><div id="zigmap1">
 <figure id="figure-14">
@@ -1945,7 +1945,7 @@ follows:<a href="#section-5.2.1-5" class="pilcrow">¶</a></p>
           <h4 id="name-events-2">
 <a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-events-2" class="section-name selfRef">Events</a>
           </h4>
-<p id="section-5.2.2-1">An <code>sdfEvents</code> is mapped to Zigbee cluster attribute reporting. The Zigbee event
+<p id="section-5.2.2-1">An <code>sdfEvent</code> <span class="bcp14">SHOULD</span> be mapped to Zigbee cluster attribute reporting. The Zigbee event
 protocol mapping structure is defined as follows:<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-p"></span><div id="zigmap-event">
 <figure id="figure-15">
@@ -2012,7 +2012,7 @@ zigbee-event-map = {
           <h4 id="name-actions">
 <a href="#section-5.2.3" class="section-number selfRef">5.2.3. </a><a href="#name-actions" class="section-name selfRef">Actions</a>
           </h4>
-<p id="section-5.2.3-1">An <code>sdfAction</code> <span class="bcp14">SHOULD</span> be mapped to Zigbee cluster commands. The Zigbee protocol
+<p id="section-5.2.3-1">An <code>sdfAction</code> <span class="bcp14">SHOULD</span> be mapped to a Zigbee cluster command. The Zigbee protocol
 mapping structure for actions is defined as follows:<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-pr"></span><div id="zigmap2">
 <figure id="figure-16">
@@ -2233,7 +2233,7 @@ They should verify that updates preserve backward compatibility with deployed im
         <h3 id="name-scim-device-schema-sdf-exte">
 <a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-scim-device-schema-sdf-exte" class="section-name selfRef">SCIM Device Schema SDF Extension</a>
         </h3>
-<p id="section-8.2-1">IANA is requested to create the following extensions in the SCIM
+<p id="section-8.2-1">IANA is requested to create the following extension in the SCIM
 Server-Related Schema URIs registry as described in <a href="#scim-sdf-extension" class="auto internal xref">Section 6</a>:<a href="#section-8.2-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-2">
           <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
@@ -2377,10 +2377,10 @@ $$SDF-EVENT-PROTOCOL-MAP //= (
 )
 
 ble-event-map = {
-  type: "gatt" / "advertisements" / "connection_events",
-  ? serviceID: text,
-  ? characteristicID: text
-}
+  type: "gatt",
+  serviceID: text,
+  characteristicID: text
+} / { type: "advertisements" } / { type: "connection_events" }
 
 $$SDF-PROPERTY-PROTOCOL-MAP //= (
   property-protocol-map&lt;"zigbee", zigbee-property&gt;
@@ -2390,7 +2390,7 @@ zigbee-property = {
   endpointID: uint,
   clusterID: uint,
   attributeID: uint,
-  attributeType: uint
+  attributeType: uint,
   ? manufacturerCode: uint,
 }
 
@@ -2402,7 +2402,7 @@ zigbee-event-map = {
   endpointID: uint,
   clusterID: uint,
   attributeID: uint,
-  attributeType: uint
+  attributeType: uint,
   ? manufacturerCode: uint,
 }
 
@@ -2413,7 +2413,7 @@ $$SDF-ACTION-PROTOCOL-MAP //= (
 zigbee-action-map = {
   endpointID: uint,
   clusterID: uint,
-  commandID: uint
+  commandID: uint,
   ? manufacturerCode: uint,
 }
 
@@ -2534,23 +2534,42 @@ components:
       type: object
       properties:
         ble:
-          required:
-            - type
-          type: object
-          properties:
-            type:
-              type: string
-              example: gatt
-              enum:
-                - gatt
-                - connection_events
-                - advertisements
-            serviceID:
-              type: string
-              example: 00001809-0000-1000-8000-00805f9b34fb
-            characteristicID:
-              type: string
-              example: 00002a1c-0000-1000-8000-00805f9b34fb
+          oneOf:
+            - type: object
+              required:
+                - type
+                - serviceID
+                - characteristicID
+              properties:
+                type:
+                  type: string
+                  example: gatt
+                  enum:
+                    - gatt
+                serviceID:
+                  type: string
+                  example: 00001809-0000-1000-8000-00805f9b34fb
+                characteristicID:
+                  type: string
+                  example: 00002a1c-0000-1000-8000-00805f9b34fb
+            - type: object
+              required:
+                - type
+              properties:
+                type:
+                  type: string
+                  example: advertisements
+                  enum:
+                    - advertisements
+            - type: object
+              required:
+                - type
+              properties:
+                type:
+                  type: string
+                  example: connection_events
+                  enum:
+                    - connection_events
 
 &lt;CODE ENDS&gt;</pre>
 </div>
