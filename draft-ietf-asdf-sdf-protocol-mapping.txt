@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 28 August 2026                                        L. Corneo
+Expires: 3 September 2026                                      L. Corneo
                                                                 Ericsson
-                                                        24 February 2026
+                                                            2 March 2026
 
 
                         Protocol Mapping for SDF
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 August 2026.
+   This Internet-Draft will expire on 3 September 2026.
 
 Copyright Notice
 
@@ -74,31 +74,29 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  Protocol Mapping
-     1.2.  SCIM SDF model extension
    2.  Conventions and Definitions
-   3.  Structure
+   3.  SDF Protocol Mapping Structure
      3.1.  SDF Extension Points
        3.1.1.  Property Extension
        3.1.2.  Action Extension
        3.1.3.  Event Extension
-     3.2.  Protocol Registration
-   4.  Registered Protocol Mappings
-     4.1.  BLE
-       4.1.1.  Properties
-       4.1.2.  Events
-     4.2.  Zigbee
-       4.2.1.  Properties
-       4.2.2.  Events
-       4.2.3.  Actions
-   5.  SCIM SDF Extension
-   6.  Security Considerations
-   7.  IANA Considerations
-     7.1.  Protocol Mapping
-     7.2.  SCIM Device Schema SDF Extension
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   4.  New Protocol Registration Procedure
+   5.  Registered Protocol Mappings
+     5.1.  BLE
+       5.1.1.  Properties
+       5.1.2.  Events
+     5.2.  Zigbee
+       5.2.1.  Properties
+       5.2.2.  Events
+       5.2.3.  Actions
+   6.  SCIM SDF Extension
+   7.  Security Considerations
+   8.  IANA Considerations
+     8.1.  Protocol Mapping
+     8.2.  SCIM Device Schema SDF Extension
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Appendix A.  CDDL Definition
    Appendix B.  OpenAPI Definition
      B.1.  Protocol map for BLE
@@ -108,41 +106,43 @@ Table of Contents
 
 1.  Introduction
 
-1.1.  Protocol Mapping
-
    The Semantic Definition Format (SDF) [RFC9880] provides a protocol-
    agnostic way to describe IoT devices and their capabilities through
    properties, actions, and events (collectively called affordances).
-   When implementing the SDF model for a device on an actual
-   implementation using specific communication protocols, there needs to
-   be a mechanism to map the protocol-agnostic SDF definitions to
-   protocol-specific operations, translating the model into a real-world
-   implementation.
+   When implementing an SDF model for a device using specific
+   communication protocols, there needs to be a mechanism to map the
+   protocol-agnostic SDF definitions to protocol-specific operations,
+   translating the model into a real-world implementation.  Moreover,
+   such a mechanism needs to be extensible for enabling implementors to
+   provide novel SDF protocol mappings to expand the SDF ecosystem.  SDF
+   protocol mappings may target a variety of protocols spanning from
+   non-IP protocols commonly used in IoT environments, such as [BLE53]
+   and [Zigbee30], to IP-based protocols such as HTTP [RFC9110] and CoAP
+   [RFC7252].  This document provides the required mechanism by
+   defining:
 
-   This document defines such a mechanism using the sdfProtocolMap
-   keyword, which allows SDF models to include protocol-specific mapping
-   information attached to the protocol-agnostic definitions.  An
-   sdfProtocolMap can be applied to an sdfAffordance, be it an
-   sdfProperty, sdfEvent or sdfAction.  The mapping enables use cases
-   such as application gateways or multi-protocol gateways that
-   translate between different IoT protocols, automated generation of
-   protocol-specific implementations from SDF models, and
-   interoperability across heterogeneous device ecosystems.
+   *  The sdfProtocolMap keyword, which allows SDF models to include
+      protocol-specific mapping information attached to the protocol-
+      agnostic definitions, see Section 3.  An sdfProtocolMap MAY be
+      applied to an SDF affordance, be it an sdfProperty, sdfEvent or
+      sdfAction.  The mapping enables use cases such as application
+      gateways or multi-protocol gateways that translate between
+      different IoT protocols, automated generation of protocol-specific
+      implementations from SDF models, and interoperability across
+      heterogeneous device ecosystems.
 
-   The protocol mapping mechanism is designed to be extensible: target
-   protocols include non-IP protocols commonly used in IoT environments,
-   such as [BLE53] and [Zigbee30], as well as IP-based protocols such as
-   HTTP [RFC9110] or CoAP [RFC7252].  This document registers mappings
-   for BLE and Zigbee; future specifications can define mappings for
-   additional protocols.
+   *  Two SDF protocol mappings for Bluetooth and Zigbee protocols, see
+      Section 5.1 and Section 5.2 respectively.
 
-1.2.  SCIM SDF model extension
+   *  An SDF model extension for SCIM.  While SDF provides a way to
+      describe a class of devices, SCIM describes a device instance.
+      The SDF model extension for SCIM enables the inclusion of SDF
+      models for the class of devices a device belongs to in the SCIM
+      object, see Section 6.
 
-   SDF provides a way to describe a class of devices and SCIM describes
-   a device instance.  The SDF model extension in this document defines
-   a SCIM extension that enables inclusion of the SDF model for the
-   class of devices a device belongs to in the SCIM object for that
-   device.
+   *  An IANA registry for defining additional SDF protocol mappings (in
+      addition to the BLE and Zigbee provided in this document), see
+      Section 8.1.
 
 2.  Conventions and Definitions
 
@@ -152,7 +152,7 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  Structure
+3.  SDF Protocol Mapping Structure
 
    This section defines the structure of an sdfProtocolMap.  Because
    each protocol has its own addressing model, a single SDF affordance
@@ -180,7 +180,7 @@ Table of Contents
                |
                +-----> ...
 
-                    Figure 1: Protocol Mapping Structure
+                  Figure 1: SDF Protocol Mapping Structure
 
 3.1.  SDF Extension Points
 
@@ -219,8 +219,8 @@ Table of Contents
 
    The property-protocol-map generic (Figure 2) captures the common
    structure of property protocol mappings.  The name parameter is the
-   registered protocol name and props is the protocol-specific map of
-   attributes.  A protocol can provide either:
+   protocol name and props is the protocol-specific map of attributes.
+   A protocol can provide either:
 
    *  A single mapping that applies to both read and write operations,
       or
@@ -229,10 +229,12 @@ Table of Contents
       attributes for each direction.
 
    To extend $$SDF-PROPERTY-PROTOCOL-MAP for a new protocol (e.g., "new-
-   protocol"), use the property-protocol-map generic with the protocol
-   name and a map type defining the protocol-specific attributes.  The
-   protocol name ("new-protocol") MUST be registered in the IANA
-   registry defined in Section 7.1.
+   protocol"), implementors MUST use the property-protocol-map generic
+   with the protocol name and a map type defining the protocol-specific
+   attributes.
+
+   It is to be noted that the protocol name (e.g., "new-protocol") MUST
+   be registered in the IANA registry defined in Section 8.1.
 
    For example:
 
@@ -308,8 +310,8 @@ Table of Contents
 
    Actions use a simpler structure than properties, as they do not
    require the read/write distinction.  To extend $$SDF-ACTION-PROTOCOL-
-   MAP for a new protocol, add a group entry mapping the protocol name
-   to the protocol-specific attributes:
+   MAP for a new protocol, implementors MUST add a group entry that maps
+   the protocol name to the protocol-specific attributes:
 
    $$SDF-ACTION-PROTOCOL-MAP //= (
      "new-protocol": new-protocol-action
@@ -380,14 +382,14 @@ Table of Contents
 
                Figure 11: Example Event Protocol Map in JSON
 
-3.2.  Protocol Registration
+4.  New Protocol Registration Procedure
 
    Protocol names used as keys in the sdfProtocolMap object (e.g.,
    "ble", "zigbee") MUST be registered in the IANA registry defined in
-   Section 7.1.
+   Section 8.1.
 
-   A new protocol mapping MUST be defined by a specification that
-   includes:
+   A new SDF protocol mapping MUST be defined by a specification that
+   mandatorily includes:
 
    *  A CDDL definition that extends at least one of the group sockets
       defined in this document: $$SDF-PROPERTY-PROTOCOL-MAP
@@ -400,22 +402,22 @@ Table of Contents
       the CDDL extension, including their semantics and how they relate
       to the underlying protocol operations.
 
-4.  Registered Protocol Mappings
+5.  Registered Protocol Mappings
 
    This section defines the protocol mappings registered by this
    document.
 
-4.1.  BLE
+5.1.  BLE
 
    The BLE protocol mapping allows SDF models to specify how properties
-   and events should be accessed using Bluetooth Low Energy (BLE)
-   protocol.  The mapping includes details such as service IDs and
-   characteristic IDs that are used to access the corresponding SDF
+   and events SHOULD be accessed using Bluetooth Low Energy (BLE)
+   protocol [BLE53].  The mapping includes details such as service IDs
+   and characteristic IDs that are used to access the corresponding SDF
    affordances.
 
-4.1.1.  Properties
+5.1.1.  Properties
 
-   For SDF properties, the BLE protocol mapping structure is defined as
+   For sdfProperty, the BLE protocol mapping structure is defined as
    follows:
 
    $$SDF-PROPERTY-PROTOCOL-MAP //= (
@@ -427,7 +429,7 @@ Table of Contents
      characteristicID: text
    }
 
-     Figure 12: CDDL definition for BLE Protocol Mapping for properties
+    Figure 12: CDDL definition for BLE Protocol Mapping for sdfProperty
 
    Where:
 
@@ -474,10 +476,10 @@ Table of Contents
      }
    }
 
-4.1.2.  Events
+5.1.2.  Events
 
-   For SDF events, the BLE protocol mapping structure is similar to SDF
-   properties, but it must include additional attributes such as the
+   For sdfEvents, the BLE protocol mapping structure is similar to
+   sdfProperties, but it MUST include additional attributes such as the
    type of the event.
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
@@ -490,7 +492,7 @@ Table of Contents
      ? characteristicID: text
    }
 
-                 Figure 13: BLE Protocol Mapping for events
+               Figure 13: BLE Protocol Mapping for sdfEvents
 
    Where:
 
@@ -531,17 +533,17 @@ Table of Contents
      }
    }
 
-4.2.  Zigbee
+5.2.  Zigbee
 
    The Zigbee protocol mapping allows SDF models to specify how
    properties, actions, and events should be accessed using the Zigbee
-   protocol.  The mapping includes details such as cluster IDs and
-   attribute IDs that are used to access the corresponding SDF
+   protocol [Zigbee30].  The mapping includes details such as cluster
+   IDs and attribute IDs that are used to access the corresponding SDF
    affordances.
 
-4.2.1.  Properties
+5.2.1.  Properties
 
-   SDF properties are mapped to Zigbee cluster attributes.  The Zigbee
+   An sdfProperties is mapped to Zigbee cluster attributes.  The Zigbee
    property protocol mapping structure is defined as follows:
 
    $$SDF-PROPERTY-PROTOCOL-MAP //= (
@@ -550,13 +552,14 @@ Table of Contents
 
    zigbee-property = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
-     attributeType: uint
+     attributeType: uint,
+     ? manufacturerCode: uint,
    }
 
-   Figure 14: CDDL definition for Zigbee Protocol Mapping for properties
+         Figure 14: CDDL definition for Zigbee Protocol Mapping for
+                                sdfProperty
 
    Where:
 
@@ -574,7 +577,8 @@ Table of Contents
    *  manufacturerCode is the Zigbee manufacturer code of the attribute
       (optional).
 
-   For example, a Zigbee protocol mapping for a temperature property:
+   For example, a Zigbee protocol mapping for a temperature property may
+   look as follows:
 
    {
      "sdfProperty": {
@@ -591,9 +595,9 @@ Table of Contents
      }
    }
 
-4.2.2.  Events
+5.2.2.  Events
 
-   SDF events are mapped to Zigbee cluster attribute reporting.  The
+   An sdfEvents is mapped to Zigbee cluster attribute reporting.  The
    Zigbee event protocol mapping structure is defined as follows:
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
@@ -602,13 +606,29 @@ Table of Contents
 
    zigbee-event-map = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
-     attributeType: uint
+     attributeType: uint,
+     ? manufacturerCode: uint,
    }
 
-     Figure 15: CDDL definition for Zigbee Protocol Mapping for events
+    Figure 15: CDDL definition for Zigbee Protocol Mapping for sdfEvents
+
+   Where:
+
+   *  endpointID is the Zigbee endpoint ID that corresponds to the SDF
+      event.
+
+   *  clusterID is the Zigbee cluster ID that corresponds to the SDF
+      event.
+
+   *  attributeID is the Zigbee attribute ID that corresponds to the SDF
+      event.
+
+   *  attributeType is the Zigbee data type of the attribute.
+
+   *  manufacturerCode is the Zigbee manufacturer code of the attribute
+      (optional).
 
    For example, a Zigbee event mapping for a temperature change report:
 
@@ -627,9 +647,9 @@ Table of Contents
      }
    }
 
-4.2.3.  Actions
+5.2.3.  Actions
 
-   SDF actions are mapped to Zigbee cluster commands.  The Zigbee
+   An sdfAction SHOULD be mapped to Zigbee cluster commands.  The Zigbee
    protocol mapping structure for actions is defined as follows:
 
    $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -638,12 +658,12 @@ Table of Contents
 
    zigbee-action-map = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
-     commandID: uint
+     commandID: uint,
+     ? manufacturerCode: uint,
    }
 
-     Figure 16: CDDL definition for Zigbee Protocol Mapping for actions
+    Figure 16: CDDL definition for Zigbee Protocol Mapping for sdfAction
 
    Where:
 
@@ -655,6 +675,9 @@ Table of Contents
 
    *  commandID is the Zigbee command ID that corresponds to the SDF
       action.
+
+   *  manufacturerCode is the Zigbee manufacturer code of the command
+      (optional).
 
    For example, a Zigbee protocol mapping to set a temperature:
 
@@ -672,16 +695,17 @@ Table of Contents
      }
    }
 
-5.  SCIM SDF Extension
+6.  SCIM SDF Extension
 
    While SDF provides a way to describe a device class and SCIM defines
    a device instance, a method is needed to associate a mapping between
    an instance of a device and its associated SDF models.  To accomplish
-   this, we define a SCIM extension that can be used in conjunction with
-   [I-D.ietf-scim-device-model] in Figure 17.  Implementation of this
-   SCIM extension is OPTIONAL and independent of the protocol mapping
-   functionality defined in the rest of this document.  The SCIM schema
-   attributes used here are described in Section 7 of [RFC7643].
+   so, this document defines a SCIM extension that MAY be used in
+   conjunction with [I-D.ietf-scim-device-model] in Figure 17.
+   Implementation of this SCIM extension is OPTIONAL and independent of
+   the protocol mapping functionality defined in the rest of this
+   document.  The SCIM schema attributes used here are described in
+   Section 7 of [RFC7643].
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -729,10 +753,10 @@ Table of Contents
        }
    }
 
-   An SDF model must be referenced with the sdf keyword inside the SCIM
+   An SDF model MUST be referenced with the sdf keyword inside the SCIM
    device schema as described in [I-D.ietf-scim-device-model].
 
-6.  Security Considerations
+7.  Security Considerations
 
    The security considerations of [RFC9880] apply to this document as
    well.
@@ -744,13 +768,13 @@ Table of Contents
    level security mechanisms are employed when accessing affordances
    through the mapped protocol operations.
 
-7.  IANA Considerations
+8.  IANA Considerations
 
    This section provides guidance to the Internet Assigned Numbers
    Authority (IANA) regarding registration of values related to this
    document, in accordance with [RFC8126].
 
-7.1.  Protocol Mapping
+8.1.  Protocol Mapping
 
    IANA is requested to create a new registry called "SDF Protocol
    Mapping".
@@ -760,7 +784,7 @@ Table of Contents
 
    The registry must contain the following attributes:
 
-   *  Protocol map name
+   *  Protocol map name, as per sdfProtocolMap
 
    *  Protocol name
 
@@ -769,7 +793,7 @@ Table of Contents
    *  Reference of the specification describing the protocol mapping.
 
    The specification requirements for a registration request are defined
-   in Section 3.2.
+   in Section 4.
 
    The designated expert(s) SHOULD verify that the protocol map name is
    appropriate and not likely to cause confusion with existing entries.
@@ -794,10 +818,10 @@ Table of Contents
 
                      Table 1: Protocol Mapping Registry
 
-7.2.  SCIM Device Schema SDF Extension
+8.2.  SCIM Device Schema SDF Extension
 
    IANA is requested to create the following extensions in the SCIM
-   Server-Related Schema URIs registry as described in Section 5:
+   Server-Related Schema URIs registry as described in Section 6:
 
       +=======================+=============+==========+===========+
       | URN                   | Description | Resource | Reference |
@@ -805,14 +829,14 @@ Table of Contents
       +=======================+=============+==========+===========+
       | urn:ietf:params:scim: | SDF         | Device   | This      |
       | schemas:extension:    | Extension   |          | memo,     |
-      | sdf:2.0:Device        |             |          | Section 5 |
+      | sdf:2.0:Device        |             |          | Section 6 |
       +-----------------------+-------------+----------+-----------+
 
                                  Table 2
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [I-D.ietf-scim-device-model]
               Shahzad, M., Iqbal, H., and E. Lear, "Device Schema
@@ -851,7 +875,7 @@ Table of Contents
               Interactions of Things", RFC 9880, DOI 10.17487/RFC9880,
               January 2026, <https://www.rfc-editor.org/rfc/rfc9880>.
 
-8.2.  Informative References
+9.2.  Informative References
 
    [BLE53]    Bluetooth SIG, "Bluetooth Core Specification Version 5.3",
               13 July 2021,
@@ -928,10 +952,10 @@ Appendix A.  CDDL Definition
 
    zigbee-property = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
      attributeType: uint
+     ? manufacturerCode: uint,
    }
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
@@ -940,10 +964,10 @@ Appendix A.  CDDL Definition
 
    zigbee-event-map = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
      attributeID: uint,
      attributeType: uint
+     ? manufacturerCode: uint,
    }
 
    $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -952,9 +976,9 @@ Appendix A.  CDDL Definition
 
    zigbee-action-map = {
      endpointID: uint,
-     ? manufacturerCode: uint,
      clusterID: uint,
      commandID: uint
+     ? manufacturerCode: uint,
    }
 
    <CODE ENDS>
