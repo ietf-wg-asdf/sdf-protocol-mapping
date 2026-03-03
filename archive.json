@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-01T01:28:21.772744+00:00",
+  "timestamp": "2026-03-03T01:22:46.723790+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -1566,25 +1566,35 @@
       "id": "PR_kwDOPSJ9A87GgvMI",
       "title": "General comments and minor edits",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/24",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "lorenzocorneo",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Added general comments in the document, just search for \"LC:\". Also made a few minor editorial changes.",
       "createdAt": "2026-02-26T11:20:54Z",
-      "updatedAt": "2026-02-27T21:19:21Z",
+      "updatedAt": "2026-03-02T21:30:36Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "87e7425617c8af961fe0a71724dbe383c9e08d4f",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "review-lc",
       "headRefOid": "75644898a8d01058cdd46efd6222666933a88ccc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-03-02T21:14:13Z",
+      "mergedAt": "2026-03-02T21:14:13Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "05af7dbcb0c032374fb71d8d07fa19329a2960a5"
+      },
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I have merged this and added some changes on top of this in my PR #25.\r\nI will publish this now to get it in before the submission deadline.",
+          "createdAt": "2026-03-02T21:30:36Z",
+          "updatedAt": "2026-03-02T21:30:36Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOPSJ9A87mO6wN",
@@ -1630,7 +1640,7 @@
             "abbreviatedOid": "d6aee47"
           },
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-26T19:33:06Z",
@@ -1650,7 +1660,7 @@
             "abbreviatedOid": "d6aee47"
           },
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-26T19:38:53Z",
@@ -1744,7 +1754,7 @@
             "abbreviatedOid": "b68514a"
           },
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-27T21:18:14Z",
@@ -1764,7 +1774,7 @@
             "abbreviatedOid": "b68514a"
           },
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-27T21:19:21Z",
@@ -1777,8 +1787,56 @@
               "updatedAt": "2026-02-27T21:19:21Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A87nJioC",
+          "commit": {
+            "abbreviatedOid": "b68514a"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-02T18:52:48Z",
+          "updatedAt": "2026-03-02T18:52:48Z",
+          "comments": [
+            {
+              "originalPosition": 351,
+              "body": "We should be consistent.",
+              "createdAt": "2026-03-02T18:52:48Z",
+              "updatedAt": "2026-03-02T18:52:48Z"
+            }
+          ]
         }
       ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOPSJ9A87HcOHV",
+      "title": "Update BLE event map schema, fix UUIDs in examples, improve wording",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/25",
+      "state": "MERGED",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Used Bluetooth LE defined UUIDs",
+      "createdAt": "2026-03-02T21:26:15Z",
+      "updatedAt": "2026-03-02T21:27:22Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "05af7dbcb0c032374fb71d8d07fa19329a2960a5",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "draft-06-changes",
+      "headRefOid": "f4a80cbf80831f9e1d606b221dd4660d264d9e31",
+      "closedAt": "2026-03-02T21:27:22Z",
+      "mergedAt": "2026-03-02T21:27:22Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "4d54f2bac6d560be20eef6b1c160dd858f1429f0"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
