@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-03T01:22:46.723790+00:00",
+  "timestamp": "2026-03-08T01:21:30.327099+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -387,6 +387,22 @@
       "createdAt": "2025-12-12T13:38:30Z",
       "updatedAt": "2026-02-23T11:39:49Z",
       "closedAt": "2026-02-23T11:39:49Z",
+      "comments": []
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOPSJ9A87wCxhK",
+      "title": "Allow for top-level or grouping-level protocol mappings that allow for reuse at the affordance level",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/26",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In a discussion @cabo and I had recently, it came up that it might be useful to allow for definitions of SDF protocol mappings that can be reused at the affordance level (using `sdfRef`). These protocol mappings could either be global/located at the top-level of a model, or associated with an `sdfThing` or `sdfObject` to allow for sharing common definitions (such as IP addresses).\n\nAt the top-level or grouping level, the format of the `sdfProtocolMapping` might need to allow for defining multiple mappings for the same operation that can then be referenced from different affordances (e.g., two read operations that referenced from two `sdfProperty` definitions). But the details of that could potentially be left to the specifications that define mappings for specific protocols.",
+      "createdAt": "2026-03-05T10:14:24Z",
+      "updatedAt": "2026-03-05T10:15:02Z",
+      "closedAt": null,
       "comments": []
     }
   ],
