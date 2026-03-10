@@ -150,8 +150,8 @@ sdfProperty / sdfAction / sdfEvent
 ## SDF Extension Points
 
 The `sdfProtocolMap` keyword is introduced into SDF affordance definitions
-through the extension points defined in the formal syntax of {{-sdf}}
-(Appendix A). For each affordance type, an `sdfProtocolMap` entry is added
+through the extension points defined in the formal syntax of {{Appendix
+A of -sdf}}. For each affordance type, an `sdfProtocolMap` entry is added
 via the corresponding CDDL group socket. The contents of the
 `sdfProtocolMap` object are in turn extensible through a
 protocol-mapping-specific group socket.
@@ -163,7 +163,7 @@ events but not for actions.
 ### Property Extension {#property-extension}
 
 The `$$SDF-EXTENSION-PROPERTY` group socket in the `propertyqualities`
-rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
+rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 `sdfProperty` definitions:
 
 ~~~ cddl
@@ -251,7 +251,7 @@ operations, the mapping can be split:
 ### Action Extension {#action-extension}
 
 The `$$SDF-EXTENSION-ACTION` group socket in the `actionqualities`
-rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
+rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 `sdfAction` definitions:
 
 ~~~ cddl
@@ -296,7 +296,7 @@ The corresponding JSON in an SDF model would look like:
 ### Event Extension {#event-extension}
 
 The `$$SDF-EXTENSION-EVENT` group socket in the `eventqualities`
-rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
+rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 `sdfEvent` definitions:
 
 ~~~ cddl
