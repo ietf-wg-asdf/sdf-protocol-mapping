@@ -611,7 +611,7 @@ of this SCIM extension is OPTIONAL and independent of the protocol mapping
 functionality defined in the rest of this document. The SCIM schema attributes
 used here are described in Section 7 of {{!RFC7643}}.
 
-~~~
+~~~ json
 {::include generated/scim/scim-sdf-extension.json.folded}
 ~~~
 {: #scim-sdf-extension-schema title="SCIM SDF Extension Schema"}
