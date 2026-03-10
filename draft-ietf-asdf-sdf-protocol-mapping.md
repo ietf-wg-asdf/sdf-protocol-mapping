@@ -680,10 +680,10 @@ They should verify that updates preserve backward compatibility with deployed im
 
 The following protocol mappings are described in this document:
 
-| Protocol map | Protocol Name               | Description                                 | Reference       |
-|--------------|-----------------------------|---------------------------------------------|-----------------|
-| ble          | Bluetooth Low Energy (BLE)  | Protocol mapping for BLE devices            | This document   |
-| zigbee       | Zigbee                      | Protocol mapping for Zigbee devices         | This document   |
+| Protocol Map Name | Protocol Name              | Description                         | Reference                  |
+|-------------------+----------------------------+-------------------------------------+----------------------------|
+| ble               | Bluetooth Low Energy (BLE) | Protocol mapping for BLE devices    | This document, {{ble-pm}}    |
+| zigbee            | Zigbee                     | Protocol mapping for Zigbee devices | This document, {{zigbee-pm}} |
 {: #protmap-reg title="Protocol Mapping Registry"}
 
 ## SCIM Device Schema SDF Extension
@@ -691,10 +691,10 @@ The following protocol mappings are described in this document:
 IANA is requested to create the following extension in the SCIM
 Server-Related Schema URIs registry as described in {{scim-sdf-extension}}:
 
-| URN | Description | Resource Type | Reference |
-|-----|-------------|-----------|-----------|
-| urn:ietf:params:scim: schemas:extension: sdf:2.0:Device | SDF Extension | Device | This memo, [](#scim-sdf-extension) |
-
+| URN                                                     | Description   | Resource Type | Reference                           |
+|---------------------------------------------------------+---------------+---------------+-------------------------------------|
+| urn:ietf:params:scim: schemas:extension: sdf:2.0:Device | SDF Extension | Device        | This document, {{scim-sdf-extension}} |
+{: #iana-scim title="SCIM Device Schema SDF Extension"}
 
 --- back
 
