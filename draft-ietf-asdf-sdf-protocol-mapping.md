@@ -83,7 +83,7 @@ events (collectively called affordances). When implementing an SDF model for a
 device using specific communication protocols, there needs to be a mechanism to
 map the protocol-agnostic SDF definitions to protocol-specific operations,
 translating the model into a real-world implementation. Moreover, such a mechanism
-needs to be extensible for enabling implementors to provide novel SDF protocol
+needs to be extensible for enabling implementers to provide novel SDF protocol
 mappings to expand the SDF ecosystem. SDF protocol mappings may target a variety
 of protocols spanning from non-IP protocols commonly used in IoT environments,
 such as {{BLE53}} and {{Zigbee30}}, to IP-based protocols such as HTTP
@@ -178,7 +178,7 @@ provide either:
   attributes for each direction.
 
 To extend `$$SDF-PROPERTY-PROTOCOL-MAP` for a new protocol (e.g.,
-"new-protocol"), implementors MUST use the `property-protocol-map` generic with
+"new-protocol"), implementers MUST use the `property-protocol-map` generic with
 the protocol name and a map type defining the protocol-specific attributes.
 
 It is to be noted that the protocol `name` (e.g., "new-protocol") MUST be
@@ -259,7 +259,7 @@ rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
 
 Actions use a simpler structure than properties, as they do not require the
 read/write distinction. To extend `$$SDF-ACTION-PROTOCOL-MAP` for a new
-protocol, implementors MUST add a group entry that maps the protocol name to the
+protocol, implementers MUST add a group entry that maps the protocol name to the
 protocol-specific attributes:
 
 ~~~ cddl
@@ -353,7 +353,7 @@ includes:
   underlying protocol operations.
 
 <!-- LC: Should we consider adding an appendix showing the whole process to
-create a fictitious new protocol? It may be of help to implementors. -->
+create a fictitious new protocol? It may be of help to implementers. -->
 
 # Registered Protocol Mappings
 
@@ -710,7 +710,7 @@ This appendix contains the combined CDDL definitions for the SDF protocol mappin
 <!-- LC: Maybe we need some text to explain why all of a sudden there is some
 OpenAPI specifications. -->
 
-The following non-normative model is provided for convenience of the implementor.
+The following non-normative model is provided for convenience of the implementer.
 
 ~~~~~~
 <CODE BEGINS> file "ProtocolMap.yaml"
