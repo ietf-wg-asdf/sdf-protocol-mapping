@@ -703,10 +703,12 @@ Server-Related Schema URIs registry as described in {{scim-sdf-extension}}:
 This appendix contains the combined CDDL definitions for the SDF protocol mappings.
 
 ~~~ cddl
-<CODE BEGINS> file "sdf-protocol-map.cddl"
 {::include generated/combined.cddl.folded}
-<CODE ENDS>
 ~~~
+{: #sdf-protocol-map-cddl
+   sourcecode-name="sdf-protocol-map.cddl" sourcecode-markers="true"
+   title="CDDL for SDF protocol mappings"}
+
 
 # OpenAPI Definition
 
@@ -715,30 +717,32 @@ OpenAPI specifications. -->
 
 The following non-normative model is provided for convenience of the implementer.
 
-~~~~~~
-<CODE BEGINS> file "ProtocolMap.yaml"
+~~~~~~ yaml
 {::include generated/openapi/ProtocolMap.yaml.folded}
-<CODE ENDS>
 ~~~~~~
-{: #protocolmapmodel}
+{: #protocolmapmodel
+   sourcecode-name="ProtocolMap.yaml" sourcecode-markers="true"
+   title="OpenAPI model"}
 
 ## Protocol map for BLE
 
-~~~~~
-<CODE BEGINS> file "ProtocolMap-BLE.yaml"
+~~~~~ yaml
 {::include generated/openapi/ProtocolMap-BLE.yaml.folded}
-<CODE ENDS>
 ~~~~~
-{: #protocolmapble}
+{: #protocolmapble
+   sourcecode-name="ProtocolMap-BLE.yaml" sourcecode-markers="true"
+   title="OpenAPI model for BLE"
+}
 
 ## Protocol map for Zigbee
 
-~~~~~
-<CODE BEGINS> file "ProtocolMap-Zigbee.yaml"
+~~~~~ yaml
 {::include generated/openapi/ProtocolMap-Zigbee.yaml.folded}
-<CODE ENDS>
 ~~~~~
-{: #protocolmapzigbee}
+{: #protocolmapzigbee
+   sourcecode-name="ProtocolMap-Zigbee.yaml" sourcecode-markers="true"
+   title="OpenAPI model for Zigbee"
+}
 
 # Acknowledgements
 {:numbered="false"}
