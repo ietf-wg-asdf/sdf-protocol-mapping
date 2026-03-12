@@ -168,9 +168,9 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 `sdfProperty` definitions:
 
 ~~~ cddl
-{::include cddl/sdf-property-protocol-map.cddl}
+{::include-fold cddl/sdf-property-protocol-map.cddl}
 ~~~
-{: post="fold" #sdf-prop-ext title="SDF Property Extension Point for Protocol Mapping"}
+{: #sdf-prop-ext title="SDF Property Extension Point for Protocol Mapping"}
 
 The `property-protocol-map` generic ({{sdf-prop-ext}}) captures the common
 structure of property protocol mappings. The `name` parameter is the protocol
@@ -256,9 +256,9 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 `sdfAction` definitions:
 
 ~~~ cddl
-{::include cddl/sdf-action-protocol-map.cddl}
+{::include-fold cddl/sdf-action-protocol-map.cddl}
 ~~~
-{: post="fold" #sdf-action-ext title="SDF Action Extension Point for Protocol Mapping"}
+{: #sdf-action-ext title="SDF Action Extension Point for Protocol Mapping"}
 
 
 Actions use a simpler structure than properties, as they do not require the
@@ -301,9 +301,9 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 `sdfEvent` definitions:
 
 ~~~ cddl
-{::include cddl/sdf-event-protocol-map.cddl}
+{::include-fold cddl/sdf-event-protocol-map.cddl}
 ~~~
-{: post="fold" #sdf-event-ext title="SDF Event Extension Point for Protocol Mapping"}
+{: #sdf-event-ext title="SDF Event Extension Point for Protocol Mapping"}
 
 Events follow the same simple pattern as actions. To extend
 `$$SDF-EVENT-PROTOCOL-MAP` for a new protocol:
@@ -375,9 +375,9 @@ used to access the corresponding SDF affordances.
 For `sdfProperty`, the BLE protocol mapping structure is defined as follows:
 
 ~~~ cddl
-{::include cddl/ble-protocol-map.cddl}
+{::include-fold cddl/ble-protocol-map.cddl}
 ~~~
-{: post="fold" #blemap1 title="CDDL definition for BLE Protocol Mapping for sdfProperty"}
+{: #blemap1 title="CDDL definition for BLE Protocol Mapping for sdfProperty"}
 
 Where:
 
@@ -434,9 +434,9 @@ For `sdfEvent`s, the BLE protocol mapping structure is similar to
 the event.
 
 ~~~ cddl
-{::include cddl/ble-event-map.cddl}
+{::include-fold cddl/ble-event-map.cddl}
 ~~~
-{: post="fold" #blemap2 title="BLE Protocol Mapping for sdfEvents"}
+{: #blemap2 title="BLE Protocol Mapping for sdfEvents"}
 
 Where:
 
@@ -499,9 +499,9 @@ An `sdfProperty` SHOULD be mapped to a Zigbee cluster attribute. The Zigbee prop
 protocol mapping structure is defined as follows:
 
 ~~~ cddl
-{::include cddl/zigbee-protocol-map.cddl}
+{::include-fold cddl/zigbee-protocol-map.cddl}
 ~~~
-{: post="fold" #zigmap1 title="CDDL definition for Zigbee Protocol Mapping for sdfProperty"}
+{: #zigmap1 title="CDDL definition for Zigbee Protocol Mapping for sdfProperty"}
 
 Where:
 
@@ -538,9 +538,9 @@ An `sdfEvent` SHOULD be mapped to Zigbee cluster attribute reporting. The Zigbee
 protocol mapping structure is defined as follows:
 
 ~~~ cddl
-{::include cddl/zigbee-event-map.cddl}
+{::include-fold cddl/zigbee-event-map.cddl}
 ~~~
-{: post="fold" #zigmap-event title="CDDL definition for Zigbee Protocol Mapping for sdfEvents"}
+{: #zigmap-event title="CDDL definition for Zigbee Protocol Mapping for sdfEvents"}
 
 Where:
 
@@ -578,9 +578,9 @@ An `sdfAction` SHOULD be mapped to a Zigbee cluster command. The Zigbee protocol
 mapping structure for actions is defined as follows:
 
 ~~~ cddl
-{::include cddl/zigbee-action-map.cddl}
+{::include-fold cddl/zigbee-action-map.cddl}
 ~~~
-{: post="fold" #zigmap2 title="CDDL definition for Zigbee Protocol Mapping for sdfAction"}
+{: #zigmap2 title="CDDL definition for Zigbee Protocol Mapping for sdfAction"}
 
 Where:
 
