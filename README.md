@@ -1,8 +1,8 @@
 <!-- regenerate: on (set to off if you edit this file) -->
 
-# Protocol Mapping for SDF
+# SDF Protocol Mapping
 
-This is the working area for the IETF [ASDF Working Group](https://datatracker.ietf.org/group/asdf/documents/) Internet-Draft, "Protocol Mapping for SDF".
+This is the working area for the IETF [ASDF Working Group](https://datatracker.ietf.org/group/asdf/documents/) Internet-Draft, "SDF Protocol Mapping".
 
 * [Editor's Copy](https://ietf-wg-asdf.github.io/sdf-protocol-mapping/#go.draft-ietf-asdf-sdf-protocol-mapping.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol-mapping)
