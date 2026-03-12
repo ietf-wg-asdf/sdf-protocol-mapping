@@ -461,6 +461,8 @@ Table of Contents
    For a temperature property that has different mappings for read and
    write operations, here is an example of the BLE protocol mapping:
 
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
    {
      "sdfProperty": {
        "temperature": {
@@ -468,11 +470,13 @@ Table of Contents
            "ble": {
              "read": {
                "serviceID": "00001809-0000-1000-8000-00805f9b34fb",
-               "characteristicID": "00002a1c-0000-1000-8000-00805f9b34fb"
+               "characteristicID": "00002a1c-0000-1000-8000-\
+                                                           00805f9b34fb"
              },
              "write": {
                "serviceID": "00001809-0000-1000-8000-00805f9b34fb",
-               "characteristicID": "00002a51-0000-1000-8000-00805f9b34fb"
+               "characteristicID": "00002a51-0000-1000-8000-\
+                                                           00805f9b34fb"
              }
            }
          }
@@ -732,8 +736,8 @@ Table of Contents
        ],
        "meta": {
            "resourceType": "Schema",
-           "location": "/v2/Schemas/urn:ietf:params:scim:schemas:extens\
-   ion:sdf:2.0:Device"
+           "location": "/v2/Schemas/urn:ietf:params:scim:schemas:\
+                                               extension:sdf:2.0:Device"
        }
    }
 
@@ -1008,7 +1012,7 @@ Appendix B.  OpenAPI Definition
    externalDocs:
      description: SDF Protocol Mapping IETF draft
      url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
-   -mapping/
+                                                               -mapping/
 
    paths: {}
 
@@ -1020,10 +1024,10 @@ Appendix B.  OpenAPI Definition
          properties:
            sdfProtocolMap:
              oneOf:
-               - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
-   ocolMap-BLE-Propmap'
-               - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
-   rotocolMap-Zigbee-Propmap'
+               - $ref: './ProtocolMap-BLE.yaml#/components/schemas/\
+                                                ProtocolMap-BLE-Propmap'
+               - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/\
+                                             ProtocolMap-Zigbee-Propmap'
 
    ## Protocol Map for an event
        ProtocolMap-Event:
@@ -1031,10 +1035,10 @@ Appendix B.  OpenAPI Definition
          properties:
            sdfProtocolMap:
              oneOf:
-               - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
-   ocolMap-BLE-Event'
-               - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
-   rotocolMap-Zigbee-Event'
+               - $ref: './ProtocolMap-BLE.yaml#/components/schemas/\
+                                                  ProtocolMap-BLE-Event'
+               - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/\
+                                               ProtocolMap-Zigbee-Event'
    <CODE ENDS>
 
                           Figure 19: OpenAPI model
@@ -1053,7 +1057,7 @@ B.1.  Protocol map for BLE
    externalDocs:
      description: SDF Protocol Mapping IETF draft
      url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
-   -mapping/
+                                                               -mapping/
 
    paths: {}
 
@@ -1141,7 +1145,7 @@ B.2.  Protocol map for Zigbee
    externalDocs:
      description: SDF Protocol Mapping IETF draft
      url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
-   -mapping/
+                                                               -mapping/
 
    paths: {}
 

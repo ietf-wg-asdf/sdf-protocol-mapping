@@ -1457,8 +1457,7 @@ registered in the IANA registry defined in <a href="#iana-prot-map" class="auto 
 <span id="name-example-property-protocol-m"></span><div id="prop-ext-example">
 <figure id="figure-3">
             <div class="lang-cddl sourcecode" id="section-3.1.1-8.1">
-<pre>
-$$SDF-PROPERTY-PROTOCOL-MAP //= (
+<pre>$$SDF-PROPERTY-PROTOCOL-MAP //= (
   property-protocol-map&lt;"new-protocol", new-protocol-property&gt;
 )
 
@@ -1476,8 +1475,7 @@ new-protocol-property = {
 <span id="name-example-property-protocol-ma"></span><div id="prop-ext-json-example">
 <figure id="figure-4">
             <div class="lang-json sourcecode" id="section-3.1.1-10.1">
-<pre>
-{
+<pre>{
   "sdfProperty": {
     "temperature": {
       "type": "number",
@@ -1502,8 +1500,7 @@ operations, the mapping can be split:<a href="#section-3.1.1-11" class="pilcrow"
 <span id="name-example-property-protocol-map"></span><div id="prop-ext-rw-json-example">
 <figure id="figure-5">
             <div class="lang-json sourcecode" id="section-3.1.1-12.1">
-<pre>
-{
+<pre>{
   "sdfProperty": {
     "temperature": {
       "type": "number",
@@ -1561,8 +1558,7 @@ protocol-specific attributes:<a href="#section-3.1.2-3" class="pilcrow">¶</a></
 <span id="name-example-action-protocol-map"></span><div id="action-ext-example">
 <figure id="figure-7">
             <div class="lang-cddl sourcecode" id="section-3.1.2-4.1">
-<pre>
-$$SDF-ACTION-PROTOCOL-MAP //= (
+<pre>$$SDF-ACTION-PROTOCOL-MAP //= (
   "new-protocol": new-protocol-action
 )
 
@@ -1579,8 +1575,7 @@ new-protocol-action = {
 <span id="name-example-action-protocol-map-"></span><div id="action-ext-json-example">
 <figure id="figure-8">
             <div class="lang-json sourcecode" id="section-3.1.2-6.1">
-<pre>
-{
+<pre>{
   "sdfAction": {
     "reset": {
       "sdfProtocolMap": {
@@ -1627,8 +1622,7 @@ $$SDF-EXTENSION-EVENT //= (
 <span id="name-example-event-protocol-map-"></span><div id="event-ext-example">
 <figure id="figure-10">
             <div class="lang-cddl sourcecode" id="section-3.1.3-4.1">
-<pre>
-$$SDF-EVENT-PROTOCOL-MAP //= (
+<pre>$$SDF-EVENT-PROTOCOL-MAP //= (
   "new-protocol": new-protocol-event
 )
 
@@ -1645,8 +1639,7 @@ new-protocol-event = {
 <span id="name-example-event-protocol-map-i"></span><div id="event-ext-json-example">
 <figure id="figure-11">
             <div class="lang-json sourcecode" id="section-3.1.3-6.1">
-<pre>
-{
+<pre>{
   "sdfEvent": {
     "alert": {
       "sdfProtocolMap": {
@@ -1747,8 +1740,7 @@ ble-property = {
           </ul>
 <p id="section-5.1.1-5">For example, a BLE protocol mapping for a temperature property:<a href="#section-5.1.1-5" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-5.1.1-6">
-<pre>
-{
+<pre>{
   "sdfProperty": {
     "temperature": {
       "sdfProtocolMap": {
@@ -1765,7 +1757,8 @@ ble-property = {
 <p id="section-5.1.1-7">For a temperature property that has different mappings for read and write operations,
 here is an example of the BLE protocol mapping:<a href="#section-5.1.1-7" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-5.1.1-8">
-<pre>
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 {
   "sdfProperty": {
     "temperature": {
@@ -1773,11 +1766,13 @@ here is an example of the BLE protocol mapping:<a href="#section-5.1.1-7" class=
         "ble": {
           "read": {
             "serviceID": "00001809-0000-1000-8000-00805f9b34fb",
-            "characteristicID": "00002a1c-0000-1000-8000-00805f9b34fb"
+            "characteristicID": "00002a1c-0000-1000-8000-\
+                                                        00805f9b34fb"
           },
           "write": {
             "serviceID": "00001809-0000-1000-8000-00805f9b34fb",
-            "characteristicID": "00002a51-0000-1000-8000-00805f9b34fb"
+            "characteristicID": "00002a51-0000-1000-8000-\
+                                                        00805f9b34fb"
           }
         }
       }
@@ -1829,8 +1824,7 @@ specified if the type is "gatt".<a href="#section-5.1.2-4.2.1" class="pilcrow">�
           </ul>
 <p id="section-5.1.2-5">For example, a BLE event mapping for a heart rate measurement event:<a href="#section-5.1.2-5" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-5.1.2-6">
-<pre>
-{
+<pre>{
   "sdfEvent": {
     "heartRate": {
       "sdfProtocolMap": {
@@ -1847,8 +1841,7 @@ specified if the type is "gatt".<a href="#section-5.1.2-4.2.1" class="pilcrow">�
 </div>
 <p id="section-5.1.2-7">Here is an example of an <code>isPresent</code> event using BLE advertisements:<a href="#section-5.1.2-7" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-5.1.2-8">
-<pre>
-{
+<pre>{
   "sdfEvent": {
     "isPresent": {
       "sdfProtocolMap": {
@@ -1923,8 +1916,7 @@ zigbee-property = {
 <p id="section-5.2.1-5">For example, a Zigbee protocol mapping for a temperature property may look as
 follows:<a href="#section-5.2.1-5" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-5.2.1-6">
-<pre>
-{
+<pre>{
   "sdfProperty": {
     "temperature": {
       "sdfProtocolMap": {
@@ -1990,8 +1982,7 @@ zigbee-event-map = {
           </ul>
 <p id="section-5.2.2-5">For example, a Zigbee event mapping for a temperature change report:<a href="#section-5.2.2-5" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-5.2.2-6">
-<pre>
-{
+<pre>{
   "sdfEvent": {
     "temperatureChange": {
       "sdfProtocolMap": {
@@ -2053,8 +2044,7 @@ zigbee-action-map = {
           </ul>
 <p id="section-5.2.3-5">For example, a Zigbee protocol mapping to set a temperature:<a href="#section-5.2.3-5" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-5.2.3-6">
-<pre>
-{
+<pre>{
   "sdfAction": {
     "setTemperature": {
       "sdfProtocolMap": {
@@ -2113,8 +2103,8 @@ used here are described in Section 7 of <span>[<a href="#RFC7643" class="cite xr
     ],
     "meta": {
         "resourceType": "Schema",
-        "location": "/v2/Schemas/urn:ietf:params:scim:schemas:extens\
-ion:sdf:2.0:Device"
+        "location": "/v2/Schemas/urn:ietf:params:scim:schemas:\
+                                            extension:sdf:2.0:Device"
     }
 }
 </pre>
@@ -2125,8 +2115,7 @@ ion:sdf:2.0:Device"
 </div>
 <p id="section-6-3">Here is an example SCIM device schema extension with SDF models:<a href="#section-6-3" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-6-4">
-<pre>
-{
+<pre>{
     "schemas": [
         "urn:ietf:params:scim:schemas:core:2.0:Device",
         "urn:ietf:params:scim:schemas:extension:sdf:2.0:Device"
@@ -2461,7 +2450,7 @@ info:
 externalDocs:
   description: SDF Protocol Mapping IETF draft
   url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
--mapping/
+                                                            -mapping/
 
 paths: {}
 
@@ -2473,10 +2462,10 @@ components:
       properties:
         sdfProtocolMap:
           oneOf:
-            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
-ocolMap-BLE-Propmap'
-            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
-rotocolMap-Zigbee-Propmap'
+            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/\
+                                             ProtocolMap-BLE-Propmap'
+            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/\
+                                          ProtocolMap-Zigbee-Propmap'
 
 ## Protocol Map for an event
     ProtocolMap-Event:
@@ -2484,10 +2473,10 @@ rotocolMap-Zigbee-Propmap'
       properties:
         sdfProtocolMap:
           oneOf:
-            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/Prot\
-ocolMap-BLE-Event'
-            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/P\
-rotocolMap-Zigbee-Event'
+            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/\
+                                               ProtocolMap-BLE-Event'
+            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/\
+                                            ProtocolMap-Zigbee-Event'
 
 
 &lt;CODE ENDS&gt;</pre>
@@ -2517,7 +2506,7 @@ info:
 externalDocs:
   description: SDF Protocol Mapping IETF draft
   url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
--mapping/
+                                                            -mapping/
 
 paths: {}
 
@@ -2617,7 +2606,7 @@ info:
 externalDocs:
   description: SDF Protocol Mapping IETF draft
   url: https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf-protocol\
--mapping/
+                                                            -mapping/
 
 paths: {}
 
