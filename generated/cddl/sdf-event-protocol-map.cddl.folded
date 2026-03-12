@@ -1,5 +1,0 @@
-$$SDF-EXTENSION-EVENT //= (
-  sdfProtocolMap: {
-    * $$SDF-EVENT-PROTOCOL-MAP
-  }
-)
