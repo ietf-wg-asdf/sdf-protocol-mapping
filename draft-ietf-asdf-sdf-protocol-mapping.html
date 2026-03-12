@@ -1056,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Mohan, et al.</td>
-<td class="center">Expires 3 September 2026</td>
+<td class="center">Expires 13 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-asdf-sdf-protocol-mapping-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-03-02" class="published">2 March 2026</time>
+<time datetime="2026-03-12" class="published">12 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-03">3 September 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-13">13 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1136,7 @@ This document also describes a method to extend SCIM with an SDF model mapping.<
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1286,7 +1286,7 @@ events (collectively called affordances). When implementing an SDF model for a
 device using specific communication protocols, there needs to be a mechanism to
 map the protocol-agnostic SDF definitions to protocol-specific operations,
 translating the model into a real-world implementation. Moreover, such a mechanism
-needs to be extensible for enabling implementors to provide novel SDF protocol
+needs to be extensible for enabling implementers to provide novel SDF protocol
 mappings to expand the SDF ecosystem. SDF protocol mappings may target a variety
 of protocols spanning from non-IP protocols commonly used in IoT environments,
 such as <span>[<a href="#BLE53" class="cite xref">BLE53</a>]</span> and <span>[<a href="#Zigbee30" class="cite xref">Zigbee30</a>]</span>, to IP-based protocols such as HTTP
@@ -1325,10 +1325,12 @@ the BLE and Zigbee provided in this document), see <a href="#iana-prot-map" clas
       <h2 id="name-conventions-and-definitions">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
       </h2>
-<p id="section-2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+<p id="section-2-1">The syntax extensions to <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> in terms of its JSON structures are
+shown in the Concise Data Definition Language (CDDL) <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
-appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+appear in all capitals, as shown here.<a href="#section-2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sdf-pm">
@@ -1344,7 +1346,8 @@ endpoint.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">A protocol mapping object is a JSON object identified by the <code>sdfProtocolMap</code>
 keyword, nested inside an SDF affordance definition (<code>sdfProperty</code>, <code>sdfAction</code>,
 or <code>sdfEvent</code>). Protocol-specific attributes are embedded within this object,
-keyed by an IANA registered protocol name, e.g., "ble" or "zigbee".<a href="#section-3-2" class="pilcrow">¶</a></p>
+keyed by a protocol name registered in the IANA "SDF Protocol Mapping"
+registry (<a href="#iana-prot-map" class="auto internal xref">Section 8.1</a>), e.g., "ble" or "zigbee".<a href="#section-3-2" class="pilcrow">¶</a></p>
 <span id="name-sdf-protocol-mapping-structu"></span><div id="protmap">
 <figure id="figure-1">
         <div id="section-3-3.1">
@@ -1394,8 +1397,7 @@ keyed by an IANA registered protocol name, e.g., "ble" or "zigbee".<a href="#sec
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-sdf-extension-points" class="section-name selfRef">SDF Extension Points</a>
         </h3>
 <p id="section-3.1-1">The <code>sdfProtocolMap</code> keyword is introduced into SDF affordance definitions
-through the extension points defined in the formal syntax of <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span>
-(Appendix A). For each affordance type, an <code>sdfProtocolMap</code> entry is added
+through the extension points defined in the formal syntax of <span><a href="https://rfc-editor.org/rfc/rfc9880#appendix-A" class="relref">Appendix A</a> of [<a href="#RFC9880" class="cite xref">RFC9880</a>]</span>. For each affordance type, an <code>sdfProtocolMap</code> entry is added
 via the corresponding CDDL group socket. The contents of the
 <code>sdfProtocolMap</code> object are in turn extensible through a
 protocol-mapping-specific group socket.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
@@ -1408,7 +1410,7 @@ events but not for actions.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-property-extension" class="section-name selfRef">Property Extension</a>
           </h4>
 <p id="section-3.1.1-1">The <code>$$SDF-EXTENSION-PROPERTY</code> group socket in the <code>propertyqualities</code>
-rule of <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> (Appendix A) is used to add protocol mapping to
+rule of <span><a href="https://rfc-editor.org/rfc/rfc9880#appendix-A" class="relref">Appendix A</a> of [<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> is used to add protocol mapping to
 <code>sdfProperty</code> definitions:<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-property-extension-poin"></span><div id="sdf-prop-ext">
 <figure id="figure-2">
@@ -1447,7 +1449,7 @@ attributes for each direction.<a href="#section-3.1.1-4.2.1" class="pilcrow">¶<
 </li>
           </ul>
 <p id="section-3.1.1-5">To extend <code>$$SDF-PROPERTY-PROTOCOL-MAP</code> for a new protocol (e.g.,
-"new-protocol"), implementors <span class="bcp14">MUST</span> use the <code>property-protocol-map</code> generic with
+"new-protocol"), implementers <span class="bcp14">MUST</span> use the <code>property-protocol-map</code> generic with
 the protocol name and a map type defining the protocol-specific attributes.<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-6">It is to be noted that the protocol <code>name</code> (e.g., "new-protocol") <span class="bcp14">MUST</span> be
 registered in the IANA registry defined in <a href="#iana-prot-map" class="auto internal xref">Section 8.1</a>.<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
@@ -1535,7 +1537,7 @@ operations, the mapping can be split:<a href="#section-3.1.1-11" class="pilcrow"
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-action-extension" class="section-name selfRef">Action Extension</a>
           </h4>
 <p id="section-3.1.2-1">The <code>$$SDF-EXTENSION-ACTION</code> group socket in the <code>actionqualities</code>
-rule of <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> (Appendix A) is used to add protocol mapping to
+rule of <span><a href="https://rfc-editor.org/rfc/rfc9880#appendix-A" class="relref">Appendix A</a> of [<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> is used to add protocol mapping to
 <code>sdfAction</code> definitions:<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-action-extension-point-"></span><div id="sdf-action-ext">
 <figure id="figure-6">
@@ -1554,7 +1556,7 @@ $$SDF-EXTENSION-ACTION //= (
 </div>
 <p id="section-3.1.2-3">Actions use a simpler structure than properties, as they do not require the
 read/write distinction. To extend <code>$$SDF-ACTION-PROTOCOL-MAP</code> for a new
-protocol, implementors <span class="bcp14">MUST</span> add a group entry that maps the protocol name to the
+protocol, implementers <span class="bcp14">MUST</span> add a group entry that maps the protocol name to the
 protocol-specific attributes:<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
 <span id="name-example-action-protocol-map"></span><div id="action-ext-example">
 <figure id="figure-7">
@@ -1603,7 +1605,7 @@ new-protocol-action = {
 <a href="#section-3.1.3" class="section-number selfRef">3.1.3. </a><a href="#name-event-extension" class="section-name selfRef">Event Extension</a>
           </h4>
 <p id="section-3.1.3-1">The <code>$$SDF-EXTENSION-EVENT</code> group socket in the <code>eventqualities</code>
-rule of <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> (Appendix A) is used to add protocol mapping to
+rule of <span><a href="https://rfc-editor.org/rfc/rfc9880#appendix-A" class="relref">Appendix A</a> of [<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> is used to add protocol mapping to
 <code>sdfEvent</code> definitions:<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-event-extension-point-f"></span><div id="sdf-event-ext">
 <figure id="figure-9">
@@ -2088,7 +2090,7 @@ functionality defined in the rest of this document. The SCIM schema attributes
 used here are described in Section 7 of <span>[<a href="#RFC7643" class="cite xref">RFC7643</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <span id="name-scim-sdf-extension-schema"></span><div id="scim-sdf-extension-schema">
 <figure id="figure-17">
-        <div class="alignLeft art-text artwork" id="section-6-2.1">
+        <div class="lang-json sourcecode" id="section-6-2.1">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2204,7 +2206,7 @@ They should verify that updates preserve backward compatibility with deployed im
           </caption>
 <thead>
             <tr>
-              <th class="text-left" rowspan="1" colspan="1">Protocol map</th>
+              <th class="text-left" rowspan="1" colspan="1">Protocol Map Name</th>
               <th class="text-left" rowspan="1" colspan="1">Protocol Name</th>
               <th class="text-left" rowspan="1" colspan="1">Description</th>
               <th class="text-left" rowspan="1" colspan="1">Reference</th>
@@ -2215,13 +2217,15 @@ They should verify that updates preserve backward compatibility with deployed im
               <td class="text-left" rowspan="1" colspan="1">ble</td>
               <td class="text-left" rowspan="1" colspan="1">Bluetooth Low Energy (BLE)</td>
               <td class="text-left" rowspan="1" colspan="1">Protocol mapping for BLE devices</td>
-              <td class="text-left" rowspan="1" colspan="1">This document</td>
+              <td class="text-left" rowspan="1" colspan="1">This document, <a href="#ble-pm" class="auto internal xref">Section 5.1</a>
+</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">zigbee</td>
               <td class="text-left" rowspan="1" colspan="1">Zigbee</td>
               <td class="text-left" rowspan="1" colspan="1">Protocol mapping for Zigbee devices</td>
-              <td class="text-left" rowspan="1" colspan="1">This document</td>
+              <td class="text-left" rowspan="1" colspan="1">This document, <a href="#zigbee-pm" class="auto internal xref">Section 5.2</a>
+</td>
             </tr>
           </tbody>
         </table>
@@ -2235,8 +2239,12 @@ They should verify that updates preserve backward compatibility with deployed im
         </h3>
 <p id="section-8.2-1">IANA is requested to create the following extension in the SCIM
 Server-Related Schema URIs registry as described in <a href="#scim-sdf-extension" class="auto internal xref">Section 6</a>:<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+<span id="name-scim-device-schema-sdf-exten"></span><div id="iana-scim">
 <table class="center" id="table-2">
-          <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
+          <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-scim-device-schema-sdf-exten" class="selfRef">SCIM Device Schema SDF Extension</a>
+          </caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">URN</th>
@@ -2250,11 +2258,12 @@ Server-Related Schema URIs registry as described in <a href="#scim-sdf-extension
               <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:scim: schemas:extension: sdf:2.0:Device</td>
               <td class="text-left" rowspan="1" colspan="1">SDF Extension</td>
               <td class="text-left" rowspan="1" colspan="1">Device</td>
-              <td class="text-left" rowspan="1" colspan="1">This memo, <a href="#scim-sdf-extension" class="auto internal xref">Section 6</a>
+              <td class="text-left" rowspan="1" colspan="1">This document, <a href="#scim-sdf-extension" class="auto internal xref">Section 6</a>
 </td>
             </tr>
           </tbody>
         </table>
+</div>
 </section>
 </div>
 </section>
@@ -2334,9 +2343,11 @@ Server-Related Schema URIs registry as described in <a href="#scim-sdf-extension
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-cddl-definition" class="section-name selfRef">CDDL Definition</a>
       </h2>
 <p id="appendix-A-1">This appendix contains the combined CDDL definitions for the SDF protocol mappings.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<div class="breakable lang-cddl sourcecode" id="appendix-A-2">
-<pre>
-&lt;CODE BEGINS&gt; file "sdf-protocol-map.cddl"
+<span id="name-cddl-for-sdf-protocol-mappi"></span><div id="sdf-protocol-map-cddl">
+<figure id="figure-18">
+        <div class="breakable lang-cddl sourcecode" id="appendix-A-2.1">
+<pre>&lt;CODE BEGINS&gt; file "sdf-protocol-map.cddl"
+
 $$SDF-EXTENSION-PROPERTY //= (
   sdfProtocolMap: {
     * $$SDF-PROPERTY-PROTOCOL-MAP
@@ -2417,8 +2428,12 @@ zigbee-action-map = {
   ? manufacturerCode: uint,
 }
 
-&lt;CODE ENDS&gt;
-</pre><a href="#appendix-A-2" class="pilcrow">¶</a>
+
+&lt;CODE ENDS&gt;</pre>
+</div>
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<a href="#name-cddl-for-sdf-protocol-mappi" class="selfRef">CDDL for SDF protocol mappings</a>
+        </figcaption></figure>
 </div>
 </section>
 </div>
@@ -2427,10 +2442,10 @@ zigbee-action-map = {
       <h2 id="name-openapi-definition">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-openapi-definition" class="section-name selfRef">OpenAPI Definition</a>
       </h2>
-<p id="appendix-B-1">The following non-normative model is provided for convenience of the implementor.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<div id="protocolmapmodel">
-<figure id="figure-18">
-        <div class="sourcecode" id="appendix-B-2.1">
+<p id="appendix-B-1">The following non-normative model is provided for convenience of the implementer.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<span id="name-openapi-model"></span><div id="protocolmapmodel">
+<figure id="figure-19">
+        <div class="lang-yaml sourcecode" id="appendix-B-2.1">
 <pre>&lt;CODE BEGINS&gt; file "ProtocolMap.yaml"
 
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -2477,16 +2492,18 @@ rotocolMap-Zigbee-Event'
 
 &lt;CODE ENDS&gt;</pre>
 </div>
-<figcaption><a href="#figure-18" class="selfRef">Figure 18</a></figcaption></figure>
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<a href="#name-openapi-model" class="selfRef">OpenAPI model</a>
+        </figcaption></figure>
 </div>
 <div id="protocol-map-for-ble">
 <section id="appendix-B.1">
         <h3 id="name-protocol-map-for-ble">
 <a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-protocol-map-for-ble" class="section-name selfRef">Protocol map for BLE</a>
         </h3>
-<div id="protocolmapble">
-<figure id="figure-19">
-          <div class="breakable sourcecode" id="appendix-B.1-1.1">
+<span id="name-openapi-model-for-ble"></span><div id="protocolmapble">
+<figure id="figure-20">
+          <div class="breakable lang-yaml sourcecode" id="appendix-B.1-1.1">
 <pre>&lt;CODE BEGINS&gt; file "ProtocolMap-BLE.yaml"
 
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -2573,7 +2590,9 @@ components:
 
 &lt;CODE ENDS&gt;</pre>
 </div>
-<figcaption><a href="#figure-19" class="selfRef">Figure 19</a></figcaption></figure>
+<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
+<a href="#name-openapi-model-for-ble" class="selfRef">OpenAPI model for BLE</a>
+          </figcaption></figure>
 </div>
 </section>
 </div>
@@ -2582,9 +2601,9 @@ components:
         <h3 id="name-protocol-map-for-zigbee">
 <a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-protocol-map-for-zigbee" class="section-name selfRef">Protocol map for Zigbee</a>
         </h3>
-<div id="protocolmapzigbee">
-<figure id="figure-20">
-          <div class="breakable sourcecode" id="appendix-B.2-1.1">
+<span id="name-openapi-model-for-zigbee"></span><div id="protocolmapzigbee">
+<figure id="figure-21">
+          <div class="breakable lang-yaml sourcecode" id="appendix-B.2-1.1">
 <pre>&lt;CODE BEGINS&gt; file "ProtocolMap-Zigbee.yaml"
 
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -2640,7 +2659,9 @@ components:
 
 &lt;CODE ENDS&gt;</pre>
 </div>
-<figcaption><a href="#figure-20" class="selfRef">Figure 20</a></figcaption></figure>
+<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
+<a href="#name-openapi-model-for-zigbee" class="selfRef">OpenAPI model for Zigbee</a>
+          </figcaption></figure>
 </div>
 </section>
 </div>
