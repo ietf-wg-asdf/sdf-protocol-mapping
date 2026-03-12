@@ -83,7 +83,7 @@ events (collectively called affordances). When implementing an SDF model for a
 device using specific communication protocols, there needs to be a mechanism to
 map the protocol-agnostic SDF definitions to protocol-specific operations,
 translating the model into a real-world implementation. Moreover, such a mechanism
-needs to be extensible for enabling implementors to provide novel SDF protocol
+needs to be extensible for enabling implementers to provide novel SDF protocol
 mappings to expand the SDF ecosystem. SDF protocol mappings may target a variety
 of protocols spanning from non-IP protocols commonly used in IoT environments,
 such as {{BLE53}} and {{Zigbee30}}, to IP-based protocols such as HTTP
@@ -112,6 +112,9 @@ mechanism by defining:
 
 # Conventions and Definitions
 
+The syntax extensions to {{-sdf}} in terms of its JSON structures are
+shown in the Concise Data Definition Language (CDDL) {{-cddl}}.
+
 {::boilerplate bcp14-tagged}
 
 # SDF Protocol Mapping Structure {#sdf-pm}
@@ -125,7 +128,8 @@ endpoint.
 A protocol mapping object is a JSON object identified by the `sdfProtocolMap`
 keyword, nested inside an SDF affordance definition (`sdfProperty`, `sdfAction`,
 or `sdfEvent`). Protocol-specific attributes are embedded within this object,
-keyed by an IANA registered protocol name, e.g., "ble" or "zigbee".
+keyed by a protocol name registered in the IANA "SDF Protocol Mapping"
+registry ({{iana-prot-map}}), e.g., "ble" or "zigbee".
 
 ~~~ aasvg
 sdfProperty / sdfAction / sdfEvent
@@ -147,8 +151,8 @@ sdfProperty / sdfAction / sdfEvent
 ## SDF Extension Points
 
 The `sdfProtocolMap` keyword is introduced into SDF affordance definitions
-through the extension points defined in the formal syntax of {{-sdf}}
-(Appendix A). For each affordance type, an `sdfProtocolMap` entry is added
+through the extension points defined in the formal syntax of {{Appendix
+A of -sdf}}. For each affordance type, an `sdfProtocolMap` entry is added
 via the corresponding CDDL group socket. The contents of the
 `sdfProtocolMap` object are in turn extensible through a
 protocol-mapping-specific group socket.
@@ -160,7 +164,7 @@ events but not for actions.
 ### Property Extension {#property-extension}
 
 The `$$SDF-EXTENSION-PROPERTY` group socket in the `propertyqualities`
-rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
+rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 `sdfProperty` definitions:
 
 ~~~ cddl
@@ -178,7 +182,7 @@ provide either:
   attributes for each direction.
 
 To extend `$$SDF-PROPERTY-PROTOCOL-MAP` for a new protocol (e.g.,
-"new-protocol"), implementors MUST use the `property-protocol-map` generic with
+"new-protocol"), implementers MUST use the `property-protocol-map` generic with
 the protocol name and a map type defining the protocol-specific attributes.
 
 It is to be noted that the protocol `name` (e.g., "new-protocol") MUST be
@@ -248,7 +252,7 @@ operations, the mapping can be split:
 ### Action Extension {#action-extension}
 
 The `$$SDF-EXTENSION-ACTION` group socket in the `actionqualities`
-rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
+rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 `sdfAction` definitions:
 
 ~~~ cddl
@@ -259,7 +263,7 @@ rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
 
 Actions use a simpler structure than properties, as they do not require the
 read/write distinction. To extend `$$SDF-ACTION-PROTOCOL-MAP` for a new
-protocol, implementors MUST add a group entry that maps the protocol name to the
+protocol, implementers MUST add a group entry that maps the protocol name to the
 protocol-specific attributes:
 
 ~~~ cddl
@@ -293,7 +297,7 @@ The corresponding JSON in an SDF model would look like:
 ### Event Extension {#event-extension}
 
 The `$$SDF-EXTENSION-EVENT` group socket in the `eventqualities`
-rule of {{-sdf}} (Appendix A) is used to add protocol mapping to
+rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 `sdfEvent` definitions:
 
 ~~~ cddl
@@ -353,7 +357,7 @@ includes:
   underlying protocol operations.
 
 <!-- LC: Should we consider adding an appendix showing the whole process to
-create a fictitious new protocol? It may be of help to implementors. -->
+create a fictitious new protocol? It may be of help to implementers. -->
 
 # Registered Protocol Mappings
 
@@ -608,7 +612,7 @@ of this SCIM extension is OPTIONAL and independent of the protocol mapping
 functionality defined in the rest of this document. The SCIM schema attributes
 used here are described in Section 7 of {{!RFC7643}}.
 
-~~~
+~~~ json
 {::include generated/scim/scim-sdf-extension.json.folded}
 ~~~
 {: #scim-sdf-extension-schema title="SCIM SDF Extension Schema"}
@@ -677,10 +681,10 @@ They should verify that updates preserve backward compatibility with deployed im
 
 The following protocol mappings are described in this document:
 
-| Protocol map | Protocol Name               | Description                                 | Reference       |
-|--------------|-----------------------------|---------------------------------------------|-----------------|
-| ble          | Bluetooth Low Energy (BLE)  | Protocol mapping for BLE devices            | This document   |
-| zigbee       | Zigbee                      | Protocol mapping for Zigbee devices         | This document   |
+| Protocol Map Name | Protocol Name              | Description                         | Reference                  |
+|-------------------+----------------------------+-------------------------------------+----------------------------|
+| ble               | Bluetooth Low Energy (BLE) | Protocol mapping for BLE devices    | This document, {{ble-pm}}    |
+| zigbee            | Zigbee                     | Protocol mapping for Zigbee devices | This document, {{zigbee-pm}} |
 {: #protmap-reg title="Protocol Mapping Registry"}
 
 ## SCIM Device Schema SDF Extension
@@ -688,10 +692,10 @@ The following protocol mappings are described in this document:
 IANA is requested to create the following extension in the SCIM
 Server-Related Schema URIs registry as described in {{scim-sdf-extension}}:
 
-| URN | Description | Resource Type | Reference |
-|-----|-------------|-----------|-----------|
-| urn:ietf:params:scim: schemas:extension: sdf:2.0:Device | SDF Extension | Device | This memo, [](#scim-sdf-extension) |
-
+| URN                                                     | Description   | Resource Type | Reference                           |
+|---------------------------------------------------------+---------------+---------------+-------------------------------------|
+| urn:ietf:params:scim: schemas:extension: sdf:2.0:Device | SDF Extension | Device        | This document, {{scim-sdf-extension}} |
+{: #iana-scim title="SCIM Device Schema SDF Extension"}
 
 --- back
 
@@ -700,42 +704,46 @@ Server-Related Schema URIs registry as described in {{scim-sdf-extension}}:
 This appendix contains the combined CDDL definitions for the SDF protocol mappings.
 
 ~~~ cddl
-<CODE BEGINS> file "sdf-protocol-map.cddl"
 {::include generated/combined.cddl.folded}
-<CODE ENDS>
 ~~~
+{: #sdf-protocol-map-cddl
+   sourcecode-name="sdf-protocol-map.cddl" sourcecode-markers="true"
+   title="CDDL for SDF protocol mappings"}
+
 
 # OpenAPI Definition
 
 <!-- LC: Maybe we need some text to explain why all of a sudden there is some
 OpenAPI specifications. -->
 
-The following non-normative model is provided for convenience of the implementor.
+The following non-normative model is provided for convenience of the implementer.
 
-~~~~~~
-<CODE BEGINS> file "ProtocolMap.yaml"
+~~~~~~ yaml
 {::include generated/openapi/ProtocolMap.yaml.folded}
-<CODE ENDS>
 ~~~~~~
-{: #protocolmapmodel}
+{: #protocolmapmodel
+   sourcecode-name="ProtocolMap.yaml" sourcecode-markers="true"
+   title="OpenAPI model"}
 
 ## Protocol map for BLE
 
-~~~~~
-<CODE BEGINS> file "ProtocolMap-BLE.yaml"
+~~~~~ yaml
 {::include generated/openapi/ProtocolMap-BLE.yaml.folded}
-<CODE ENDS>
 ~~~~~
-{: #protocolmapble}
+{: #protocolmapble
+   sourcecode-name="ProtocolMap-BLE.yaml" sourcecode-markers="true"
+   title="OpenAPI model for BLE"
+}
 
 ## Protocol map for Zigbee
 
-~~~~~
-<CODE BEGINS> file "ProtocolMap-Zigbee.yaml"
+~~~~~ yaml
 {::include generated/openapi/ProtocolMap-Zigbee.yaml.folded}
-<CODE ENDS>
 ~~~~~
-{: #protocolmapzigbee}
+{: #protocolmapzigbee
+   sourcecode-name="ProtocolMap-Zigbee.yaml" sourcecode-markers="true"
+   title="OpenAPI model for Zigbee"
+}
 
 # Acknowledgements
 {:numbered="false"}
