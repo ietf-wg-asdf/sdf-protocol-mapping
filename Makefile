@@ -1,5 +1,5 @@
 LIBDIR := lib
-include $(LIBDIR)/main.mk
+-include $(LIBDIR)/main.mk
 
 $(LIBDIR)/main.mk:
 ifneq (,$(wildcard $(ID_TEMPLATE_HOME)))
