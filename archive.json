@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-08T01:21:30.327099+00:00",
+  "timestamp": "2026-03-12T01:16:03.324704+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -402,6 +402,62 @@
       "body": "In a discussion @cabo and I had recently, it came up that it might be useful to allow for definitions of SDF protocol mappings that can be reused at the affordance level (using `sdfRef`). These protocol mappings could either be global/located at the top-level of a model, or associated with an `sdfThing` or `sdfObject` to allow for sharing common definitions (such as IP addresses).\n\nAt the top-level or grouping level, the format of the `sdfProtocolMapping` might need to allow for defining multiple mappings for the same operation that can then be referenced from different affordances (e.g., two read operations that referenced from two `sdfProperty` definitions). But the details of that could potentially be left to the specifications that define mappings for specific protocols.",
       "createdAt": "2026-03-05T10:14:24Z",
       "updatedAt": "2026-03-05T10:15:02Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 28,
+      "id": "I_kwDOPSJ9A87xokxO",
+      "title": "JSON",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/28",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Some of the JSON examples contain comments (*), which JSON doesn't have.\n\n(*) kramdown-rfc not detecting this is a bug to be fixed.\n",
+      "createdAt": "2026-03-10T20:01:44Z",
+      "updatedAt": "2026-03-10T21:57:44Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I had these marked as `~~~ jsonc` to indicate JSON with comments, but I guess that was removed at some point. \nWhat would you recommend? Should I just get rid of the comments? They were present only to illustrate the hex values of the Zigbee IDs.",
+          "createdAt": "2026-03-10T21:57:44Z",
+          "updatedAt": "2026-03-10T21:57:44Z"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "I_kwDOPSJ9A87xom9x",
+      "title": "SHOULD",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/29",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "There are six SHOULDs in the text.\n\nOne directly contradicts an earlier MUST (use generic `property-protocol-map`).\n\nNone of them explain the kind of exceptional condition when the SHOULD is not a MUST.\n\n(This *will* come back from IESG...)",
+      "createdAt": "2026-03-10T20:03:45Z",
+      "updatedAt": "2026-03-10T20:03:45Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 30,
+      "id": "I_kwDOPSJ9A87xqNB5",
+      "title": "Allow different protocol maps for read and write",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/30",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/blob/4d54f2bac6d560be20eef6b1c160dd858f1429f0/draft-ietf-asdf-sdf-protocol-mapping.md?plain=1#L180-L182\n\nThe definition for the generic `property-protocol-map` doesn't allow for different protocol maps for read and write. \n\n``` cddl\nproperty-protocol-map<name, props> = (\n  name => props /\n    {\n      read: props,\n      write: props\n    }\n)\n```\n\nOne example that @JKRhb [brought up](https://github.com/JKRhb/sdf-coap-protocol-map/pull/3/changes#r2913638582) is that `read` and `write` can have two different default CoAP methods. \n\n1. Should the text be changed to a SHOULD?\n2. Should we change the definition to something like: \n``` cddl\nproperty-protocol-map<name, props, read-props, write-props> = (\n  name => props /\n    {\n      read: read-props,\n      write: write-props\n    }\n)\n```\n\nAlso, relates to #29.",
+      "createdAt": "2026-03-10T21:41:32Z",
+      "updatedAt": "2026-03-10T21:41:32Z",
       "closedAt": null,
       "comments": []
     }
@@ -1853,6 +1909,53 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOPSJ9A87JdVB0",
+      "title": "Collecting Nits for  -06",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/27",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-10T17:40:38Z",
+      "updatedAt": "2026-03-11T15:46:19Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "4d54f2bac6d560be20eef6b1c160dd858f1429f0",
+      "headRepository": "cabo/sdf-protocol-mapping",
+      "headRefName": "nits-06",
+      "headRefOid": "ae5c31c5f42fc2b5ad63011d8e9cb5624e5ac0d0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A87qSGLb",
+          "commit": {
+            "abbreviatedOid": "ae5c31c"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-11T15:44:48Z",
+          "updatedAt": "2026-03-11T15:46:19Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\nshown in the Concise Data Definition Language (CDDL) {{-cddl}}.\n```\n",
+              "createdAt": "2026-03-11T15:44:48Z",
+              "updatedAt": "2026-03-11T15:46:19Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
