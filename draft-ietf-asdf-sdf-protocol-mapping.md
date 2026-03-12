@@ -170,7 +170,7 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 ~~~ cddl
 {::include cddl/sdf-property-protocol-map.cddl}
 ~~~
-{: #sdf-prop-ext title="SDF Property Extension Point for Protocol Mapping"}
+{: post="fold" #sdf-prop-ext title="SDF Property Extension Point for Protocol Mapping"}
 
 The `property-protocol-map` generic ({{sdf-prop-ext}}) captures the common
 structure of property protocol mappings. The `name` parameter is the protocol
@@ -200,7 +200,7 @@ new-protocol-property = {
   attributeB: uint
 }
 ~~~
-{: #prop-ext-example title="Example Property Protocol Map Extension"}
+{: post="fold" #prop-ext-example title="Example Property Protocol Map Extension"}
 
 The corresponding JSON in an SDF model looks like:
 
@@ -220,7 +220,7 @@ The corresponding JSON in an SDF model looks like:
   }
 }
 ~~~
-{: #prop-ext-json-example title="Example Property Protocol Map in JSON"}
+{: post="fold" #prop-ext-json-example title="Example Property Protocol Map in JSON"}
 
 When a property uses different protocol attributes for read and write
 operations, the mapping can be split:
@@ -247,7 +247,7 @@ operations, the mapping can be split:
   }
 }
 ~~~
-{: #prop-ext-rw-json-example title="Example Property Protocol Map with Read/Write in JSON"}
+{: post="fold" #prop-ext-rw-json-example title="Example Property Protocol Map with Read/Write in JSON"}
 
 ### Action Extension {#action-extension}
 
@@ -258,7 +258,7 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 ~~~ cddl
 {::include cddl/sdf-action-protocol-map.cddl}
 ~~~
-{: #sdf-action-ext title="SDF Action Extension Point for Protocol Mapping"}
+{: post="fold" #sdf-action-ext title="SDF Action Extension Point for Protocol Mapping"}
 
 
 Actions use a simpler structure than properties, as they do not require the
@@ -275,7 +275,7 @@ new-protocol-action = {
   commandID: uint
 }
 ~~~
-{: #action-ext-example title="Example Action Protocol Map Extension"}
+{: post="fold" #action-ext-example title="Example Action Protocol Map Extension"}
 
 The corresponding JSON in an SDF model would look like:
 
@@ -292,7 +292,7 @@ The corresponding JSON in an SDF model would look like:
   }
 }
 ~~~
-{: #action-ext-json-example title="Example Action Protocol Map in JSON"}
+{: post="fold" #action-ext-json-example title="Example Action Protocol Map in JSON"}
 
 ### Event Extension {#event-extension}
 
@@ -303,7 +303,7 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 ~~~ cddl
 {::include cddl/sdf-event-protocol-map.cddl}
 ~~~
-{: #sdf-event-ext title="SDF Event Extension Point for Protocol Mapping"}
+{: post="fold" #sdf-event-ext title="SDF Event Extension Point for Protocol Mapping"}
 
 Events follow the same simple pattern as actions. To extend
 `$$SDF-EVENT-PROTOCOL-MAP` for a new protocol:
@@ -317,7 +317,7 @@ new-protocol-event = {
   eventID: uint
 }
 ~~~
-{: #event-ext-example title="Example Event Protocol Map Extension"}
+{: post="fold" #event-ext-example title="Example Event Protocol Map Extension"}
 
 The corresponding JSON in an SDF model looks like:
 
@@ -334,7 +334,7 @@ The corresponding JSON in an SDF model looks like:
   }
 }
 ~~~
-{: #event-ext-json-example title="Example Event Protocol Map in JSON"}
+{: post="fold" #event-ext-json-example title="Example Event Protocol Map in JSON"}
 
 # New Protocol Registration Procedure {#protocol-registration}
 
@@ -377,7 +377,7 @@ For `sdfProperty`, the BLE protocol mapping structure is defined as follows:
 ~~~ cddl
 {::include cddl/ble-protocol-map.cddl}
 ~~~
-{: #blemap1 title="CDDL definition for BLE Protocol Mapping for sdfProperty"}
+{: post="fold" #blemap1 title="CDDL definition for BLE Protocol Mapping for sdfProperty"}
 
 Where:
 
@@ -400,6 +400,7 @@ For example, a BLE protocol mapping for a temperature property:
   }
 }
 ~~~
+{: post="fold"}
 
 For a temperature property that has different mappings for read and write operations,
 here is an example of the BLE protocol mapping:
@@ -424,6 +425,7 @@ here is an example of the BLE protocol mapping:
   }
 }
 ~~~
+{: post="fold"}
 
 ### Events
 
@@ -434,7 +436,7 @@ the event.
 ~~~ cddl
 {::include cddl/ble-event-map.cddl}
 ~~~
-{: #blemap2 title="BLE Protocol Mapping for sdfEvents"}
+{: post="fold" #blemap2 title="BLE Protocol Mapping for sdfEvents"}
 
 Where:
 
@@ -465,6 +467,7 @@ For example, a BLE event mapping for a heart rate measurement event:
   }
 }
 ~~~
+{: post="fold"}
 
 Here is an example of an `isPresent` event using BLE advertisements:
 
@@ -481,6 +484,7 @@ Here is an example of an `isPresent` event using BLE advertisements:
   }
 }
 ~~~
+{: post="fold"}
 
 ## Zigbee {#zigbee-pm}
 
@@ -497,7 +501,7 @@ protocol mapping structure is defined as follows:
 ~~~ cddl
 {::include cddl/zigbee-protocol-map.cddl}
 ~~~
-{: #zigmap1 title="CDDL definition for Zigbee Protocol Mapping for sdfProperty"}
+{: post="fold" #zigmap1 title="CDDL definition for Zigbee Protocol Mapping for sdfProperty"}
 
 Where:
 
@@ -526,6 +530,7 @@ follows:
   }
 }
 ~~~
+{: post="fold"}
 
 ### Events
 
@@ -535,7 +540,7 @@ protocol mapping structure is defined as follows:
 ~~~ cddl
 {::include cddl/zigbee-event-map.cddl}
 ~~~
-{: #zigmap-event title="CDDL definition for Zigbee Protocol Mapping for sdfEvents"}
+{: post="fold" #zigmap-event title="CDDL definition for Zigbee Protocol Mapping for sdfEvents"}
 
 Where:
 
@@ -564,6 +569,7 @@ For example, a Zigbee event mapping for a temperature change report:
   }
 }
 ~~~
+{: post="fold"}
 
 
 ### Actions
@@ -574,7 +580,7 @@ mapping structure for actions is defined as follows:
 ~~~ cddl
 {::include cddl/zigbee-action-map.cddl}
 ~~~
-{: #zigmap2 title="CDDL definition for Zigbee Protocol Mapping for sdfAction"}
+{: post="fold" #zigmap2 title="CDDL definition for Zigbee Protocol Mapping for sdfAction"}
 
 Where:
 
@@ -600,6 +606,7 @@ For example, a Zigbee protocol mapping to set a temperature:
   }
 }
 ~~~
+{: post="fold"}
 
 # SCIM SDF Extension {#scim-sdf-extension}
 
@@ -613,7 +620,7 @@ functionality defined in the rest of this document. The SCIM schema attributes
 used here are described in Section 7 of {{!RFC7643}}.
 
 ~~~ json
-{::include generated/scim/scim-sdf-extension.json.folded}
+{::include-fold scim/scim-sdf-extension.json}
 ~~~
 {: #scim-sdf-extension-schema title="SCIM SDF Extension Schema"}
 
@@ -636,6 +643,7 @@ Here is an example SCIM device schema extension with SDF models:
     }
 }
 ~~~
+{: post="fold"}
 
 An SDF model MUST be referenced with the `sdf` keyword inside the SCIM device
 schema as described in {{!I-D.ietf-scim-device-model}}.
@@ -704,7 +712,7 @@ Server-Related Schema URIs registry as described in {{scim-sdf-extension}}:
 This appendix contains the combined CDDL definitions for the SDF protocol mappings.
 
 ~~~ cddl
-{::include generated/combined.cddl.folded}
+{::include-fold generated/combined.cddl}
 ~~~
 {: #sdf-protocol-map-cddl
    sourcecode-name="sdf-protocol-map.cddl" sourcecode-markers="true"
@@ -719,7 +727,7 @@ OpenAPI specifications. -->
 The following non-normative model is provided for convenience of the implementer.
 
 ~~~~~~ yaml
-{::include generated/openapi/ProtocolMap.yaml.folded}
+{::include-fold openapi/ProtocolMap.yaml}
 ~~~~~~
 {: #protocolmapmodel
    sourcecode-name="ProtocolMap.yaml" sourcecode-markers="true"
@@ -728,7 +736,7 @@ The following non-normative model is provided for convenience of the implementer
 ## Protocol map for BLE
 
 ~~~~~ yaml
-{::include generated/openapi/ProtocolMap-BLE.yaml.folded}
+{::include-fold openapi/ProtocolMap-BLE.yaml}
 ~~~~~
 {: #protocolmapble
    sourcecode-name="ProtocolMap-BLE.yaml" sourcecode-markers="true"
@@ -738,7 +746,7 @@ The following non-normative model is provided for convenience of the implementer
 ## Protocol map for Zigbee
 
 ~~~~~ yaml
-{::include generated/openapi/ProtocolMap-Zigbee.yaml.folded}
+{::include-fold openapi/ProtocolMap-Zigbee.yaml}
 ~~~~~
 {: #protocolmapzigbee
    sourcecode-name="ProtocolMap-Zigbee.yaml" sourcecode-markers="true"

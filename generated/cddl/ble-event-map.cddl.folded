@@ -1,9 +1,0 @@
-$$SDF-EVENT-PROTOCOL-MAP //= (
-  ble: ble-event-map
-)
-
-ble-event-map = {
-  type: "gatt",
-  serviceID: text,
-  characteristicID: text
-} / { type: "advertisements" } / { type: "connection_events" }
