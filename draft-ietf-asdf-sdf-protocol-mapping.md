@@ -521,9 +521,9 @@ follows:
       "sdfProtocolMap": {
         "zigbee": {
           "endpointID": 1,
-          "clusterID": 1026, // 0x0402
-          "attributeID": 0, // 0x0000
-          "attributeType": 41 // 0x29
+          "clusterID": 1026,
+          "attributeID": 0,
+          "attributeType": 41
         }
       }
     }
@@ -560,9 +560,9 @@ For example, a Zigbee event mapping for a temperature change report:
       "sdfProtocolMap": {
         "zigbee": {
           "endpointID": 1,
-          "clusterID": 1026, // 0x0402
-          "attributeID": 0, // 0x0000
-          "attributeType": 41 // 0x29
+          "clusterID": 1026,
+          "attributeID": 0,
+          "attributeType": 41
         }
       }
     }
@@ -598,8 +598,8 @@ For example, a Zigbee protocol mapping to set a temperature:
       "sdfProtocolMap": {
         "zigbee": {
           "endpointID": 1,
-          "clusterID": 1026, // 0x0402
-          "commandID": 0 // 0x0000
+          "clusterID": 1026,
+          "commandID": 0
         }
       }
     }
