@@ -4,10 +4,10 @@ $$SDF-EXTENSION-PROPERTY //= (
   }
 )
 
-property-protocol-map<name, props> = (
+property-protocol-map<name, props, read-props, write-props> = (
   name => props /
     {
-      read: props,
-      write: props
+      read: read-props,
+      write: write-props
     }
 )

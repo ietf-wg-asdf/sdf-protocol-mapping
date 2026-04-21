@@ -192,7 +192,7 @@ For example:
 
 ~~~ cddl
 $$SDF-PROPERTY-PROTOCOL-MAP //= (
-  property-protocol-map<"new-protocol", new-protocol-property>
+  property-protocol-map<"new-protocol", new-protocol-property, new-protocol-property, new-protocol-property>
 )
 
 new-protocol-property = {
@@ -350,7 +350,7 @@ includes:
   `$$SDF-PROPERTY-PROTOCOL-MAP` ({{property-extension}}),
   `$$SDF-ACTION-PROTOCOL-MAP` ({{action-extension}}), or
   `$$SDF-EVENT-PROTOCOL-MAP` ({{event-extension}}).
-  Property mappings SHOULD use the `property-protocol-map` generic
+  Property mappings MUST use the `property-protocol-map` generic
   ({{property-extension}}) to ensure a consistent structure.
 - A description of the protocol-specific attributes introduced by the
   CDDL extension, including their semantics and how they relate to the
