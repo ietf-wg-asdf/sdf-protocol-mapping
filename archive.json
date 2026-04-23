@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-15T01:43:20.570643+00:00",
+  "timestamp": "2026-04-23T01:55:27.262721+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -2012,6 +2012,58 @@
       "mergeCommit": {
         "oid": "50ecb7d71f4ba942867871dbb222588adac9860a"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDOPSJ9A87Ua7Yq",
+      "title": "Allow two different read/write protocol mappings",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/33",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses issue #30",
+      "createdAt": "2026-04-21T20:09:29Z",
+      "updatedAt": "2026-04-21T20:09:29Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "9ef46d5ea0f292f1cea1afbd07ac430834554b33",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "property-protocol-map-issue-30",
+      "headRefOid": "8e1fd0299151da3786e9ee33e1970e33f2b2bf21",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 34,
+      "id": "PR_kwDOPSJ9A87Ua9lS",
+      "title": "Removed json comments",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/34",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #28 ",
+      "createdAt": "2026-04-21T20:11:58Z",
+      "updatedAt": "2026-04-21T20:11:58Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "9ef46d5ea0f292f1cea1afbd07ac430834554b33",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "json-comments",
+      "headRefOid": "2eda82530d093782431df2838c11720230e84edc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
