@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 23 October 2026                                       L. Corneo
+Expires: 30 October 2026                                       L. Corneo
                                                                 Ericsson
-                                                           21 April 2026
+                                                           28 April 2026
 
 
                           SDF Protocol Mapping
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 October 2026.
+   This Internet-Draft will expire on 30 October 2026.
 
 Copyright Notice
 
@@ -594,9 +594,9 @@ Table of Contents
          "sdfProtocolMap": {
            "zigbee": {
              "endpointID": 1,
-             "clusterID": 1026, // 0x0402
-             "attributeID": 0, // 0x0000
-             "attributeType": 41 // 0x29
+             "clusterID": 1026,
+             "attributeID": 0,
+             "attributeType": 41
            }
          }
        }
@@ -646,9 +646,9 @@ Table of Contents
          "sdfProtocolMap": {
            "zigbee": {
              "endpointID": 1,
-             "clusterID": 1026, // 0x0402
-             "attributeID": 0, // 0x0000
-             "attributeType": 41 // 0x29
+             "clusterID": 1026,
+             "attributeID": 0,
+             "attributeType": 41
            }
          }
        }
@@ -695,8 +695,8 @@ Table of Contents
          "sdfProtocolMap": {
            "zigbee": {
              "endpointID": 1,
-             "clusterID": 1026, // 0x0402
-             "commandID": 0 // 0x0000
+             "clusterID": 1026,
+             "commandID": 0
            }
          }
        }
