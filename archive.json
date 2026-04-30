@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-23T01:55:27.262721+00:00",
+  "timestamp": "2026-04-30T02:09:04.370626+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -410,15 +410,15 @@
       "id": "I_kwDOPSJ9A87xokxO",
       "title": "JSON",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/28",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cabo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Some of the JSON examples contain comments (*), which JSON doesn't have.\n\n(*) kramdown-rfc not detecting this is a bug to be fixed.\n",
       "createdAt": "2026-03-10T20:01:44Z",
-      "updatedAt": "2026-03-10T21:57:44Z",
-      "closedAt": null,
+      "updatedAt": "2026-04-28T16:18:17Z",
+      "closedAt": "2026-04-28T16:18:17Z",
       "comments": [
         {
           "author": "rohitmohan96",
@@ -512,14 +512,14 @@
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/7",
       "state": "OPEN",
       "author": "lorenzocorneo",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [
         "lorenzocorneo"
       ],
       "labels": [],
       "body": "# HTTP and CoAP SDF Protocol Mappings\n\nThis PR aim is to add SDF Protocol Mappings for HTTP and CoAP. It addresses the issue #5.\n\nCoAP is still missing.\n\nThis PR currently features:\n- **OpenAPI CDDL and structure change**\n- **Draft of HTTP protocol mapping**\n",
       "createdAt": "2025-08-27T09:50:05Z",
-      "updatedAt": "2026-02-26T19:30:17Z",
+      "updatedAt": "2026-04-29T04:22:00Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "c9593aa5d2825b8fffc2b040ee8d1e7f5df6f31d",
@@ -533,7 +533,7 @@
       "comments": [
         {
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Up to this commit, HTTP method, path, and query string are in three separate fields. Should they be in a single field?",
           "createdAt": "2025-08-29T06:19:37Z",
           "updatedAt": "2025-08-29T06:19:37Z"
@@ -547,7 +547,7 @@
         },
         {
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Hi @rohitmohan96 and @lorenzocorneo, would it be okay for you if I spun off the CoAP protocol mapping into a separate document? If you like, I would add you as co-authors and invite you to the repository.",
           "createdAt": "2026-02-26T17:11:26Z",
           "updatedAt": "2026-02-26T17:11:26Z"
@@ -561,7 +561,7 @@
         },
         {
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "> Hi @rohitmohan96 and @lorenzocorneo, would it be okay for you if I spun off the CoAP protocol mapping into a separate document? If you like, I would add you as co-authors and invite you to the repository.\r\n\r\nAbsolutely, thanks!",
           "createdAt": "2026-02-26T19:30:17Z",
           "updatedAt": "2026-02-26T19:30:17Z"
@@ -594,7 +594,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-02T13:30:31Z",
@@ -614,7 +614,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "Thank you, @lorenzocorneo, I think this is an interesting starting point for further discussion! See a first set of CoAP-related comments below.",
           "createdAt": "2025-09-07T09:04:02Z",
@@ -658,7 +658,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-07T09:25:36Z",
@@ -678,7 +678,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-07T09:30:55Z",
@@ -698,7 +698,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-07T09:37:08Z",
@@ -718,7 +718,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-07T09:39:46Z",
@@ -738,7 +738,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-07T09:44:06Z",
@@ -758,7 +758,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-07T09:56:29Z",
@@ -778,7 +778,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-08T06:06:58Z",
@@ -798,7 +798,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-08T06:12:17Z",
@@ -818,7 +818,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-08T06:15:47Z",
@@ -838,7 +838,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-08T06:28:01Z",
@@ -858,7 +858,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-13T14:08:23Z",
@@ -878,7 +878,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-13T14:20:27Z",
@@ -898,7 +898,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-13T14:26:58Z",
@@ -918,7 +918,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-15T08:54:43Z",
@@ -938,7 +938,7 @@
             "abbreviatedOid": "055b049"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-15T13:12:59Z",
@@ -998,7 +998,7 @@
             "abbreviatedOid": "be93264"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-15T21:28:35Z",
@@ -1018,7 +1018,7 @@
             "abbreviatedOid": "055b049"
           },
           "author": "JKRhb",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-09-15T21:29:21Z",
@@ -1078,7 +1078,7 @@
             "abbreviatedOid": "055b049"
           },
           "author": "lorenzocorneo",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-10-06T10:19:15Z",
@@ -1091,6 +1091,19 @@
               "updatedAt": "2025-10-06T10:19:15Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A875--Wj",
+          "commit": {
+            "abbreviatedOid": "055b049"
+          },
+          "author": "Ramsesugalde",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-04-29T04:22:00Z",
+          "updatedAt": "2026-04-29T04:22:00Z",
+          "comments": []
         }
       ]
     },
@@ -2046,24 +2059,26 @@
       "id": "PR_kwDOPSJ9A87Ua9lS",
       "title": "Removed json comments",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/34",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #28 ",
       "createdAt": "2026-04-21T20:11:58Z",
-      "updatedAt": "2026-04-21T20:11:58Z",
+      "updatedAt": "2026-04-28T16:18:16Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "9ef46d5ea0f292f1cea1afbd07ac430834554b33",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "json-comments",
       "headRefOid": "2eda82530d093782431df2838c11720230e84edc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-04-28T16:18:16Z",
+      "mergedAt": "2026-04-28T16:18:16Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "3ebafde88f133ad95680915dbfee99d2dc52ccac"
+      },
       "comments": [],
       "reviews": []
     }
