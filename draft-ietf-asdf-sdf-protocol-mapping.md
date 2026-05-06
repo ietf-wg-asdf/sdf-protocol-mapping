@@ -350,7 +350,7 @@ includes:
   `$$SDF-PROPERTY-PROTOCOL-MAP` ({{property-extension}}),
   `$$SDF-ACTION-PROTOCOL-MAP` ({{action-extension}}), or
   `$$SDF-EVENT-PROTOCOL-MAP` ({{event-extension}}).
-  Property mappings SHOULD use the `property-protocol-map` generic
+  Property mappings MUST use the `property-protocol-map` generic
   ({{property-extension}}) to ensure a consistent structure.
 - A description of the protocol-specific attributes introduced by the
   CDDL extension, including their semantics and how they relate to the
@@ -366,7 +366,7 @@ This section defines the protocol mappings registered by this document.
 ## BLE {#ble-pm}
 
 The BLE protocol mapping allows SDF models to specify how properties and events
-SHOULD be accessed using Bluetooth Low Energy (BLE) protocol {{BLE53}}. The
+should be accessed using Bluetooth Low Energy (BLE) protocol {{BLE53}}. The
 mapping includes details such as service IDs and characteristic IDs that are
 used to access the corresponding SDF affordances.
 
@@ -495,7 +495,7 @@ to access the corresponding SDF affordances.
 
 ### Properties
 
-An `sdfProperty` SHOULD be mapped to a Zigbee cluster attribute. The Zigbee property
+An `sdfProperty` is mapped to a Zigbee cluster attribute. The Zigbee property
 protocol mapping structure is defined as follows:
 
 ~~~ cddl
@@ -534,7 +534,7 @@ follows:
 
 ### Events
 
-An `sdfEvent` SHOULD be mapped to Zigbee cluster attribute reporting. The Zigbee event
+An `sdfEvent` is mapped to Zigbee cluster attribute reporting. The Zigbee event
 protocol mapping structure is defined as follows:
 
 ~~~ cddl
@@ -574,7 +574,7 @@ For example, a Zigbee event mapping for a temperature change report:
 
 ### Actions
 
-An `sdfAction` SHOULD be mapped to a Zigbee cluster command. The Zigbee protocol
+An `sdfAction` is mapped to a Zigbee cluster command. The Zigbee protocol
 mapping structure for actions is defined as follows:
 
 ~~~ cddl
@@ -682,7 +682,7 @@ The registry must contain the following attributes:
 The specification requirements for a registration request are
 defined in {{protocol-registration}}.
 
-The designated expert(s) SHOULD verify that the protocol map name is appropriate and not likely to cause confusion with existing entries.
+The designated expert(s) MUST verify that the protocol map name is appropriate and not likely to cause confusion with existing entries.
 
 The registrant of an existing entry may request updates to that entry, subject to the same expert review.
 They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.
