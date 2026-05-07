@@ -1705,7 +1705,7 @@ underlying protocol operations.<a href="#section-4-3.2.1" class="pilcrow">¶</a>
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-ble" class="section-name selfRef">BLE</a>
         </h3>
 <p id="section-5.1-1">The BLE protocol mapping allows SDF models to specify how properties and events
-<span class="bcp14">SHOULD</span> be accessed using Bluetooth Low Energy (BLE) protocol <span>[<a href="#BLE53" class="cite xref">BLE53</a>]</span>. The
+should be accessed using Bluetooth Low Energy (BLE) protocol <span>[<a href="#BLE53" class="cite xref">BLE53</a>]</span>. The
 mapping includes details such as service IDs and characteristic IDs that are
 used to access the corresponding SDF affordances.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <div id="properties">
@@ -1878,7 +1878,7 @@ to access the corresponding SDF affordances.<a href="#section-5.2-1" class="pilc
           <h4 id="name-properties-2">
 <a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-properties-2" class="section-name selfRef">Properties</a>
           </h4>
-<p id="section-5.2.1-1">An <code>sdfProperty</code> <span class="bcp14">SHOULD</span> be mapped to a Zigbee cluster attribute. The Zigbee property
+<p id="section-5.2.1-1">An <code>sdfProperty</code> is mapped to a Zigbee cluster attribute. The Zigbee property
 protocol mapping structure is defined as follows:<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-"></span><div id="zigmap1">
 <figure id="figure-14">
@@ -1948,7 +1948,7 @@ follows:<a href="#section-5.2.1-5" class="pilcrow">¶</a></p>
           <h4 id="name-events-2">
 <a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-events-2" class="section-name selfRef">Events</a>
           </h4>
-<p id="section-5.2.2-1">An <code>sdfEvent</code> <span class="bcp14">SHOULD</span> be mapped to Zigbee cluster attribute reporting. The Zigbee event
+<p id="section-5.2.2-1">An <code>sdfEvent</code> is mapped to Zigbee cluster attribute reporting. The Zigbee event
 protocol mapping structure is defined as follows:<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-p"></span><div id="zigmap-event">
 <figure id="figure-15">
@@ -2014,7 +2014,7 @@ zigbee-event-map = {
           <h4 id="name-actions">
 <a href="#section-5.2.3" class="section-number selfRef">5.2.3. </a><a href="#name-actions" class="section-name selfRef">Actions</a>
           </h4>
-<p id="section-5.2.3-1">An <code>sdfAction</code> <span class="bcp14">SHOULD</span> be mapped to a Zigbee cluster command. The Zigbee protocol
+<p id="section-5.2.3-1">An <code>sdfAction</code> is mapped to a Zigbee cluster command. The Zigbee protocol
 mapping structure for actions is defined as follows:<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-pr"></span><div id="zigmap2">
 <figure id="figure-16">
@@ -2192,7 +2192,7 @@ defined in Section 4.6 of <span>[<a href="#RFC8126" class="cite xref">RFC8126</a
         </ul>
 <p id="section-8.1-5">The specification requirements for a registration request are
 defined in <a href="#protocol-registration" class="auto internal xref">Section 4</a>.<a href="#section-8.1-5" class="pilcrow">¶</a></p>
-<p id="section-8.1-6">The designated expert(s) <span class="bcp14">SHOULD</span> verify that the protocol map name is appropriate and not likely to cause confusion with existing entries.<a href="#section-8.1-6" class="pilcrow">¶</a></p>
+<p id="section-8.1-6">The designated expert(s) <span class="bcp14">MUST</span> verify that the protocol map name is appropriate and not likely to cause confusion with existing entries.<a href="#section-8.1-6" class="pilcrow">¶</a></p>
 <p id="section-8.1-7">The registrant of an existing entry may request updates to that entry, subject to the same expert review.
 They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.<a href="#section-8.1-7" class="pilcrow">¶</a></p>
 <p id="section-8.1-8">The following protocol mappings are described in this document:<a href="#section-8.1-8" class="pilcrow">¶</a></p>

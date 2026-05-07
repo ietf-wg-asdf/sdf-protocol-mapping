@@ -417,7 +417,7 @@ Table of Contents
 5.1.  BLE
 
    The BLE protocol mapping allows SDF models to specify how properties
-   and events SHOULD be accessed using Bluetooth Low Energy (BLE)
+   and events should be accessed using Bluetooth Low Energy (BLE)
    protocol [BLE53].  The mapping includes details such as service IDs
    and characteristic IDs that are used to access the corresponding SDF
    affordances.
@@ -557,8 +557,8 @@ Table of Contents
 
 5.2.1.  Properties
 
-   An sdfProperty SHOULD be mapped to a Zigbee cluster attribute.  The
-   Zigbee property protocol mapping structure is defined as follows:
+   An sdfProperty is mapped to a Zigbee cluster attribute.  The Zigbee
+   property protocol mapping structure is defined as follows:
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -614,8 +614,8 @@ Table of Contents
 
 5.2.2.  Events
 
-   An sdfEvent SHOULD be mapped to Zigbee cluster attribute reporting.
-   The Zigbee event protocol mapping structure is defined as follows:
+   An sdfEvent is mapped to Zigbee cluster attribute reporting.  The
+   Zigbee event protocol mapping structure is defined as follows:
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
      zigbee: zigbee-event-map
@@ -666,8 +666,8 @@ Table of Contents
 
 5.2.3.  Actions
 
-   An sdfAction SHOULD be mapped to a Zigbee cluster command.  The
-   Zigbee protocol mapping structure for actions is defined as follows:
+   An sdfAction is mapped to a Zigbee cluster command.  The Zigbee
+   protocol mapping structure for actions is defined as follows:
 
    $$SDF-ACTION-PROTOCOL-MAP //= (
      zigbee: zigbee-action-map
@@ -812,7 +812,7 @@ Table of Contents
    The specification requirements for a registration request are defined
    in Section 4.
 
-   The designated expert(s) SHOULD verify that the protocol map name is
+   The designated expert(s) MUST verify that the protocol map name is
    appropriate and not likely to cause confusion with existing entries.
 
    The registrant of an existing entry may request updates to that
