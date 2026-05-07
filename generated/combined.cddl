@@ -4,11 +4,11 @@ $$SDF-EXTENSION-PROPERTY //= (
   }
 )
 
-property-protocol-map<name, props> = (
+property-protocol-map<name, props, read-props, write-props> = (
   name => props /
     {
-      read: props,
-      write: props
+      read: read-props,
+      write: write-props
     }
 )
 
@@ -25,7 +25,7 @@ $$SDF-EXTENSION-EVENT //= (
 )
 
 $$SDF-PROPERTY-PROTOCOL-MAP //= (
-  property-protocol-map<"ble", ble-property>
+  property-protocol-map<"ble", ble-property, ble-property, ble-property>
 )
 
 ble-property = {
@@ -44,7 +44,7 @@ ble-event-map = {
 } / { type: "advertisements" } / { type: "connection_events" }
 
 $$SDF-PROPERTY-PROTOCOL-MAP //= (
-  property-protocol-map<"zigbee", zigbee-property>
+  property-protocol-map<"zigbee", zigbee-property, zigbee-property, zigbee-property>
 )
 
 zigbee-property = {
