@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-30T02:09:04.370626+00:00",
+  "timestamp": "2026-05-07T02:06:20.408586+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -2079,6 +2079,32 @@
       "mergeCommit": {
         "oid": "3ebafde88f133ad95680915dbfee99d2dc52ccac"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDOPSJ9A87Y7kQh",
+      "title": "Re-work usage of SHOULD in the document",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/35",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Should fix #29",
+      "createdAt": "2026-05-06T21:31:47Z",
+      "updatedAt": "2026-05-06T21:31:48Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "3ebafde88f133ad95680915dbfee99d2dc52ccac",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "should",
+      "headRefOid": "0ab96508e5ce848934fd23af74ed7fef04ceab8d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
