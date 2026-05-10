@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-07T02:06:20.408586+00:00",
+  "timestamp": "2026-05-10T02:08:23.330452+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -396,14 +396,22 @@
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/26",
       "state": "OPEN",
       "author": "JKRhb",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "In a discussion @cabo and I had recently, it came up that it might be useful to allow for definitions of SDF protocol mappings that can be reused at the affordance level (using `sdfRef`). These protocol mappings could either be global/located at the top-level of a model, or associated with an `sdfThing` or `sdfObject` to allow for sharing common definitions (such as IP addresses).\n\nAt the top-level or grouping level, the format of the `sdfProtocolMapping` might need to allow for defining multiple mappings for the same operation that can then be referenced from different affordances (e.g., two read operations that referenced from two `sdfProperty` definitions). But the details of that could potentially be left to the specifications that define mappings for specific protocols.",
       "createdAt": "2026-03-05T10:14:24Z",
-      "updatedAt": "2026-03-05T10:15:02Z",
+      "updatedAt": "2026-05-07T20:27:46Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this would be defined as we define new mappings for protocols that need these. In the current draft, we define only a BLE and Zigbee mapping and I don't see something like this applying for those. ",
+          "createdAt": "2026-05-07T20:27:46Z",
+          "updatedAt": "2026-05-07T20:27:46Z"
+        }
+      ]
     },
     {
       "number": 28,
@@ -434,15 +442,15 @@
       "id": "I_kwDOPSJ9A87xom9x",
       "title": "SHOULD",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/29",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cabo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "There are six SHOULDs in the text.\n\nOne directly contradicts an earlier MUST (use generic `property-protocol-map`).\n\nNone of them explain the kind of exceptional condition when the SHOULD is not a MUST.\n\n(This *will* come back from IESG...)",
       "createdAt": "2026-03-10T20:03:45Z",
-      "updatedAt": "2026-03-10T20:03:45Z",
-      "closedAt": null,
+      "updatedAt": "2026-05-07T18:08:13Z",
+      "closedAt": "2026-05-07T18:08:13Z",
       "comments": []
     },
     {
@@ -450,16 +458,24 @@
       "id": "I_kwDOPSJ9A87xqNB5",
       "title": "Allow different protocol maps for read and write",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/30",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/blob/4d54f2bac6d560be20eef6b1c160dd858f1429f0/draft-ietf-asdf-sdf-protocol-mapping.md?plain=1#L180-L182\n\nThe definition for the generic `property-protocol-map` doesn't allow for different protocol maps for read and write. \n\n``` cddl\nproperty-protocol-map<name, props> = (\n  name => props /\n    {\n      read: props,\n      write: props\n    }\n)\n```\n\nOne example that @JKRhb [brought up](https://github.com/JKRhb/sdf-coap-protocol-map/pull/3/changes#r2913638582) is that `read` and `write` can have two different default CoAP methods. \n\n1. Should the text be changed to a SHOULD?\n2. Should we change the definition to something like: \n``` cddl\nproperty-protocol-map<name, props, read-props, write-props> = (\n  name => props /\n    {\n      read: read-props,\n      write: write-props\n    }\n)\n```\n\nAlso, relates to #29.",
       "createdAt": "2026-03-10T21:41:32Z",
-      "updatedAt": "2026-03-10T21:41:32Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-05-07T19:33:04Z",
+      "closedAt": "2026-05-07T19:33:04Z",
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed in #33.",
+          "createdAt": "2026-05-07T19:33:04Z",
+          "updatedAt": "2026-05-07T19:33:04Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -2033,24 +2049,26 @@
       "id": "PR_kwDOPSJ9A87Ua7Yq",
       "title": "Allow two different read/write protocol mappings",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/33",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses issue #30",
       "createdAt": "2026-04-21T20:09:29Z",
-      "updatedAt": "2026-04-21T20:09:29Z",
+      "updatedAt": "2026-05-07T18:07:54Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "9ef46d5ea0f292f1cea1afbd07ac430834554b33",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "property-protocol-map-issue-30",
       "headRefOid": "8e1fd0299151da3786e9ee33e1970e33f2b2bf21",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-05-07T18:07:54Z",
+      "mergedAt": "2026-05-07T18:07:54Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "4f057afb6d6358a8dba04ffb1c6f70e345bfab98"
+      },
       "comments": [],
       "reviews": []
     },
@@ -2087,24 +2105,26 @@
       "id": "PR_kwDOPSJ9A87Y7kQh",
       "title": "Re-work usage of SHOULD in the document",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/35",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Should fix #29",
       "createdAt": "2026-05-06T21:31:47Z",
-      "updatedAt": "2026-05-06T21:31:48Z",
+      "updatedAt": "2026-05-07T18:08:12Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "3ebafde88f133ad95680915dbfee99d2dc52ccac",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "should",
       "headRefOid": "0ab96508e5ce848934fd23af74ed7fef04ceab8d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-05-07T18:08:11Z",
+      "mergedAt": "2026-05-07T18:08:11Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "89acab6e5332e37c9e95bd552a83f7ccbf5e8779"
+      },
       "comments": [],
       "reviews": []
     }
