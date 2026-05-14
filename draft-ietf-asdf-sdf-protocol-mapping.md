@@ -47,6 +47,7 @@ author:
 normative:
   RFC8610: cddl
   RFC9880: sdf
+  RFC9944: scim-devices
 
 informative:
   BLE53:
@@ -614,7 +615,7 @@ While SDF provides a way to describe a device class and SCIM defines a device
 instance, a method is needed to associate a mapping between an instance of a
 device and its associated SDF models. To accomplish so, this document defines
 a SCIM extension that MAY be used in conjunction with
-{{!I-D.ietf-scim-device-model}} in {{scim-sdf-extension-schema}}. Implementation
+{{-scim-devices}} in {{scim-sdf-extension-schema}}. Implementation
 of this SCIM extension is OPTIONAL and independent of the protocol mapping
 functionality defined in the rest of this document. The SCIM schema attributes
 used here are described in Section 7 of {{!RFC7643}}.
@@ -646,7 +647,7 @@ Here is an example SCIM device schema extension with SDF models:
 {: post="fold"}
 
 An SDF model MUST be referenced with the `sdf` keyword inside the SCIM device
-schema as described in {{!I-D.ietf-scim-device-model}}.
+schema as described in {{-scim-devices}}.
 
 # Security Considerations
 
@@ -756,6 +757,8 @@ The following non-normative model is provided for convenience of the implementer
 # Acknowledgements
 {:numbered="false"}
 
-<!-- LC: We need to add all the names of the ASDF WG that contributed with discussions, reviews, etc. -->
-
-This document relies on SDF models described in {{-sdf}}, as such, we are grateful to the authors of this document for putting their time and effort into defining SDF in depth, allowing us to make use of it. The authors would also like to thank the ASDF working group for their excellent feedback and steering of the document.
+This document relies on SDF models described in {{-sdf}}, as such, we are grateful to the authors of this document for putting their time and effort into defining SDF in depth, allowing us to make use of it.
+The authors are grateful to Carsten Bormann, Jan Romann, Ari Keränen, and Eliot Lear
+for their reviews and contributions to this document,
+in particular Jan Romann for his help with the CDDL definitions ({{sdf-protocol-map-cddl}})
+and Eliot Lear for his contributions to {{scim-sdf-extension}}.
