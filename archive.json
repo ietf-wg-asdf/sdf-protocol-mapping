@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-10T02:08:23.330452+00:00",
+  "timestamp": "2026-05-17T02:25:07.050086+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -2125,6 +2125,32 @@
       "mergeCommit": {
         "oid": "89acab6e5332e37c9e95bd552a83f7ccbf5e8779"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 36,
+      "id": "PR_kwDOPSJ9A87bqrnn",
+      "title": "Update SCIM device model reference and expand acknowledgements",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/36",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-05-14T20:17:47Z",
+      "updatedAt": "2026-05-14T20:17:48Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "89acab6e5332e37c9e95bd552a83f7ccbf5e8779",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "update-ref-ack",
+      "headRefOid": "e9bdeaaab185aeaa9052f08d01b32c8087a289ac",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
