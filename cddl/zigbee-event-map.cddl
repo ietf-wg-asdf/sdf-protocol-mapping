@@ -2,7 +2,10 @@ $$SDF-EVENT-PROTOCOL-MAP //= (
   zigbee: zigbee-event-map
 )
 
+zigbee-event-type = "attribute_reporting" / "write_event"
+
 zigbee-event-map = {
+  type: zigbee-event-type,
   endpointID: uint,
   clusterID: uint,
   attributeID: uint,

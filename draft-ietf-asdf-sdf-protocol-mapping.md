@@ -535,7 +535,8 @@ follows:
 
 ### Events
 
-An `sdfEvent` is mapped to Zigbee cluster attribute reporting. The Zigbee event
+An `sdfEvent` is mapped to a Zigbee cluster event such as attribute reporting
+or a device-initiated write to an attribute on the gateway. The Zigbee event
 protocol mapping structure is defined as follows:
 
 ~~~ cddl
@@ -545,6 +546,11 @@ protocol mapping structure is defined as follows:
 
 Where:
 
+- `type` is the type of Zigbee event. It MUST be one of:
+  - `"attribute_reporting"`: the event is triggered by Zigbee attribute
+    reporting.
+  - `"write_event"`: the event is triggered by the device writing to an
+    attribute on the gateway.
 - `endpointID` is the Zigbee endpoint ID that corresponds to the SDF event.
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF event.
 - `attributeID` is the Zigbee attribute ID that corresponds to the SDF event.
@@ -560,6 +566,7 @@ For example, a Zigbee event mapping for a temperature change report:
     "temperatureChange": {
       "sdfProtocolMap": {
         "zigbee": {
+          "type": "attribute_reporting",
           "endpointID": 1,
           "clusterID": 1026,
           "attributeID": 0,
