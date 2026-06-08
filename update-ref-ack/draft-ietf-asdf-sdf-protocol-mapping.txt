@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 15 November 2026                                      L. Corneo
+Expires: 10 December 2026                                      L. Corneo
                                                                 Ericsson
-                                                             14 May 2026
+                                                             8 June 2026
 
 
                           SDF Protocol Mapping
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 November 2026.
+   This Internet-Draft will expire on 10 December 2026.
 
 Copyright Notice
 
@@ -614,14 +614,18 @@ Table of Contents
 
 5.2.2.  Events
 
-   An sdfEvent is mapped to Zigbee cluster attribute reporting.  The
-   Zigbee event protocol mapping structure is defined as follows:
+   An sdfEvent is mapped to a Zigbee cluster event such as attribute
+   reporting or a device-initiated write to an attribute on the gateway.
+   The Zigbee event protocol mapping structure is defined as follows:
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
      zigbee: zigbee-event-map
    )
 
+   zigbee-event-type = "attribute_reporting" / "write_event"
+
    zigbee-event-map = {
+     type: zigbee-event-type,
      endpointID: uint,
      clusterID: uint,
      attributeID: uint,
@@ -632,6 +636,14 @@ Table of Contents
     Figure 15: CDDL definition for Zigbee Protocol Mapping for sdfEvents
 
    Where:
+
+   *  type is the type of Zigbee event.  It MUST be one of:
+
+      -  "attribute_reporting": the event is triggered by Zigbee
+         attribute reporting.
+
+      -  "write_event": the event is triggered by the device writing to
+         an attribute on the gateway.
 
    *  endpointID is the Zigbee endpoint ID that corresponds to the SDF
       event.
@@ -654,6 +666,7 @@ Table of Contents
        "temperatureChange": {
          "sdfProtocolMap": {
            "zigbee": {
+             "type": "attribute_reporting",
              "endpointID": 1,
              "clusterID": 1026,
              "attributeID": 0,
@@ -981,7 +994,10 @@ Appendix A.  CDDL Definition
      zigbee: zigbee-event-map
    )
 
+   zigbee-event-type = "attribute_reporting" / "write_event"
+
    zigbee-event-map = {
+     type: zigbee-event-type,
      endpointID: uint,
      clusterID: uint,
      attributeID: uint,
