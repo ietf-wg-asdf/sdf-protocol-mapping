@@ -1894,6 +1894,7 @@ zigbee-property = {
   clusterID: uint,
   attributeID: uint,
   attributeType: uint,
+  ? profileID: uint,
   ? manufacturerCode: uint,
 }
 </pre>
@@ -1917,7 +1918,10 @@ zigbee-property = {
               <p id="section-5.2.1-4.4.1"><code>attributeType</code> is the Zigbee data type of the attribute.<a href="#section-5.2.1-4.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-5.2.1-4.5">
-              <p id="section-5.2.1-4.5.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the attribute (optional).<a href="#section-5.2.1-4.5.1" class="pilcrow">¶</a></p>
+              <p id="section-5.2.1-4.5.1"><code>profileID</code> is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.<a href="#section-5.2.1-4.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.1-4.6">
+              <p id="section-5.2.1-4.6.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the attribute (optional).<a href="#section-5.2.1-4.6.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-5.2.1-5">For example, a Zigbee protocol mapping for a temperature property may look as
@@ -1931,7 +1935,8 @@ follows:<a href="#section-5.2.1-5" class="pilcrow">¶</a></p>
           "endpointID": 1,
           "clusterID": 1026,
           "attributeID": 0,
-          "attributeType": 41
+          "attributeType": 41,
+          "profileID": 260
         }
       }
     }
@@ -1965,6 +1970,7 @@ zigbee-event-map = {
   clusterID: uint,
   attributeID: uint,
   attributeType: uint,
+  ? profileID: uint,
   ? manufacturerCode: uint,
 }
 </pre>
@@ -2001,7 +2007,10 @@ attribute on the gateway.<a href="#section-5.2.2-4.1.2.2.1" class="pilcrow">¶</
               <p id="section-5.2.2-4.5.1"><code>attributeType</code> is the Zigbee data type of the attribute.<a href="#section-5.2.2-4.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-5.2.2-4.6">
-              <p id="section-5.2.2-4.6.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the attribute (optional).<a href="#section-5.2.2-4.6.1" class="pilcrow">¶</a></p>
+              <p id="section-5.2.2-4.6.1"><code>profileID</code> is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.<a href="#section-5.2.2-4.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.2-4.7">
+              <p id="section-5.2.2-4.7.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the attribute (optional).<a href="#section-5.2.2-4.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-5.2.2-5">For example, a Zigbee event mapping for a temperature change report:<a href="#section-5.2.2-5" class="pilcrow">¶</a></p>
@@ -2012,6 +2021,7 @@ attribute on the gateway.<a href="#section-5.2.2-4.1.2.2.1" class="pilcrow">¶</
       "sdfProtocolMap": {
         "zigbee": {
           "type": "attribute_reporting",
+          "profileID": 260,
           "endpointID": 1,
           "clusterID": 1026,
           "attributeID": 0,
@@ -2044,6 +2054,7 @@ zigbee-action-map = {
   endpointID: uint,
   clusterID: uint,
   commandID: uint,
+  ? profileID: uint,
   ? manufacturerCode: uint,
 }
 </pre>
@@ -2064,7 +2075,10 @@ zigbee-action-map = {
               <p id="section-5.2.3-4.3.1"><code>commandID</code> is the Zigbee command ID that corresponds to the SDF action.<a href="#section-5.2.3-4.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-5.2.3-4.4">
-              <p id="section-5.2.3-4.4.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the command (optional).<a href="#section-5.2.3-4.4.1" class="pilcrow">¶</a></p>
+              <p id="section-5.2.3-4.4.1"><code>profileID</code> is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.<a href="#section-5.2.3-4.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.3-4.5">
+              <p id="section-5.2.3-4.5.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the command (optional).<a href="#section-5.2.3-4.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-5.2.3-5">For example, a Zigbee protocol mapping to set a temperature:<a href="#section-5.2.3-5" class="pilcrow">¶</a></p>
@@ -2074,6 +2088,7 @@ zigbee-action-map = {
     "setTemperature": {
       "sdfProtocolMap": {
         "zigbee": {
+          "profileID": 260,
           "endpointID": 1,
           "clusterID": 1026,
           "commandID": 0
@@ -2420,6 +2435,7 @@ zigbee-property = {
   clusterID: uint,
   attributeID: uint,
   attributeType: uint,
+  ? profileID: uint,
   ? manufacturerCode: uint,
 }
 
@@ -2435,6 +2451,7 @@ zigbee-event-map = {
   clusterID: uint,
   attributeID: uint,
   attributeType: uint,
+  ? profileID: uint,
   ? manufacturerCode: uint,
 }
 
@@ -2446,6 +2463,7 @@ zigbee-action-map = {
   endpointID: uint,
   clusterID: uint,
   commandID: uint,
+  ? profileID: uint,
   ? manufacturerCode: uint,
 }
 
@@ -2673,6 +2691,10 @@ components:
               type: integer
               format: int32
               example: 1
+            profileID:
+              type: integer
+              format: int32
+              example: 260
 
     ProtocolMap-Zigbee-Event:
       allOf:
