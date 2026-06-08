@@ -7,5 +7,6 @@ zigbee-property = {
   clusterID: uint,
   attributeID: uint,
   attributeType: uint,
+  ? profileID: uint,
   ? manufacturerCode: uint,
 }

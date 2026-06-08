@@ -10,5 +10,6 @@ zigbee-event-map = {
   clusterID: uint,
   attributeID: uint,
   attributeType: uint,
+  ? profileID: uint,
   ? manufacturerCode: uint,
 }

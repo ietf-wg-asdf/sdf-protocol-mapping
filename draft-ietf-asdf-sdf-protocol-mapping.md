@@ -510,6 +510,7 @@ Where:
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF property.
 - `attributeID` is the Zigbee attribute ID that corresponds to the SDF property.
 - `attributeType` is the Zigbee data type of the attribute.
+- `profileID` is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.
 - `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
 
 For example, a Zigbee protocol mapping for a temperature property may look as
@@ -524,7 +525,8 @@ follows:
           "endpointID": 1,
           "clusterID": 1026,
           "attributeID": 0,
-          "attributeType": 41
+          "attributeType": 41,
+          "profileID": 260
         }
       }
     }
@@ -555,6 +557,7 @@ Where:
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF event.
 - `attributeID` is the Zigbee attribute ID that corresponds to the SDF event.
 - `attributeType` is the Zigbee data type of the attribute.
+- `profileID` is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.
 - `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
 
 
@@ -567,6 +570,7 @@ For example, a Zigbee event mapping for a temperature change report:
       "sdfProtocolMap": {
         "zigbee": {
           "type": "attribute_reporting",
+          "profileID": 260,
           "endpointID": 1,
           "clusterID": 1026,
           "attributeID": 0,
@@ -595,6 +599,7 @@ Where:
 - `endpointID` is the Zigbee endpoint ID that corresponds to the SDF action.
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF action.
 - `commandID` is the Zigbee command ID that corresponds to the SDF action.
+- `profileID` is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.
 - `manufacturerCode` is the Zigbee manufacturer code of the command (optional).
 
 For example, a Zigbee protocol mapping to set a temperature:
@@ -605,6 +610,7 @@ For example, a Zigbee protocol mapping to set a temperature:
     "setTemperature": {
       "sdfProtocolMap": {
         "zigbee": {
+          "profileID": 260,
           "endpointID": 1,
           "clusterID": 1026,
           "commandID": 0

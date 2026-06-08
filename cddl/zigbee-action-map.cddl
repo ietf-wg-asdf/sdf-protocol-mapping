@@ -6,5 +6,6 @@ zigbee-action-map = {
   endpointID: uint,
   clusterID: uint,
   commandID: uint,
+  ? profileID: uint,
   ? manufacturerCode: uint,
 }
