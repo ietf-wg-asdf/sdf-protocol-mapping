@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-17T02:25:07.050086+00:00",
+  "timestamp": "2026-06-09T02:26:24.581626+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -2140,13 +2140,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-05-14T20:17:47Z",
-      "updatedAt": "2026-05-14T20:17:48Z",
+      "updatedAt": "2026-06-08T20:34:41Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "89acab6e5332e37c9e95bd552a83f7ccbf5e8779",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "update-ref-ack",
-      "headRefOid": "e9bdeaaab185aeaa9052f08d01b32c8087a289ac",
+      "headRefOid": "cc1eb2163d7220624d6734b6427339725eb1bbcc",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
