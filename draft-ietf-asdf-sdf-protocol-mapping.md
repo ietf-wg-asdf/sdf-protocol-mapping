@@ -47,6 +47,7 @@ author:
 normative:
   RFC8610: cddl
   RFC9880: sdf
+  RFC9944: scim-devices
 
 informative:
   BLE53:
@@ -509,6 +510,7 @@ Where:
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF property.
 - `attributeID` is the Zigbee attribute ID that corresponds to the SDF property.
 - `attributeType` is the Zigbee data type of the attribute.
+- `profileID` is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.
 - `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
 
 For example, a Zigbee protocol mapping for a temperature property may look as
@@ -523,7 +525,8 @@ follows:
           "endpointID": 1,
           "clusterID": 1026,
           "attributeID": 0,
-          "attributeType": 41
+          "attributeType": 41,
+          "profileID": 260
         }
       }
     }
@@ -534,7 +537,8 @@ follows:
 
 ### Events
 
-An `sdfEvent` is mapped to Zigbee cluster attribute reporting. The Zigbee event
+An `sdfEvent` is mapped to a Zigbee cluster event such as attribute reporting
+or a device-initiated write to an attribute on the gateway. The Zigbee event
 protocol mapping structure is defined as follows:
 
 ~~~ cddl
@@ -544,10 +548,16 @@ protocol mapping structure is defined as follows:
 
 Where:
 
+- `type` is the type of Zigbee event. It MUST be one of:
+  - `"attribute_reporting"`: the event is triggered by Zigbee attribute
+    reporting.
+  - `"write_event"`: the event is triggered by the device writing to an
+    attribute on the gateway.
 - `endpointID` is the Zigbee endpoint ID that corresponds to the SDF event.
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF event.
 - `attributeID` is the Zigbee attribute ID that corresponds to the SDF event.
 - `attributeType` is the Zigbee data type of the attribute.
+- `profileID` is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.
 - `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
 
 
@@ -559,6 +569,8 @@ For example, a Zigbee event mapping for a temperature change report:
     "temperatureChange": {
       "sdfProtocolMap": {
         "zigbee": {
+          "type": "attribute_reporting",
+          "profileID": 260,
           "endpointID": 1,
           "clusterID": 1026,
           "attributeID": 0,
@@ -587,6 +599,7 @@ Where:
 - `endpointID` is the Zigbee endpoint ID that corresponds to the SDF action.
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF action.
 - `commandID` is the Zigbee command ID that corresponds to the SDF action.
+- `profileID` is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.
 - `manufacturerCode` is the Zigbee manufacturer code of the command (optional).
 
 For example, a Zigbee protocol mapping to set a temperature:
@@ -597,6 +610,7 @@ For example, a Zigbee protocol mapping to set a temperature:
     "setTemperature": {
       "sdfProtocolMap": {
         "zigbee": {
+          "profileID": 260,
           "endpointID": 1,
           "clusterID": 1026,
           "commandID": 0
@@ -614,7 +628,7 @@ While SDF provides a way to describe a device class and SCIM defines a device
 instance, a method is needed to associate a mapping between an instance of a
 device and its associated SDF models. To accomplish so, this document defines
 a SCIM extension that MAY be used in conjunction with
-{{!I-D.ietf-scim-device-model}} in {{scim-sdf-extension-schema}}. Implementation
+{{-scim-devices}} in {{scim-sdf-extension-schema}}. Implementation
 of this SCIM extension is OPTIONAL and independent of the protocol mapping
 functionality defined in the rest of this document. The SCIM schema attributes
 used here are described in Section 7 of {{!RFC7643}}.
@@ -646,7 +660,7 @@ Here is an example SCIM device schema extension with SDF models:
 {: post="fold"}
 
 An SDF model MUST be referenced with the `sdf` keyword inside the SCIM device
-schema as described in {{!I-D.ietf-scim-device-model}}.
+schema as described in {{-scim-devices}}.
 
 # Security Considerations
 
@@ -756,6 +770,8 @@ The following non-normative model is provided for convenience of the implementer
 # Acknowledgements
 {:numbered="false"}
 
-<!-- LC: We need to add all the names of the ASDF WG that contributed with discussions, reviews, etc. -->
-
-This document relies on SDF models described in {{-sdf}}, as such, we are grateful to the authors of this document for putting their time and effort into defining SDF in depth, allowing us to make use of it. The authors would also like to thank the ASDF working group for their excellent feedback and steering of the document.
+This document relies on SDF models described in {{-sdf}}, as such, we are grateful to the authors of this document for putting their time and effort into defining SDF in depth, allowing us to make use of it.
+The authors are grateful to Carsten Bormann, Jan Romann, Ari Keränen, and Eliot Lear
+for their reviews and contributions to this document,
+in particular Jan Romann for his help with the CDDL definitions ({{sdf-protocol-map-cddl}})
+and Eliot Lear for his contributions to {{scim-sdf-extension}}.

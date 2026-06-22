@@ -41,6 +41,10 @@ components:
               type: integer
               format: int32
               example: 1
+            profileID:
+              type: integer
+              format: int32
+              example: 260
 
     ProtocolMap-Zigbee-Event:
       allOf:  
