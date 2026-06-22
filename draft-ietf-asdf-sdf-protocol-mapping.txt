@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 8 November 2026                                       L. Corneo
+Expires: 24 December 2026                                      L. Corneo
                                                                 Ericsson
-                                                              7 May 2026
+                                                            22 June 2026
 
 
                           SDF Protocol Mapping
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 November 2026.
+   This Internet-Draft will expire on 24 December 2026.
 
 Copyright Notice
 
@@ -572,6 +572,7 @@ Table of Contents
      clusterID: uint,
      attributeID: uint,
      attributeType: uint,
+     ? profileID: uint,
      ? manufacturerCode: uint,
    }
 
@@ -591,6 +592,10 @@ Table of Contents
 
    *  attributeType is the Zigbee data type of the attribute.
 
+   *  profileID is the Zigbee application profile ID (optional).  If not
+      provided, it defaults to the Home Automation profile (0x0104),
+      which is the default profile in Zigbee 3.0.
+
    *  manufacturerCode is the Zigbee manufacturer code of the attribute
       (optional).
 
@@ -605,7 +610,8 @@ Table of Contents
              "endpointID": 1,
              "clusterID": 1026,
              "attributeID": 0,
-             "attributeType": 41
+             "attributeType": 41,
+             "profileID": 260
            }
          }
        }
@@ -614,24 +620,37 @@ Table of Contents
 
 5.2.2.  Events
 
-   An sdfEvent is mapped to Zigbee cluster attribute reporting.  The
-   Zigbee event protocol mapping structure is defined as follows:
+   An sdfEvent is mapped to a Zigbee cluster event such as attribute
+   reporting or a device-initiated write to an attribute on the gateway.
+   The Zigbee event protocol mapping structure is defined as follows:
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
      zigbee: zigbee-event-map
    )
 
+   zigbee-event-type = "attribute_reporting" / "write_event"
+
    zigbee-event-map = {
+     type: zigbee-event-type,
      endpointID: uint,
      clusterID: uint,
      attributeID: uint,
      attributeType: uint,
+     ? profileID: uint,
      ? manufacturerCode: uint,
    }
 
     Figure 15: CDDL definition for Zigbee Protocol Mapping for sdfEvents
 
    Where:
+
+   *  type is the type of Zigbee event.  It MUST be one of:
+
+      -  "attribute_reporting": the event is triggered by Zigbee
+         attribute reporting.
+
+      -  "write_event": the event is triggered by the device writing to
+         an attribute on the gateway.
 
    *  endpointID is the Zigbee endpoint ID that corresponds to the SDF
       event.
@@ -644,6 +663,10 @@ Table of Contents
 
    *  attributeType is the Zigbee data type of the attribute.
 
+   *  profileID is the Zigbee application profile ID (optional).  If not
+      provided, it defaults to the Home Automation profile (0x0104),
+      which is the default profile in Zigbee 3.0.
+
    *  manufacturerCode is the Zigbee manufacturer code of the attribute
       (optional).
 
@@ -654,6 +677,8 @@ Table of Contents
        "temperatureChange": {
          "sdfProtocolMap": {
            "zigbee": {
+             "type": "attribute_reporting",
+             "profileID": 260,
              "endpointID": 1,
              "clusterID": 1026,
              "attributeID": 0,
@@ -677,6 +702,7 @@ Table of Contents
      endpointID: uint,
      clusterID: uint,
      commandID: uint,
+     ? profileID: uint,
      ? manufacturerCode: uint,
    }
 
@@ -693,6 +719,10 @@ Table of Contents
    *  commandID is the Zigbee command ID that corresponds to the SDF
       action.
 
+   *  profileID is the Zigbee application profile ID (optional).  If not
+      provided, it defaults to the Home Automation profile (0x0104),
+      which is the default profile in Zigbee 3.0.
+
    *  manufacturerCode is the Zigbee manufacturer code of the command
       (optional).
 
@@ -703,6 +733,7 @@ Table of Contents
        "setTemperature": {
          "sdfProtocolMap": {
            "zigbee": {
+             "profileID": 260,
              "endpointID": 1,
              "clusterID": 1026,
              "commandID": 0
@@ -718,11 +749,10 @@ Table of Contents
    a device instance, a method is needed to associate a mapping between
    an instance of a device and its associated SDF models.  To accomplish
    so, this document defines a SCIM extension that MAY be used in
-   conjunction with [I-D.ietf-scim-device-model] in Figure 17.
-   Implementation of this SCIM extension is OPTIONAL and independent of
-   the protocol mapping functionality defined in the rest of this
-   document.  The SCIM schema attributes used here are described in
-   Section 7 of [RFC7643].
+   conjunction with [RFC9944] in Figure 17.  Implementation of this SCIM
+   extension is OPTIONAL and independent of the protocol mapping
+   functionality defined in the rest of this document.  The SCIM schema
+   attributes used here are described in Section 7 of [RFC7643].
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -771,7 +801,7 @@ Table of Contents
    }
 
    An SDF model MUST be referenced with the sdf keyword inside the SCIM
-   device schema as described in [I-D.ietf-scim-device-model].
+   device schema as described in [RFC9944].
 
 7.  Security Considerations
 
@@ -856,13 +886,6 @@ Table of Contents
 
 9.1.  Normative References
 
-   [I-D.ietf-scim-device-model]
-              Shahzad, M., Iqbal, H., and E. Lear, "Device Schema
-              Extensions to the SCIM model", Work in Progress, Internet-
-              Draft, draft-ietf-scim-device-model-18, 3 September 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-scim-
-              device-model-18>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -892,6 +915,11 @@ Table of Contents
               "Semantic Definition Format (SDF) for Data and
               Interactions of Things", RFC 9880, DOI 10.17487/RFC9880,
               January 2026, <https://www.rfc-editor.org/rfc/rfc9880>.
+
+   [RFC9944]  Shahzad, M., Iqbal, H., and E. Lear, "Device Schema
+              Extensions to the System for Cross-Domain Identity
+              Management (SCIM) Model", RFC 9944, DOI 10.17487/RFC9944,
+              May 2026, <https://www.rfc-editor.org/rfc/rfc9944>.
 
 9.2.  Informative References
 
@@ -977,6 +1005,7 @@ Appendix A.  CDDL Definition
      clusterID: uint,
      attributeID: uint,
      attributeType: uint,
+     ? profileID: uint,
      ? manufacturerCode: uint,
    }
 
@@ -984,11 +1013,15 @@ Appendix A.  CDDL Definition
      zigbee: zigbee-event-map
    )
 
+   zigbee-event-type = "attribute_reporting" / "write_event"
+
    zigbee-event-map = {
+     type: zigbee-event-type,
      endpointID: uint,
      clusterID: uint,
      attributeID: uint,
      attributeType: uint,
+     ? profileID: uint,
      ? manufacturerCode: uint,
    }
 
@@ -1000,6 +1033,7 @@ Appendix A.  CDDL Definition
      endpointID: uint,
      clusterID: uint,
      commandID: uint,
+     ? profileID: uint,
      ? manufacturerCode: uint,
    }
    <CODE ENDS>
@@ -1193,6 +1227,10 @@ B.2.  Protocol map for Zigbee
                  type: integer
                  format: int32
                  example: 1
+               profileID:
+                 type: integer
+                 format: int32
+                 example: 260
 
        ProtocolMap-Zigbee-Event:
          allOf:
@@ -1206,8 +1244,11 @@ Acknowledgements
    This document relies on SDF models described in [RFC9880], as such,
    we are grateful to the authors of this document for putting their
    time and effort into defining SDF in depth, allowing us to make use
-   of it.  The authors would also like to thank the ASDF working group
-   for their excellent feedback and steering of the document.
+   of it.  The authors are grateful to Carsten Bormann, Jan Romann, Ari
+   Keränen, and Eliot Lear for their reviews and contributions to this
+   document, in particular Jan Romann for his help with the CDDL
+   definitions (Figure 18) and Eliot Lear for his contributions to
+   Section 6.
 
 Authors' Addresses
 
