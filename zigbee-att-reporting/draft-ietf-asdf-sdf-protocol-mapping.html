@@ -16,22 +16,23 @@ to specify how properties, actions, and events should be accessed using specific
 non-IP and IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
 This document also describes a method to extend SCIM with an SDF model mapping. 
     " name="description">
-<meta content="xml2rfc 3.33.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="IoT" name="keyword">
 <meta content="draft-ietf-asdf-sdf-protocol-mapping-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.33.0
-    Python 3.12.13
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.7.0
+    wcwidth 0.8.2
 -->
 <link href="draft-ietf-asdf-sdf-protocol-mapping.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1050,11 +1051,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">sdf-protocol-mapping</td>
-<td class="right">June 2026</td>
+<td class="right">July 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Mohan, et al.</td>
-<td class="center">Expires 10 December 2026</td>
+<td class="center">Expires 15 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1068,12 @@ svg {
 <dd class="internet-draft">draft-ietf-asdf-sdf-protocol-mapping-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-08" class="published">8 June 2026</time>
+<time datetime="2026-07-14" class="published">14 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-10">10 December 2026</time></dd>
+<dd class="expires"><time datetime="2027-01-15">15 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1135,7 @@ This document also describes a method to extend SCIM with an SDF model mapping.<
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 10 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 15 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1972,6 +1973,9 @@ zigbee-event-map = {
   attributeType: uint,
   ? profileID: uint,
   ? manufacturerCode: uint,
+  ? minReportingInterval: uint,
+  ? maxReportingInterval: uint,
+  ? reportableChange: number,
 }
 </pre>
 </div>
@@ -2012,6 +2016,22 @@ attribute on the gateway.<a href="#section-5.2.2-4.1.2.2.1" class="pilcrow">¶</
             <li class="normal" id="section-5.2.2-4.7">
               <p id="section-5.2.2-4.7.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the attribute (optional).<a href="#section-5.2.2-4.7.1" class="pilcrow">¶</a></p>
 </li>
+            <li class="normal" id="section-5.2.2-4.8">
+              <p id="section-5.2.2-4.8.1"><code>minReportingInterval</code> is the minimum reporting interval in seconds
+(optional). It is the minimum time between issued attribute reports and
+applies only when <code>type</code> is <code>"attribute_reporting"</code>.<a href="#section-5.2.2-4.8.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.2-4.9">
+              <p id="section-5.2.2-4.9.1"><code>maxReportingInterval</code> is the maximum reporting interval in seconds
+(optional). It is the maximum time between issued attribute reports and
+applies only when <code>type</code> is <code>"attribute_reporting"</code>.<a href="#section-5.2.2-4.9.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.2-4.10">
+              <p id="section-5.2.2-4.10.1"><code>reportableChange</code> is the minimum change to the attribute value that triggers
+a report (optional). It applies only when <code>type</code> is <code>"attribute_reporting"</code>
+and to attributes with an 'analog' data type, and <span class="bcp14">MUST</span> have the same data type
+as the reported attribute.<a href="#section-5.2.2-4.10.1" class="pilcrow">¶</a></p>
+</li>
           </ul>
 <p id="section-5.2.2-5">For example, a Zigbee event mapping for a temperature change report:<a href="#section-5.2.2-5" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-5.2.2-6">
@@ -2025,7 +2045,10 @@ attribute on the gateway.<a href="#section-5.2.2-4.1.2.2.1" class="pilcrow">¶</
           "endpointID": 1,
           "clusterID": 1026,
           "attributeID": 0,
-          "attributeType": 41
+          "attributeType": 41,
+          "minReportingInterval": 10,
+          "maxReportingInterval": 300,
+          "reportableChange": 50
         }
       }
     }
@@ -2453,6 +2476,9 @@ zigbee-event-map = {
   attributeType: uint,
   ? profileID: uint,
   ? manufacturerCode: uint,
+  ? minReportingInterval: uint,
+  ? maxReportingInterval: uint,
+  ? reportableChange: number,
 }
 
 $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -2699,6 +2725,22 @@ components:
     ProtocolMap-Zigbee-Event:
       allOf:
         - $ref: '#/components/schemas/ProtocolMap-Zigbee-Propmap'
+        - type: object
+          properties:
+            zigbee:
+              type: object
+              properties:
+                minReportingInterval:
+                  type: integer
+                  format: int32
+                  example: 10
+                maxReportingInterval:
+                  type: integer
+                  format: int32
+                  example: 300
+                reportableChange:
+                  type: number
+                  example: 50
 
 &lt;CODE ENDS&gt;</pre>
 </div>
