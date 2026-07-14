@@ -12,4 +12,7 @@ zigbee-event-map = {
   attributeType: uint,
   ? profileID: uint,
   ? manufacturerCode: uint,
+  ? minReportingInterval: uint,
+  ? maxReportingInterval: uint,
+  ? reportableChange: number,
 }

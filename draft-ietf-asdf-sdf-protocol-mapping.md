@@ -562,6 +562,16 @@ Where:
 - `attributeType` is the Zigbee data type of the attribute.
 - `profileID` is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.
 - `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
+- `minReportingInterval` is the minimum reporting interval in seconds
+  (optional). It is the minimum time between issued attribute reports and
+  applies only when `type` is `"attribute_reporting"`.
+- `maxReportingInterval` is the maximum reporting interval in seconds
+  (optional). It is the maximum time between issued attribute reports and
+  applies only when `type` is `"attribute_reporting"`.
+- `reportableChange` is the minimum change to the attribute value that triggers
+  a report (optional). It applies only when `type` is `"attribute_reporting"`
+  and to attributes with an 'analog' data type, and MUST have the same data type
+  as the reported attribute.
 
 
 For example, a Zigbee event mapping for a temperature change report:
@@ -577,7 +587,10 @@ For example, a Zigbee event mapping for a temperature change report:
           "endpointID": 1,
           "clusterID": 1026,
           "attributeID": 0,
-          "attributeType": 41
+          "attributeType": 41,
+          "minReportingInterval": 10,
+          "maxReportingInterval": 300,
+          "reportableChange": 50
         }
       }
     }
