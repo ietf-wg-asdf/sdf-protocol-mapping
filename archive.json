@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-23T02:31:12.156897+00:00",
+  "timestamp": "2026-07-16T01:51:30.487757+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -2153,6 +2153,32 @@
       "mergeCommit": {
         "oid": "5fb0a635fb91025502850e90a1fe7d59c18a5e39"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDOPSJ9A87xrpt7",
+      "title": "Add optional reporting interval and reportable change fields to Zigbee event mappings",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/37",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-14T18:07:14Z",
+      "updatedAt": "2026-07-14T18:07:15Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "5fb0a635fb91025502850e90a1fe7d59c18a5e39",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "zigbee-att-reporting",
+      "headRefOid": "7df6e2d02ada5d1087d2e49241dc6072ca5a5df2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
