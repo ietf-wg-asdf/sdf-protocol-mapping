@@ -206,7 +206,7 @@ new-protocol-property = {
 ~~~
 {: post="fold" #prop-ext-example title="Example Property Protocol Map Extension"}
 
-The corresponding JSON in an SDF model looks like:
+An SDF model using this extension could look like:
 
 ~~~ json
 {
