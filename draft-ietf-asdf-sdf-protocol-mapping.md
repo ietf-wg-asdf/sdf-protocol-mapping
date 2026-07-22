@@ -268,7 +268,8 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 Actions use a simpler structure than properties, as they do not require the
 read/write distinction. To extend `$$SDF-ACTION-PROTOCOL-MAP` for a new
 protocol, implementers MUST add a group entry that maps the protocol name to the
-protocol-specific attributes:
+protocol-specific attributes. For example, an extension for a fictitious
+"new-protocol" could be defined as:
 
 ~~~ cddl
 $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -281,7 +282,7 @@ new-protocol-action = {
 ~~~
 {: post="fold" #action-ext-example title="Example Action Protocol Map Extension"}
 
-The corresponding JSON in an SDF model would look like:
+An SDF model using this extension could look like:
 
 ~~~ json
 {
