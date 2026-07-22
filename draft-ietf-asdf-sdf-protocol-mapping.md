@@ -182,6 +182,9 @@ provide either:
 - Separate `read` and `write` mappings when the protocol uses different
   attributes for each direction.
 
+To keep these two forms unambiguous, the protocol-specific attribute map
+(the `props` type) MUST NOT define members named `read` or `write`.
+
 To extend `$$SDF-PROPERTY-PROTOCOL-MAP` for a new protocol (e.g.,
 "new-protocol"), implementers MUST use the `property-protocol-map` generic with
 the protocol name and a map type defining the protocol-specific attributes.
