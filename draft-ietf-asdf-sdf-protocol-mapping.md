@@ -94,7 +94,7 @@ such as {{BLE53}} and {{Zigbee30}}, to IP-based protocols such as HTTP
 {{?RFC9110}} and CoAP {{?RFC7252}}. This document provides the required
 mechanism by defining:
 
-- The `sdfProtocolMap` keyword, which allows SDF models to include
+- The `sdfProtocolMap` quality, which allows SDF models to include
   protocol-specific mapping information attached to the protocol-agnostic
   definitions, see {{sdf-pm}}. An `sdfProtocolMap` MAY be applied to an SDF
   affordance, be it an `sdfProperty`, `sdfEvent` or `sdfAction`. The mapping
@@ -130,7 +130,7 @@ characteristic, while Zigbee addresses it as an attribute in a cluster of an
 endpoint.
 
 A protocol mapping object is a JSON object identified by the `sdfProtocolMap`
-keyword, nested inside an SDF affordance definition (`sdfProperty`, `sdfAction`,
+quality, nested inside an SDF affordance definition (`sdfProperty`, `sdfAction`,
 or `sdfEvent`). Protocol-specific attributes are embedded within this object,
 keyed by a protocol name registered in the IANA "SDF Protocol Mapping"
 registry ({{iana-prot-map}}), e.g., "ble" or "zigbee".
@@ -154,7 +154,7 @@ sdfProperty / sdfAction / sdfEvent
 
 ## SDF Extension Points
 
-The `sdfProtocolMap` keyword is introduced into SDF affordance definitions
+The `sdfProtocolMap` quality is introduced into SDF affordance definitions
 through the extension points defined in the formal syntax of {{Appendix
 A of -sdf}}. For each affordance type, an `sdfProtocolMap` entry is added
 via the corresponding CDDL group socket. The contents of the
