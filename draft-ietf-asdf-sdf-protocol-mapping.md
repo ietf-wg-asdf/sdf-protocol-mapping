@@ -82,10 +82,11 @@ model mapping.
 
 The Semantic Definition Format (SDF) {{-sdf}} provides a protocol-agnostic way
 to describe IoT devices and their capabilities through properties, actions, and
-events (collectively called affordances). When implementing an SDF model for a
-device using specific communication protocols, there needs to be a mechanism to
-map the protocol-agnostic SDF definitions to protocol-specific operations,
-translating the model into a real-world implementation. Moreover, such a mechanism
+events (collectively called affordances). A device described by an SDF model, however, is
+accessed over a specific communication protocol. To interact with such a device
+based on its SDF model, there needs to be a mechanism to map the
+protocol-agnostic SDF definitions to the protocol-specific operations that
+access the device. Moreover, such a mechanism
 needs to be extensible for enabling implementers to provide novel SDF protocol
 mappings to expand the SDF ecosystem. SDF protocol mappings may target a variety
 of protocols spanning from non-IP protocols commonly used in IoT environments,
