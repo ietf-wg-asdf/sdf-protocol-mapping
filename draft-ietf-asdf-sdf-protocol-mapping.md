@@ -311,7 +311,9 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 {: #sdf-event-ext title="SDF Event Extension Point for Protocol Mapping"}
 
 Events follow the same simple pattern as actions. To extend
-`$$SDF-EVENT-PROTOCOL-MAP` for a new protocol:
+`$$SDF-EVENT-PROTOCOL-MAP` for a new protocol, implementers add a group entry
+that maps the protocol name to the protocol-specific attributes. For example, an
+extension for a fictitious "new-protocol" could be defined as:
 
 ~~~ cddl
 $$SDF-EVENT-PROTOCOL-MAP //= (
@@ -324,7 +326,7 @@ new-protocol-event = {
 ~~~
 {: post="fold" #event-ext-example title="Example Event Protocol Map Extension"}
 
-The corresponding JSON in an SDF model looks like:
+An SDF model using this extension could look like:
 
 ~~~ json
 {
