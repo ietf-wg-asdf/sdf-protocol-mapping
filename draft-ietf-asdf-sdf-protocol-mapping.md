@@ -116,8 +116,8 @@ mechanism by defining:
 
 # Conventions and Definitions
 
-The syntax extensions to {{-sdf}} in terms of its JSON structures are
-shown in the Concise Data Definition Language (CDDL) {{-cddl}}.
+The syntax extensions to {{-sdf}} are shown in the Concise Data Definition
+Language (CDDL) {{-cddl}}, which describes their JSON representation.
 
 {::boilerplate bcp14-tagged}
 
