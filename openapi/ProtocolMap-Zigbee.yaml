@@ -47,13 +47,38 @@ components:
               example: 260
 
     ProtocolMap-Zigbee-Event:
-      allOf:
-        - $ref: '#/components/schemas/ProtocolMap-Zigbee-Propmap'
-        - type: object
-          properties:
-            zigbee:
-              type: object
+      required:
+        - zigbee
+      type: object
+      properties:
+        zigbee:
+          oneOf:
+            - type: object
+              required:
+                - endpointID
+                - clusterID
+                - attributeID
               properties:
+                endpointID:
+                  type: integer
+                  format: int32
+                  example: 1
+                clusterID:
+                  type: integer
+                  format: int32
+                  example: 6
+                attributeID:
+                  type: integer
+                  format: int32
+                  example: 16
+                type:
+                  type: integer
+                  format: int32
+                  example: 1
+                profileID:
+                  type: integer
+                  format: int32
+                  example: 260
                 minReportingInterval:
                   type: integer
                   format: int32
@@ -65,3 +90,12 @@ components:
                 reportableChange:
                   type: number
                   example: 50
+            - type: object
+              required:
+                - type
+              properties:
+                type:
+                  type: string
+                  example: connection_events
+                  enum:
+                    - connection_events

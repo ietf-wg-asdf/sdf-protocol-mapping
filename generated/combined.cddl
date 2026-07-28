@@ -73,7 +73,7 @@ zigbee-event-map = {
   ? minReportingInterval: uint,
   ? maxReportingInterval: uint,
   ? reportableChange: number,
-}
+} / { type: "connection_events" }
 
 $$SDF-ACTION-PROTOCOL-MAP //= (
   zigbee: zigbee-action-map

@@ -556,6 +556,8 @@ Where:
     reporting.
   - `"write_event"`: the event is triggered by the device writing to an
     attribute on the gateway.
+  - `"connection_events"`: the event is triggered when a Zigbee end device
+    joins or leaves the Zigbee network.
 - `endpointID` is the Zigbee endpoint ID that corresponds to the SDF event.
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF event.
 - `attributeID` is the Zigbee attribute ID that corresponds to the SDF event.
@@ -573,6 +575,7 @@ Where:
   and to attributes with an 'analog' data type, and MUST have the same data type
   as the reported attribute.
 
+When `type` is `"connection_events"`, no other attributes are required.
 
 For example, a Zigbee event mapping for a temperature change report:
 
@@ -591,6 +594,23 @@ For example, a Zigbee event mapping for a temperature change report:
           "minReportingInterval": 10,
           "maxReportingInterval": 300,
           "reportableChange": 50
+        }
+      }
+    }
+  }
+}
+~~~
+{: post="fold"}
+
+Here is an example of an `isPresent` event using Zigbee connection events:
+
+~~~ json
+{
+  "sdfEvent": {
+    "isPresent": {
+      "sdfProtocolMap": {
+        "zigbee": {
+          "type": "connection_events"
         }
       }
     }

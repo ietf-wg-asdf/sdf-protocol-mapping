@@ -15,4 +15,4 @@ zigbee-event-map = {
   ? minReportingInterval: uint,
   ? maxReportingInterval: uint,
   ? reportableChange: number,
-}
+} / { type: "connection_events" }
