@@ -19,32 +19,51 @@ components:
       type: object
       properties:
         zigbee:
-          required:
-            - endpointID
-            - clusterID
-            - attributeID
-          type: object
-          properties:
-            endpointID:
-              type: integer
-              format: int32
-              example: 1
-            clusterID:
-              type: integer
-              format: int32
-              example: 6
-            attributeID:
-              type: integer
-              format: int32
-              example: 16
-            type:
-              type: integer
-              format: int32
-              example: 1
-            profileID:
-              type: integer
-              format: int32
-              example: 260
+          oneOf:
+            - $ref: '#/components/schemas/Zigbee-Property'
+            - type: object
+              required:
+                - read
+                - write
+              properties:
+                read:
+                  $ref: '#/components/schemas/Zigbee-Property'
+                write:
+                  $ref: '#/components/schemas/Zigbee-Property'
+
+## Reusable Zigbee property object
+    Zigbee-Property:
+      required:
+        - endpointID
+        - clusterID
+        - attributeID
+        - attributeType
+      type: object
+      properties:
+        endpointID:
+          type: integer
+          format: int32
+          example: 1
+        clusterID:
+          type: integer
+          format: int32
+          example: 6
+        attributeID:
+          type: integer
+          format: int32
+          example: 16
+        attributeType:
+          type: integer
+          format: int32
+          example: 32
+        profileID:
+          type: integer
+          format: int32
+          example: 260
+        manufacturerCode:
+          type: integer
+          format: int32
+          example: 4174
 
     ProtocolMap-Zigbee-Event:
       required:
@@ -145,3 +164,37 @@ components:
                   example: connection_events
                   enum:
                     - connection_events
+
+## Protocol mapping for Zigbee action
+    ProtocolMap-Zigbee-Action:
+      required:
+        - zigbee
+      type: object
+      properties:
+        zigbee:
+          required:
+            - endpointID
+            - clusterID
+            - commandID
+          type: object
+          properties:
+            endpointID:
+              type: integer
+              format: int32
+              example: 1
+            clusterID:
+              type: integer
+              format: int32
+              example: 6
+            commandID:
+              type: integer
+              format: int32
+              example: 0
+            profileID:
+              type: integer
+              format: int32
+              example: 260
+            manufacturerCode:
+              type: integer
+              format: int32
+              example: 4174

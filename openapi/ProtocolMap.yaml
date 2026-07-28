@@ -31,4 +31,12 @@ components:
           oneOf:  
             - $ref: './ProtocolMap-BLE.yaml#/components/schemas/ProtocolMap-BLE-Event'
             - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/ProtocolMap-Zigbee-Event'
+
+## Protocol Map for an action
+    ProtocolMap-Action:
+      type: object
+      properties:
+        sdfProtocolMap:
+          oneOf:  
+            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/ProtocolMap-Zigbee-Action'
  

@@ -19,20 +19,34 @@ components:
       type: object
       properties:
         ble:
-          required:
-            - serviceID
-            - characteristicID
-          type: object
-          properties:
-            serviceID:
-              type: string
-              format: uuid
-              example: 00001809-0000-1000-8000-00805f9b34fb
-            characteristicID:
-              type: string
-              format: uuid
-              example: 00002a1c-0000-1000-8000-00805f9b34fb
-              
+          oneOf:
+            - $ref: '#/components/schemas/BLE-Property'
+            - type: object
+              required:
+                - read
+                - write
+              properties:
+                read:
+                  $ref: '#/components/schemas/BLE-Property'
+                write:
+                  $ref: '#/components/schemas/BLE-Property'
+
+## Reusable BLE property object
+    BLE-Property:
+      required:
+        - serviceID
+        - characteristicID
+      type: object
+      properties:
+        serviceID:
+          type: string
+          format: uuid
+          example: 00001809-0000-1000-8000-00805f9b34fb
+        characteristicID:
+          type: string
+          format: uuid
+          example: 00002a1c-0000-1000-8000-00805f9b34fb
+
 ## Defines different types of BLE events
     ProtocolMap-BLE-Event:
       required:
