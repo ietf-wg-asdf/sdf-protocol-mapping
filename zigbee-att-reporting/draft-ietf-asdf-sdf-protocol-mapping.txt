@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 15 January 2027                                       L. Corneo
+Expires: 29 January 2027                                       L. Corneo
                                                                 Ericsson
-                                                            14 July 2026
+                                                            28 July 2026
 
 
                           SDF Protocol Mapping
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 January 2027.
+   This Internet-Draft will expire on 29 January 2027.
 
 Copyright Notice
 
@@ -641,7 +641,7 @@ Table of Contents
      ? minReportingInterval: uint,
      ? maxReportingInterval: uint,
      ? reportableChange: number,
-   }
+   } / { type: "connection_events" }
 
     Figure 15: CDDL definition for Zigbee Protocol Mapping for sdfEvents
 
@@ -654,6 +654,9 @@ Table of Contents
 
       -  "write_event": the event is triggered by the device writing to
          an attribute on the gateway.
+
+      -  "connection_events": the event is triggered when a Zigbee end
+         device joins or leaves the Zigbee network.
 
    *  endpointID is the Zigbee endpoint ID that corresponds to the SDF
       event.
@@ -686,6 +689,8 @@ Table of Contents
       "attribute_reporting" and to attributes with an 'analog' data
       type, and MUST have the same data type as the reported attribute.
 
+   When type is "connection_events", no other attributes are required.
+
    For example, a Zigbee event mapping for a temperature change report:
 
    {
@@ -702,6 +707,21 @@ Table of Contents
              "minReportingInterval": 10,
              "maxReportingInterval": 300,
              "reportableChange": 50
+           }
+         }
+       }
+     }
+   }
+
+   Here is an example of an isPresent event using Zigbee connection
+   events:
+
+   {
+     "sdfEvent": {
+       "isPresent": {
+         "sdfProtocolMap": {
+           "zigbee": {
+             "type": "connection_events"
            }
          }
        }
@@ -1045,7 +1065,7 @@ Appendix A.  CDDL Definition
      ? minReportingInterval: uint,
      ? maxReportingInterval: uint,
      ? reportableChange: number,
-   }
+   } / { type: "connection_events" }
 
    $$SDF-ACTION-PROTOCOL-MAP //= (
      zigbee: zigbee-action-map
@@ -1255,13 +1275,38 @@ B.2.  Protocol map for Zigbee
                  example: 260
 
        ProtocolMap-Zigbee-Event:
-         allOf:
-           - $ref: '#/components/schemas/ProtocolMap-Zigbee-Propmap'
-           - type: object
-             properties:
-               zigbee:
-                 type: object
+         required:
+           - zigbee
+         type: object
+         properties:
+           zigbee:
+             oneOf:
+               - type: object
+                 required:
+                   - endpointID
+                   - clusterID
+                   - attributeID
                  properties:
+                   endpointID:
+                     type: integer
+                     format: int32
+                     example: 1
+                   clusterID:
+                     type: integer
+                     format: int32
+                     example: 6
+                   attributeID:
+                     type: integer
+                     format: int32
+                     example: 16
+                   type:
+                     type: integer
+                     format: int32
+                     example: 1
+                   profileID:
+                     type: integer
+                     format: int32
+                     example: 260
                    minReportingInterval:
                      type: integer
                      format: int32
@@ -1273,6 +1318,15 @@ B.2.  Protocol map for Zigbee
                    reportableChange:
                      type: number
                      example: 50
+               - type: object
+                 required:
+                   - type
+                 properties:
+                   type:
+                     type: string
+                     example: connection_events
+                     enum:
+                       - connection_events
    <CODE ENDS>
 
                     Figure 21: OpenAPI model for Zigbee
