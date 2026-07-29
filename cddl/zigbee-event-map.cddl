@@ -2,10 +2,10 @@ $$SDF-EVENT-PROTOCOL-MAP //= (
   zigbee: zigbee-event-map
 )
 
-zigbee-event-type = "attribute_reporting" / "write_event"
+zigbee-event-map = zigbee-attribute-reporting / zigbee-write-event / zigbee-connection-event
 
-zigbee-event-map = {
-  type: zigbee-event-type,
+zigbee-attribute-reporting = {
+  type: "attribute_reporting",
   endpointID: uint,
   clusterID: uint,
   attributeID: uint,
@@ -15,4 +15,18 @@ zigbee-event-map = {
   ? minReportingInterval: uint,
   ? maxReportingInterval: uint,
   ? reportableChange: number,
-} / { type: "connection_events" }
+}
+
+zigbee-write-event = {
+  type: "write_event",
+  endpointID: uint,
+  clusterID: uint,
+  attributeID: uint,
+  attributeType: uint,
+  ? profileID: uint,
+  ? manufacturerCode: uint,
+}
+
+zigbee-connection-event = {
+  type: "connection_events",
+}

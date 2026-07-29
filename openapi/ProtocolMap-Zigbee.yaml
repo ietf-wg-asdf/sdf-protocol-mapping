@@ -55,10 +55,16 @@ components:
           oneOf:
             - type: object
               required:
+                - type
                 - endpointID
                 - clusterID
                 - attributeID
               properties:
+                type:
+                  type: string
+                  example: attribute_reporting
+                  enum:
+                    - attribute_reporting
                 endpointID:
                   type: integer
                   format: int32
@@ -71,14 +77,17 @@ components:
                   type: integer
                   format: int32
                   example: 16
-                type:
+                attributeType:
                   type: integer
                   format: int32
-                  example: 1
+                  example: 41
                 profileID:
                   type: integer
                   format: int32
                   example: 260
+                manufacturerCode:
+                  type: integer
+                  format: int32
                 minReportingInterval:
                   type: integer
                   format: int32
@@ -90,6 +99,41 @@ components:
                 reportableChange:
                   type: number
                   example: 50
+            - type: object
+              required:
+                - type
+                - endpointID
+                - clusterID
+                - attributeID
+              properties:
+                type:
+                  type: string
+                  example: write_event
+                  enum:
+                    - write_event
+                endpointID:
+                  type: integer
+                  format: int32
+                  example: 1
+                clusterID:
+                  type: integer
+                  format: int32
+                  example: 6
+                attributeID:
+                  type: integer
+                  format: int32
+                  example: 16
+                attributeType:
+                  type: integer
+                  format: int32
+                  example: 41
+                profileID:
+                  type: integer
+                  format: int32
+                  example: 260
+                manufacturerCode:
+                  type: integer
+                  format: int32
             - type: object
               required:
                 - type
