@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 30 January 2027                                       L. Corneo
+Expires: 31 January 2027                                       L. Corneo
                                                                 Ericsson
-                                                            29 July 2026
+                                                            30 July 2026
 
 
                           SDF Protocol Mapping
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 January 2027.
+   This Internet-Draft will expire on 31 January 2027.
 
 Copyright Notice
 
@@ -622,7 +622,10 @@ Table of Contents
 
    An sdfEvent is mapped to a Zigbee cluster event such as attribute
    reporting or a device-initiated write to an attribute on the gateway.
-   The Zigbee event protocol mapping structure is defined as follows:
+   The Zigbee event protocol mapping structure is defined as follows.
+   The "attribute_reporting" and "write_event" variants reuse the
+   zigbee-property definition from Figure 14 to identify the underlying
+   Zigbee attribute:
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -635,12 +638,7 @@ Table of Contents
 
    zigbee-attribute-reporting = {
      type: "attribute_reporting",
-     endpointID: uint,
-     clusterID: uint,
-     attributeID: uint,
-     attributeType: uint,
-     ? profileID: uint,
-     ? manufacturerCode: uint,
+     ~zigbee-property,
      ? minReportingInterval: uint,
      ? maxReportingInterval: uint,
      ? reportableChange: number,
@@ -648,12 +646,7 @@ Table of Contents
 
    zigbee-write-event = {
      type: "write_event",
-     endpointID: uint,
-     clusterID: uint,
-     attributeID: uint,
-     attributeType: uint,
-     ? profileID: uint,
-     ? manufacturerCode: uint,
+     ~zigbee-property,
    }
 
    zigbee-connection-event = {
@@ -675,29 +668,11 @@ Table of Contents
       -  "connection_events": the event is triggered when a Zigbee end
          device joins or leaves the Zigbee network.
 
-   *  endpointID is the Zigbee endpoint ID that corresponds to the SDF
-      event.  It is required when type is "attribute_reporting" or
-      "write_event".
-
-   *  clusterID is the Zigbee cluster ID that corresponds to the SDF
-      event.  It is required when type is "attribute_reporting" or
-      "write_event".
-
-   *  attributeID is the Zigbee attribute ID that corresponds to the SDF
-      event.  It is required when type is "attribute_reporting" or
-      "write_event".
-
-   *  attributeType is the Zigbee data type of the attribute.  It is
-      required when type is "attribute_reporting" or "write_event".
-
-   *  profileID is the Zigbee application profile ID (optional).  It
-      only applies when type is "attribute_reporting" or "write_event".
-      If not provided, it defaults to the Home Automation profile
-      (0x0104), which is the default profile in Zigbee 3.0.
-
-   *  manufacturerCode is the Zigbee manufacturer code of the attribute
-      (optional).  It only applies when type is "attribute_reporting" or
-      "write_event".
+   *  endpointID, clusterID, attributeID, attributeType, profileID, and
+      manufacturerCode have the same meaning as described for
+      sdfProperty in Figure 14.  These fields are present when type is
+      "attribute_reporting" or "write_event", and MUST be absent when
+      type is "connection_events".
 
    *  minReportingInterval is the minimum reporting interval in seconds
       (optional).  It is the minimum time between issued attribute
@@ -709,10 +684,13 @@ Table of Contents
 
    *  reportableChange is the minimum change to the attribute value that
       triggers a report (optional).  It only applies when type is
-      "attribute_reporting" and to attributes with an 'analog' data
-      type, and MUST have the same data type as the reported attribute.
-
-   When type is "connection_events", no other attributes are required.
+      "attribute_reporting" and to attributes whose attributeType is one
+      of the "analog" data types defined by the Zigbee Cluster Library,
+      part of [Zigbee30] (e.g., unsigned and signed integers, floating
+      point numbers), as opposed to "discrete" data types (e.g.,
+      booleans, enumerations, bitmaps), for which reporting a minimum
+      change is not meaningful.  The encoded value MUST use the same
+      Zigbee data type as the reported attribute's attributeType.
 
    For example, a Zigbee event mapping for a temperature change report:
 
@@ -1080,12 +1058,7 @@ Appendix A.  CDDL Definition
 
    zigbee-attribute-reporting = {
      type: "attribute_reporting",
-     endpointID: uint,
-     clusterID: uint,
-     attributeID: uint,
-     attributeType: uint,
-     ? profileID: uint,
-     ? manufacturerCode: uint,
+     ~zigbee-property,
      ? minReportingInterval: uint,
      ? maxReportingInterval: uint,
      ? reportableChange: number,
@@ -1093,12 +1066,7 @@ Appendix A.  CDDL Definition
 
    zigbee-write-event = {
      type: "write_event",
-     endpointID: uint,
-     clusterID: uint,
-     attributeID: uint,
-     attributeType: uint,
-     ? profileID: uint,
-     ? manufacturerCode: uint,
+     ~zigbee-property,
    }
 
    zigbee-connection-event = {
@@ -1325,6 +1293,7 @@ B.2.  Protocol map for Zigbee
                    - endpointID
                    - clusterID
                    - attributeID
+                   - attributeType
                  properties:
                    type:
                      type: string
@@ -1371,6 +1340,7 @@ B.2.  Protocol map for Zigbee
                    - endpointID
                    - clusterID
                    - attributeID
+                   - attributeType
                  properties:
                    type:
                      type: string
