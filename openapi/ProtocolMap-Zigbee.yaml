@@ -59,6 +59,7 @@ components:
                 - endpointID
                 - clusterID
                 - attributeID
+                - attributeType
               properties:
                 type:
                   type: string
@@ -105,6 +106,7 @@ components:
                 - endpointID
                 - clusterID
                 - attributeID
+                - attributeType
               properties:
                 type:
                   type: string

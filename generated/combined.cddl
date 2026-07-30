@@ -64,12 +64,7 @@ zigbee-event-map = zigbee-attribute-reporting / zigbee-write-event / zigbee-conn
 
 zigbee-attribute-reporting = {
   type: "attribute_reporting",
-  endpointID: uint,
-  clusterID: uint,
-  attributeID: uint,
-  attributeType: uint,
-  ? profileID: uint,
-  ? manufacturerCode: uint,
+  ~zigbee-property,
   ? minReportingInterval: uint,
   ? maxReportingInterval: uint,
   ? reportableChange: number,
@@ -77,12 +72,7 @@ zigbee-attribute-reporting = {
 
 zigbee-write-event = {
   type: "write_event",
-  endpointID: uint,
-  clusterID: uint,
-  attributeID: uint,
-  attributeType: uint,
-  ? profileID: uint,
-  ? manufacturerCode: uint,
+  ~zigbee-property,
 }
 
 zigbee-connection-event = {
