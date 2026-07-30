@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-23T01:59:55.969961+00:00",
+  "timestamp": "2026-07-30T01:43:22.116337+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -2168,19 +2168,106 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-07-14T18:07:14Z",
-      "updatedAt": "2026-07-14T18:07:15Z",
+      "updatedAt": "2026-07-29T20:19:03Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "5fb0a635fb91025502850e90a1fe7d59c18a5e39",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "zigbee-att-reporting",
-      "headRefOid": "7df6e2d02ada5d1087d2e49241dc6072ca5a5df2",
+      "headRefOid": "90684bdbc4f840163a5b50b7532842764450e062",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABGDg8Tg",
+          "commit": {
+            "abbreviatedOid": "0646672"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-15T05:54:28Z",
+          "updatedAt": "2026-07-29T08:12:47Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "If I understand correctly from the description [here](https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/37/changes#diff-77a8879fcf5a580896699f926161ec07ed8b3f2940db96f8f71acfd5ed2085a4R562), these three fields are valid only if `type` equals `attribute_reporting`. I do not think that the above CDDL expresses that.\n\nHow about the following?\n\n```cddl\nzigbee-event-map = zigbee-attribute-reporting / zigbee-write-event\n\nzigbee-attribute-reporting = {\n  type: \"attribute_reporting\",\n  endpointID: uint,\n  clusterID: uint,\n  attributeID: uint,\n  attributeType: uint,\n  ? profileID: uint,\n  ? manufacturerCode: uint,\n  ? minReportingInterval: uint,\n  ? maxReportingInterval: uint,\n  ? reportableChange: number,\n}\n\nzigbee-write-event = {\n  type: \"write_event\",\n  endpointID: uint,\n  clusterID: uint,\n  attributeID: uint,\n  attributeType: uint,\n  ? profileID: uint,\n  ? manufacturerCode: uint,\n}\n```\n\nThere is a bit of repetition as the common fields are repeated, but it is more legible than if there were referencing of another group. What do you think?",
+              "createdAt": "2026-07-15T05:54:28Z",
+              "updatedAt": "2026-07-29T08:12:47Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "`reportableChanges`, now I see that the above CDDL needs also a discriminator for `analog` data type.\n\nAlso, for consistency and ease of understanding, should this be called `minReportableChange`?",
+              "createdAt": "2026-07-15T05:56:53Z",
+              "updatedAt": "2026-07-29T08:12:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABHtKFSg",
+          "commit": {
+            "abbreviatedOid": "7df6e2d"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-29T19:16:48Z",
+          "updatedAt": "2026-07-29T19:16:48Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "`reportableChange` this is the name in the zigbee spec. The 'analog' data type in zigbee is just a `number`.",
+              "createdAt": "2026-07-29T19:16:48Z",
+              "updatedAt": "2026-07-29T19:16:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABHtKkBQ",
+          "commit": {
+            "abbreviatedOid": "7df6e2d"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-29T19:17:40Z",
+          "updatedAt": "2026-07-29T19:17:40Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Good point. Let me fix that.",
+              "createdAt": "2026-07-29T19:17:40Z",
+              "updatedAt": "2026-07-29T19:17:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABHtoT0w",
+          "commit": {
+            "abbreviatedOid": "7df6e2d"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-29T20:16:52Z",
+          "updatedAt": "2026-07-29T20:16:52Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "The common fields are same as `zigbee-property` which is in a different cddl file and embedded in a different section in the draft. I worry it will affect the readability of the draft.",
+              "createdAt": "2026-07-29T20:16:52Z",
+              "updatedAt": "2026-07-29T20:16:52Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 38,
@@ -2235,6 +2322,32 @@
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "property-map-readwrite-guard",
       "headRefOid": "39862588e1535413c05cb5dcd85784df83c89cdb",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 40,
+      "id": "PR_kwDOPSJ9A873sD1f",
+      "title": "Address Ari's comments",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/40",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/asdf/q-o2DZ9RLtUdzyDEDxpzbMh5heU/",
+      "createdAt": "2026-07-28T22:15:51Z",
+      "updatedAt": "2026-07-28T22:15:51Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "zigbee-att-reporting",
+      "baseRefOid": "0646672e9d63c96880ae7e383533b8774f094b4c",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "address-comments-ari",
+      "headRefOid": "a1d38e5437b407553fedcab64450c0e995fd22a6",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
