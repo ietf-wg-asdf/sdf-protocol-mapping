@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 24 December 2026                                      L. Corneo
+Expires: 31 January 2027                                       L. Corneo
                                                                 Ericsson
-                                                            22 June 2026
+                                                            30 July 2026
 
 
                           SDF Protocol Mapping
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 December 2026.
+   This Internet-Draft will expire on 31 January 2027.
 
 Copyright Notice
 
@@ -231,6 +231,9 @@ Table of Contents
 
    *  Separate read and write mappings when the protocol uses different
       attributes for each direction.
+
+   To keep these two forms unambiguous, the protocol-specific attribute
+   map (the props type) MUST NOT define members named read or write.
 
    To extend $$SDF-PROPERTY-PROTOCOL-MAP for a new protocol (e.g., "new-
    protocol"), implementers MUST use the property-protocol-map generic
