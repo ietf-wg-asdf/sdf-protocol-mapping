@@ -1444,15 +1444,17 @@ provide either:<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
 attributes for each direction.<a href="#section-3.1.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.1.1-5">To extend <code>$$SDF-PROPERTY-PROTOCOL-MAP</code> for a new protocol (e.g.,
+<p id="section-3.1.1-5">To keep these two forms unambiguous, the protocol-specific attribute map
+(the <code>props</code> type) <span class="bcp14">MUST NOT</span> define members named <code>read</code> or <code>write</code>.<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-6">To extend <code>$$SDF-PROPERTY-PROTOCOL-MAP</code> for a new protocol (e.g.,
 "new-protocol"), implementers <span class="bcp14">MUST</span> use the <code>property-protocol-map</code> generic with
-the protocol name and a map type defining the protocol-specific attributes.<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-6">It is to be noted that the protocol <code>name</code> (e.g., "new-protocol") <span class="bcp14">MUST</span> be
-registered in the IANA registry defined in <a href="#iana-prot-map" class="auto internal xref">Section 8.1</a>.<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-7">For example:<a href="#section-3.1.1-7" class="pilcrow">¶</a></p>
+the protocol name and a map type defining the protocol-specific attributes.<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-7">It is to be noted that the protocol <code>name</code> (e.g., "new-protocol") <span class="bcp14">MUST</span> be
+registered in the IANA registry defined in <a href="#iana-prot-map" class="auto internal xref">Section 8.1</a>.<a href="#section-3.1.1-7" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-8">For example:<a href="#section-3.1.1-8" class="pilcrow">¶</a></p>
 <span id="name-example-property-protocol-m"></span><div id="prop-ext-example">
 <figure id="figure-3">
-            <div class="lang-cddl sourcecode" id="section-3.1.1-8.1">
+            <div class="lang-cddl sourcecode" id="section-3.1.1-9.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 $$SDF-PROPERTY-PROTOCOL-MAP //= (
@@ -1470,10 +1472,10 @@ new-protocol-property = {
 <a href="#name-example-property-protocol-m" class="selfRef">Example Property Protocol Map Extension</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.1-9">The corresponding JSON in an SDF model looks like:<a href="#section-3.1.1-9" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-10">The corresponding JSON in an SDF model looks like:<a href="#section-3.1.1-10" class="pilcrow">¶</a></p>
 <span id="name-example-property-protocol-ma"></span><div id="prop-ext-json-example">
 <figure id="figure-4">
-            <div class="lang-json sourcecode" id="section-3.1.1-10.1">
+            <div class="lang-json sourcecode" id="section-3.1.1-11.1">
 <pre>{
   "sdfProperty": {
     "temperature": {
@@ -1494,11 +1496,11 @@ new-protocol-property = {
 <a href="#name-example-property-protocol-ma" class="selfRef">Example Property Protocol Map in JSON</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.1-11">When a property uses different protocol attributes for read and write
-operations, the mapping can be split:<a href="#section-3.1.1-11" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-12">When a property uses different protocol attributes for read and write
+operations, the mapping can be split:<a href="#section-3.1.1-12" class="pilcrow">¶</a></p>
 <span id="name-example-property-protocol-map"></span><div id="prop-ext-rw-json-example">
 <figure id="figure-5">
-            <div class="lang-json sourcecode" id="section-3.1.1-12.1">
+            <div class="lang-json sourcecode" id="section-3.1.1-13.1">
 <pre>{
   "sdfProperty": {
     "temperature": {
