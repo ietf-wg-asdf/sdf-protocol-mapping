@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-30T01:43:22.116337+00:00",
+  "timestamp": "2026-08-02T01:58:19.955376+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -2168,13 +2168,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-07-14T18:07:14Z",
-      "updatedAt": "2026-07-29T20:19:03Z",
+      "updatedAt": "2026-07-30T20:37:39Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
-      "baseRefOid": "5fb0a635fb91025502850e90a1fe7d59c18a5e39",
+      "baseRefOid": "190ed5cf9a9fc3f50d57afdb9e8eb5915420b8a0",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "zigbee-att-reporting",
-      "headRefOid": "90684bdbc4f840163a5b50b7532842764450e062",
+      "headRefOid": "12b3cd14bd76c08dd008bfdcb8217fd3361166ee",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2266,6 +2266,86 @@
               "updatedAt": "2026-07-29T20:16:52Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABHwtFmw",
+          "commit": {
+            "abbreviatedOid": "7df6e2d"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-30T06:04:38Z",
+          "updatedAt": "2026-07-30T06:04:38Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Right. Wondering if adding `zigbee-property` to the above for completeness makes it easier? You can possibly also mention that in the text before the CDDL.",
+              "createdAt": "2026-07-30T06:04:38Z",
+              "updatedAt": "2026-07-30T06:04:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABHwt7FQ",
+          "commit": {
+            "abbreviatedOid": "7df6e2d"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-30T06:06:45Z",
+          "updatedAt": "2026-07-30T06:06:46Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Ok, then the naming is fine. The important bit here is the conditions on the types in the CDDL above.",
+              "createdAt": "2026-07-30T06:06:46Z",
+              "updatedAt": "2026-07-30T06:06:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABH3TEIQ",
+          "commit": {
+            "abbreviatedOid": "7df6e2d"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-30T19:54:42Z",
+          "updatedAt": "2026-07-30T19:54:42Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "I rephrased this paragraph to make it more clear.",
+              "createdAt": "2026-07-30T19:54:42Z",
+              "updatedAt": "2026-07-30T19:54:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABH3Ty7Q",
+          "commit": {
+            "abbreviatedOid": "7df6e2d"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-30T19:55:57Z",
+          "updatedAt": "2026-07-30T19:55:57Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "I have made that change.\r\nTake a look at the section to see if is still legible:\r\nhttps://ietf-wg-asdf.github.io/sdf-protocol-mapping/zigbee-att-reporting/draft-ietf-asdf-sdf-protocol-mapping.html#section-5.2.2",
+              "createdAt": "2026-07-30T19:55:57Z",
+              "updatedAt": "2026-07-30T19:55:57Z"
+            }
+          ]
         }
       ]
     },
@@ -2308,24 +2388,26 @@
       "id": "PR_kwDOPSJ9A871FFMU",
       "title": "Forbid \"read\"/\"write\" members in property protocol map attributes",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/39",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "akeranen",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Seems without this there would be potential ambiguity if `prop` would contain `write` or `read`",
       "createdAt": "2026-07-22T21:02:35Z",
-      "updatedAt": "2026-07-22T21:02:36Z",
+      "updatedAt": "2026-07-30T20:31:57Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "5fb0a635fb91025502850e90a1fe7d59c18a5e39",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "property-map-readwrite-guard",
       "headRefOid": "39862588e1535413c05cb5dcd85784df83c89cdb",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-07-30T20:31:57Z",
+      "mergedAt": "2026-07-30T20:31:57Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "190ed5cf9a9fc3f50d57afdb9e8eb5915420b8a0"
+      },
       "comments": [],
       "reviews": []
     },
@@ -2341,13 +2423,39 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/asdf/q-o2DZ9RLtUdzyDEDxpzbMh5heU/",
       "createdAt": "2026-07-28T22:15:51Z",
-      "updatedAt": "2026-07-28T22:15:51Z",
+      "updatedAt": "2026-07-30T20:37:39Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "zigbee-att-reporting",
-      "baseRefOid": "0646672e9d63c96880ae7e383533b8774f094b4c",
+      "baseRefOid": "12b3cd14bd76c08dd008bfdcb8217fd3361166ee",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "address-comments-ari",
-      "headRefOid": "a1d38e5437b407553fedcab64450c0e995fd22a6",
+      "headRefOid": "d00632c156761cba73cbcd43bd921e7b5c3e758d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 42,
+      "id": "PR_kwDOPSJ9A874t46O",
+      "title": "Clarify IANA registry group locations for protocol mapping and SCIM extension registries",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/42",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-30T20:31:02Z",
+      "updatedAt": "2026-07-30T20:37:40Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "address-comments-ari",
+      "baseRefOid": "d00632c156761cba73cbcd43bd921e7b5c3e758d",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "update-iana-group",
+      "headRefOid": "741323e4b296041f7f1ff2bfae6f79a4b5d48384",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
