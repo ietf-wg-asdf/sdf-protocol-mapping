@@ -366,9 +366,6 @@ includes:
   CDDL extension, including their semantics and how they relate to the
   underlying protocol operations.
 
-<!-- LC: Should we consider adding an appendix showing the whole process to
-create a fictitious new protocol? It may be of help to implementers. -->
-
 # Registered Protocol Mappings
 
 This section defines the protocol mappings registered by this document.
@@ -453,12 +450,9 @@ Where:
 - `type` specifies the type of BLE event, such as "gatt" for GATT events,
   "advertisements" for advertisement events, or "connection_events" for
   connection-related events.
-- `serviceID` and `characteristicID` are optional attributes that are
-  specified if the type is "gatt".
-
-<!-- LC: Is there a way to make serviceID and characteristicID mandatory only if
-the type is gatt? The current solution allows a connection event to have a
-serviceID, or characteristicID, or both. -->
+- `serviceID` and `characteristicID` identify the GATT service and
+  characteristic. They MUST be present when `type` is `"gatt"`, and MUST be
+  absent when `type` is `"advertisements"` or `"connection_events"`.
 
 For example, a BLE event mapping for a heart rate measurement event:
 
@@ -761,7 +755,7 @@ described in {{scim-sdf-extension}}:
 
 | URN                                                     | Description   | Resource Type | Reference                           |
 |---------------------------------------------------------+---------------+---------------+-------------------------------------|
-| urn:ietf:params:scim: schemas:extension: sdf:2.0:Device | SDF Extension | Device        | This document, {{scim-sdf-extension}} |
+| urn:ietf:params:scim:schemas:extension:sdf:2.0:Device | SDF Extension | Device        | This document, {{scim-sdf-extension}} |
 {: #iana-scim title="SCIM Device Schema SDF Extension"}
 
 --- back
@@ -779,9 +773,6 @@ This appendix contains the combined CDDL definitions for the SDF protocol mappin
 
 
 # OpenAPI Definition
-
-<!-- LC: Maybe we need some text to explain why all of a sudden there is some
-OpenAPI specifications. -->
 
 The following non-normative model is provided for convenience of the implementer.
 
