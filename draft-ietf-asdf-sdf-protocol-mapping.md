@@ -755,7 +755,7 @@ described in {{scim-sdf-extension}}:
 
 | URN                                                     | Description   | Resource Type | Reference                           |
 |---------------------------------------------------------+---------------+---------------+-------------------------------------|
-| urn:ietf:params:scim:schemas:extension:sdf:2.0:Device | SDF Extension | Device        | This document, {{scim-sdf-extension}} |
+| urn:ietf:params:scim: schemas:extension: sdf:2.0:Device | SDF Extension | Device        | This document, {{scim-sdf-extension}} |
 {: #iana-scim title="SCIM Device Schema SDF Extension"}
 
 --- back
