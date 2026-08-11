@@ -725,17 +725,16 @@ in accordance with {{!RFC8126}}.
 
 ## Protocol Mapping {#iana-prot-map}
 
-IANA is requested to create a new registry called "SDF Protocol Mapping".
-
-The registration policy for this registry is "Specification Required" as
-defined in Section 4.6 of {{!RFC8126}}.
-
-The registry must contain the following attributes:
+IANA is requested to create a new registry called "SDF Protocol Mapping" in
+the "Semantic Definition Format (SDF)" registry group {{!IANA.sdf}}, with the following template:
 
 - Protocol map name, as per `sdfProtocolMap`
 - Protocol name
 - Description
 - Reference of the specification describing the protocol mapping.
+
+The registration policy for this registry is "Specification Required" as
+defined in Section 4.6 of {{!RFC8126}}.
 
 The specification requirements for a registration request are
 defined in {{protocol-registration}}.
@@ -755,8 +754,10 @@ The following protocol mappings are described in this document:
 
 ## SCIM Device Schema SDF Extension
 
-IANA is requested to create the following extension in the SCIM
-Server-Related Schema URIs registry as described in {{scim-sdf-extension}}:
+IANA is requested to create the following extension in the "SCIM
+Server-Related Schema URIs" registry, within the "System for Cross-domain
+Identity Management (SCIM) Schema URIs" registry group {{!IANA.scim}}, as
+described in {{scim-sdf-extension}}:
 
 | URN                                                     | Description   | Resource Type | Reference                           |
 |---------------------------------------------------------+---------------+---------------+-------------------------------------|
