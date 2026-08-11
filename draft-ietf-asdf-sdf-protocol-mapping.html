@@ -1830,8 +1830,9 @@ ble-event-map = {
 connection-related events.<a href="#section-5.1.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-5.1.2-4.2">
-              <p id="section-5.1.2-4.2.1"><code>serviceID</code> and <code>characteristicID</code> are optional attributes that are
-specified if the type is "gatt".<a href="#section-5.1.2-4.2.1" class="pilcrow">¶</a></p>
+              <p id="section-5.1.2-4.2.1"><code>serviceID</code> and <code>characteristicID</code> identify the GATT service and
+characteristic. They <span class="bcp14">MUST</span> be present when <code>type</code> is <code>"gatt"</code>, and <span class="bcp14">MUST</span> be
+absent when <code>type</code> is <code>"advertisements"</code> or <code>"connection_events"</code>.<a href="#section-5.1.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-5.1.2-5">For example, a BLE event mapping for a heart rate measurement event:<a href="#section-5.1.2-5" class="pilcrow">¶</a></p>

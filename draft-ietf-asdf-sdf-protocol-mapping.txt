@@ -523,8 +523,10 @@ Table of Contents
       events, "advertisements" for advertisement events, or
       "connection_events" for connection-related events.
 
-   *  serviceID and characteristicID are optional attributes that are
-      specified if the type is "gatt".
+   *  serviceID and characteristicID identify the GATT service and
+      characteristic.  They MUST be present when type is "gatt", and
+      MUST be absent when type is "advertisements" or
+      "connection_events".
 
    For example, a BLE event mapping for a heart rate measurement event:
 
