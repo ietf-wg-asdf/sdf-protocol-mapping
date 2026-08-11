@@ -923,16 +923,16 @@ Table of Contents
    domain Identity Management (SCIM) Schema URIs" registry group
    [IANA.scim], as described in Section 6:
 
-   +=====================================================+===========+========+=========+
-   |URN                                                  |Description|Resource|Reference|
-   |                                                     |           |Type    |         |
-   +=====================================================+===========+========+=========+
-   |urn:ietf:params:scim:schemas:extension:sdf:2.0:Device|SDF        |Device  |This     |
-   |                                                     |Extension  |        |document,|
-   |                                                     |           |        |Section 6|
-   +-----------------------------------------------------+-----------+--------+---------+
+      +=======================+=============+==========+===========+
+      | URN                   | Description | Resource | Reference |
+      |                       |             | Type     |           |
+      +=======================+=============+==========+===========+
+      | urn:ietf:params:scim: | SDF         | Device   | This      |
+      | schemas:extension:    | Extension   |          | document, |
+      | sdf:2.0:Device        |             |          | Section 6 |
+      +-----------------------+-------------+----------+-----------+
 
-                 Table 2: SCIM Device Schema SDF Extension
+                Table 2: SCIM Device Schema SDF Extension
 
 9.  References
 
