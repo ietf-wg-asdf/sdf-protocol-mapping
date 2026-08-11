@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 31 January 2027                                       L. Corneo
+Expires: 12 February 2027                                      L. Corneo
                                                                 Ericsson
-                                                            30 July 2026
+                                                          11 August 2026
 
 
                           SDF Protocol Mapping
@@ -19,9 +19,11 @@ Abstract
    Definition Format (SDF) to enable mapping of protocol-agnostic SDF
    affordances to protocol-specific operations.  The protocol mapping
    mechanism allows SDF models to specify how properties, actions, and
-   events should be accessed using specific non-IP and IP protocols such
-   as Bluetooth Low Energy, Zigbee or HTTP and CoAP.  This document also
-   describes a method to extend SCIM with an SDF model mapping.
+   events should be accessed using a specific protocol.  This document
+   defines protocol mappings for Bluetooth Low Energy and Zigbee, and
+   the mechanism can be extended to other protocols such as HTTP and
+   CoAP.  This document also describes a method to extend SCIM with an
+   SDF model mapping.
 
 About This Document
 
@@ -55,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 January 2027.
+   This Internet-Draft will expire on 12 February 2027.
 
 Copyright Notice
 
@@ -108,20 +110,20 @@ Table of Contents
 
    The Semantic Definition Format (SDF) [RFC9880] provides a protocol-
    agnostic way to describe IoT devices and their capabilities through
-   properties, actions, and events (collectively called affordances).
-   When implementing an SDF model for a device using specific
-   communication protocols, there needs to be a mechanism to map the
-   protocol-agnostic SDF definitions to protocol-specific operations,
-   translating the model into a real-world implementation.  Moreover,
-   such a mechanism needs to be extensible for enabling implementers to
-   provide novel SDF protocol mappings to expand the SDF ecosystem.  SDF
-   protocol mappings may target a variety of protocols spanning from
-   non-IP protocols commonly used in IoT environments, such as [BLE53]
-   and [Zigbee30], to IP-based protocols such as HTTP [RFC9110] and CoAP
-   [RFC7252].  This document provides the required mechanism by
-   defining:
+   properties, actions, and events (collectively called affordances).  A
+   device described by an SDF model, however, is accessed over a
+   specific communication protocol.  To interact with such a device
+   based on its SDF model, there needs to be a mechanism to map the
+   protocol-agnostic SDF definitions to the protocol-specific operations
+   that access the device.  Moreover, such a mechanism needs to be
+   extensible for enabling implementers to provide novel SDF protocol
+   mappings to expand the SDF ecosystem.  SDF protocol mappings may
+   target a variety of protocols spanning from non-IP protocols commonly
+   used in IoT environments, such as [BLE53] and [Zigbee30], to IP-based
+   protocols such as HTTP [RFC9110] and CoAP [RFC7252].  This document
+   provides the required mechanism by defining:
 
-   *  The sdfProtocolMap keyword, which allows SDF models to include
+   *  The sdfProtocolMap quality, which allows SDF models to include
       protocol-specific mapping information attached to the protocol-
       agnostic definitions, see Section 3.  An sdfProtocolMap MAY be
       applied to an SDF affordance, be it an sdfProperty, sdfEvent or
@@ -146,8 +148,9 @@ Table of Contents
 
 2.  Conventions and Definitions
 
-   The syntax extensions to [RFC9880] in terms of its JSON structures
-   are shown in the Concise Data Definition Language (CDDL) [RFC8610].
+   The syntax extensions to [RFC9880] are shown in the Concise Data
+   Definition Language (CDDL) [RFC8610], which describes their JSON
+   representation.
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -163,12 +166,11 @@ Table of Contents
    a property as a service characteristic, while Zigbee addresses it as
    an attribute in a cluster of an endpoint.
 
-   A protocol mapping object is a JSON object identified by the
-   sdfProtocolMap keyword, nested inside an SDF affordance definition
-   (sdfProperty, sdfAction, or sdfEvent).  Protocol-specific attributes
-   are embedded within this object, keyed by a protocol name registered
-   in the IANA "SDF Protocol Mapping" registry (Section 8.1), e.g.,
-   "ble" or "zigbee".
+   The value of the sdfProtocolMap quality is a JSON object nested
+   inside an SDF affordance definition (sdfProperty, sdfAction, or
+   sdfEvent).  Protocol-specific attributes are embedded within this
+   object, keyed by a protocol name registered in the IANA "SDF Protocol
+   Mapping" registry (Section 8.1), e.g., "ble" or "zigbee".
 
    sdfProperty / sdfAction / sdfEvent
      |
@@ -188,7 +190,7 @@ Table of Contents
 
 3.1.  SDF Extension Points
 
-   The sdfProtocolMap keyword is introduced into SDF affordance
+   The sdfProtocolMap quality is introduced into SDF affordance
    definitions through the extension points defined in the formal syntax
    of Appendix A of [RFC9880].  For each affordance type, an
    sdfProtocolMap entry is added via the corresponding CDDL group
@@ -259,7 +261,7 @@ Table of Contents
 
              Figure 3: Example Property Protocol Map Extension
 
-   The corresponding JSON in an SDF model looks like:
+   An SDF model using this extension could look like:
 
    {
      "sdfProperty": {
@@ -321,7 +323,8 @@ Table of Contents
    Actions use a simpler structure than properties, as they do not
    require the read/write distinction.  To extend $$SDF-ACTION-PROTOCOL-
    MAP for a new protocol, implementers MUST add a group entry that maps
-   the protocol name to the protocol-specific attributes:
+   the protocol name to the protocol-specific attributes.  For example,
+   an extension for a fictitious "new-protocol" could be defined as:
 
    $$SDF-ACTION-PROTOCOL-MAP //= (
      "new-protocol": new-protocol-action
@@ -333,7 +336,7 @@ Table of Contents
 
               Figure 7: Example Action Protocol Map Extension
 
-   The corresponding JSON in an SDF model would look like:
+   An SDF model using this extension could look like:
 
    {
      "sdfAction": {
@@ -364,7 +367,10 @@ Table of Contents
           Figure 9: SDF Event Extension Point for Protocol Mapping
 
    Events follow the same simple pattern as actions.  To extend $$SDF-
-   EVENT-PROTOCOL-MAP for a new protocol:
+   EVENT-PROTOCOL-MAP for a new protocol, implementers add a group entry
+   that maps the protocol name to the protocol-specific attributes.  For
+   example, an extension for a fictitious "new-protocol" could be
+   defined as:
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
      "new-protocol": new-protocol-event
@@ -376,7 +382,7 @@ Table of Contents
 
               Figure 10: Example Event Protocol Map Extension
 
-   The corresponding JSON in an SDF model looks like:
+   An SDF model using this extension could look like:
 
    {
      "sdfEvent": {
