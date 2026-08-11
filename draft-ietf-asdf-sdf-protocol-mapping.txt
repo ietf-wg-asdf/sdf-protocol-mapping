@@ -873,12 +873,8 @@ Table of Contents
 8.1.  Protocol Mapping
 
    IANA is requested to create a new registry called "SDF Protocol
-   Mapping".
-
-   The registration policy for this registry is "Specification Required"
-   as defined in Section 4.6 of [RFC8126].
-
-   The registry must contain the following attributes:
+   Mapping" in the "Semantic Definition Format (SDF)" registry group
+   [IANA.sdf], with the following template:
 
    *  Protocol map name, as per sdfProtocolMap
 
@@ -887,6 +883,9 @@ Table of Contents
    *  Description
 
    *  Reference of the specification describing the protocol mapping.
+
+   The registration policy for this registry is "Specification Required"
+   as defined in Section 4.6 of [RFC8126].
 
    The specification requirements for a registration request are defined
    in Section 4.
@@ -917,8 +916,10 @@ Table of Contents
 
 8.2.  SCIM Device Schema SDF Extension
 
-   IANA is requested to create the following extension in the SCIM
-   Server-Related Schema URIs registry as described in Section 6:
+   IANA is requested to create the following extension in the "SCIM
+   Server-Related Schema URIs" registry, within the "System for Cross-
+   domain Identity Management (SCIM) Schema URIs" registry group
+   [IANA.scim], as described in Section 6:
 
       +=======================+=============+==========+===========+
       | URN                   | Description | Resource | Reference |
@@ -934,6 +935,13 @@ Table of Contents
 9.  References
 
 9.1.  Normative References
+
+   [IANA.scim]
+              IANA, "System for Cross-domain Identity Management (SCIM)
+              Schema URIs", <https://www.iana.org/assignments/scim>.
+
+   [IANA.sdf] IANA, "Semantic Definition Format (SDF)",
+              <https://www.iana.org/assignments/sdf>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1143,6 +1151,15 @@ Appendix B.  OpenAPI Definition
                                                   ProtocolMap-BLE-Event'
                - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/\
                                                ProtocolMap-Zigbee-Event'
+
+   ## Protocol Map for an action
+       ProtocolMap-Action:
+         type: object
+         properties:
+           sdfProtocolMap:
+             oneOf:
+               - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/\
+                                              ProtocolMap-Zigbee-Action'
    <CODE ENDS>
 
                           Figure 19: OpenAPI model
@@ -1174,19 +1191,33 @@ B.1.  Protocol map for BLE
          type: object
          properties:
            ble:
-             required:
-               - serviceID
-               - characteristicID
-             type: object
-             properties:
-               serviceID:
-                 type: string
-                 format: uuid
-                 example: 00001809-0000-1000-8000-00805f9b34fb
-               characteristicID:
-                 type: string
-                 format: uuid
-                 example: 00002a1c-0000-1000-8000-00805f9b34fb
+             oneOf:
+               - $ref: '#/components/schemas/BLE-Property'
+               - type: object
+                 required:
+                   - read
+                   - write
+                 properties:
+                   read:
+                     $ref: '#/components/schemas/BLE-Property'
+                   write:
+                     $ref: '#/components/schemas/BLE-Property'
+
+   ## Reusable BLE property object
+       BLE-Property:
+         required:
+           - serviceID
+           - characteristicID
+         type: object
+         properties:
+           serviceID:
+             type: string
+             format: uuid
+             example: 00001809-0000-1000-8000-00805f9b34fb
+           characteristicID:
+             type: string
+             format: uuid
+             example: 00002a1c-0000-1000-8000-00805f9b34fb
 
    ## Defines different types of BLE events
        ProtocolMap-BLE-Event:
@@ -1262,32 +1293,51 @@ B.2.  Protocol map for Zigbee
          type: object
          properties:
            zigbee:
-             required:
-               - endpointID
-               - clusterID
-               - attributeID
-             type: object
-             properties:
-               endpointID:
-                 type: integer
-                 format: int32
-                 example: 1
-               clusterID:
-                 type: integer
-                 format: int32
-                 example: 6
-               attributeID:
-                 type: integer
-                 format: int32
-                 example: 16
-               type:
-                 type: integer
-                 format: int32
-                 example: 1
-               profileID:
-                 type: integer
-                 format: int32
-                 example: 260
+             oneOf:
+               - $ref: '#/components/schemas/Zigbee-Property'
+               - type: object
+                 required:
+                   - read
+                   - write
+                 properties:
+                   read:
+                     $ref: '#/components/schemas/Zigbee-Property'
+                   write:
+                     $ref: '#/components/schemas/Zigbee-Property'
+
+   ## Reusable Zigbee property object
+       Zigbee-Property:
+         required:
+           - endpointID
+           - clusterID
+           - attributeID
+           - attributeType
+         type: object
+         properties:
+           endpointID:
+             type: integer
+             format: int32
+             example: 1
+           clusterID:
+             type: integer
+             format: int32
+             example: 6
+           attributeID:
+             type: integer
+             format: int32
+             example: 16
+           attributeType:
+             type: integer
+             format: int32
+             example: 32
+           profileID:
+             type: integer
+             format: int32
+             example: 260
+           manufacturerCode:
+             type: integer
+             format: int32
+             example: 4174
 
        ProtocolMap-Zigbee-Event:
          required:
@@ -1388,6 +1438,40 @@ B.2.  Protocol map for Zigbee
                      example: connection_events
                      enum:
                        - connection_events
+
+   ## Protocol mapping for Zigbee action
+       ProtocolMap-Zigbee-Action:
+         required:
+           - zigbee
+         type: object
+         properties:
+           zigbee:
+             required:
+               - endpointID
+               - clusterID
+               - commandID
+             type: object
+             properties:
+               endpointID:
+                 type: integer
+                 format: int32
+                 example: 1
+               clusterID:
+                 type: integer
+                 format: int32
+                 example: 6
+               commandID:
+                 type: integer
+                 format: int32
+                 example: 0
+               profileID:
+                 type: integer
+                 format: int32
+                 example: 260
+               manufacturerCode:
+                 type: integer
+                 format: int32
+                 example: 4174
    <CODE ENDS>
 
                     Figure 21: OpenAPI model for Zigbee

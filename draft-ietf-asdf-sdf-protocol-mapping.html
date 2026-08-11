@@ -2253,30 +2253,30 @@ in accordance with <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</spa
         <h3 id="name-protocol-mapping">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-protocol-mapping" class="section-name selfRef">Protocol Mapping</a>
         </h3>
-<p id="section-8.1-1">IANA is requested to create a new registry called "SDF Protocol Mapping".<a href="#section-8.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1-2">The registration policy for this registry is "Specification Required" as
-defined in Section 4.6 of <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.1-3">The registry must contain the following attributes:<a href="#section-8.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.1-1">IANA is requested to create a new registry called "SDF Protocol Mapping" in
+the "Semantic Definition Format (SDF)" registry group <span>[<a href="#IANA.sdf" class="cite xref">IANA.sdf</a>]</span>, with the following template:<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-8.1-4.1">
-            <p id="section-8.1-4.1.1">Protocol map name, as per <code>sdfProtocolMap</code><a href="#section-8.1-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-8.1-2.1">
+            <p id="section-8.1-2.1.1">Protocol map name, as per <code>sdfProtocolMap</code><a href="#section-8.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-8.1-4.2">
-            <p id="section-8.1-4.2.1">Protocol name<a href="#section-8.1-4.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-8.1-2.2">
+            <p id="section-8.1-2.2.1">Protocol name<a href="#section-8.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-8.1-4.3">
-            <p id="section-8.1-4.3.1">Description<a href="#section-8.1-4.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-8.1-2.3">
+            <p id="section-8.1-2.3.1">Description<a href="#section-8.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-8.1-4.4">
-            <p id="section-8.1-4.4.1">Reference of the specification describing the protocol mapping.<a href="#section-8.1-4.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-8.1-2.4">
+            <p id="section-8.1-2.4.1">Reference of the specification describing the protocol mapping.<a href="#section-8.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-8.1-5">The specification requirements for a registration request are
-defined in <a href="#protocol-registration" class="auto internal xref">Section 4</a>.<a href="#section-8.1-5" class="pilcrow">¶</a></p>
-<p id="section-8.1-6">The designated expert(s) <span class="bcp14">MUST</span> verify that the protocol map name is appropriate and not likely to cause confusion with existing entries.<a href="#section-8.1-6" class="pilcrow">¶</a></p>
-<p id="section-8.1-7">The registrant of an existing entry may request updates to that entry, subject to the same expert review.
-They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.<a href="#section-8.1-7" class="pilcrow">¶</a></p>
-<p id="section-8.1-8">The following protocol mappings are described in this document:<a href="#section-8.1-8" class="pilcrow">¶</a></p>
+<p id="section-8.1-3">The registration policy for this registry is "Specification Required" as
+defined in Section 4.6 of <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.1-4">The specification requirements for a registration request are
+defined in <a href="#protocol-registration" class="auto internal xref">Section 4</a>.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
+<p id="section-8.1-5">The designated expert(s) <span class="bcp14">MUST</span> verify that the protocol map name is appropriate and not likely to cause confusion with existing entries.<a href="#section-8.1-5" class="pilcrow">¶</a></p>
+<p id="section-8.1-6">The registrant of an existing entry may request updates to that entry, subject to the same expert review.
+They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.<a href="#section-8.1-6" class="pilcrow">¶</a></p>
+<p id="section-8.1-7">The following protocol mappings are described in this document:<a href="#section-8.1-7" class="pilcrow">¶</a></p>
 <span id="name-protocol-mapping-registry"></span><div id="protmap-reg">
 <table class="center" id="table-1">
           <caption>
@@ -2316,8 +2316,10 @@ They should verify that updates preserve backward compatibility with deployed im
         <h3 id="name-scim-device-schema-sdf-exte">
 <a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-scim-device-schema-sdf-exte" class="section-name selfRef">SCIM Device Schema SDF Extension</a>
         </h3>
-<p id="section-8.2-1">IANA is requested to create the following extension in the SCIM
-Server-Related Schema URIs registry as described in <a href="#scim-sdf-extension" class="auto internal xref">Section 6</a>:<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.2-1">IANA is requested to create the following extension in the "SCIM
+Server-Related Schema URIs" registry, within the "System for Cross-domain
+Identity Management (SCIM) Schema URIs" registry group <span>[<a href="#IANA.scim" class="cite xref">IANA.scim</a>]</span>, as
+described in <a href="#scim-sdf-extension" class="auto internal xref">Section 6</a>:<a href="#section-8.2-1" class="pilcrow">¶</a></p>
 <span id="name-scim-device-schema-sdf-exten"></span><div id="iana-scim">
 <table class="center" id="table-2">
           <caption>
@@ -2358,6 +2360,14 @@ Server-Related Schema URIs registry as described in <a href="#scim-sdf-extension
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="IANA.scim">[IANA.scim]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"System for Cross-domain Identity Management (SCIM) Schema URIs"</span>, <span>&lt;<a href="https://www.iana.org/assignments/scim">https://www.iana.org/assignments/scim</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IANA.sdf">[IANA.sdf]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Semantic Definition Format (SDF)"</span>, <span>&lt;<a href="https://www.iana.org/assignments/sdf">https://www.iana.org/assignments/sdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
@@ -2542,7 +2552,7 @@ zigbee-action-map = {
 <p id="appendix-B-1">The following non-normative model is provided for convenience of the implementer.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <span id="name-openapi-model"></span><div id="protocolmapmodel">
 <figure id="figure-19">
-        <div class="lang-yaml sourcecode" id="appendix-B-2.1">
+        <div class="breakable lang-yaml sourcecode" id="appendix-B-2.1">
 <pre>&lt;CODE BEGINS&gt; file "ProtocolMap.yaml"
 
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -2586,6 +2596,15 @@ components:
             - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/\
                                             ProtocolMap-Zigbee-Event'
 
+## Protocol Map for an action
+    ProtocolMap-Action:
+      type: object
+      properties:
+        sdfProtocolMap:
+          oneOf:
+            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/\
+                                           ProtocolMap-Zigbee-Action'
+
 
 &lt;CODE ENDS&gt;</pre>
 </div>
@@ -2627,19 +2646,33 @@ components:
       type: object
       properties:
         ble:
-          required:
-            - serviceID
-            - characteristicID
-          type: object
-          properties:
-            serviceID:
-              type: string
-              format: uuid
-              example: 00001809-0000-1000-8000-00805f9b34fb
-            characteristicID:
-              type: string
-              format: uuid
-              example: 00002a1c-0000-1000-8000-00805f9b34fb
+          oneOf:
+            - $ref: '#/components/schemas/BLE-Property'
+            - type: object
+              required:
+                - read
+                - write
+              properties:
+                read:
+                  $ref: '#/components/schemas/BLE-Property'
+                write:
+                  $ref: '#/components/schemas/BLE-Property'
+
+## Reusable BLE property object
+    BLE-Property:
+      required:
+        - serviceID
+        - characteristicID
+      type: object
+      properties:
+        serviceID:
+          type: string
+          format: uuid
+          example: 00001809-0000-1000-8000-00805f9b34fb
+        characteristicID:
+          type: string
+          format: uuid
+          example: 00002a1c-0000-1000-8000-00805f9b34fb
 
 ## Defines different types of BLE events
     ProtocolMap-BLE-Event:
@@ -2727,32 +2760,51 @@ components:
       type: object
       properties:
         zigbee:
-          required:
-            - endpointID
-            - clusterID
-            - attributeID
-          type: object
-          properties:
-            endpointID:
-              type: integer
-              format: int32
-              example: 1
-            clusterID:
-              type: integer
-              format: int32
-              example: 6
-            attributeID:
-              type: integer
-              format: int32
-              example: 16
-            type:
-              type: integer
-              format: int32
-              example: 1
-            profileID:
-              type: integer
-              format: int32
-              example: 260
+          oneOf:
+            - $ref: '#/components/schemas/Zigbee-Property'
+            - type: object
+              required:
+                - read
+                - write
+              properties:
+                read:
+                  $ref: '#/components/schemas/Zigbee-Property'
+                write:
+                  $ref: '#/components/schemas/Zigbee-Property'
+
+## Reusable Zigbee property object
+    Zigbee-Property:
+      required:
+        - endpointID
+        - clusterID
+        - attributeID
+        - attributeType
+      type: object
+      properties:
+        endpointID:
+          type: integer
+          format: int32
+          example: 1
+        clusterID:
+          type: integer
+          format: int32
+          example: 6
+        attributeID:
+          type: integer
+          format: int32
+          example: 16
+        attributeType:
+          type: integer
+          format: int32
+          example: 32
+        profileID:
+          type: integer
+          format: int32
+          example: 260
+        manufacturerCode:
+          type: integer
+          format: int32
+          example: 4174
 
     ProtocolMap-Zigbee-Event:
       required:
@@ -2853,6 +2905,40 @@ components:
                   example: connection_events
                   enum:
                     - connection_events
+
+## Protocol mapping for Zigbee action
+    ProtocolMap-Zigbee-Action:
+      required:
+        - zigbee
+      type: object
+      properties:
+        zigbee:
+          required:
+            - endpointID
+            - clusterID
+            - commandID
+          type: object
+          properties:
+            endpointID:
+              type: integer
+              format: int32
+              example: 1
+            clusterID:
+              type: integer
+              format: int32
+              example: 6
+            commandID:
+              type: integer
+              format: int32
+              example: 0
+            profileID:
+              type: integer
+              format: int32
+              example: 260
+            manufacturerCode:
+              type: integer
+              format: int32
+              example: 4174
 
 &lt;CODE ENDS&gt;</pre>
 </div>
