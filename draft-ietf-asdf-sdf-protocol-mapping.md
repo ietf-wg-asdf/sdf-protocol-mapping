@@ -542,7 +542,9 @@ follows:
 
 An `sdfEvent` is mapped to a Zigbee cluster event such as attribute reporting
 or a device-initiated write to an attribute on the gateway. The Zigbee event
-protocol mapping structure is defined as follows:
+protocol mapping structure is defined as follows. The `"attribute_reporting"`
+and `"write_event"` variants reuse the `zigbee-property` definition from
+{{zigmap1}} to identify the underlying Zigbee attribute:
 
 ~~~ cddl
 {::include-fold cddl/zigbee-event-map.cddl}
@@ -556,13 +558,26 @@ Where:
     reporting.
   - `"write_event"`: the event is triggered by the device writing to an
     attribute on the gateway.
-- `endpointID` is the Zigbee endpoint ID that corresponds to the SDF event.
-- `clusterID` is the Zigbee cluster ID that corresponds to the SDF event.
-- `attributeID` is the Zigbee attribute ID that corresponds to the SDF event.
-- `attributeType` is the Zigbee data type of the attribute.
-- `profileID` is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.
-- `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
-
+  - `"connection_events"`: the event is triggered when a Zigbee end device
+    joins or leaves the Zigbee network.
+- `endpointID`, `clusterID`, `attributeID`, `attributeType`, `profileID`, and
+  `manufacturerCode` have the same meaning as described for `sdfProperty` in
+  {{zigmap1}}. These fields are present when `type` is `"attribute_reporting"`
+  or `"write_event"`, and MUST be absent when `type` is `"connection_events"`.
+- `minReportingInterval` is the minimum reporting interval in seconds
+  (optional). It is the minimum time between issued attribute reports and
+  only applies when `type` is `"attribute_reporting"`.
+- `maxReportingInterval` is the maximum reporting interval in seconds
+  (optional). It is the maximum time between issued attribute reports and
+  only applies when `type` is `"attribute_reporting"`.
+- `reportableChange` is the minimum change to the attribute value that triggers
+  a report (optional). It only applies when `type` is `"attribute_reporting"`
+  and to attributes whose `attributeType` is one of the "analog" data types
+  defined by the Zigbee Cluster Library, part of {{Zigbee30}} (e.g., unsigned
+  and signed integers, floating point numbers), as opposed to "discrete" data types
+  (e.g., booleans, enumerations, bitmaps), for which reporting a minimum
+  change is not meaningful. The encoded value MUST use the same Zigbee data type
+  as the reported attribute's `attributeType`.
 
 For example, a Zigbee event mapping for a temperature change report:
 
@@ -577,7 +592,27 @@ For example, a Zigbee event mapping for a temperature change report:
           "endpointID": 1,
           "clusterID": 1026,
           "attributeID": 0,
-          "attributeType": 41
+          "attributeType": 41,
+          "minReportingInterval": 10,
+          "maxReportingInterval": 300,
+          "reportableChange": 50
+        }
+      }
+    }
+  }
+}
+~~~
+{: post="fold"}
+
+Here is an example of an `isPresent` event using Zigbee connection events:
+
+~~~ json
+{
+  "sdfEvent": {
+    "isPresent": {
+      "sdfProtocolMap": {
+        "zigbee": {
+          "type": "connection_events"
         }
       }
     }
