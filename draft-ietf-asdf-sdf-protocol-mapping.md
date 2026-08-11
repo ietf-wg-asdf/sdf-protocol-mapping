@@ -70,9 +70,11 @@ informative:
 This document defines protocol mapping extensions for the Semantic Definition
 Format (SDF) to enable mapping of protocol-agnostic SDF affordances to
 protocol-specific operations. The protocol mapping mechanism allows SDF models
-to specify how properties, actions, and events should be accessed using specific
-non-IP and IP protocols such as Bluetooth Low Energy, Zigbee or HTTP and CoAP.
-This document also describes a method to extend SCIM with an SDF model mapping.
+to specify how properties, actions, and events should be accessed using a
+specific protocol. This document defines protocol mappings for Bluetooth Low
+Energy and Zigbee, and the mechanism can be extended to other protocols such as
+HTTP and CoAP. This document also describes a method to extend SCIM with an SDF
+model mapping.
 
 --- middle
 
@@ -80,10 +82,11 @@ This document also describes a method to extend SCIM with an SDF model mapping.
 
 The Semantic Definition Format (SDF) {{-sdf}} provides a protocol-agnostic way
 to describe IoT devices and their capabilities through properties, actions, and
-events (collectively called affordances). When implementing an SDF model for a
-device using specific communication protocols, there needs to be a mechanism to
-map the protocol-agnostic SDF definitions to protocol-specific operations,
-translating the model into a real-world implementation. Moreover, such a mechanism
+events (collectively called affordances). A device described by an SDF model, however, is
+accessed over a specific communication protocol. To interact with such a device
+based on its SDF model, there needs to be a mechanism to map the
+protocol-agnostic SDF definitions to the protocol-specific operations that
+access the device. Moreover, such a mechanism
 needs to be extensible for enabling implementers to provide novel SDF protocol
 mappings to expand the SDF ecosystem. SDF protocol mappings may target a variety
 of protocols spanning from non-IP protocols commonly used in IoT environments,
@@ -91,7 +94,7 @@ such as {{BLE53}} and {{Zigbee30}}, to IP-based protocols such as HTTP
 {{?RFC9110}} and CoAP {{?RFC7252}}. This document provides the required
 mechanism by defining:
 
-- The `sdfProtocolMap` keyword, which allows SDF models to include
+- The `sdfProtocolMap` quality, which allows SDF models to include
   protocol-specific mapping information attached to the protocol-agnostic
   definitions, see {{sdf-pm}}. An `sdfProtocolMap` MAY be applied to an SDF
   affordance, be it an `sdfProperty`, `sdfEvent` or `sdfAction`. The mapping
@@ -113,8 +116,8 @@ mechanism by defining:
 
 # Conventions and Definitions
 
-The syntax extensions to {{-sdf}} in terms of its JSON structures are
-shown in the Concise Data Definition Language (CDDL) {{-cddl}}.
+The syntax extensions to {{-sdf}} are shown in the Concise Data Definition
+Language (CDDL) {{-cddl}}, which describes their JSON representation.
 
 {::boilerplate bcp14-tagged}
 
@@ -126,11 +129,11 @@ mapping per protocol. For example, BLE addresses a property as a service
 characteristic, while Zigbee addresses it as an attribute in a cluster of an
 endpoint.
 
-A protocol mapping object is a JSON object identified by the `sdfProtocolMap`
-keyword, nested inside an SDF affordance definition (`sdfProperty`, `sdfAction`,
-or `sdfEvent`). Protocol-specific attributes are embedded within this object,
-keyed by a protocol name registered in the IANA "SDF Protocol Mapping"
-registry ({{iana-prot-map}}), e.g., "ble" or "zigbee".
+The value of the `sdfProtocolMap` quality is a JSON object nested inside an SDF
+affordance definition (`sdfProperty`, `sdfAction`, or `sdfEvent`).
+Protocol-specific attributes are embedded within this object, keyed by a
+protocol name registered in the IANA "SDF Protocol Mapping" registry
+({{iana-prot-map}}), e.g., "ble" or "zigbee".
 
 ~~~ aasvg
 sdfProperty / sdfAction / sdfEvent
@@ -151,7 +154,7 @@ sdfProperty / sdfAction / sdfEvent
 
 ## SDF Extension Points
 
-The `sdfProtocolMap` keyword is introduced into SDF affordance definitions
+The `sdfProtocolMap` quality is introduced into SDF affordance definitions
 through the extension points defined in the formal syntax of {{Appendix
 A of -sdf}}. For each affordance type, an `sdfProtocolMap` entry is added
 via the corresponding CDDL group socket. The contents of the
@@ -206,7 +209,7 @@ new-protocol-property = {
 ~~~
 {: post="fold" #prop-ext-example title="Example Property Protocol Map Extension"}
 
-The corresponding JSON in an SDF model looks like:
+An SDF model using this extension could look like:
 
 ~~~ json
 {
@@ -268,7 +271,8 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 Actions use a simpler structure than properties, as they do not require the
 read/write distinction. To extend `$$SDF-ACTION-PROTOCOL-MAP` for a new
 protocol, implementers MUST add a group entry that maps the protocol name to the
-protocol-specific attributes:
+protocol-specific attributes. For example, an extension for a fictitious
+"new-protocol" could be defined as:
 
 ~~~ cddl
 $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -281,7 +285,7 @@ new-protocol-action = {
 ~~~
 {: post="fold" #action-ext-example title="Example Action Protocol Map Extension"}
 
-The corresponding JSON in an SDF model would look like:
+An SDF model using this extension could look like:
 
 ~~~ json
 {
@@ -310,7 +314,9 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 {: #sdf-event-ext title="SDF Event Extension Point for Protocol Mapping"}
 
 Events follow the same simple pattern as actions. To extend
-`$$SDF-EVENT-PROTOCOL-MAP` for a new protocol:
+`$$SDF-EVENT-PROTOCOL-MAP` for a new protocol, implementers add a group entry
+that maps the protocol name to the protocol-specific attributes. For example, an
+extension for a fictitious "new-protocol" could be defined as:
 
 ~~~ cddl
 $$SDF-EVENT-PROTOCOL-MAP //= (
@@ -323,7 +329,7 @@ new-protocol-event = {
 ~~~
 {: post="fold" #event-ext-example title="Example Event Protocol Map Extension"}
 
-The corresponding JSON in an SDF model looks like:
+An SDF model using this extension could look like:
 
 ~~~ json
 {
