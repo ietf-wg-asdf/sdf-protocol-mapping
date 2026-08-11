@@ -28,7 +28,7 @@ This document also describes a method to extend SCIM with an SDF model mapping.
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.1
+    platformdirs 4.11.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
@@ -1048,11 +1048,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">sdf-protocol-mapping</td>
-<td class="right">July 2026</td>
+<td class="right">August 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Mohan, et al.</td>
-<td class="center">Expires 31 January 2027</td>
+<td class="center">Expires 12 February 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg {
 <dd class="internet-draft">draft-ietf-asdf-sdf-protocol-mapping-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-30" class="published">30 July 2026</time>
+<time datetime="2026-08-11" class="published">11 August 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-31">31 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-02-12">12 February 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1132,7 +1132,7 @@ This document also describes a method to extend SCIM with an SDF model mapping.<
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 31 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1953,25 +1953,37 @@ follows:<a href="#section-5.2.1-5" class="pilcrow">¶</a></p>
           </h4>
 <p id="section-5.2.2-1">An <code>sdfEvent</code> is mapped to a Zigbee cluster event such as attribute reporting
 or a device-initiated write to an attribute on the gateway. The Zigbee event
-protocol mapping structure is defined as follows:<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
+protocol mapping structure is defined as follows. The <code>"attribute_reporting"</code>
+and <code>"write_event"</code> variants reuse the <code>zigbee-property</code> definition from
+<a href="#zigmap1" class="auto internal xref">Figure 14</a> to identify the underlying Zigbee attribute:<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-p"></span><div id="zigmap-event">
 <figure id="figure-15">
             <div class="lang-cddl sourcecode" id="section-5.2.2-2.1">
 <pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 $$SDF-EVENT-PROTOCOL-MAP //= (
   zigbee: zigbee-event-map
 )
 
-zigbee-event-type = "attribute_reporting" / "write_event"
+zigbee-event-map = zigbee-attribute-reporting / zigbee-write-event \
+                                            / zigbee-connection-event
 
-zigbee-event-map = {
-  type: zigbee-event-type,
-  endpointID: uint,
-  clusterID: uint,
-  attributeID: uint,
-  attributeType: uint,
-  ? profileID: uint,
-  ? manufacturerCode: uint,
+zigbee-attribute-reporting = {
+  type: "attribute_reporting",
+  ~zigbee-property,
+  ? minReportingInterval: uint,
+  ? maxReportingInterval: uint,
+  ? reportableChange: number,
+}
+
+zigbee-write-event = {
+  type: "write_event",
+  ~zigbee-property,
+}
+
+zigbee-connection-event = {
+  type: "connection_events",
 }
 </pre>
 </div>
@@ -1992,25 +2004,37 @@ reporting.<a href="#section-5.2.2-4.1.2.1.1" class="pilcrow">¶</a></p>
                   <p id="section-5.2.2-4.1.2.2.1"><code>"write_event"</code>: the event is triggered by the device writing to an
 attribute on the gateway.<a href="#section-5.2.2-4.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
+                <li class="normal" id="section-5.2.2-4.1.2.3">
+                  <p id="section-5.2.2-4.1.2.3.1"><code>"connection_events"</code>: the event is triggered when a Zigbee end device
+joins or leaves the Zigbee network.<a href="#section-5.2.2-4.1.2.3.1" class="pilcrow">¶</a></p>
+</li>
               </ul>
 </li>
             <li class="normal" id="section-5.2.2-4.2">
-              <p id="section-5.2.2-4.2.1"><code>endpointID</code> is the Zigbee endpoint ID that corresponds to the SDF event.<a href="#section-5.2.2-4.2.1" class="pilcrow">¶</a></p>
+              <p id="section-5.2.2-4.2.1"><code>endpointID</code>, <code>clusterID</code>, <code>attributeID</code>, <code>attributeType</code>, <code>profileID</code>, and
+<code>manufacturerCode</code> have the same meaning as described for <code>sdfProperty</code> in
+<a href="#zigmap1" class="auto internal xref">Figure 14</a>. These fields are present when <code>type</code> is <code>"attribute_reporting"</code>
+or <code>"write_event"</code>, and <span class="bcp14">MUST</span> be absent when <code>type</code> is <code>"connection_events"</code>.<a href="#section-5.2.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-5.2.2-4.3">
-              <p id="section-5.2.2-4.3.1"><code>clusterID</code> is the Zigbee cluster ID that corresponds to the SDF event.<a href="#section-5.2.2-4.3.1" class="pilcrow">¶</a></p>
+              <p id="section-5.2.2-4.3.1"><code>minReportingInterval</code> is the minimum reporting interval in seconds
+(optional). It is the minimum time between issued attribute reports and
+only applies when <code>type</code> is <code>"attribute_reporting"</code>.<a href="#section-5.2.2-4.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-5.2.2-4.4">
-              <p id="section-5.2.2-4.4.1"><code>attributeID</code> is the Zigbee attribute ID that corresponds to the SDF event.<a href="#section-5.2.2-4.4.1" class="pilcrow">¶</a></p>
+              <p id="section-5.2.2-4.4.1"><code>maxReportingInterval</code> is the maximum reporting interval in seconds
+(optional). It is the maximum time between issued attribute reports and
+only applies when <code>type</code> is <code>"attribute_reporting"</code>.<a href="#section-5.2.2-4.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-5.2.2-4.5">
-              <p id="section-5.2.2-4.5.1"><code>attributeType</code> is the Zigbee data type of the attribute.<a href="#section-5.2.2-4.5.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-5.2.2-4.6">
-              <p id="section-5.2.2-4.6.1"><code>profileID</code> is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.<a href="#section-5.2.2-4.6.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-5.2.2-4.7">
-              <p id="section-5.2.2-4.7.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the attribute (optional).<a href="#section-5.2.2-4.7.1" class="pilcrow">¶</a></p>
+              <p id="section-5.2.2-4.5.1"><code>reportableChange</code> is the minimum change to the attribute value that triggers
+a report (optional). It only applies when <code>type</code> is <code>"attribute_reporting"</code>
+and to attributes whose <code>attributeType</code> is one of the "analog" data types
+defined by the Zigbee Cluster Library, part of <span>[<a href="#Zigbee30" class="cite xref">Zigbee30</a>]</span> (e.g., unsigned
+and signed integers, floating point numbers), as opposed to "discrete" data types
+(e.g., booleans, enumerations, bitmaps), for which reporting a minimum
+change is not meaningful. The encoded value <span class="bcp14">MUST</span> use the same Zigbee data type
+as the reported attribute's <code>attributeType</code>.<a href="#section-5.2.2-4.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-5.2.2-5">For example, a Zigbee event mapping for a temperature change report:<a href="#section-5.2.2-5" class="pilcrow">¶</a></p>
@@ -2025,13 +2049,31 @@ attribute on the gateway.<a href="#section-5.2.2-4.1.2.2.1" class="pilcrow">¶</
           "endpointID": 1,
           "clusterID": 1026,
           "attributeID": 0,
-          "attributeType": 41
+          "attributeType": 41,
+          "minReportingInterval": 10,
+          "maxReportingInterval": 300,
+          "reportableChange": 50
         }
       }
     }
   }
 }
 </pre><a href="#section-5.2.2-6" class="pilcrow">¶</a>
+</div>
+<p id="section-5.2.2-7">Here is an example of an <code>isPresent</code> event using Zigbee connection events:<a href="#section-5.2.2-7" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.2.2-8">
+<pre>{
+  "sdfEvent": {
+    "isPresent": {
+      "sdfProtocolMap": {
+        "zigbee": {
+          "type": "connection_events"
+        }
+      }
+    }
+  }
+}
+</pre><a href="#section-5.2.2-8" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2443,16 +2485,24 @@ $$SDF-EVENT-PROTOCOL-MAP //= (
   zigbee: zigbee-event-map
 )
 
-zigbee-event-type = "attribute_reporting" / "write_event"
+zigbee-event-map = zigbee-attribute-reporting / zigbee-write-event \
+                                            / zigbee-connection-event
 
-zigbee-event-map = {
-  type: zigbee-event-type,
-  endpointID: uint,
-  clusterID: uint,
-  attributeID: uint,
-  attributeType: uint,
-  ? profileID: uint,
-  ? manufacturerCode: uint,
+zigbee-attribute-reporting = {
+  type: "attribute_reporting",
+  ~zigbee-property,
+  ? minReportingInterval: uint,
+  ? maxReportingInterval: uint,
+  ? reportableChange: number,
+}
+
+zigbee-write-event = {
+  type: "write_event",
+  ~zigbee-property,
+}
+
+zigbee-connection-event = {
+  type: "connection_events",
 }
 
 $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -2697,8 +2747,104 @@ components:
               example: 260
 
     ProtocolMap-Zigbee-Event:
-      allOf:
-        - $ref: '#/components/schemas/ProtocolMap-Zigbee-Propmap'
+      required:
+        - zigbee
+      type: object
+      properties:
+        zigbee:
+          oneOf:
+            - type: object
+              required:
+                - type
+                - endpointID
+                - clusterID
+                - attributeID
+                - attributeType
+              properties:
+                type:
+                  type: string
+                  example: attribute_reporting
+                  enum:
+                    - attribute_reporting
+                endpointID:
+                  type: integer
+                  format: int32
+                  example: 1
+                clusterID:
+                  type: integer
+                  format: int32
+                  example: 6
+                attributeID:
+                  type: integer
+                  format: int32
+                  example: 16
+                attributeType:
+                  type: integer
+                  format: int32
+                  example: 41
+                profileID:
+                  type: integer
+                  format: int32
+                  example: 260
+                manufacturerCode:
+                  type: integer
+                  format: int32
+                minReportingInterval:
+                  type: integer
+                  format: int32
+                  example: 10
+                maxReportingInterval:
+                  type: integer
+                  format: int32
+                  example: 300
+                reportableChange:
+                  type: number
+                  example: 50
+            - type: object
+              required:
+                - type
+                - endpointID
+                - clusterID
+                - attributeID
+                - attributeType
+              properties:
+                type:
+                  type: string
+                  example: write_event
+                  enum:
+                    - write_event
+                endpointID:
+                  type: integer
+                  format: int32
+                  example: 1
+                clusterID:
+                  type: integer
+                  format: int32
+                  example: 6
+                attributeID:
+                  type: integer
+                  format: int32
+                  example: 16
+                attributeType:
+                  type: integer
+                  format: int32
+                  example: 41
+                profileID:
+                  type: integer
+                  format: int32
+                  example: 260
+                manufacturerCode:
+                  type: integer
+                  format: int32
+            - type: object
+              required:
+                - type
+              properties:
+                type:
+                  type: string
+                  example: connection_events
+                  enum:
+                    - connection_events
 
 &lt;CODE ENDS&gt;</pre>
 </div>
