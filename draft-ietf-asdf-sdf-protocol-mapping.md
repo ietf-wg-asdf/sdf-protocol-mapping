@@ -437,7 +437,7 @@ here is an example of the BLE protocol mapping:
 ### Events
 
 For `sdfEvent`s, the BLE protocol mapping structure is similar to
-`sdfProperties`, but it MUST include additional attributes such as the `type` of
+`sdfProperties`, but it MUST additionally include at least the `type` of
 the event.
 
 ~~~ cddl
