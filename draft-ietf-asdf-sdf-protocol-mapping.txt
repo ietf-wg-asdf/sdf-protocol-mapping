@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 12 February 2027                                      L. Corneo
+Expires: 13 February 2027                                      L. Corneo
                                                                 Ericsson
-                                                          11 August 2026
+                                                          12 August 2026
 
 
                           SDF Protocol Mapping
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 February 2027.
+   This Internet-Draft will expire on 13 February 2027.
 
 Copyright Notice
 
@@ -700,7 +700,7 @@ Table of Contents
       part of [Zigbee30] (e.g., unsigned and signed integers, floating
       point numbers), as opposed to "discrete" data types (e.g.,
       booleans, enumerations, bitmaps), for which reporting a minimum
-      change is not meaningful.  The encoded value MUST use the same
+      change is not meaningful.  The value is interpreted in the same
       Zigbee data type as the reported attribute's attributeType.
 
    For example, a Zigbee event mapping for a temperature change report:
