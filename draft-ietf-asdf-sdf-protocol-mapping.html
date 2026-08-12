@@ -1801,7 +1801,7 @@ here is an example of the BLE protocol mapping:<a href="#section-5.1.1-7" class=
 <a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-events" class="section-name selfRef">Events</a>
           </h4>
 <p id="section-5.1.2-1">For <code>sdfEvent</code>s, the BLE protocol mapping structure is similar to
-<code>sdfProperties</code>, but it <span class="bcp14">MUST</span> include additional attributes such as the <code>type</code> of
+<code>sdfProperties</code>, but it <span class="bcp14">MUST</span> additionally include at least the <code>type</code> of
 the event.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
 <span id="name-ble-protocol-mapping-for-sd"></span><div id="blemap2">
 <figure id="figure-13">
@@ -2126,7 +2126,8 @@ zigbee-action-map = {
               <p id="section-5.2.3-4.3.1"><code>commandID</code> is the Zigbee command ID that corresponds to the SDF action.<a href="#section-5.2.3-4.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-5.2.3-4.4">
-              <p id="section-5.2.3-4.4.1"><code>profileID</code> is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.<a href="#section-5.2.3-4.4.1" class="pilcrow">¶</a></p>
+              <p id="section-5.2.3-4.4.1"><code>profileID</code> has the same meaning and default as described for <code>sdfProperty</code> in
+<a href="#zigmap1" class="auto internal xref">Figure 14</a> (optional).<a href="#section-5.2.3-4.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-5.2.3-4.5">
               <p id="section-5.2.3-4.5.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the command (optional).<a href="#section-5.2.3-4.5.1" class="pilcrow">¶</a></p>
