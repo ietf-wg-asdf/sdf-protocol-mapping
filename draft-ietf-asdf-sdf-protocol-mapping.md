@@ -576,8 +576,8 @@ Where:
   defined by the Zigbee Cluster Library, part of {{Zigbee30}} (e.g., unsigned
   and signed integers, floating point numbers), as opposed to "discrete" data types
   (e.g., booleans, enumerations, bitmaps), for which reporting a minimum
-  change is not meaningful. The encoded value MUST use the same Zigbee data type
-  as the reported attribute's `attributeType`.
+  change is not meaningful. The value is interpreted in the same Zigbee data
+  type as the reported attribute's `attributeType`.
 
 For example, a Zigbee event mapping for a temperature change report:
 
