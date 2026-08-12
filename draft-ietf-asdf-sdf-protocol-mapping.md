@@ -437,7 +437,7 @@ here is an example of the BLE protocol mapping:
 ### Events
 
 For `sdfEvent`s, the BLE protocol mapping structure is similar to
-`sdfProperties`, but it MUST include additional attributes such as the `type` of
+`sdfProperties`, but it MUST additionally include at least the `type` of
 the event.
 
 ~~~ cddl
@@ -637,7 +637,8 @@ Where:
 - `endpointID` is the Zigbee endpoint ID that corresponds to the SDF action.
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF action.
 - `commandID` is the Zigbee command ID that corresponds to the SDF action.
-- `profileID` is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.
+- `profileID` has the same meaning and default as described for `sdfProperty` in
+  {{zigmap1}} (optional).
 - `manufacturerCode` is the Zigbee manufacturer code of the command (optional).
 
 For example, a Zigbee protocol mapping to set a temperature:
