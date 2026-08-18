@@ -195,7 +195,8 @@ the protocol name and a map type defining the protocol-specific attributes.
 It is to be noted that the protocol `name` (e.g., "new-protocol") MUST be
 registered in the IANA registry defined in {{iana-prot-map}}.
 
-For example:
+For a fictitious "new-protocol" that uses the same attributes for both read
+and write operations, the generic invocation could be defined as:
 
 ~~~ cddl
 $$SDF-PROPERTY-PROTOCOL-MAP //= (
@@ -209,7 +210,8 @@ new-protocol-property = {
 ~~~
 {: post="fold" #prop-ext-example title="Example Property Protocol Map Extension"}
 
-An SDF model using this extension could look like:
+An SDF model using a single mapping for both read and write operations
+could look like:
 
 ~~~ json
 {
@@ -227,10 +229,9 @@ An SDF model using this extension could look like:
   }
 }
 ~~~
-{: post="fold" #prop-ext-json-example title="Example Property Protocol Map in JSON"}
+{: post="fold" #prop-ext-json-example title="Example Property Protocol Map with a Single Mapping"}
 
-When a property uses different protocol attributes for read and write
-operations, the mapping can be split:
+An SDF model using separate read and write mappings could look like:
 
 ~~~ json
 {
@@ -254,7 +255,52 @@ operations, the mapping can be split:
   }
 }
 ~~~
-{: post="fold" #prop-ext-rw-json-example title="Example Property Protocol Map with Read/Write in JSON"}
+{: post="fold" #prop-ext-rw-json-example title="Example Property Protocol Map with Separate Read and Write Mappings"}
+
+When a protocol instead uses different attributes for read and write
+operations, the `read-props` and `write-props` type parameters can be
+given distinct types:
+
+~~~ cddl
+$$SDF-PROPERTY-PROTOCOL-MAP //= (
+  property-protocol-map<"new-protocol", new-protocol-property, new-protocol-property-read, new-protocol-property-write>
+)
+
+new-protocol-property-read = {
+  attributeA: text
+}
+
+new-protocol-property-write = {
+  attributeA: text,
+  attributeB: uint
+}
+~~~
+{: post="fold" #prop-ext-rw-types-example title="Example Property Protocol Map Extension with Distinct Read and Write Attribute Types"}
+
+An SDF model using this extension could look like:
+
+~~~ json
+{
+  "sdfProperty": {
+    "temperature": {
+      "type": "number",
+      "unit": "Cel",
+      "sdfProtocolMap": {
+        "new-protocol": {
+          "read": {
+            "attributeA": "temperature-read-service"
+          },
+          "write": {
+            "attributeA": "temperature-write-service",
+            "attributeB": 2
+          }
+        }
+      }
+    }
+  }
+}
+~~~
+{: post="fold" #prop-ext-rw-types-json-example title="Example Property Protocol Map with Distinct Read and Write Attributes"}
 
 ### Action Extension {#action-extension}
 
