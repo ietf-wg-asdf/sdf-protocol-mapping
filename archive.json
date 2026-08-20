@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-13T01:14:12.631326+00:00",
+  "timestamp": "2026-08-20T00:44:15.973797+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -513,9 +513,17 @@
       "labels": [],
       "body": "(moved into new issue from the PR 38 [comment](https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/38#issuecomment-5051554258); can also be ignored if you think it's not worth it but good to be explicit here)\n\nIn the property extension section (3.1.1), consider restructuring the example into two parts. Right now a single CDDL block passes the same type three times to the property-protocol-map generic, and then two JSON instances (direct form and read/write split) follow. It could read more clearly as:\n\nthe generic invocation on its own, then\nseparate labeled examples showing the direct form vs. the read/write-split form.",
       "createdAt": "2026-08-12T09:16:20Z",
-      "updatedAt": "2026-08-12T09:16:20Z",
+      "updatedAt": "2026-08-18T18:16:03Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@akeranen I have opened PR #48 to address this. I have tried to clarify the text for the property extension with additional examples.\n\nDoes this fix the issue? Can you take a look?\nhttps://ietf-wg-asdf.github.io/sdf-protocol-mapping/47-restructuring-property-extension-example/draft-ietf-asdf-sdf-protocol-mapping.html#name-property-extension",
+          "createdAt": "2026-08-18T18:16:03Z",
+          "updatedAt": "2026-08-18T18:16:03Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -2608,6 +2616,86 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 48,
+      "id": "PR_kwDOPSJ9A88AAAABALq_2Q",
+      "title": "Expand property protocol map extension examples with distinct read/write types",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/48",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #47 ",
+      "createdAt": "2026-08-18T18:12:40Z",
+      "updatedAt": "2026-08-19T17:41:44Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "cc9f56fecf64207f6b39893ce017eb9906f7f9c6",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "47-restructuring-property-extension-example",
+      "headRefOid": "8f7b48954cf8740064457668df6c947e9bcff0d4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABKE1jZA",
+          "commit": {
+            "abbreviatedOid": "8f7b489"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-19T10:28:25Z",
+          "updatedAt": "2026-08-19T10:28:25Z",
+          "comments": [
+            {
+              "originalPosition": 74,
+              "body": "The split between read and write is useful. In cases like this, if you have 1 RW prop and 1 either R or W, you have to \"duplicate\" the attributeAs of sort. Would it make sense to explicitly support RW? In the case above you could then have:\n\n```json\n\"sdfProtocolMap\": {\n        \"new-protocol\": {\n          \"read-write\": {\n            \"attributeA\": \"temperature-service\"\n          },\n          \"write\": {\n            \"attributeB\": 2,\n          }\n...\n```\n\nThis way, you do not end up duplicating RW attributes in both R and W. No strong opinions, just food for thoughts",
+              "createdAt": "2026-08-19T10:28:25Z",
+              "updatedAt": "2026-08-19T10:28:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABKE1-rw",
+          "commit": {
+            "abbreviatedOid": "8f7b489"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "Looks good to me, just one comment to think about in the review.",
+          "createdAt": "2026-08-19T10:29:14Z",
+          "updatedAt": "2026-08-19T10:29:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABKIl7mg",
+          "commit": {
+            "abbreviatedOid": "8f7b489"
+          },
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-19T17:41:44Z",
+          "updatedAt": "2026-08-19T17:41:44Z",
+          "comments": [
+            {
+              "originalPosition": 74,
+              "body": "The keys \"read\" and \"write\" refer to the operation that is performed and what protocol mapping to use in that case. We wouldn't have a \"read-write\" operation. \r\nIf we do this just to avoid repetition, we also need to define how these maps are merged to derive the correct mapping when we want to perform a read or a write.\r\nI think what we have is simple enough, and these mappings aren't very big so being explicit can be a good thing.",
+              "createdAt": "2026-08-19T17:41:44Z",
+              "updatedAt": "2026-08-19T17:41:44Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
