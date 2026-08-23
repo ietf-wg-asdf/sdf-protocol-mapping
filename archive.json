@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-20T00:44:15.973797+00:00",
+  "timestamp": "2026-08-23T00:49:49.591822+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -522,6 +522,30 @@
           "body": "@akeranen I have opened PR #48 to address this. I have tried to clarify the text for the property extension with additional examples.\n\nDoes this fix the issue? Can you take a look?\nhttps://ietf-wg-asdf.github.io/sdf-protocol-mapping/47-restructuring-property-extension-example/draft-ietf-asdf-sdf-protocol-mapping.html#name-property-extension",
           "createdAt": "2026-08-18T18:16:03Z",
           "updatedAt": "2026-08-18T18:16:03Z"
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "id": "I_kwDOPSJ9A88AAAABNpx0-g",
+      "title": "Support shared protocol-map values via sdfRef",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/49",
+      "state": "OPEN",
+      "author": "akeranen",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "When affordances share protocol-map values (e.g. a common Zigbee `endpointID`/`clusterID`/`profileID`), they're currently repeated in every `sdfProtocolMap`. We can reuse SDF's existing machinery instead: `sdfRef` deep-merges a referenced definition into the referencing one via JSON Merge Patch (RFC 9880 \u00a74.4). Since the CDDL validates the *resolved* model (\u00a74.4: the syntaxes \"describe the result of applying a merge-patch\"), the merged `sdfProtocolMap` just needs to be valid after resolution.\n\nMy take is that the best option is **Option 2**, with **Option 1b** as a fallback if we want to avoid the CDDL change. **Option 3** is interesting too, but needs more than the others (see below).\n\n**Option 1a \u2014 dedicated template `sdfProperty` (no draft change).** A placeholder property carries only the shared `sdfProtocolMap`; real affordances `sdfRef` it and add their specifics. Valid today (all property qualities are optional). Downside: the template appears in the model as a real `sdfProperty`, so a consumer would take it to be an actual affordance of the device and try to use it, even though it exists only to be referenced. There's no way to mark it as non-functional.\n\n**Option 1b \u2014 first real affordance as template (no draft change).** No placeholder: one real affordance is fully specified, siblings `sdfRef` it and patch only what differs.\n\n```jsonc\n\"sdfProperty\": {\n  \"temperature\": {\n    \"type\": \"number\", \"unit\": \"Cel\",\n    \"sdfProtocolMap\": { \"zigbee\": { \"endpointID\": 1, \"clusterID\": 1026, \"profileID\": 260, \"attributeID\": 0, \"attributeType\": 41 } }\n  },\n  \"humidity\": {\n    \"sdfRef\": \"#/sdfProperty/temperature\",\n    \"unit\": \"%RH\",\n    \"sdfProtocolMap\": { \"zigbee\": { \"clusterID\": 1029 } }\n  }\n}\n```\n\nDownside: siblings inherit *all* qualities of the template affordance, not just the protocol map.\n\n**Option 2 \u2014 dedicated `sdfData` definition (one CDDL addition).** Cleanest placement for reuse-only fragments, but `sdfData` uses `$$SDF-EXTENSION-DATA`, which the draft doesn't extend today. Adding `$$SDF-EXTENSION-DATA //= ( sdfProtocolMap: { * $$SDF-PROPERTY-PROTOCOL-MAP } )` enables `sdfRef` to an `sdfData` base. Since `propertyqualities` unwraps `~dataqualities`, this could also subsume the existing `$$SDF-EXTENSION-PROPERTY` extension; actions/events would still need their own sockets.\n\n**Option 3 \u2014 `sdfRef` inside `sdfProtocolMap`, pointing at an existing protocol map (would require an extension).** Reference another affordance's protocol-map fragment directly:\n\n```jsonc\n\"humidity\": {\n  \"sdfProtocolMap\": { \"zigbee\": {\n    \"sdfRef\": \"#/sdfProperty/temperature/sdfProtocolMap/zigbee\",\n    \"clusterID\": 1029\n  } }\n}\n```\n\nIf resolved, the merged `zigbee` map has all mandatory fields and validates, and this shares only the protocol map, not other qualities. **But it does not work today:** `sdfRef` is defined as an SDF quality that is resolved at SDF definition points, not as a general merge directive that fires anywhere it appears. A protocol-map value is opaque extension content, not an SDF definition, so a conformant processor would not resolve an `sdfRef` located there. Enabling this would require this document to explicitly define `sdfRef`-style resolution inside `sdfProtocolMap`. Options 1a/1b/2 place `sdfRef` at affordance/data definition boundaries where the spec already resolves it.",
+      "createdAt": "2026-08-21T06:29:35Z",
+      "updatedAt": "2026-08-21T19:06:02Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm not sure option 2 is correct since `dataqualities` is used in other places other than `propertyqualities` (such as `sdfInputData`, `sdfOutputData`, `sdfData` in actions, events). The extensions initially used SDF-EXTENSION-DATA before we moved it out to the specific extension points for properties/actions/events because of the same issue (see https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/1#issuecomment-3600435022). \n\nI think option 1b might be more suited. Since this is already present in RFC9880, do you think we need to mention it in this draft?",
+          "createdAt": "2026-08-21T19:06:02Z",
+          "updatedAt": "2026-08-21T19:06:02Z"
         }
       ]
     }
@@ -2696,6 +2720,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 50,
+      "id": "PR_kwDOPSJ9A88AAAABAmU2Kg",
+      "title": "Move protocol registration requirements to IANA section, update Zigbee references",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/50",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Handles comments from @mcr\r\nhttps://mailarchive.ietf.org/arch/msg/asdf/nSyQtAvbEmprW31ZpYVF5_3sumg/",
+      "createdAt": "2026-08-21T20:50:45Z",
+      "updatedAt": "2026-08-21T20:50:46Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "cc9f56fecf64207f6b39893ce017eb9906f7f9c6",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "mcr-comments",
+      "headRefOid": "da23f214f7847bf0d9500decf7026530fc2b5cdd",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
