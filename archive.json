@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-23T00:49:49.591822+00:00",
+  "timestamp": "2026-08-25T00:46:20.992798+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -2653,7 +2653,7 @@
       "labels": [],
       "body": "Fixes #47 ",
       "createdAt": "2026-08-18T18:12:40Z",
-      "updatedAt": "2026-08-19T17:41:44Z",
+      "updatedAt": "2026-08-24T06:02:35Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "cc9f56fecf64207f6b39893ce017eb9906f7f9c6",
@@ -2716,6 +2716,26 @@
               "body": "The keys \"read\" and \"write\" refer to the operation that is performed and what protocol mapping to use in that case. We wouldn't have a \"read-write\" operation. \r\nIf we do this just to avoid repetition, we also need to define how these maps are merged to derive the correct mapping when we want to perform a read or a write.\r\nI think what we have is simple enough, and these mappings aren't very big so being explicit can be a good thing.",
               "createdAt": "2026-08-19T17:41:44Z",
               "updatedAt": "2026-08-19T17:41:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABKlD-NQ",
+          "commit": {
+            "abbreviatedOid": "8f7b489"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-24T06:02:35Z",
+          "updatedAt": "2026-08-24T06:02:35Z",
+          "comments": [
+            {
+              "originalPosition": 74,
+              "body": "+ 1 for being explicit, it may be worth the redundancy. I am not sure I agree about the definition of how to merge the properties, that may be implementation/protocol specific. But I guess we are fine as-is.",
+              "createdAt": "2026-08-24T06:02:35Z",
+              "updatedAt": "2026-08-24T06:02:35Z"
             }
           ]
         }
