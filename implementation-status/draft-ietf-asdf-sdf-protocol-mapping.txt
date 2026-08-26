@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 23 January 2027                                       L. Corneo
+Expires: 27 February 2027                                      L. Corneo
                                                                 Ericsson
-                                                            22 July 2026
+                                                          26 August 2026
 
 
                           SDF Protocol Mapping
@@ -19,9 +19,11 @@ Abstract
    Definition Format (SDF) to enable mapping of protocol-agnostic SDF
    affordances to protocol-specific operations.  The protocol mapping
    mechanism allows SDF models to specify how properties, actions, and
-   events should be accessed using specific non-IP and IP protocols such
-   as Bluetooth Low Energy, Zigbee or HTTP and CoAP.  This document also
-   describes a method to extend SCIM with an SDF model mapping.
+   events should be accessed using a specific protocol.  This document
+   defines protocol mappings for Bluetooth Low Energy and Zigbee, and
+   the mechanism can be extended to other protocols such as HTTP and
+   CoAP.  This document also describes a method to extend SCIM with an
+   SDF model mapping.
 
 About This Document
 
@@ -55,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 January 2027.
+   This Internet-Draft will expire on 27 February 2027.
 
 Copyright Notice
 
@@ -90,13 +92,17 @@ Table of Contents
        5.2.2.  Events
        5.2.3.  Actions
    6.  SCIM SDF Extension
-   7.  Security Considerations
-   8.  IANA Considerations
-     8.1.  Protocol Mapping
-     8.2.  SCIM Device Schema SDF Extension
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   7.  Implementation Status
+     7.1.  TieDie IoT
+     7.2.  Cisco Sensor Connect for IoT Services
+     7.3.  SDF Protocol Mapping Prototype
+   8.  Security Considerations
+   9.  IANA Considerations
+     9.1.  Protocol Mapping
+     9.2.  SCIM Device Schema SDF Extension
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Appendix A.  CDDL Definition
    Appendix B.  OpenAPI Definition
      B.1.  Protocol map for BLE
@@ -108,20 +114,20 @@ Table of Contents
 
    The Semantic Definition Format (SDF) [RFC9880] provides a protocol-
    agnostic way to describe IoT devices and their capabilities through
-   properties, actions, and events (collectively called affordances).
-   When implementing an SDF model for a device using specific
-   communication protocols, there needs to be a mechanism to map the
-   protocol-agnostic SDF definitions to protocol-specific operations,
-   translating the model into a real-world implementation.  Moreover,
-   such a mechanism needs to be extensible for enabling implementers to
-   provide novel SDF protocol mappings to expand the SDF ecosystem.  SDF
-   protocol mappings may target a variety of protocols spanning from
-   non-IP protocols commonly used in IoT environments, such as [BLE53]
-   and [Zigbee30], to IP-based protocols such as HTTP [RFC9110] and CoAP
-   [RFC7252].  This document provides the required mechanism by
-   defining:
+   properties, actions, and events (collectively called affordances).  A
+   device described by an SDF model, however, is accessed over a
+   specific communication protocol.  To interact with such a device
+   based on its SDF model, there needs to be a mechanism to map the
+   protocol-agnostic SDF definitions to the protocol-specific operations
+   that access the device.  Moreover, such a mechanism needs to be
+   extensible for enabling implementers to provide novel SDF protocol
+   mappings to expand the SDF ecosystem.  SDF protocol mappings may
+   target a variety of protocols spanning from non-IP protocols commonly
+   used in IoT environments, such as [BLE53] and [Zigbee30], to IP-based
+   protocols such as HTTP [RFC9110] and CoAP [RFC7252].  This document
+   provides the required mechanism by defining:
 
-   *  The sdfProtocolMap keyword, which allows SDF models to include
+   *  The sdfProtocolMap quality, which allows SDF models to include
       protocol-specific mapping information attached to the protocol-
       agnostic definitions, see Section 3.  An sdfProtocolMap MAY be
       applied to an SDF affordance, be it an sdfProperty, sdfEvent or
@@ -142,12 +148,13 @@ Table of Contents
 
    *  An IANA registry for defining additional SDF protocol mappings (in
       addition to the BLE and Zigbee provided in this document), see
-      Section 8.1.
+      Section 9.1.
 
 2.  Conventions and Definitions
 
-   The syntax extensions to [RFC9880] in terms of its JSON structures
-   are shown in the Concise Data Definition Language (CDDL) [RFC8610].
+   The syntax extensions to [RFC9880] are shown in the Concise Data
+   Definition Language (CDDL) [RFC8610], which describes their JSON
+   representation.
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -163,12 +170,11 @@ Table of Contents
    a property as a service characteristic, while Zigbee addresses it as
    an attribute in a cluster of an endpoint.
 
-   A protocol mapping object is a JSON object identified by the
-   sdfProtocolMap keyword, nested inside an SDF affordance definition
-   (sdfProperty, sdfAction, or sdfEvent).  Protocol-specific attributes
-   are embedded within this object, keyed by a protocol name registered
-   in the IANA "SDF Protocol Mapping" registry (Section 8.1), e.g.,
-   "ble" or "zigbee".
+   The value of the sdfProtocolMap quality is a JSON object nested
+   inside an SDF affordance definition (sdfProperty, sdfAction, or
+   sdfEvent).  Protocol-specific attributes are embedded within this
+   object, keyed by a protocol name registered in the IANA "SDF Protocol
+   Mapping" registry (Section 9.1), e.g., "ble" or "zigbee".
 
    sdfProperty / sdfAction / sdfEvent
      |
@@ -188,7 +194,7 @@ Table of Contents
 
 3.1.  SDF Extension Points
 
-   The sdfProtocolMap keyword is introduced into SDF affordance
+   The sdfProtocolMap quality is introduced into SDF affordance
    definitions through the extension points defined in the formal syntax
    of Appendix A of [RFC9880].  For each affordance type, an
    sdfProtocolMap entry is added via the corresponding CDDL group
@@ -241,7 +247,7 @@ Table of Contents
    attributes.
 
    It is to be noted that the protocol name (e.g., "new-protocol") MUST
-   be registered in the IANA registry defined in Section 8.1.
+   be registered in the IANA registry defined in Section 9.1.
 
    For example:
 
@@ -259,7 +265,7 @@ Table of Contents
 
              Figure 3: Example Property Protocol Map Extension
 
-   The corresponding JSON in an SDF model looks like:
+   An SDF model using this extension could look like:
 
    {
      "sdfProperty": {
@@ -321,7 +327,8 @@ Table of Contents
    Actions use a simpler structure than properties, as they do not
    require the read/write distinction.  To extend $$SDF-ACTION-PROTOCOL-
    MAP for a new protocol, implementers MUST add a group entry that maps
-   the protocol name to the protocol-specific attributes:
+   the protocol name to the protocol-specific attributes.  For example,
+   an extension for a fictitious "new-protocol" could be defined as:
 
    $$SDF-ACTION-PROTOCOL-MAP //= (
      "new-protocol": new-protocol-action
@@ -333,7 +340,7 @@ Table of Contents
 
               Figure 7: Example Action Protocol Map Extension
 
-   The corresponding JSON in an SDF model would look like:
+   An SDF model using this extension could look like:
 
    {
      "sdfAction": {
@@ -364,7 +371,10 @@ Table of Contents
           Figure 9: SDF Event Extension Point for Protocol Mapping
 
    Events follow the same simple pattern as actions.  To extend $$SDF-
-   EVENT-PROTOCOL-MAP for a new protocol:
+   EVENT-PROTOCOL-MAP for a new protocol, implementers add a group entry
+   that maps the protocol name to the protocol-specific attributes.  For
+   example, an extension for a fictitious "new-protocol" could be
+   defined as:
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
      "new-protocol": new-protocol-event
@@ -376,7 +386,7 @@ Table of Contents
 
               Figure 10: Example Event Protocol Map Extension
 
-   The corresponding JSON in an SDF model looks like:
+   An SDF model using this extension could look like:
 
    {
      "sdfEvent": {
@@ -396,7 +406,7 @@ Table of Contents
 
    Protocol names used as keys in the sdfProtocolMap object (e.g.,
    "ble", "zigbee") MUST be registered in the IANA registry defined in
-   Section 8.1.
+   Section 9.1.
 
    A new SDF protocol mapping MUST be defined by a specification that
    mandatorily includes:
@@ -496,8 +506,8 @@ Table of Contents
 5.1.2.  Events
 
    For sdfEvents, the BLE protocol mapping structure is similar to
-   sdfProperties, but it MUST include additional attributes such as the
-   type of the event.
+   sdfProperties, but it MUST additionally include at least the type of
+   the event.
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
      ble: ble-event-map
@@ -517,8 +527,10 @@ Table of Contents
       events, "advertisements" for advertisement events, or
       "connection_events" for connection-related events.
 
-   *  serviceID and characteristicID are optional attributes that are
-      specified if the type is "gatt".
+   *  serviceID and characteristicID identify the GATT service and
+      characteristic.  They MUST be present when type is "gatt", and
+      MUST be absent when type is "advertisements" or
+      "connection_events".
 
    For example, a BLE event mapping for a heart rate measurement event:
 
@@ -625,22 +637,35 @@ Table of Contents
 
    An sdfEvent is mapped to a Zigbee cluster event such as attribute
    reporting or a device-initiated write to an attribute on the gateway.
-   The Zigbee event protocol mapping structure is defined as follows:
+   The Zigbee event protocol mapping structure is defined as follows.
+   The "attribute_reporting" and "write_event" variants reuse the
+   zigbee-property definition from Figure 14 to identify the underlying
+   Zigbee attribute:
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
 
    $$SDF-EVENT-PROTOCOL-MAP //= (
      zigbee: zigbee-event-map
    )
 
-   zigbee-event-type = "attribute_reporting" / "write_event"
+   zigbee-event-map = zigbee-attribute-reporting / zigbee-write-event \
+                                               / zigbee-connection-event
 
-   zigbee-event-map = {
-     type: zigbee-event-type,
-     endpointID: uint,
-     clusterID: uint,
-     attributeID: uint,
-     attributeType: uint,
-     ? profileID: uint,
-     ? manufacturerCode: uint,
+   zigbee-attribute-reporting = {
+     type: "attribute_reporting",
+     ~zigbee-property,
+     ? minReportingInterval: uint,
+     ? maxReportingInterval: uint,
+     ? reportableChange: number,
+   }
+
+   zigbee-write-event = {
+     type: "write_event",
+     ~zigbee-property,
+   }
+
+   zigbee-connection-event = {
+     type: "connection_events",
    }
 
     Figure 15: CDDL definition for Zigbee Protocol Mapping for sdfEvents
@@ -655,23 +680,32 @@ Table of Contents
       -  "write_event": the event is triggered by the device writing to
          an attribute on the gateway.
 
-   *  endpointID is the Zigbee endpoint ID that corresponds to the SDF
-      event.
+      -  "connection_events": the event is triggered when a Zigbee end
+         device joins or leaves the Zigbee network.
 
-   *  clusterID is the Zigbee cluster ID that corresponds to the SDF
-      event.
+   *  endpointID, clusterID, attributeID, attributeType, profileID, and
+      manufacturerCode have the same meaning as described for
+      sdfProperty in Figure 14.  These fields are present when type is
+      "attribute_reporting" or "write_event", and MUST be absent when
+      type is "connection_events".
 
-   *  attributeID is the Zigbee attribute ID that corresponds to the SDF
-      event.
+   *  minReportingInterval is the minimum reporting interval in seconds
+      (optional).  It is the minimum time between issued attribute
+      reports and only applies when type is "attribute_reporting".
 
-   *  attributeType is the Zigbee data type of the attribute.
+   *  maxReportingInterval is the maximum reporting interval in seconds
+      (optional).  It is the maximum time between issued attribute
+      reports and only applies when type is "attribute_reporting".
 
-   *  profileID is the Zigbee application profile ID (optional).  If not
-      provided, it defaults to the Home Automation profile (0x0104),
-      which is the default profile in Zigbee 3.0.
-
-   *  manufacturerCode is the Zigbee manufacturer code of the attribute
-      (optional).
+   *  reportableChange is the minimum change to the attribute value that
+      triggers a report (optional).  It only applies when type is
+      "attribute_reporting" and to attributes whose attributeType is one
+      of the "analog" data types defined by the Zigbee Cluster Library,
+      part of [Zigbee30] (e.g., unsigned and signed integers, floating
+      point numbers), as opposed to "discrete" data types (e.g.,
+      booleans, enumerations, bitmaps), for which reporting a minimum
+      change is not meaningful.  The value is interpreted in the same
+      Zigbee data type as the reported attribute's attributeType.
 
    For example, a Zigbee event mapping for a temperature change report:
 
@@ -685,7 +719,25 @@ Table of Contents
              "endpointID": 1,
              "clusterID": 1026,
              "attributeID": 0,
-             "attributeType": 41
+             "attributeType": 41,
+             "minReportingInterval": 10,
+             "maxReportingInterval": 300,
+             "reportableChange": 50
+           }
+         }
+       }
+     }
+   }
+
+   Here is an example of an isPresent event using Zigbee connection
+   events:
+
+   {
+     "sdfEvent": {
+       "isPresent": {
+         "sdfProtocolMap": {
+           "zigbee": {
+             "type": "connection_events"
            }
          }
        }
@@ -722,9 +774,8 @@ Table of Contents
    *  commandID is the Zigbee command ID that corresponds to the SDF
       action.
 
-   *  profileID is the Zigbee application profile ID (optional).  If not
-      provided, it defaults to the Home Automation profile (0x0104),
-      which is the default profile in Zigbee 3.0.
+   *  profileID has the same meaning and default as described for
+      sdfProperty in Figure 14 (optional).
 
    *  manufacturerCode is the Zigbee manufacturer code of the command
       (optional).
@@ -806,7 +857,81 @@ Table of Contents
    An SDF model MUST be referenced with the sdf keyword inside the SCIM
    device schema as described in [RFC9944].
 
-7.  Security Considerations
+7.  Implementation Status
+
+   This section is to be removed before publishing as an RFC.
+
+   This section records the status of known implementations of the
+   protocol defined by this specification at the time of posting of this
+   Internet-Draft, and is based on a proposal described in [RFC7942].
+   The description of implementations in this section is intended to
+   assist the IETF in its decision processes in progressing drafts to
+   RFCs.  Please note that the listing of any individual implementation
+   here does not imply endorsement by the IETF.  Furthermore, no effort
+   has been spent to verify the information presented here that was
+   supplied by IETF contributors.  This is not intended as, and must not
+   be construed to be, a catalog of available implementations or their
+   features.  Readers are advised to note that other implementations may
+   exist.
+
+   According to [RFC7942], "this will allow reviewers and working groups
+   to assign due consideration to documents that have the benefit of
+   running code, which may serve as evidence of valuable experimentation
+   and feedback that have made the implemented protocols more mature.
+   It is up to the individual working groups to use this information as
+   they see fit".
+
+7.1.  TieDie IoT
+
+   Organization: Cisco Systems, North Carolina State University
+
+   Description: Open-source implementation of a gateway and SDKs that
+   implement the SDF Protocol Mapping for BLE.
+
+   Level of maturity: Open-source prototype
+
+   Coverage: All SDF Protocol Mappings for BLE
+
+   Version compatibility: draft-11
+
+   Licensing: Apache License, Version 2.0
+
+   URL: https://github.com/iot-onboarding/tiedie
+
+7.2.  Cisco Sensor Connect for IoT Services
+
+   Organization: Cisco Systems
+
+   Description: Commercial solution that delivers advanced BLE
+   capabilities over Cisco Wireless infrastructure.
+
+   Level of maturity: Production
+
+   Coverage: All SDF Protocol Mappings for BLE and Zigbee
+
+   Version compatibility: draft-11
+
+   Licensing: Proprietary
+
+7.3.  SDF Protocol Mapping Prototype
+
+   Organization: Ericsson Research
+
+   Description: Prototype implementation in C of the SDF Protocol
+   Mapping for BLE.
+
+   Level of maturity: Research prototype
+
+   Coverage: All SDF Protocol Mappings for BLE
+
+   Version compatibility: draft-00
+
+   Licensing: Proprietary
+
+   Contact: Lorenzo Corneo lorenzo.corneo@ericsson.com
+   (mailto:lorenzo.corneo@ericsson.com)
+
+8.  Security Considerations
 
    The security considerations of [RFC9880] apply to this document as
    well.
@@ -818,21 +943,17 @@ Table of Contents
    level security mechanisms are employed when accessing affordances
    through the mapped protocol operations.
 
-8.  IANA Considerations
+9.  IANA Considerations
 
    This section provides guidance to the Internet Assigned Numbers
    Authority (IANA) regarding registration of values related to this
    document, in accordance with [RFC8126].
 
-8.1.  Protocol Mapping
+9.1.  Protocol Mapping
 
    IANA is requested to create a new registry called "SDF Protocol
-   Mapping".
-
-   The registration policy for this registry is "Specification Required"
-   as defined in Section 4.6 of [RFC8126].
-
-   The registry must contain the following attributes:
+   Mapping" in the "Semantic Definition Format (SDF)" registry group
+   [IANA.sdf], with the following template:
 
    *  Protocol map name, as per sdfProtocolMap
 
@@ -841,6 +962,9 @@ Table of Contents
    *  Description
 
    *  Reference of the specification describing the protocol mapping.
+
+   The registration policy for this registry is "Specification Required"
+   as defined in Section 4.6 of [RFC8126].
 
    The specification requirements for a registration request are defined
    in Section 4.
@@ -869,10 +993,12 @@ Table of Contents
 
                     Table 1: Protocol Mapping Registry
 
-8.2.  SCIM Device Schema SDF Extension
+9.2.  SCIM Device Schema SDF Extension
 
-   IANA is requested to create the following extension in the SCIM
-   Server-Related Schema URIs registry as described in Section 6:
+   IANA is requested to create the following extension in the "SCIM
+   Server-Related Schema URIs" registry, within the "System for Cross-
+   domain Identity Management (SCIM) Schema URIs" registry group
+   [IANA.scim], as described in Section 6:
 
       +=======================+=============+==========+===========+
       | URN                   | Description | Resource | Reference |
@@ -885,9 +1011,16 @@ Table of Contents
 
                 Table 2: SCIM Device Schema SDF Extension
 
-9.  References
+10.  References
 
-9.1.  Normative References
+10.1.  Normative References
+
+   [IANA.scim]
+              IANA, "System for Cross-domain Identity Management (SCIM)
+              Schema URIs", <https://www.iana.org/assignments/scim>.
+
+   [IANA.sdf] IANA, "Semantic Definition Format (SDF)",
+              <https://www.iana.org/assignments/sdf>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -924,7 +1057,7 @@ Table of Contents
               Management (SCIM) Model", RFC 9944, DOI 10.17487/RFC9944,
               May 2026, <https://www.rfc-editor.org/rfc/rfc9944>.
 
-9.2.  Informative References
+10.2.  Informative References
 
    [BLE53]    Bluetooth SIG, "Bluetooth Core Specification Version 5.3",
               13 July 2021,
@@ -935,6 +1068,11 @@ Table of Contents
               Application Protocol (CoAP)", RFC 7252,
               DOI 10.17487/RFC7252, June 2014,
               <https://www.rfc-editor.org/rfc/rfc7252>.
+
+   [RFC7942]  Sheffer, Y. and A. Farrel, "Improving Awareness of Running
+              Code: The Implementation Status Section", BCP 205,
+              RFC 7942, DOI 10.17487/RFC7942, July 2016,
+              <https://www.rfc-editor.org/rfc/rfc7942>.
 
    [RFC9110]  Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
               Ed., "HTTP Semantics", STD 97, RFC 9110,
@@ -1016,16 +1154,24 @@ Appendix A.  CDDL Definition
      zigbee: zigbee-event-map
    )
 
-   zigbee-event-type = "attribute_reporting" / "write_event"
+   zigbee-event-map = zigbee-attribute-reporting / zigbee-write-event \
+                                               / zigbee-connection-event
 
-   zigbee-event-map = {
-     type: zigbee-event-type,
-     endpointID: uint,
-     clusterID: uint,
-     attributeID: uint,
-     attributeType: uint,
-     ? profileID: uint,
-     ? manufacturerCode: uint,
+   zigbee-attribute-reporting = {
+     type: "attribute_reporting",
+     ~zigbee-property,
+     ? minReportingInterval: uint,
+     ? maxReportingInterval: uint,
+     ? reportableChange: number,
+   }
+
+   zigbee-write-event = {
+     type: "write_event",
+     ~zigbee-property,
+   }
+
+   zigbee-connection-event = {
+     type: "connection_events",
    }
 
    $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -1089,6 +1235,15 @@ Appendix B.  OpenAPI Definition
                                                   ProtocolMap-BLE-Event'
                - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/\
                                                ProtocolMap-Zigbee-Event'
+
+   ## Protocol Map for an action
+       ProtocolMap-Action:
+         type: object
+         properties:
+           sdfProtocolMap:
+             oneOf:
+               - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/\
+                                              ProtocolMap-Zigbee-Action'
    <CODE ENDS>
 
                           Figure 19: OpenAPI model
@@ -1120,19 +1275,33 @@ B.1.  Protocol map for BLE
          type: object
          properties:
            ble:
-             required:
-               - serviceID
-               - characteristicID
-             type: object
-             properties:
-               serviceID:
-                 type: string
-                 format: uuid
-                 example: 00001809-0000-1000-8000-00805f9b34fb
-               characteristicID:
-                 type: string
-                 format: uuid
-                 example: 00002a1c-0000-1000-8000-00805f9b34fb
+             oneOf:
+               - $ref: '#/components/schemas/BLE-Property'
+               - type: object
+                 required:
+                   - read
+                   - write
+                 properties:
+                   read:
+                     $ref: '#/components/schemas/BLE-Property'
+                   write:
+                     $ref: '#/components/schemas/BLE-Property'
+
+   ## Reusable BLE property object
+       BLE-Property:
+         required:
+           - serviceID
+           - characteristicID
+         type: object
+         properties:
+           serviceID:
+             type: string
+             format: uuid
+             example: 00001809-0000-1000-8000-00805f9b34fb
+           characteristicID:
+             type: string
+             format: uuid
+             example: 00002a1c-0000-1000-8000-00805f9b34fb
 
    ## Defines different types of BLE events
        ProtocolMap-BLE-Event:
@@ -1208,10 +1377,163 @@ B.2.  Protocol map for Zigbee
          type: object
          properties:
            zigbee:
+             oneOf:
+               - $ref: '#/components/schemas/Zigbee-Property'
+               - type: object
+                 required:
+                   - read
+                   - write
+                 properties:
+                   read:
+                     $ref: '#/components/schemas/Zigbee-Property'
+                   write:
+                     $ref: '#/components/schemas/Zigbee-Property'
+
+   ## Reusable Zigbee property object
+       Zigbee-Property:
+         required:
+           - endpointID
+           - clusterID
+           - attributeID
+           - attributeType
+         type: object
+         properties:
+           endpointID:
+             type: integer
+             format: int32
+             example: 1
+           clusterID:
+             type: integer
+             format: int32
+             example: 6
+           attributeID:
+             type: integer
+             format: int32
+             example: 16
+           attributeType:
+             type: integer
+             format: int32
+             example: 32
+           profileID:
+             type: integer
+             format: int32
+             example: 260
+           manufacturerCode:
+             type: integer
+             format: int32
+             example: 4174
+
+       ProtocolMap-Zigbee-Event:
+         required:
+           - zigbee
+         type: object
+         properties:
+           zigbee:
+             oneOf:
+               - type: object
+                 required:
+                   - type
+                   - endpointID
+                   - clusterID
+                   - attributeID
+                   - attributeType
+                 properties:
+                   type:
+                     type: string
+                     example: attribute_reporting
+                     enum:
+                       - attribute_reporting
+                   endpointID:
+                     type: integer
+                     format: int32
+                     example: 1
+                   clusterID:
+                     type: integer
+                     format: int32
+                     example: 6
+                   attributeID:
+                     type: integer
+                     format: int32
+                     example: 16
+                   attributeType:
+                     type: integer
+                     format: int32
+                     example: 41
+                   profileID:
+                     type: integer
+                     format: int32
+                     example: 260
+                   manufacturerCode:
+                     type: integer
+                     format: int32
+                   minReportingInterval:
+                     type: integer
+                     format: int32
+                     example: 10
+                   maxReportingInterval:
+                     type: integer
+                     format: int32
+                     example: 300
+                   reportableChange:
+                     type: number
+                     example: 50
+               - type: object
+                 required:
+                   - type
+                   - endpointID
+                   - clusterID
+                   - attributeID
+                   - attributeType
+                 properties:
+                   type:
+                     type: string
+                     example: write_event
+                     enum:
+                       - write_event
+                   endpointID:
+                     type: integer
+                     format: int32
+                     example: 1
+                   clusterID:
+                     type: integer
+                     format: int32
+                     example: 6
+                   attributeID:
+                     type: integer
+                     format: int32
+                     example: 16
+                   attributeType:
+                     type: integer
+                     format: int32
+                     example: 41
+                   profileID:
+                     type: integer
+                     format: int32
+                     example: 260
+                   manufacturerCode:
+                     type: integer
+                     format: int32
+               - type: object
+                 required:
+                   - type
+                 properties:
+                   type:
+                     type: string
+                     example: connection_events
+                     enum:
+                       - connection_events
+
+   ## Protocol mapping for Zigbee action
+       ProtocolMap-Zigbee-Action:
+         required:
+           - zigbee
+         type: object
+         properties:
+           zigbee:
              required:
                - endpointID
                - clusterID
-               - attributeID
+               - commandID
              type: object
              properties:
                endpointID:
@@ -1222,22 +1544,18 @@ B.2.  Protocol map for Zigbee
                  type: integer
                  format: int32
                  example: 6
-               attributeID:
+               commandID:
                  type: integer
                  format: int32
-                 example: 16
-               type:
-                 type: integer
-                 format: int32
-                 example: 1
+                 example: 0
                profileID:
                  type: integer
                  format: int32
                  example: 260
-
-       ProtocolMap-Zigbee-Event:
-         allOf:
-           - $ref: '#/components/schemas/ProtocolMap-Zigbee-Propmap'
+               manufacturerCode:
+                 type: integer
+                 format: int32
+                 example: 4174
    <CODE ENDS>
 
                     Figure 21: OpenAPI model for Zigbee
