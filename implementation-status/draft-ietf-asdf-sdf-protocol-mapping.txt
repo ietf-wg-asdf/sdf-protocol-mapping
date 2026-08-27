@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 27 February 2027                                      L. Corneo
+Expires: 28 February 2027                                      L. Corneo
                                                                 Ericsson
-                                                          26 August 2026
+                                                          27 August 2026
 
 
                           SDF Protocol Mapping
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 February 2027.
+   This Internet-Draft will expire on 28 February 2027.
 
 Copyright Notice
 
@@ -95,7 +95,6 @@ Table of Contents
    7.  Implementation Status
      7.1.  TieDie IoT
      7.2.  Cisco Sensor Connect for IoT Services
-     7.3.  SDF Protocol Mapping Prototype
    8.  Security Considerations
    9.  IANA Considerations
      9.1.  Protocol Mapping
@@ -912,24 +911,6 @@ Table of Contents
    Version compatibility: draft-11
 
    Licensing: Proprietary
-
-7.3.  SDF Protocol Mapping Prototype
-
-   Organization: Ericsson Research
-
-   Description: Prototype implementation in C of the SDF Protocol
-   Mapping for BLE.
-
-   Level of maturity: Research prototype
-
-   Coverage: All SDF Protocol Mappings for BLE
-
-   Version compatibility: draft-00
-
-   Licensing: Proprietary
-
-   Contact: Lorenzo Corneo lorenzo.corneo@ericsson.com
-   (mailto:lorenzo.corneo@ericsson.com)
 
 8.  Security Considerations
 
