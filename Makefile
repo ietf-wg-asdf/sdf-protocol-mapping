@@ -33,4 +33,9 @@ $(CDDL_COMBINED): $(CDDL_SOURCE_FILES)
 
 draft-ietf-asdf-sdf-protocol-mapping.xml: $(CDDL_COMBINED)
 
+## Validate the CDDL definitions and every JSON example embedded in the draft.
+.PHONY: validate
+validate: $(CDDL_COMBINED)
+	ruby scripts/validate.rb
+
 clean:: ; -rm -rf $(GENERATED_DIR)
