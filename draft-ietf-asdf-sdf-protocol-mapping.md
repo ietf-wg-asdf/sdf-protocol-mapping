@@ -48,8 +48,6 @@ normative:
   RFC8610: cddl
   RFC9880: sdf
   RFC9944: scim-devices
-
-informative:
   BLE53:
     title: "Bluetooth Core Specification Version 5.3"
     author:
@@ -57,11 +55,21 @@ informative:
     date: 2021-07-13
     target: https://www.bluetooth.com/specifications/specs/core-specification-5-3/
   Zigbee30:
-    title: "Zigbee 3.0 Specification"
+    title: "Zigbee Specification"
     author:
-      org: CSA IoT
-    date: 2026
-    target: https://csa-iot.org/all-solutions/zigbee/
+      org: Connectivity Standards Alliance
+    date: 2024-07
+    seriesinfo:
+      CSA: Document 05-3474-23 (Revision R23.1)
+    target: https://csa-iot.org/wp-content/uploads/2024/07/docs-05-3474-23-csg-zigbee-specificationR23.1.pdf
+  ZCL7:
+    title: "Zigbee Cluster Library Specification"
+    author:
+      org: Connectivity Standards Alliance
+    date: 2018-02
+    seriesinfo:
+      CSA: Document 07-5123 (Revision 7)
+    target: https://csa-iot.org/wp-content/uploads/2022/01/07-5123-07-zigbeeclusterlibrary_revision_7-1.pdf
 
 ...
 
@@ -346,26 +354,6 @@ An SDF model using this extension could look like:
 ~~~
 {: post="fold" #event-ext-json-example title="Example Event Protocol Map in JSON"}
 
-# New Protocol Registration Procedure {#protocol-registration}
-
-Protocol names used as keys in the `sdfProtocolMap` object (e.g., "ble",
-"zigbee") MUST be registered in the IANA registry defined in
-{{iana-prot-map}}.
-
-A new SDF protocol mapping MUST be defined by a specification that mandatorily
-includes:
-
-- A CDDL definition that extends at least one of the group sockets
-  defined in this document:
-  `$$SDF-PROPERTY-PROTOCOL-MAP` ({{property-extension}}),
-  `$$SDF-ACTION-PROTOCOL-MAP` ({{action-extension}}), or
-  `$$SDF-EVENT-PROTOCOL-MAP` ({{event-extension}}).
-  Property mappings MUST use the `property-protocol-map` generic
-  ({{property-extension}}) to ensure a consistent structure.
-- A description of the protocol-specific attributes introduced by the
-  CDDL extension, including their semantics and how they relate to the
-  underlying protocol operations.
-
 # Registered Protocol Mappings
 
 This section defines the protocol mappings registered by this document.
@@ -512,8 +500,8 @@ Where:
 - `endpointID` is the Zigbee endpoint ID that corresponds to the SDF property.
 - `clusterID` is the Zigbee cluster ID that corresponds to the SDF property.
 - `attributeID` is the Zigbee attribute ID that corresponds to the SDF property.
-- `attributeType` is the Zigbee data type of the attribute.
-- `profileID` is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default profile in Zigbee 3.0.
+- `attributeType` is the Zigbee data type of the attribute, as defined by the Zigbee Cluster Library {{ZCL7}}.
+- `profileID` is the Zigbee application profile ID (optional). If not provided, it defaults to the Home Automation profile (0x0104), which is the default application profile defined in {{Zigbee30}}.
 - `manufacturerCode` is the Zigbee manufacturer code of the attribute (optional).
 
 For example, a Zigbee protocol mapping for a temperature property may look as
@@ -573,7 +561,7 @@ Where:
 - `reportableChange` is the minimum change to the attribute value that triggers
   a report (optional). It only applies when `type` is `"attribute_reporting"`
   and to attributes whose `attributeType` is one of the "analog" data types
-  defined by the Zigbee Cluster Library, part of {{Zigbee30}} (e.g., unsigned
+  defined by the Zigbee Cluster Library {{ZCL7}} (e.g., unsigned
   and signed integers, floating point numbers), as opposed to "discrete" data types
   (e.g., booleans, enumerations, bitmaps), for which reporting a minimum
   change is not meaningful. The value is interpreted in the same Zigbee data
@@ -729,12 +717,27 @@ the "Semantic Definition Format (SDF)" registry group {{!IANA.sdf}}, with the fo
 - Reference of the specification describing the protocol mapping.
 
 The registration policy for this registry is "Specification Required" as
-defined in Section 4.6 of {{!RFC8126}}.
+defined in Section 4.6 of {{!RFC8126}}. Protocol names used as keys in the
+`sdfProtocolMap` object (e.g., "ble", "zigbee") are registered in this
+registry.
 
-The specification requirements for a registration request are
-defined in {{protocol-registration}}.
+The specification describing a new SDF protocol mapping is expected to
+include:
 
-The designated expert(s) MUST verify that the protocol map name is appropriate and not likely to cause confusion with existing entries.
+- A CDDL definition that extends at least one of the group sockets
+  defined in this document:
+  `$$SDF-PROPERTY-PROTOCOL-MAP` ({{property-extension}}),
+  `$$SDF-ACTION-PROTOCOL-MAP` ({{action-extension}}), or
+  `$$SDF-EVENT-PROTOCOL-MAP` ({{event-extension}}).
+  Property mappings use the `property-protocol-map` generic
+  ({{property-extension}}) to ensure a consistent structure.
+- A description of the protocol-specific attributes introduced by the
+  CDDL extension, including their semantics and how they relate to the
+  underlying protocol operations.
+
+The designated expert(s) verify that the specification meets the above
+requirements, and that the protocol map name is appropriately named and
+unlikely to cause confusion.
 
 The registrant of an existing entry may request updates to that entry, subject to the same expert review.
 They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.
