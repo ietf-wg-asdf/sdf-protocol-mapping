@@ -244,7 +244,9 @@ Table of Contents
    It is to be noted that the protocol name (e.g., "new-protocol") MUST
    be registered in the IANA registry defined in Section 7.1.
 
-   For example:
+   For a fictitious "new-protocol" that uses the same attributes for
+   both read and write operations, the generic invocation could be
+   defined as:
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -260,7 +262,8 @@ Table of Contents
 
              Figure 3: Example Property Protocol Map Extension
 
-   An SDF model using this extension could look like:
+   An SDF model using a single mapping for both read and write
+   operations could look like:
 
    {
      "sdfProperty": {
@@ -277,10 +280,9 @@ Table of Contents
      }
    }
 
-              Figure 4: Example Property Protocol Map in JSON
+       Figure 4: Example Property Protocol Map with a Single Mapping
 
-   When a property uses different protocol attributes for read and write
-   operations, the mapping can be split:
+   An SDF model using separate read and write mappings could look like:
 
    {
      "sdfProperty": {
@@ -303,7 +305,56 @@ Table of Contents
      }
    }
 
-      Figure 5: Example Property Protocol Map with Read/Write in JSON
+       Figure 5: Example Property Protocol Map with Separate Read and
+                               Write Mappings
+
+   When a protocol instead uses different attributes for read and write
+   operations, the read-props and write-props type parameters can be
+   given distinct types:
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   $$SDF-PROPERTY-PROTOCOL-MAP //= (
+     property-protocol-map<"new-protocol", new-protocol-property, new-\
+                    protocol-property-read, new-protocol-property-write>
+   )
+
+   new-protocol-property-read = {
+     attributeA: text
+   }
+
+   new-protocol-property-write = {
+     attributeA: text,
+     attributeB: uint
+   }
+
+      Figure 6: Example Property Protocol Map Extension with Distinct
+                       Read and Write Attribute Types
+
+   An SDF model using this extension could look like:
+
+   {
+     "sdfProperty": {
+       "temperature": {
+         "type": "number",
+         "unit": "Cel",
+         "sdfProtocolMap": {
+           "new-protocol": {
+             "read": {
+               "attributeA": "temperature-read-service"
+             },
+             "write": {
+               "attributeA": "temperature-write-service",
+               "attributeB": 2
+             }
+           }
+         }
+       }
+     }
+   }
+
+       Figure 7: Example Property Protocol Map with Distinct Read and
+                              Write Attributes
 
 3.1.2.  Action Extension
 
@@ -317,7 +368,7 @@ Table of Contents
      }
    )
 
-         Figure 6: SDF Action Extension Point for Protocol Mapping
+         Figure 8: SDF Action Extension Point for Protocol Mapping
 
    Actions use a simpler structure than properties, as they do not
    require the read/write distinction.  To extend $$SDF-ACTION-PROTOCOL-
@@ -333,7 +384,7 @@ Table of Contents
      commandID: uint
    }
 
-              Figure 7: Example Action Protocol Map Extension
+              Figure 9: Example Action Protocol Map Extension
 
    An SDF model using this extension could look like:
 
@@ -349,7 +400,7 @@ Table of Contents
      }
    }
 
-               Figure 8: Example Action Protocol Map in JSON
+               Figure 10: Example Action Protocol Map in JSON
 
 3.1.3.  Event Extension
 
@@ -363,7 +414,7 @@ Table of Contents
      }
    )
 
-          Figure 9: SDF Event Extension Point for Protocol Mapping
+         Figure 11: SDF Event Extension Point for Protocol Mapping
 
    Events follow the same simple pattern as actions.  To extend $$SDF-
    EVENT-PROTOCOL-MAP for a new protocol, implementers add a group entry
@@ -379,7 +430,7 @@ Table of Contents
      eventID: uint
    }
 
-              Figure 10: Example Event Protocol Map Extension
+              Figure 12: Example Event Protocol Map Extension
 
    An SDF model using this extension could look like:
 
@@ -395,7 +446,7 @@ Table of Contents
      }
    }
 
-               Figure 11: Example Event Protocol Map in JSON
+               Figure 13: Example Event Protocol Map in JSON
 
 4.  Registered Protocol Mappings
 
@@ -427,7 +478,7 @@ Table of Contents
      characteristicID: text
    }
 
-    Figure 12: CDDL definition for BLE Protocol Mapping for sdfProperty
+    Figure 14: CDDL definition for BLE Protocol Mapping for sdfProperty
 
    Where:
 
@@ -494,7 +545,7 @@ Table of Contents
      characteristicID: text
    } / { type: "advertisements" } / { type: "connection_events" }
 
-               Figure 13: BLE Protocol Mapping for sdfEvents
+               Figure 15: BLE Protocol Mapping for sdfEvents
 
    Where:
 
@@ -566,7 +617,7 @@ Table of Contents
      ? manufacturerCode: uint,
    }
 
-         Figure 14: CDDL definition for Zigbee Protocol Mapping for
+         Figure 16: CDDL definition for Zigbee Protocol Mapping for
                                 sdfProperty
 
    Where:
@@ -615,7 +666,7 @@ Table of Contents
    reporting or a device-initiated write to an attribute on the gateway.
    The Zigbee event protocol mapping structure is defined as follows.
    The "attribute_reporting" and "write_event" variants reuse the
-   zigbee-property definition from Figure 14 to identify the underlying
+   zigbee-property definition from Figure 16 to identify the underlying
    Zigbee attribute:
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -644,7 +695,7 @@ Table of Contents
      type: "connection_events",
    }
 
-    Figure 15: CDDL definition for Zigbee Protocol Mapping for sdfEvents
+    Figure 17: CDDL definition for Zigbee Protocol Mapping for sdfEvents
 
    Where:
 
@@ -661,7 +712,7 @@ Table of Contents
 
    *  endpointID, clusterID, attributeID, attributeType, profileID, and
       manufacturerCode have the same meaning as described for
-      sdfProperty in Figure 14.  These fields are present when type is
+      sdfProperty in Figure 16.  These fields are present when type is
       "attribute_reporting" or "write_event", and MUST be absent when
       type is "connection_events".
 
@@ -737,7 +788,7 @@ Table of Contents
      ? manufacturerCode: uint,
    }
 
-    Figure 16: CDDL definition for Zigbee Protocol Mapping for sdfAction
+    Figure 18: CDDL definition for Zigbee Protocol Mapping for sdfAction
 
    Where:
 
@@ -751,7 +802,7 @@ Table of Contents
       action.
 
    *  profileID has the same meaning and default as described for
-      sdfProperty in Figure 14 (optional).
+      sdfProperty in Figure 16 (optional).
 
    *  manufacturerCode is the Zigbee manufacturer code of the command
       (optional).
@@ -779,7 +830,7 @@ Table of Contents
    a device instance, a method is needed to associate a mapping between
    an instance of a device and its associated SDF models.  To accomplish
    so, this document defines a SCIM extension that MAY be used in
-   conjunction with [RFC9944] in Figure 17.  Implementation of this SCIM
+   conjunction with [RFC9944] in Figure 19.  Implementation of this SCIM
    extension is OPTIONAL and independent of the protocol mapping
    functionality defined in the rest of this document.  The SCIM schema
    attributes used here are described in Section 7 of [RFC7643].
@@ -810,7 +861,7 @@ Table of Contents
        }
    }
 
-                    Figure 17: SCIM SDF Extension Schema
+                    Figure 19: SCIM SDF Extension Schema
 
    Here is an example SCIM device schema extension with SDF models:
 
@@ -1105,7 +1156,7 @@ Appendix A.  CDDL Definition
    }
    <CODE ENDS>
 
-                 Figure 18: CDDL for SDF protocol mappings
+                 Figure 20: CDDL for SDF protocol mappings
 
 Appendix B.  OpenAPI Definition
 
@@ -1164,7 +1215,7 @@ Appendix B.  OpenAPI Definition
                                               ProtocolMap-Zigbee-Action'
    <CODE ENDS>
 
-                          Figure 19: OpenAPI model
+                          Figure 21: OpenAPI model
 
 B.1.  Protocol map for BLE
 
@@ -1266,7 +1317,7 @@ B.1.  Protocol map for BLE
                        - connection_events
    <CODE ENDS>
 
-                      Figure 20: OpenAPI model for BLE
+                      Figure 22: OpenAPI model for BLE
 
 B.2.  Protocol map for Zigbee
 
@@ -1476,7 +1527,7 @@ B.2.  Protocol map for Zigbee
                  example: 4174
    <CODE ENDS>
 
-                    Figure 21: OpenAPI model for Zigbee
+                    Figure 23: OpenAPI model for Zigbee
 
 Acknowledgements
 
@@ -1486,7 +1537,7 @@ Acknowledgements
    of it.  The authors are grateful to Carsten Bormann, Jan Romann, Ari
    Keränen, and Eliot Lear for their reviews and contributions to this
    document, in particular Jan Romann for his help with the CDDL
-   definitions (Figure 18) and Eliot Lear for his contributions to
+   definitions (Figure 20) and Eliot Lear for his contributions to
    Section 5.
 
 Authors' Addresses

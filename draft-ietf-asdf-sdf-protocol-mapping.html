@@ -1453,7 +1453,8 @@ attributes for each direction.<a href="#section-3.1.1-4.2.1" class="pilcrow">¶<
 the protocol name and a map type defining the protocol-specific attributes.<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-7">It is to be noted that the protocol <code>name</code> (e.g., "new-protocol") <span class="bcp14">MUST</span> be
 registered in the IANA registry defined in <a href="#iana-prot-map" class="auto internal xref">Section 7.1</a>.<a href="#section-3.1.1-7" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-8">For example:<a href="#section-3.1.1-8" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-8">For a fictitious "new-protocol" that uses the same attributes for both read
+and write operations, the generic invocation could be defined as:<a href="#section-3.1.1-8" class="pilcrow">¶</a></p>
 <span id="name-example-property-protocol-m"></span><div id="prop-ext-example">
 <figure id="figure-3">
             <div class="lang-cddl sourcecode" id="section-3.1.1-9.1">
@@ -1474,7 +1475,8 @@ new-protocol-property = {
 <a href="#name-example-property-protocol-m" class="selfRef">Example Property Protocol Map Extension</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.1-10">An SDF model using this extension could look like:<a href="#section-3.1.1-10" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-10">An SDF model using a single mapping for both read and write operations
+could look like:<a href="#section-3.1.1-10" class="pilcrow">¶</a></p>
 <span id="name-example-property-protocol-ma"></span><div id="prop-ext-json-example">
 <figure id="figure-4">
             <div class="lang-json sourcecode" id="section-3.1.1-11.1">
@@ -1495,11 +1497,10 @@ new-protocol-property = {
 </pre>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-example-property-protocol-ma" class="selfRef">Example Property Protocol Map in JSON</a>
+<a href="#name-example-property-protocol-ma" class="selfRef">Example Property Protocol Map with a Single Mapping</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.1-12">When a property uses different protocol attributes for read and write
-operations, the mapping can be split:<a href="#section-3.1.1-12" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-12">An SDF model using separate read and write mappings could look like:<a href="#section-3.1.1-12" class="pilcrow">¶</a></p>
 <span id="name-example-property-protocol-map"></span><div id="prop-ext-rw-json-example">
 <figure id="figure-5">
             <div class="lang-json sourcecode" id="section-3.1.1-13.1">
@@ -1526,7 +1527,63 @@ operations, the mapping can be split:<a href="#section-3.1.1-12" class="pilcrow"
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-example-property-protocol-map" class="selfRef">Example Property Protocol Map with Read/Write in JSON</a>
+<a href="#name-example-property-protocol-map" class="selfRef">Example Property Protocol Map with Separate Read and Write Mappings</a>
+            </figcaption></figure>
+</div>
+<p id="section-3.1.1-14">When a protocol instead uses different attributes for read and write
+operations, the <code>read-props</code> and <code>write-props</code> type parameters can be
+given distinct types:<a href="#section-3.1.1-14" class="pilcrow">¶</a></p>
+<span id="name-example-property-protocol-map-"></span><div id="prop-ext-rw-types-example">
+<figure id="figure-6">
+            <div class="lang-cddl sourcecode" id="section-3.1.1-15.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+$$SDF-PROPERTY-PROTOCOL-MAP //= (
+  property-protocol-map&lt;"new-protocol", new-protocol-property, new-\
+                 protocol-property-read, new-protocol-property-write&gt;
+)
+
+new-protocol-property-read = {
+  attributeA: text
+}
+
+new-protocol-property-write = {
+  attributeA: text,
+  attributeB: uint
+}
+</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-example-property-protocol-map-" class="selfRef">Example Property Protocol Map Extension with Distinct Read and Write Attribute Types</a>
+            </figcaption></figure>
+</div>
+<p id="section-3.1.1-16">An SDF model using this extension could look like:<a href="#section-3.1.1-16" class="pilcrow">¶</a></p>
+<span id="name-example-property-protocol-map-w"></span><div id="prop-ext-rw-types-json-example">
+<figure id="figure-7">
+            <div class="lang-json sourcecode" id="section-3.1.1-17.1">
+<pre>{
+  "sdfProperty": {
+    "temperature": {
+      "type": "number",
+      "unit": "Cel",
+      "sdfProtocolMap": {
+        "new-protocol": {
+          "read": {
+            "attributeA": "temperature-read-service"
+          },
+          "write": {
+            "attributeA": "temperature-write-service",
+            "attributeB": 2
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<a href="#name-example-property-protocol-map-w" class="selfRef">Example Property Protocol Map with Distinct Read and Write Attributes</a>
             </figcaption></figure>
 </div>
 </section>
@@ -1540,7 +1597,7 @@ operations, the mapping can be split:<a href="#section-3.1.1-12" class="pilcrow"
 rule of <span><a href="https://rfc-editor.org/rfc/rfc9880#appendix-A" class="relref">Appendix A</a> of [<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> is used to add protocol mapping to
 <code>sdfAction</code> definitions:<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-action-extension-point-"></span><div id="sdf-action-ext">
-<figure id="figure-6">
+<figure id="figure-8">
             <div class="lang-cddl sourcecode" id="section-3.1.2-2.1">
 <pre>
 $$SDF-EXTENSION-ACTION //= (
@@ -1550,7 +1607,7 @@ $$SDF-EXTENSION-ACTION //= (
 )
 </pre>
 </div>
-<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
 <a href="#name-sdf-action-extension-point-" class="selfRef">SDF Action Extension Point for Protocol Mapping</a>
             </figcaption></figure>
 </div>
@@ -1560,7 +1617,7 @@ protocol, implementers <span class="bcp14">MUST</span> add a group entry that ma
 protocol-specific attributes. For example, an extension for a fictitious
 "new-protocol" could be defined as:<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
 <span id="name-example-action-protocol-map"></span><div id="action-ext-example">
-<figure id="figure-7">
+<figure id="figure-9">
             <div class="lang-cddl sourcecode" id="section-3.1.2-4.1">
 <pre>$$SDF-ACTION-PROTOCOL-MAP //= (
   "new-protocol": new-protocol-action
@@ -1571,13 +1628,13 @@ new-protocol-action = {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
 <a href="#name-example-action-protocol-map" class="selfRef">Example Action Protocol Map Extension</a>
             </figcaption></figure>
 </div>
 <p id="section-3.1.2-5">An SDF model using this extension could look like:<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
 <span id="name-example-action-protocol-map-"></span><div id="action-ext-json-example">
-<figure id="figure-8">
+<figure id="figure-10">
             <div class="lang-json sourcecode" id="section-3.1.2-6.1">
 <pre>{
   "sdfAction": {
@@ -1592,7 +1649,7 @@ new-protocol-action = {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
 <a href="#name-example-action-protocol-map-" class="selfRef">Example Action Protocol Map in JSON</a>
             </figcaption></figure>
 </div>
@@ -1607,7 +1664,7 @@ new-protocol-action = {
 rule of <span><a href="https://rfc-editor.org/rfc/rfc9880#appendix-A" class="relref">Appendix A</a> of [<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> is used to add protocol mapping to
 <code>sdfEvent</code> definitions:<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-event-extension-point-f"></span><div id="sdf-event-ext">
-<figure id="figure-9">
+<figure id="figure-11">
             <div class="lang-cddl sourcecode" id="section-3.1.3-2.1">
 <pre>
 $$SDF-EXTENSION-EVENT //= (
@@ -1617,7 +1674,7 @@ $$SDF-EXTENSION-EVENT //= (
 )
 </pre>
 </div>
-<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
 <a href="#name-sdf-event-extension-point-f" class="selfRef">SDF Event Extension Point for Protocol Mapping</a>
             </figcaption></figure>
 </div>
@@ -1626,7 +1683,7 @@ $$SDF-EXTENSION-EVENT //= (
 that maps the protocol name to the protocol-specific attributes. For example, an
 extension for a fictitious "new-protocol" could be defined as:<a href="#section-3.1.3-3" class="pilcrow">¶</a></p>
 <span id="name-example-event-protocol-map-"></span><div id="event-ext-example">
-<figure id="figure-10">
+<figure id="figure-12">
             <div class="lang-cddl sourcecode" id="section-3.1.3-4.1">
 <pre>$$SDF-EVENT-PROTOCOL-MAP //= (
   "new-protocol": new-protocol-event
@@ -1637,13 +1694,13 @@ new-protocol-event = {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
 <a href="#name-example-event-protocol-map-" class="selfRef">Example Event Protocol Map Extension</a>
             </figcaption></figure>
 </div>
 <p id="section-3.1.3-5">An SDF model using this extension could look like:<a href="#section-3.1.3-5" class="pilcrow">¶</a></p>
 <span id="name-example-event-protocol-map-i"></span><div id="event-ext-json-example">
-<figure id="figure-11">
+<figure id="figure-13">
             <div class="lang-json sourcecode" id="section-3.1.3-6.1">
 <pre>{
   "sdfEvent": {
@@ -1658,7 +1715,7 @@ new-protocol-event = {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
 <a href="#name-example-event-protocol-map-i" class="selfRef">Example Event Protocol Map in JSON</a>
             </figcaption></figure>
 </div>
@@ -1690,7 +1747,7 @@ used to access the corresponding SDF affordances.<a href="#section-4.1-1" class=
           </h4>
 <p id="section-4.1.1-1">For <code>sdfProperty</code>, the BLE protocol mapping structure is defined as follows:<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-ble-pro"></span><div id="blemap1">
-<figure id="figure-12">
+<figure id="figure-14">
             <div class="lang-cddl sourcecode" id="section-4.1.1-2.1">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -1706,7 +1763,7 @@ ble-property = {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
+<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
 <a href="#name-cddl-definition-for-ble-pro" class="selfRef">CDDL definition for BLE Protocol Mapping for sdfProperty</a>
             </figcaption></figure>
 </div>
@@ -1773,7 +1830,7 @@ here is an example of the BLE protocol mapping:<a href="#section-4.1.1-7" class=
 <code>sdfProperties</code>, but it <span class="bcp14">MUST</span> additionally include at least the <code>type</code> of
 the event.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
 <span id="name-ble-protocol-mapping-for-sd"></span><div id="blemap2">
-<figure id="figure-13">
+<figure id="figure-15">
             <div class="lang-cddl sourcecode" id="section-4.1.2-2.1">
 <pre>
 $$SDF-EVENT-PROTOCOL-MAP //= (
@@ -1787,7 +1844,7 @@ ble-event-map = {
 } / { type: "advertisements" } / { type: "connection_events" }
 </pre>
 </div>
-<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
+<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
 <a href="#name-ble-protocol-mapping-for-sd" class="selfRef">BLE Protocol Mapping for sdfEvents</a>
             </figcaption></figure>
 </div>
@@ -1857,7 +1914,7 @@ to access the corresponding SDF affordances.<a href="#section-4.2-1" class="pilc
 <p id="section-4.2.1-1">An <code>sdfProperty</code> is mapped to a Zigbee cluster attribute. The Zigbee property
 protocol mapping structure is defined as follows:<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-"></span><div id="zigmap1">
-<figure id="figure-14">
+<figure id="figure-16">
             <div class="lang-cddl sourcecode" id="section-4.2.1-2.1">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -1877,7 +1934,7 @@ zigbee-property = {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
+<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
 <a href="#name-cddl-definition-for-zigbee-" class="selfRef">CDDL definition for Zigbee Protocol Mapping for sdfProperty</a>
             </figcaption></figure>
 </div>
@@ -1933,9 +1990,9 @@ follows:<a href="#section-4.2.1-5" class="pilcrow">¶</a></p>
 or a device-initiated write to an attribute on the gateway. The Zigbee event
 protocol mapping structure is defined as follows. The <code>"attribute_reporting"</code>
 and <code>"write_event"</code> variants reuse the <code>zigbee-property</code> definition from
-<a href="#zigmap1" class="auto internal xref">Figure 14</a> to identify the underlying Zigbee attribute:<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
+<a href="#zigmap1" class="auto internal xref">Figure 16</a> to identify the underlying Zigbee attribute:<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-p"></span><div id="zigmap-event">
-<figure id="figure-15">
+<figure id="figure-17">
             <div class="lang-cddl sourcecode" id="section-4.2.2-2.1">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -1965,7 +2022,7 @@ zigbee-connection-event = {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
+<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
 <a href="#name-cddl-definition-for-zigbee-p" class="selfRef">CDDL definition for Zigbee Protocol Mapping for sdfEvents</a>
             </figcaption></figure>
 </div>
@@ -1991,7 +2048,7 @@ joins or leaves the Zigbee network.<a href="#section-4.2.2-4.1.2.3.1" class="pil
             <li class="normal" id="section-4.2.2-4.2">
               <p id="section-4.2.2-4.2.1"><code>endpointID</code>, <code>clusterID</code>, <code>attributeID</code>, <code>attributeType</code>, <code>profileID</code>, and
 <code>manufacturerCode</code> have the same meaning as described for <code>sdfProperty</code> in
-<a href="#zigmap1" class="auto internal xref">Figure 14</a>. These fields are present when <code>type</code> is <code>"attribute_reporting"</code>
+<a href="#zigmap1" class="auto internal xref">Figure 16</a>. These fields are present when <code>type</code> is <code>"attribute_reporting"</code>
 or <code>"write_event"</code>, and <span class="bcp14">MUST</span> be absent when <code>type</code> is <code>"connection_events"</code>.<a href="#section-4.2.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.2.2-4.3">
@@ -2063,7 +2120,7 @@ type as the reported attribute's <code>attributeType</code>.<a href="#section-4.
 <p id="section-4.2.3-1">An <code>sdfAction</code> is mapped to a Zigbee cluster command. The Zigbee protocol
 mapping structure for actions is defined as follows:<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-for-zigbee-pr"></span><div id="zigmap2">
-<figure id="figure-16">
+<figure id="figure-18">
             <div class="lang-cddl sourcecode" id="section-4.2.3-2.1">
 <pre>
 $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -2079,7 +2136,7 @@ zigbee-action-map = {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
 <a href="#name-cddl-definition-for-zigbee-pr" class="selfRef">CDDL definition for Zigbee Protocol Mapping for sdfAction</a>
             </figcaption></figure>
 </div>
@@ -2096,7 +2153,7 @@ zigbee-action-map = {
 </li>
             <li class="normal" id="section-4.2.3-4.4">
               <p id="section-4.2.3-4.4.1"><code>profileID</code> has the same meaning and default as described for <code>sdfProperty</code> in
-<a href="#zigmap1" class="auto internal xref">Figure 14</a> (optional).<a href="#section-4.2.3-4.4.1" class="pilcrow">¶</a></p>
+<a href="#zigmap1" class="auto internal xref">Figure 16</a> (optional).<a href="#section-4.2.3-4.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.2.3-4.5">
               <p id="section-4.2.3-4.5.1"><code>manufacturerCode</code> is the Zigbee manufacturer code of the command (optional).<a href="#section-4.2.3-4.5.1" class="pilcrow">¶</a></p>
@@ -2135,12 +2192,12 @@ zigbee-action-map = {
 instance, a method is needed to associate a mapping between an instance of a
 device and its associated SDF models. To accomplish so, this document defines
 a SCIM extension that <span class="bcp14">MAY</span> be used in conjunction with
-<span>[<a href="#RFC9944" class="cite xref">RFC9944</a>]</span> in <a href="#scim-sdf-extension-schema" class="auto internal xref">Figure 17</a>. Implementation
+<span>[<a href="#RFC9944" class="cite xref">RFC9944</a>]</span> in <a href="#scim-sdf-extension-schema" class="auto internal xref">Figure 19</a>. Implementation
 of this SCIM extension is <span class="bcp14">OPTIONAL</span> and independent of the protocol mapping
 functionality defined in the rest of this document. The SCIM schema attributes
 used here are described in Section 7 of <span>[<a href="#RFC7643" class="cite xref">RFC7643</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span id="name-scim-sdf-extension-schema"></span><div id="scim-sdf-extension-schema">
-<figure id="figure-17">
+<figure id="figure-19">
         <div class="lang-json sourcecode" id="section-5-2.1">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -2170,7 +2227,7 @@ used here are described in Section 7 of <span>[<a href="#RFC7643" class="cite xr
 }
 </pre>
 </div>
-<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
 <a href="#name-scim-sdf-extension-schema" class="selfRef">SCIM SDF Extension Schema</a>
         </figcaption></figure>
 </div>
@@ -2428,7 +2485,7 @@ described in <a href="#scim-sdf-extension" class="auto internal xref">Section 5<
       </h2>
 <p id="appendix-A-1">This appendix contains the combined CDDL definitions for the SDF protocol mappings.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-for-sdf-protocol-mappi"></span><div id="sdf-protocol-map-cddl">
-<figure id="figure-18">
+<figure id="figure-20">
         <div class="breakable lang-cddl sourcecode" id="appendix-A-2.1">
 <pre>&lt;CODE BEGINS&gt; file "sdf-protocol-map.cddl"
 
@@ -2533,7 +2590,7 @@ zigbee-action-map = {
 
 &lt;CODE ENDS&gt;</pre>
 </div>
-<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
 <a href="#name-cddl-for-sdf-protocol-mappi" class="selfRef">CDDL for SDF protocol mappings</a>
         </figcaption></figure>
 </div>
@@ -2546,7 +2603,7 @@ zigbee-action-map = {
       </h2>
 <p id="appendix-B-1">The following non-normative model is provided for convenience of the implementer.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <span id="name-openapi-model"></span><div id="protocolmapmodel">
-<figure id="figure-19">
+<figure id="figure-21">
         <div class="breakable lang-yaml sourcecode" id="appendix-B-2.1">
 <pre>&lt;CODE BEGINS&gt; file "ProtocolMap.yaml"
 
@@ -2603,7 +2660,7 @@ components:
 
 &lt;CODE ENDS&gt;</pre>
 </div>
-<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
 <a href="#name-openapi-model" class="selfRef">OpenAPI model</a>
         </figcaption></figure>
 </div>
@@ -2613,7 +2670,7 @@ components:
 <a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-protocol-map-for-ble" class="section-name selfRef">Protocol map for BLE</a>
         </h3>
 <span id="name-openapi-model-for-ble"></span><div id="protocolmapble">
-<figure id="figure-20">
+<figure id="figure-22">
           <div class="breakable lang-yaml sourcecode" id="appendix-B.1-1.1">
 <pre>&lt;CODE BEGINS&gt; file "ProtocolMap-BLE.yaml"
 
@@ -2715,7 +2772,7 @@ components:
 
 &lt;CODE ENDS&gt;</pre>
 </div>
-<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
+<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
 <a href="#name-openapi-model-for-ble" class="selfRef">OpenAPI model for BLE</a>
           </figcaption></figure>
 </div>
@@ -2727,7 +2784,7 @@ components:
 <a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-protocol-map-for-zigbee" class="section-name selfRef">Protocol map for Zigbee</a>
         </h3>
 <span id="name-openapi-model-for-zigbee"></span><div id="protocolmapzigbee">
-<figure id="figure-21">
+<figure id="figure-23">
           <div class="breakable lang-yaml sourcecode" id="appendix-B.2-1.1">
 <pre>&lt;CODE BEGINS&gt; file "ProtocolMap-Zigbee.yaml"
 
@@ -2937,7 +2994,7 @@ components:
 
 &lt;CODE ENDS&gt;</pre>
 </div>
-<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
+<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
 <a href="#name-openapi-model-for-zigbee" class="selfRef">OpenAPI model for Zigbee</a>
           </figcaption></figure>
 </div>
@@ -2953,7 +3010,7 @@ components:
 <p id="appendix-C-1">This document relies on SDF models described in <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span>, as such, we are grateful to the authors of this document for putting their time and effort into defining SDF in depth, allowing us to make use of it.
 The authors are grateful to Carsten Bormann, Jan Romann, Ari Keränen, and Eliot Lear
 for their reviews and contributions to this document,
-in particular Jan Romann for his help with the CDDL definitions (<a href="#sdf-protocol-map-cddl" class="auto internal xref">Figure 18</a>)
+in particular Jan Romann for his help with the CDDL definitions (<a href="#sdf-protocol-map-cddl" class="auto internal xref">Figure 20</a>)
 and Eliot Lear for his contributions to <a href="#scim-sdf-extension" class="auto internal xref">Section 5</a>.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 </section>
 </div>
