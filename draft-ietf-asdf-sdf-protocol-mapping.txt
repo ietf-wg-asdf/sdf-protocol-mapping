@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 13 February 2027                                      L. Corneo
+Expires: 28 February 2027                                      L. Corneo
                                                                 Ericsson
-                                                          12 August 2026
+                                                          27 August 2026
 
 
                           SDF Protocol Mapping
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 February 2027.
+   This Internet-Draft will expire on 28 February 2027.
 
 Copyright Notice
 
