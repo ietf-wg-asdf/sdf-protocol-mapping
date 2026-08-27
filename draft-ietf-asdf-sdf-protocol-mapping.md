@@ -735,6 +735,59 @@ Here is an example SCIM device schema extension with SDF models:
 An SDF model MUST be referenced with the `sdf` keyword inside the SCIM device
 schema as described in {{-scim-devices}}.
 
+# Implementation Status
+{:removeinrfc="true"}
+
+This section records the status of known implementations of the
+protocol defined by this specification at the time of posting of
+this Internet-Draft, and is based on a proposal described in
+{{?RFC7942}}.  The description of implementations in this section is
+intended to assist the IETF in its decision processes in
+progressing drafts to RFCs.  Please note that the listing of any
+individual implementation here does not imply endorsement by the
+IETF.  Furthermore, no effort has been spent to verify the
+information presented here that was supplied by IETF contributors.
+This is not intended as, and must not be construed to be, a
+catalog of available implementations or their features.  Readers
+are advised to note that other implementations may exist.
+
+According to {{?RFC7942}}, "this will allow reviewers and working
+groups to assign due consideration to documents that have the
+benefit of running code, which may serve as evidence of valuable
+experimentation and feedback that have made the implemented
+protocols more mature.  It is up to the individual working groups
+to use this information as they see fit".
+
+## TieDie IoT
+
+Organization: Cisco Systems, North Carolina State University
+
+Description: Open-source implementation of a gateway and SDKs that implement the SDF Protocol Mapping for BLE.
+
+Level of maturity: Open-source prototype
+
+Coverage: All SDF Protocol Mappings for BLE
+
+Version compatibility: draft-11
+
+Licensing: Apache License, Version 2.0
+
+URL: [](https://github.com/iot-onboarding/tiedie)
+
+## Cisco Sensor Connect for IoT Services
+
+Organization: Cisco Systems
+
+Description: Commercial solution that delivers advanced BLE capabilities over Cisco Wireless infrastructure.
+
+Level of maturity: Production
+
+Coverage: All SDF Protocol Mappings for BLE and Zigbee
+
+Version compatibility: draft-11
+
+Licensing: Proprietary
+
 # Security Considerations
 
 The security considerations of {{-sdf}} apply to this document as well.
