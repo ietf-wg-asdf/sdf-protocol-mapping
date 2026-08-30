@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-27T06:19:23.552385+00:00",
+  "timestamp": "2026-08-30T02:43:20.173034+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -506,15 +506,15 @@
       "id": "I_kwDOPSJ9A88AAAABMbpm-Q",
       "title": "Restructuring property extension example",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/47",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "akeranen",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "(moved into new issue from the PR 38 [comment](https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/38#issuecomment-5051554258); can also be ignored if you think it's not worth it but good to be explicit here)\n\nIn the property extension section (3.1.1), consider restructuring the example into two parts. Right now a single CDDL block passes the same type three times to the property-protocol-map generic, and then two JSON instances (direct form and read/write split) follow. It could read more clearly as:\n\nthe generic invocation on its own, then\nseparate labeled examples showing the direct form vs. the read/write-split form.",
       "createdAt": "2026-08-12T09:16:20Z",
-      "updatedAt": "2026-08-18T18:16:03Z",
-      "closedAt": null,
+      "updatedAt": "2026-08-27T11:41:26Z",
+      "closedAt": "2026-08-27T11:41:26Z",
       "comments": [
         {
           "author": "rohitmohan96",
@@ -537,7 +537,7 @@
       "labels": [],
       "body": "When affordances share protocol-map values (e.g. a common Zigbee `endpointID`/`clusterID`/`profileID`), they're currently repeated in every `sdfProtocolMap`. We can reuse SDF's existing machinery instead: `sdfRef` deep-merges a referenced definition into the referencing one via JSON Merge Patch (RFC 9880 \u00a74.4). Since the CDDL validates the *resolved* model (\u00a74.4: the syntaxes \"describe the result of applying a merge-patch\"), the merged `sdfProtocolMap` just needs to be valid after resolution.\n\nMy take is that the best option is **Option 2**, with **Option 1b** as a fallback if we want to avoid the CDDL change. **Option 3** is interesting too, but needs more than the others (see below).\n\n**Option 1a \u2014 dedicated template `sdfProperty` (no draft change).** A placeholder property carries only the shared `sdfProtocolMap`; real affordances `sdfRef` it and add their specifics. Valid today (all property qualities are optional). Downside: the template appears in the model as a real `sdfProperty`, so a consumer would take it to be an actual affordance of the device and try to use it, even though it exists only to be referenced. There's no way to mark it as non-functional.\n\n**Option 1b \u2014 first real affordance as template (no draft change).** No placeholder: one real affordance is fully specified, siblings `sdfRef` it and patch only what differs.\n\n```jsonc\n\"sdfProperty\": {\n  \"temperature\": {\n    \"type\": \"number\", \"unit\": \"Cel\",\n    \"sdfProtocolMap\": { \"zigbee\": { \"endpointID\": 1, \"clusterID\": 1026, \"profileID\": 260, \"attributeID\": 0, \"attributeType\": 41 } }\n  },\n  \"humidity\": {\n    \"sdfRef\": \"#/sdfProperty/temperature\",\n    \"unit\": \"%RH\",\n    \"sdfProtocolMap\": { \"zigbee\": { \"clusterID\": 1029 } }\n  }\n}\n```\n\nDownside: siblings inherit *all* qualities of the template affordance, not just the protocol map.\n\n**Option 2 \u2014 dedicated `sdfData` definition (one CDDL addition).** Cleanest placement for reuse-only fragments, but `sdfData` uses `$$SDF-EXTENSION-DATA`, which the draft doesn't extend today. Adding `$$SDF-EXTENSION-DATA //= ( sdfProtocolMap: { * $$SDF-PROPERTY-PROTOCOL-MAP } )` enables `sdfRef` to an `sdfData` base. Since `propertyqualities` unwraps `~dataqualities`, this could also subsume the existing `$$SDF-EXTENSION-PROPERTY` extension; actions/events would still need their own sockets.\n\n**Option 3 \u2014 `sdfRef` inside `sdfProtocolMap`, pointing at an existing protocol map (would require an extension).** Reference another affordance's protocol-map fragment directly:\n\n```jsonc\n\"humidity\": {\n  \"sdfProtocolMap\": { \"zigbee\": {\n    \"sdfRef\": \"#/sdfProperty/temperature/sdfProtocolMap/zigbee\",\n    \"clusterID\": 1029\n  } }\n}\n```\n\nIf resolved, the merged `zigbee` map has all mandatory fields and validates, and this shares only the protocol map, not other qualities. **But it does not work today:** `sdfRef` is defined as an SDF quality that is resolved at SDF definition points, not as a general merge directive that fires anywhere it appears. A protocol-map value is opaque extension content, not an SDF definition, so a conformant processor would not resolve an `sdfRef` located there. Enabling this would require this document to explicitly define `sdfRef`-style resolution inside `sdfProtocolMap`. Options 1a/1b/2 place `sdfRef` at affordance/data definition boundaries where the spec already resolves it.",
       "createdAt": "2026-08-21T06:29:35Z",
-      "updatedAt": "2026-08-21T19:06:02Z",
+      "updatedAt": "2026-08-27T11:50:53Z",
       "closedAt": null,
       "comments": [
         {
@@ -546,6 +546,13 @@
           "body": "I'm not sure option 2 is correct since `dataqualities` is used in other places other than `propertyqualities` (such as `sdfInputData`, `sdfOutputData`, `sdfData` in actions, events). The extensions initially used SDF-EXTENSION-DATA before we moved it out to the specific extension points for properties/actions/events because of the same issue (see https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/1#issuecomment-3600435022). \n\nI think option 1b might be more suited. Since this is already present in RFC9880, do you think we need to mention it in this draft?",
           "createdAt": "2026-08-21T19:06:02Z",
           "updatedAt": "2026-08-21T19:06:02Z"
+        },
+        {
+          "author": "bbrinckman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree with Rohit, option 1a and 1b already work. Option 2 may be a problem because these protocolmaps can now appear in sdfData qualities in event/actions. Option 3 really does not add anything to option 1a or 1b",
+          "createdAt": "2026-08-27T11:50:53Z",
+          "updatedAt": "2026-08-27T11:50:53Z"
         }
       ]
     }
@@ -2646,24 +2653,26 @@
       "id": "PR_kwDOPSJ9A88AAAABALq_2Q",
       "title": "Expand property protocol map extension examples with distinct read/write types",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/48",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #47 ",
       "createdAt": "2026-08-18T18:12:40Z",
-      "updatedAt": "2026-08-24T06:02:35Z",
+      "updatedAt": "2026-08-27T11:41:25Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "cc9f56fecf64207f6b39893ce017eb9906f7f9c6",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "47-restructuring-property-extension-example",
       "headRefOid": "8f7b48954cf8740064457668df6c947e9bcff0d4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-27T11:41:25Z",
+      "mergedAt": "2026-08-27T11:41:25Z",
+      "mergedBy": "bbrinckman",
+      "mergeCommit": {
+        "oid": "0f964820531be8b98a1d83b413fc5504ff911250"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2746,24 +2755,26 @@
       "id": "PR_kwDOPSJ9A88AAAABAmU2Kg",
       "title": "Move protocol registration requirements to IANA section, update Zigbee references",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/50",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Handles comments from @mcr\r\nhttps://mailarchive.ietf.org/arch/msg/asdf/nSyQtAvbEmprW31ZpYVF5_3sumg/",
       "createdAt": "2026-08-21T20:50:45Z",
-      "updatedAt": "2026-08-21T20:50:46Z",
+      "updatedAt": "2026-08-27T11:34:05Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "cc9f56fecf64207f6b39893ce017eb9906f7f9c6",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "headRefName": "mcr-comments",
       "headRefOid": "da23f214f7847bf0d9500decf7026530fc2b5cdd",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-27T11:34:05Z",
+      "mergedAt": "2026-08-27T11:34:05Z",
+      "mergedBy": "bbrinckman",
+      "mergeCommit": {
+        "oid": "c9799377e912689a5232c0b8d638257de1e158a9"
+      },
       "comments": [],
       "reviews": []
     },
@@ -2772,24 +2783,54 @@
       "id": "PR_kwDOPSJ9A88AAAABBFpw9Q",
       "title": "Add implementation status section",
       "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/51",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "rohitmohan96",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-08-26T14:24:44Z",
-      "updatedAt": "2026-08-26T14:24:45Z",
+      "updatedAt": "2026-08-27T11:57:31Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "0f964820531be8b98a1d83b413fc5504ff911250",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "implementation-status",
+      "headRefOid": "c7890fde156fa15ce617f190906f90ae728e9f8b",
+      "closedAt": "2026-08-27T11:57:31Z",
+      "mergedAt": "2026-08-27T11:57:31Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "679b5385454cfda2cb385daf5dee0524223eaaf2"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 52,
+      "id": "PR_kwDOPSJ9A88AAAABBL8JaQ",
+      "title": "Add CDDL validation script",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/52",
+      "state": "MERGED",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "```\r\n# Running:\r\n\r\nPASS CddlModelTest#test_example_extension_model_parses\r\nPASS CddlModelTest#test_combined_cddl_is_up_to_date\r\nPASS CddlModelTest#test_base_model_parses\r\nPASS SdfJsonExampleTest#test_events_b_json\r\nPASS SdfJsonExampleTest#test_properties_2_json\r\nPASS SdfJsonExampleTest#test_events_2_b_json\r\nSKIP SdfJsonExampleTest#test_scim_sdf_extension_json \u2014 scim-sdf-extension.json: not an SDF document (no CDDL model in this draft)\r\nPASS SdfJsonExampleTest#test_property_extension_b_json\r\nPASS SdfJsonExampleTest#test_event_extension_json\r\nPASS SdfJsonExampleTest#test_events_json\r\nPASS SdfJsonExampleTest#test_properties_json\r\nSKIP SdfJsonExampleTest#test_scim_sdf_extension_b_json \u2014 scim-sdf-extension-b.json: not an SDF document (no CDDL model in this draft)\r\nPASS SdfJsonExampleTest#test_events_2_json\r\nPASS SdfJsonExampleTest#test_actions_json\r\nPASS SdfJsonExampleTest#test_property_extension_json\r\nPASS SdfJsonExampleTest#test_action_extension_json\r\nPASS SdfJsonExampleTest#test_properties_b_json\r\n\r\n\r\nFinished in 3.883942s, 4.3770 runs/s, 7.4666 assertions/s.\r\n\r\n17 runs, 29 assertions, 0 failures, 0 errors, 2 skips\r\n```",
+      "createdAt": "2026-08-27T09:41:31Z",
+      "updatedAt": "2026-08-27T09:42:06Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "cc9f56fecf64207f6b39893ce017eb9906f7f9c6",
       "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
-      "headRefName": "implementation-status",
-      "headRefOid": "904cc4d8f5b68582dc212410e416c902c90eb555",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefName": "cddl-validation-script",
+      "headRefOid": "088e999b86ef055547f664960421924c519e031e",
+      "closedAt": "2026-08-27T09:42:06Z",
+      "mergedAt": "2026-08-27T09:42:06Z",
+      "mergedBy": "rohitmohan96",
+      "mergeCommit": {
+        "oid": "350145241df22c8110e3e27127116ab6212ee165"
+      },
       "comments": [],
       "reviews": []
     }
