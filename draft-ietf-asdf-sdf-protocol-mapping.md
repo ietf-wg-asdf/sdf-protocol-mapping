@@ -400,6 +400,70 @@ An SDF model using this extension could look like:
 ~~~
 {: post="fold" #event-ext-json-example title="Example Event Protocol Map in JSON"}
 
+## Reusing Protocol Mappings {#reuse}
+
+Affordances often share most of their protocol mapping, e.g. when several Zigbee
+attributes are reached through the same endpoint and application profile. The
+`sdfRef` quality ({{Section 4.4 of -sdf}}) can then be used to base one affordance
+definition on another and patch only the differing protocol attributes; a `null`
+value removes an inherited one. A definition (e.g., `sdfProperty`) intended only for
+such reuse can be placed at the top level of the SDF model ({{Section 3.4 of -sdf}}),
+where it does not declare an affordance of any `sdfObject`.
+
+For example, with two Zigbee attributes on the same endpoint and profile:
+
+~~~ json
+{
+  "sdfProperty": {
+    "zigbeeTemperatureAttributeBase": {
+      "type": "number",
+      "unit": "Cel",
+      "sdfProtocolMap": {
+        "zigbee": {
+          "endpointID": 1,
+          "profileID": 260,
+          "clusterID": 1026,
+          "attributeID": 0,
+          "attributeType": 41
+        }
+      }
+    }
+  },
+  "sdfObject": {
+    "sensor": {
+      "sdfProperty": {
+        "temperature": {
+          "sdfRef": "#/sdfProperty/zigbeeTemperatureAttributeBase"
+        },
+        "humidity": {
+          "sdfRef": "#/sdfProperty/zigbeeTemperatureAttributeBase",
+          "unit": "%RH",
+          "minimum": 0,
+          "sdfProtocolMap": {
+            "zigbee": {
+              "clusterID": 1029,
+              "attributeType": 33
+            }
+          }
+        }
+      }
+    }
+  }
+}
+~~~
+{: post="fold" #reuse-json-example title="Reusing a Protocol Mapping via sdfRef"}
+
+`humidity` adds a `minimum` of its own and restates only the two Zigbee attributes
+that differ, `clusterID` and `attributeType`; `endpointID`, `profileID`, and
+`attributeID` come from the base. Adding `"profileID": null` there would drop the
+profile instead of inheriting it.
+
+The CDDL here describes resolved models ({{Section 4.4.1 of -sdf}}) and does not admit
+`sdfRef` inside the protocol-specific attribute maps. A definition supplying only the
+differing attributes therefore conforms to this specification only once `sdfRef` has
+been resolved. The referenced definition remains part of the resolved model, so it has
+to carry a complete and valid protocol mapping.
+
 # Registered Protocol Mappings
 
 This section defines the protocol mappings registered by this document.
