@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-30T02:43:20.173034+00:00",
+  "timestamp": "2026-09-10T02:19:58.561779+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -537,7 +537,7 @@
       "labels": [],
       "body": "When affordances share protocol-map values (e.g. a common Zigbee `endpointID`/`clusterID`/`profileID`), they're currently repeated in every `sdfProtocolMap`. We can reuse SDF's existing machinery instead: `sdfRef` deep-merges a referenced definition into the referencing one via JSON Merge Patch (RFC 9880 \u00a74.4). Since the CDDL validates the *resolved* model (\u00a74.4: the syntaxes \"describe the result of applying a merge-patch\"), the merged `sdfProtocolMap` just needs to be valid after resolution.\n\nMy take is that the best option is **Option 2**, with **Option 1b** as a fallback if we want to avoid the CDDL change. **Option 3** is interesting too, but needs more than the others (see below).\n\n**Option 1a \u2014 dedicated template `sdfProperty` (no draft change).** A placeholder property carries only the shared `sdfProtocolMap`; real affordances `sdfRef` it and add their specifics. Valid today (all property qualities are optional). Downside: the template appears in the model as a real `sdfProperty`, so a consumer would take it to be an actual affordance of the device and try to use it, even though it exists only to be referenced. There's no way to mark it as non-functional.\n\n**Option 1b \u2014 first real affordance as template (no draft change).** No placeholder: one real affordance is fully specified, siblings `sdfRef` it and patch only what differs.\n\n```jsonc\n\"sdfProperty\": {\n  \"temperature\": {\n    \"type\": \"number\", \"unit\": \"Cel\",\n    \"sdfProtocolMap\": { \"zigbee\": { \"endpointID\": 1, \"clusterID\": 1026, \"profileID\": 260, \"attributeID\": 0, \"attributeType\": 41 } }\n  },\n  \"humidity\": {\n    \"sdfRef\": \"#/sdfProperty/temperature\",\n    \"unit\": \"%RH\",\n    \"sdfProtocolMap\": { \"zigbee\": { \"clusterID\": 1029 } }\n  }\n}\n```\n\nDownside: siblings inherit *all* qualities of the template affordance, not just the protocol map.\n\n**Option 2 \u2014 dedicated `sdfData` definition (one CDDL addition).** Cleanest placement for reuse-only fragments, but `sdfData` uses `$$SDF-EXTENSION-DATA`, which the draft doesn't extend today. Adding `$$SDF-EXTENSION-DATA //= ( sdfProtocolMap: { * $$SDF-PROPERTY-PROTOCOL-MAP } )` enables `sdfRef` to an `sdfData` base. Since `propertyqualities` unwraps `~dataqualities`, this could also subsume the existing `$$SDF-EXTENSION-PROPERTY` extension; actions/events would still need their own sockets.\n\n**Option 3 \u2014 `sdfRef` inside `sdfProtocolMap`, pointing at an existing protocol map (would require an extension).** Reference another affordance's protocol-map fragment directly:\n\n```jsonc\n\"humidity\": {\n  \"sdfProtocolMap\": { \"zigbee\": {\n    \"sdfRef\": \"#/sdfProperty/temperature/sdfProtocolMap/zigbee\",\n    \"clusterID\": 1029\n  } }\n}\n```\n\nIf resolved, the merged `zigbee` map has all mandatory fields and validates, and this shares only the protocol map, not other qualities. **But it does not work today:** `sdfRef` is defined as an SDF quality that is resolved at SDF definition points, not as a general merge directive that fires anywhere it appears. A protocol-map value is opaque extension content, not an SDF definition, so a conformant processor would not resolve an `sdfRef` located there. Enabling this would require this document to explicitly define `sdfRef`-style resolution inside `sdfProtocolMap`. Options 1a/1b/2 place `sdfRef` at affordance/data definition boundaries where the spec already resolves it.",
       "createdAt": "2026-08-21T06:29:35Z",
-      "updatedAt": "2026-08-27T11:50:53Z",
+      "updatedAt": "2026-09-09T06:52:57Z",
       "closedAt": null,
       "comments": [
         {
@@ -553,6 +553,27 @@
           "body": "I agree with Rohit, option 1a and 1b already work. Option 2 may be a problem because these protocolmaps can now appear in sdfData qualities in event/actions. Option 3 really does not add anything to option 1a or 1b",
           "createdAt": "2026-08-27T11:50:53Z",
           "updatedAt": "2026-08-27T11:50:53Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "MEMBER",
+          "body": "With option 1a, if the sdfProperty definition being referenced is a top-level definition (Section 3.4 of RFC 9880), there is no unwanted effect on any property declaration in an sdfObject.  So I think this simply works without unwanted side effects; the dumminess of the top-level container sdfProperty(/A/E) could be signaled by giving it an appropriate name.\n\nI do have a problem with sdfRef not appearing in the grammar.  While it is true that ultimately the grammar needs to match the resolved definition, we did include sdfRef in the grammar for SDF itself, so we know where it can be used.  Making this apparent in the current protocolmap CDDL appears to be difficult, so we probably just want to say that in English and give an example how that works.\n",
+          "createdAt": "2026-09-08T12:35:55Z",
+          "updatedAt": "2026-09-08T12:35:55Z"
+        },
+        {
+          "author": "akeranen",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Agreed on Option 1a with a top-level definition: per Section 3.4 of RFC 9880 it is a definition but not a declaration, so no `sdfObject` gains an affordance. Inheriting the base's other qualities is not a problem either, since a referencing definition can drop any of them with `null` (Section 4.4 of RFC 9880, RFC 7396).\n\nWorth saying in the English text why the unresolved model does not validate here, when for base SDF it usually does (\"even merge-patch inputs will validate\", Section 4.4). Our protocol maps are closed maps with required members, so a partial `sdfProtocolMap` validates only after resolution. It also means the referenced base has to be a complete, valid map, since it stays in the resolved model.\n\nExample, two Zigbee attributes on the same endpoint and profile:\n\n```json\n{\n  \"sdfProperty\": {\n    \"zigbeeTemperatureAttributeBase\": {\n      \"type\": \"number\", \"unit\": \"Cel\",\n      \"sdfProtocolMap\": { \"zigbee\": {\n        \"endpointID\": 1, \"profileID\": 260,\n        \"clusterID\": 1026, \"attributeID\": 0, \"attributeType\": 41\n      } }\n    }\n  },\n  \"sdfObject\": {\n    \"sensor\": {\n      \"sdfProperty\": {\n        \"temperature\": { \"sdfRef\": \"#/sdfProperty/zigbeeTemperatureAttributeBase\" },\n        \"humidity\": {\n          \"sdfRef\": \"#/sdfProperty/zigbeeTemperatureAttributeBase\",\n          \"unit\": \"%RH\",\n          \"sdfProtocolMap\": { \"zigbee\": { \"clusterID\": 1029, \"attributeType\": 33 } }\n        }\n      }\n    }\n  }\n}\n```\n\n`humidity` restates only the humidity cluster and `uint16` instead of `int16`; endpoint, profile, and attribute ID come from the base. Adding `\"profileID\": null` there would drop the profile instead of inheriting it.\n\nI checked the resolution against `generated/combined.cddl`: the resolved maps validate (also with `null` removing an optional member), while the partial map and a shared-members-only template do not.\n\nProse to go with it:\n\n> Affordances often share most of their protocol mapping, e.g. when several Zigbee\n> attributes are reached through the same endpoint and application profile. The\n> `sdfRef` quality ({{Section 4.4 of -sdf}}) can then be used to base one affordance\n> definition on another and patch only the differing protocol attributes; a `null`\n> value removes an inherited one. A definition (e.g., `sdfProperty`) intended only for\n> such reuse can be placed at the top level of the SDF model ({{Section 3.4 of -sdf}}),\n> where it does not declare an affordance of any `sdfObject`.\n>\n> The CDDL here describes resolved models ({{Section 4.4.1 of -sdf}}) and does not admit\n> `sdfRef` inside the protocol-specific attribute maps. A definition supplying only the\n> differing attributes therefore conforms to this specification only once `sdfRef` has\n> been resolved. The referenced definition remains part of the resolved model, so it has\n> to carry a complete and valid protocol mapping.\n\nHappy to turn this into a PR.\n",
+          "createdAt": "2026-09-08T15:23:39Z",
+          "updatedAt": "2026-09-08T15:23:39Z"
+        },
+        {
+          "author": "akeranen",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I see @rohitmohan96 +1'd so I made the PR (#54)\n",
+          "createdAt": "2026-09-09T06:52:57Z",
+          "updatedAt": "2026-09-09T06:52:57Z"
         }
       ]
     }
@@ -2831,6 +2852,58 @@
       "mergeCommit": {
         "oid": "350145241df22c8110e3e27127116ab6212ee165"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 53,
+      "id": "PR_kwDOPSJ9A88AAAABCvSsfA",
+      "title": "Add zigbee-cluster-command-event mapping",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/53",
+      "state": "OPEN",
+      "author": "rohitmohan96",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-09-08T21:34:18Z",
+      "updatedAt": "2026-09-08T21:34:18Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "679b5385454cfda2cb385daf5dee0524223eaaf2",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "zigbee-cluster-command",
+      "headRefOid": "1b5f9220cfdad6fe170b666436525fa8b3fb6177",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 54,
+      "id": "PR_kwDOPSJ9A88AAAABCyZiNg",
+      "title": "Describe reuse of protocol mappings via sdfRef",
+      "url": "https://github.com/ietf-wg-asdf/sdf-protocol-mapping/pull/54",
+      "state": "OPEN",
+      "author": "akeranen",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Adds a \"Reusing Protocol Mappings\" section (renders as 3.2) describing how `sdfRef`\ncan be used to share a protocol mapping between affordances, using the text and\nexample agreed in #49.\n\nThe section makes two points that came out of the discussion:\n\n- A definition intended only for reuse can be placed at the top level of the SDF\n  model (Section 3.4 of RFC 9880), where it is a definition but not a declaration,\n  so it does not add an affordance to any `sdfObject`.\n- Because the CDDL here describes resolved models and does not admit `sdfRef`\n  inside the protocol-specific attribute maps, a definition giving only the\n  differing attributes conforms only once `sdfRef` has been resolved, and the\n  referenced definition needs a complete mapping of its own. This is the English\n  explanation @cabo asked for in place of a CDDL change.\n\nThe example was checked against `generated/combined.cddl`: the resolved mappings\nvalidate (also with `null` removing an optional member), while a partial mapping\nand a shared-members-only template do not.\n\nTwo notes for review:\n\n- The prose and example are those from the issue thread, except that the JSON is\n  formatted one quality per line to match the other examples in the document, and\n  `humidity` gained a `\"minimum\": 0` to show a patch adding a quality rather than\n  only overriding protocol attributes.\n- `null` removal is attributed to RFC 9880 Section 4.4 rather than citing RFC 7396\n  directly, to avoid adding a reference. Happy to add it if preferred.\n\nCloses #49",
+      "createdAt": "2026-09-09T06:51:52Z",
+      "updatedAt": "2026-09-09T06:53:52Z",
+      "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "baseRefName": "main",
+      "baseRefOid": "679b5385454cfda2cb385daf5dee0524223eaaf2",
+      "headRepository": "ietf-wg-asdf/sdf-protocol-mapping",
+      "headRefName": "49-reuse-protocol-map",
+      "headRefOid": "0684326216189bb5d6b61dbc45f2432d83aec90f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
