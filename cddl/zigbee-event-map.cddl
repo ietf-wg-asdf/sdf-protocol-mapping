@@ -2,7 +2,7 @@ $$SDF-EVENT-PROTOCOL-MAP //= (
   zigbee: zigbee-event-map
 )
 
-zigbee-event-map = zigbee-attribute-reporting / zigbee-write-event / zigbee-connection-event
+zigbee-event-map = zigbee-attribute-reporting / zigbee-write-event / zigbee-connection-event / zigbee-cluster-command-event
 
 zigbee-attribute-reporting = {
   type: "attribute_reporting",
@@ -19,4 +19,14 @@ zigbee-write-event = {
 
 zigbee-connection-event = {
   type: "connection_events",
+}
+
+zigbee-cluster-command-event = {
+  type: "cluster_command",
+  endpointID: uint,
+  clusterID: uint,
+  commandID: uint,
+  direction: "client_to_server" / "server_to_client",
+  ? profileID: uint,
+  ? manufacturerCode: uint,
 }

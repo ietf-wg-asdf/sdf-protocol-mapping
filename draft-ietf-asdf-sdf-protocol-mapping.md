@@ -574,11 +574,12 @@ follows:
 
 ### Events
 
-An `sdfEvent` is mapped to a Zigbee cluster event such as attribute reporting
-or a device-initiated write to an attribute on the gateway. The Zigbee event
-protocol mapping structure is defined as follows. The `"attribute_reporting"`
-and `"write_event"` variants reuse the `zigbee-property` definition from
-{{zigmap1}} to identify the underlying Zigbee attribute:
+An `sdfEvent` is mapped to a Zigbee cluster event such as attribute reporting,
+a device-initiated write to an attribute on the gateway, or a cluster command.
+The Zigbee event protocol mapping structure is defined as follows. The
+`"attribute_reporting"` and `"write_event"` variants reuse the
+`zigbee-property` definition from {{zigmap1}} to identify the underlying
+Zigbee attribute:
 
 ~~~ cddl
 {::include-fold cddl/zigbee-event-map.cddl}
@@ -594,10 +595,18 @@ Where:
     attribute on the gateway.
   - `"connection_events"`: the event is triggered when a Zigbee end device
     joins or leaves the Zigbee network.
+  - `"cluster_command"`: the event is triggered by a ZCL cluster-specific
+    command.
 - `endpointID`, `clusterID`, `attributeID`, `attributeType`, `profileID`, and
   `manufacturerCode` have the same meaning as described for `sdfProperty` in
   {{zigmap1}}. These fields are present when `type` is `"attribute_reporting"`
   or `"write_event"`, and MUST be absent when `type` is `"connection_events"`.
+- For `"cluster_command"`, `endpointID` identifies the originating Zigbee end
+  device's source endpoint, `clusterID` identifies the cluster, and `commandID`
+  identifies the cluster-specific command. `direction` identifies the ZCL
+  command direction and MUST be present. It cannot be inferred from the
+  coordinator role: the gateway can be either the ZCL client or the ZCL server.
+  `profileID` and `manufacturerCode` have the same meaning as in {{zigmap1}}.
 - `minReportingInterval` is the minimum reporting interval in seconds
   (optional). It is the minimum time between issued attribute reports and
   only applies when `type` is `"attribute_reporting"`.
@@ -638,6 +647,29 @@ For example, a Zigbee event mapping for a temperature change report:
 ~~~
 {: post="fold"}
 
+For example, a Zigbee switch sends an On command from its On/Off cluster client
+to the gateway's On/Off cluster server:
+
+~~~ json
+{
+  "sdfEvent": {
+    "on": {
+      "sdfProtocolMap": {
+        "zigbee": {
+          "type": "cluster_command",
+          "profileID": 260,
+          "endpointID": 1,
+          "clusterID": 6,
+          "commandID": 1,
+          "direction": "client_to_server"
+        }
+      }
+    }
+  }
+}
+~~~
+{: post="fold"}
+
 Here is an example of an `isPresent` event using Zigbee connection events:
 
 ~~~ json
@@ -654,7 +686,6 @@ Here is an example of an `isPresent` event using Zigbee connection events:
 }
 ~~~
 {: post="fold"}
-
 
 ### Actions
 

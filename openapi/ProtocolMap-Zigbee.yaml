@@ -164,6 +164,45 @@ components:
                   example: connection_events
                   enum:
                     - connection_events
+            - type: object
+              required:
+                - type
+                - endpointID
+                - clusterID
+                - commandID
+                - direction
+              properties:
+                type:
+                  type: string
+                  example: cluster_command
+                  enum:
+                    - cluster_command
+                endpointID:
+                  type: integer
+                  format: int32
+                  example: 1
+                clusterID:
+                  type: integer
+                  format: int32
+                  example: 6
+                commandID:
+                  type: integer
+                  format: int32
+                  example: 1
+                direction:
+                  type: string
+                  example: client_to_server
+                  enum:
+                    - client_to_server
+                    - server_to_client
+                profileID:
+                  type: integer
+                  format: int32
+                  example: 260
+                manufacturerCode:
+                  type: integer
+                  format: int32
+                  example: 4174
 
 ## Protocol mapping for Zigbee action
     ProtocolMap-Zigbee-Action:
