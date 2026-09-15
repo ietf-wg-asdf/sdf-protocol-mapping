@@ -15,6 +15,26 @@ on:
     - .gitignore
 
 jobs:
+  validate:
+    name: "Validate SDF Examples"
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Checkout"
+      uses: actions/checkout@v5
+
+    - name: "Set Up Ruby"
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "3.3"
+
+    - name: "Install Validation Tools"
+      run: |
+        npm install --global aasvg
+        gem install --no-document cddl kramdown-rfc
+
+    - name: "Run Validation"
+      run: make validate
+
   build:
     name: "Update Editor's Copy"
     runs-on: ubuntu-latest
