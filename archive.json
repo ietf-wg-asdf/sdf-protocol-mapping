@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-10T02:19:58.561779+00:00",
+  "timestamp": "2026-09-15T02:41:08.271593+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -2893,7 +2893,7 @@
       "labels": [],
       "body": "Adds a \"Reusing Protocol Mappings\" section (renders as 3.2) describing how `sdfRef`\ncan be used to share a protocol mapping between affordances, using the text and\nexample agreed in #49.\n\nThe section makes two points that came out of the discussion:\n\n- A definition intended only for reuse can be placed at the top level of the SDF\n  model (Section 3.4 of RFC 9880), where it is a definition but not a declaration,\n  so it does not add an affordance to any `sdfObject`.\n- Because the CDDL here describes resolved models and does not admit `sdfRef`\n  inside the protocol-specific attribute maps, a definition giving only the\n  differing attributes conforms only once `sdfRef` has been resolved, and the\n  referenced definition needs a complete mapping of its own. This is the English\n  explanation @cabo asked for in place of a CDDL change.\n\nThe example was checked against `generated/combined.cddl`: the resolved mappings\nvalidate (also with `null` removing an optional member), while a partial mapping\nand a shared-members-only template do not.\n\nTwo notes for review:\n\n- The prose and example are those from the issue thread, except that the JSON is\n  formatted one quality per line to match the other examples in the document, and\n  `humidity` gained a `\"minimum\": 0` to show a patch adding a quality rather than\n  only overriding protocol attributes.\n- `null` removal is attributed to RFC 9880 Section 4.4 rather than citing RFC 7396\n  directly, to avoid adding a reference. Happy to add it if preferred.\n\nCloses #49",
       "createdAt": "2026-09-09T06:51:52Z",
-      "updatedAt": "2026-09-09T06:53:52Z",
+      "updatedAt": "2026-09-14T16:26:12Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "679b5385454cfda2cb385daf5dee0524223eaaf2",
@@ -2904,7 +2904,22 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@akeranen the text changes look good, but my cddl validation script (`make validate`) fails now for the snippet that you added.",
+          "createdAt": "2026-09-14T15:24:56Z",
+          "updatedAt": "2026-09-14T15:24:56Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "MEMBER",
+          "body": "> @akeranen the text changes look good, but my cddl validation script (`make validate`) fails now for the snippet that you added.\r\n\r\nRight, as the text says we'd need a way to check the resolved model against the CDDL.\r\nDo we have an easy way to do a resolution in the CI?\r\nThe merge-patch should be easy, but the sdf-pointers probably need some code (put model into default namespace, retrieve item from namespaces).",
+          "createdAt": "2026-09-14T16:26:12Z",
+          "updatedAt": "2026-09-14T16:26:12Z"
+        }
+      ],
       "reviews": []
     }
   ]
