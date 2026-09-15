@@ -5,9 +5,9 @@
 A Semantic Definition Format for Data and Interactions of ThingsR. Mohan
 Internet-Draft                                              B. Brinckman
 Intended status: Standards Track                           Cisco Systems
-Expires: 28 February 2027                                      L. Corneo
+Expires: 19 March 2027                                         L. Corneo
                                                                 Ericsson
-                                                          27 August 2026
+                                                       15 September 2026
 
 
                           SDF Protocol Mapping
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 February 2027.
+   This Internet-Draft will expire on 19 March 2027.
 
 Copyright Notice
 
@@ -666,11 +666,11 @@ Table of Contents
 4.2.2.  Events
 
    An sdfEvent is mapped to a Zigbee cluster event such as attribute
-   reporting or a device-initiated write to an attribute on the gateway.
-   The Zigbee event protocol mapping structure is defined as follows.
-   The "attribute_reporting" and "write_event" variants reuse the
-   zigbee-property definition from Figure 16 to identify the underlying
-   Zigbee attribute:
+   reporting, a device-initiated write to an attribute on the gateway,
+   or a cluster command.  The Zigbee event protocol mapping structure is
+   defined as follows.  The "attribute_reporting" and "write_event"
+   variants reuse the zigbee-property definition from Figure 16 to
+   identify the underlying Zigbee attribute:
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -679,7 +679,7 @@ Table of Contents
    )
 
    zigbee-event-map = zigbee-attribute-reporting / zigbee-write-event \
-                                               / zigbee-connection-event
+                / zigbee-connection-event / zigbee-cluster-command-event
 
    zigbee-attribute-reporting = {
      type: "attribute_reporting",
@@ -698,6 +698,16 @@ Table of Contents
      type: "connection_events",
    }
 
+   zigbee-cluster-command-event = {
+     type: "cluster_command",
+     endpointID: uint,
+     clusterID: uint,
+     commandID: uint,
+     direction: "client_to_server" / "server_to_client",
+     ? profileID: uint,
+     ? manufacturerCode: uint,
+   }
+
     Figure 17: CDDL definition for Zigbee Protocol Mapping for sdfEvents
 
    Where:
@@ -713,11 +723,22 @@ Table of Contents
       -  "connection_events": the event is triggered when a Zigbee end
          device joins or leaves the Zigbee network.
 
+      -  "cluster_command": the event is triggered by a ZCL cluster-
+         specific command.
+
    *  endpointID, clusterID, attributeID, attributeType, profileID, and
       manufacturerCode have the same meaning as described for
       sdfProperty in Figure 16.  These fields are present when type is
       "attribute_reporting" or "write_event", and MUST be absent when
       type is "connection_events".
+
+   *  For "cluster_command", endpointID identifies the originating
+      Zigbee end device's source endpoint, clusterID identifies the
+      cluster, and commandID identifies the cluster-specific command.
+      direction identifies the ZCL command direction and MUST be
+      present.  It cannot be inferred from the coordinator role: the
+      gateway can be either the ZCL client or the ZCL server. profileID
+      and manufacturerCode have the same meaning as in Figure 16.
 
    *  minReportingInterval is the minimum reporting interval in seconds
       (optional).  It is the minimum time between issued attribute
@@ -753,6 +774,26 @@ Table of Contents
              "minReportingInterval": 10,
              "maxReportingInterval": 300,
              "reportableChange": 50
+           }
+         }
+       }
+     }
+   }
+
+   For example, a Zigbee switch sends an On command from its On/Off
+   cluster client to the gateway's On/Off cluster server:
+
+   {
+     "sdfEvent": {
+       "on": {
+         "sdfProtocolMap": {
+           "zigbee": {
+             "type": "cluster_command",
+             "profileID": 260,
+             "endpointID": 1,
+             "clusterID": 6,
+             "commandID": 1,
+             "direction": "client_to_server"
            }
          }
        }
@@ -1188,7 +1229,7 @@ Appendix A.  CDDL Definition
    )
 
    zigbee-event-map = zigbee-attribute-reporting / zigbee-write-event \
-                                               / zigbee-connection-event
+                / zigbee-connection-event / zigbee-cluster-command-event
 
    zigbee-attribute-reporting = {
      type: "attribute_reporting",
@@ -1205,6 +1246,16 @@ Appendix A.  CDDL Definition
 
    zigbee-connection-event = {
      type: "connection_events",
+   }
+
+   zigbee-cluster-command-event = {
+     type: "cluster_command",
+     endpointID: uint,
+     clusterID: uint,
+     commandID: uint,
+     direction: "client_to_server" / "server_to_client",
+     ? profileID: uint,
+     ? manufacturerCode: uint,
    }
 
    $$SDF-ACTION-PROTOCOL-MAP //= (
@@ -1555,6 +1606,45 @@ B.2.  Protocol map for Zigbee
                      example: connection_events
                      enum:
                        - connection_events
+               - type: object
+                 required:
+                   - type
+                   - endpointID
+                   - clusterID
+                   - commandID
+                   - direction
+                 properties:
+                   type:
+                     type: string
+                     example: cluster_command
+                     enum:
+                       - cluster_command
+                   endpointID:
+                     type: integer
+                     format: int32
+                     example: 1
+                   clusterID:
+                     type: integer
+                     format: int32
+                     example: 6
+                   commandID:
+                     type: integer
+                     format: int32
+                     example: 1
+                   direction:
+                     type: string
+                     example: client_to_server
+                     enum:
+                       - client_to_server
+                       - server_to_client
+                   profileID:
+                     type: integer
+                     format: int32
+                     example: 260
+                   manufacturerCode:
+                     type: integer
+                     format: int32
+                     example: 4174
 
    ## Protocol mapping for Zigbee action
        ProtocolMap-Zigbee-Action:
