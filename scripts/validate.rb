@@ -140,6 +140,140 @@ module Draft
     output.lines.any? { |l| l =~ /Features potentially used/ && l.include?("sdfProtocolMap") }
   end
 
+  # Resolve the local SDF references used in a model before CDDL validation.
+  # An sdfRef supplies the base object and the remaining members form an RFC
+  # 7396 JSON Merge Patch. CDDL describes that resolved form: in particular,
+  # it cannot type a partial protocol map that inherits required members from
+  # its referenced definition.
+  class SdfRefError < StandardError; end
+
+  class SdfRefResolver
+    def initialize(document)
+      @document = document
+      @resolving = []
+    end
+
+    def resolve
+      resolve_value(@document, "", nil)
+    end
+
+    private
+
+    def resolve_value(value, location, siblings)
+      case value
+      when Hash
+        if value.key?("sdfRef")
+          ref = value["sdfRef"]
+          target, target_location, target_siblings = dereference(ref, location, siblings)
+          if @resolving.include?(target_location)
+            raise SdfRefError, "cyclic sdfRef #{ref.inspect} at #{location.empty? ? '#' : "##{location}"}"
+          end
+
+          @resolving << target_location
+          begin
+            inherited = resolve_value(target, target_location, target_siblings)
+          ensure
+            @resolving.pop
+          end
+          patch = value.reject { |key, _| key == "sdfRef" }
+          return resolve_value(json_merge_patch(inherited, patch), location, siblings)
+        end
+
+        value.each_with_object({}) do |(key, child), resolved|
+          resolved[key] = resolve_value(child, pointer_child(location, key), value)
+        end
+      when Array
+        value.each_with_index.map do |child, index|
+          resolve_value(child, pointer_child(location, index), nil)
+        end
+      else
+        value
+      end
+    end
+
+    # RFC 7396, Section 2. Keeping this here avoids an extra dependency just
+    # for the validation script and makes null remove an inherited member.
+    def json_merge_patch(target, patch)
+      return deep_copy(patch) unless patch.is_a?(Hash)
+
+      result = target.is_a?(Hash) ? deep_copy(target) : {}
+      patch.each do |key, value|
+        if value.nil?
+          result.delete(key)
+        else
+          result[key] = json_merge_patch(result[key], value)
+        end
+      end
+      result
+    end
+
+    def deep_copy(value)
+      case value
+      when Hash then value.transform_values { |child| deep_copy(child) }
+      when Array then value.map { |child| deep_copy(child) }
+      else value
+      end
+    end
+
+    def dereference(ref, location, siblings)
+      unless ref.is_a?(String)
+        raise SdfRefError, "sdfRef must be a string; got #{ref.inspect}"
+      end
+
+      if ref.start_with?("#")
+        target, target_siblings = json_pointer(ref[1..])
+        return [target, "##{ref[1..]}", target_siblings]
+      end
+
+      # A referenceable name is shorthand for a sibling in the same SDF
+      # object. It does not contain ':' or '#', as defined by RFC 9880.
+      if ref !~ /[:#]/ && siblings.is_a?(Hash) && siblings.key?(ref)
+        parent_location = location.sub(%r{/[^/]*\z}, "")
+        return [siblings.fetch(ref), pointer_child(parent_location, ref), siblings]
+      end
+
+      raise SdfRefError,
+            "cannot resolve sdfRef #{ref.inspect}; validation supports local JSON pointers and same-object references"
+    end
+
+    def json_pointer(pointer)
+      return [@document, nil] if pointer.empty?
+      unless pointer.start_with?("/")
+        raise SdfRefError, "invalid local sdfRef JSON Pointer ##{pointer}"
+      end
+
+      value = @document
+      siblings = nil
+      pointer[1..].split("/").each do |part|
+        token = part.gsub("~1", "/").gsub("~0", "~")
+        siblings = value if value.is_a?(Hash)
+        case value
+        when Hash
+          raise SdfRefError, "sdfRef target ##{pointer} does not exist" unless value.key?(token)
+          value = value.fetch(token)
+        when Array
+          unless token.match?(/(?:0|[1-9][0-9]*)/) && token.to_i < value.length
+            raise SdfRefError, "sdfRef target ##{pointer} does not exist"
+          end
+          value = value.fetch(token.to_i)
+          siblings = nil
+        else
+          raise SdfRefError, "sdfRef target ##{pointer} does not exist"
+        end
+      end
+      [value, siblings]
+    end
+
+    def pointer_child(parent, token)
+      escaped = token.to_s.gsub("~", "~0").gsub("/", "~1")
+      "#{parent}/#{escaped}"
+    end
+  end
+
+  def resolve_sdf_refs(document)
+    SdfRefResolver.new(document).resolve
+  end
+
   # --- memoized fixtures ---------------------------------------------------
 
   def combined_cddl
@@ -287,6 +421,12 @@ class SdfJsonExampleTest < Minitest::Test
         skip "#{name}: not an SDF document (no CDDL model in this draft)"
       end
 
+      begin
+        parsed = Draft.resolve_sdf_refs(parsed)
+      rescue Draft::SdfRefError => e
+        flunk "#{name}: could not resolve sdfRef before CDDL validation: #{e.message}"
+      end
+
       # Pick the smallest model that types the protocols this example uses.
       protos = Draft.protocols_used(parsed)
       if (protos - Draft.known_protocols).empty?
@@ -298,7 +438,7 @@ class SdfJsonExampleTest < Minitest::Test
       end
 
       Tempfile.create(["example", ".json"]) do |tmp|
-        tmp.write(body)
+        tmp.write(JSON.generate(parsed))
         tmp.flush
         out, err, st = Draft.run("cddl", model.path, "validate", tmp.path)
         combined_out = [out, err].join
