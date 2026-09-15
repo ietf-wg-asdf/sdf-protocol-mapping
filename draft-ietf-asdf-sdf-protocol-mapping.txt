@@ -82,6 +82,7 @@ Table of Contents
        3.1.1.  Property Extension
        3.1.2.  Action Extension
        3.1.3.  Event Extension
+     3.2.  Reusing Protocol Mappings
    4.  Registered Protocol Mappings
      4.1.  BLE
        4.1.1.  Properties
@@ -451,6 +452,73 @@ Table of Contents
 
                Figure 13: Example Event Protocol Map in JSON
 
+3.2.  Reusing Protocol Mappings
+
+   Affordances often share most of their protocol mapping, e.g. when
+   several Zigbee attributes are reached through the same endpoint and
+   application profile.  The sdfRef quality (Section 4.4 of [RFC9880])
+   can then be used to base one affordance definition on another and
+   patch only the differing protocol attributes; a null value removes an
+   inherited one.  A definition (e.g., sdfProperty) intended only for
+   such reuse can be placed at the top level of the SDF model
+   (Section 3.4 of [RFC9880]), where it does not declare an affordance
+   of any sdfObject.
+
+   For example, with two Zigbee attributes on the same endpoint and
+   profile:
+
+   {
+     "sdfProperty": {
+       "zigbeeTemperatureAttributeBase": {
+         "type": "number",
+         "unit": "Cel",
+         "sdfProtocolMap": {
+           "zigbee": {
+             "endpointID": 1,
+             "profileID": 260,
+             "clusterID": 1026,
+             "attributeID": 0,
+             "attributeType": 41
+           }
+         }
+       }
+     },
+     "sdfObject": {
+       "sensor": {
+         "sdfProperty": {
+           "temperature": {
+             "sdfRef": "#/sdfProperty/zigbeeTemperatureAttributeBase"
+           },
+           "humidity": {
+             "sdfRef": "#/sdfProperty/zigbeeTemperatureAttributeBase",
+             "unit": "%RH",
+             "minimum": 0,
+             "sdfProtocolMap": {
+               "zigbee": {
+                 "clusterID": 1029,
+                 "attributeType": 33
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+
+              Figure 14: Reusing a Protocol Mapping via sdfRef
+
+   humidity adds a minimum of its own and restates only the two Zigbee
+   attributes that differ, clusterID and attributeType; endpointID,
+   profileID, and attributeID come from the base.  Adding "profileID":
+   null there would drop the profile instead of inheriting it.
+
+   The CDDL here describes resolved models (Section 4.4.1 of [RFC9880])
+   and does not admit sdfRef inside the protocol-specific attribute
+   maps.  A definition supplying only the differing attributes therefore
+   conforms to this specification only once sdfRef has been resolved.
+   The referenced definition remains part of the resolved model, so it
+   has to carry a complete and valid protocol mapping.
+
 4.  Registered Protocol Mappings
 
    This section defines the protocol mappings registered by this
@@ -481,7 +549,7 @@ Table of Contents
      characteristicID: text
    }
 
-    Figure 14: CDDL definition for BLE Protocol Mapping for sdfProperty
+    Figure 15: CDDL definition for BLE Protocol Mapping for sdfProperty
 
    Where:
 
@@ -548,7 +616,7 @@ Table of Contents
      characteristicID: text
    } / { type: "advertisements" } / { type: "connection_events" }
 
-               Figure 15: BLE Protocol Mapping for sdfEvents
+               Figure 16: BLE Protocol Mapping for sdfEvents
 
    Where:
 
@@ -620,7 +688,7 @@ Table of Contents
      ? manufacturerCode: uint,
    }
 
-         Figure 16: CDDL definition for Zigbee Protocol Mapping for
+         Figure 17: CDDL definition for Zigbee Protocol Mapping for
                                 sdfProperty
 
    Where:
@@ -669,7 +737,7 @@ Table of Contents
    reporting, a device-initiated write to an attribute on the gateway,
    or a cluster command.  The Zigbee event protocol mapping structure is
    defined as follows.  The "attribute_reporting" and "write_event"
-   variants reuse the zigbee-property definition from Figure 16 to
+   variants reuse the zigbee-property definition from Figure 17 to
    identify the underlying Zigbee attribute:
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -708,7 +776,7 @@ Table of Contents
      ? manufacturerCode: uint,
    }
 
-    Figure 17: CDDL definition for Zigbee Protocol Mapping for sdfEvents
+    Figure 18: CDDL definition for Zigbee Protocol Mapping for sdfEvents
 
    Where:
 
@@ -728,7 +796,7 @@ Table of Contents
 
    *  endpointID, clusterID, attributeID, attributeType, profileID, and
       manufacturerCode have the same meaning as described for
-      sdfProperty in Figure 16.  These fields are present when type is
+      sdfProperty in Figure 17.  These fields are present when type is
       "attribute_reporting" or "write_event", and MUST be absent when
       type is "connection_events".
 
@@ -738,7 +806,7 @@ Table of Contents
       direction identifies the ZCL command direction and MUST be
       present.  It cannot be inferred from the coordinator role: the
       gateway can be either the ZCL client or the ZCL server. profileID
-      and manufacturerCode have the same meaning as in Figure 16.
+      and manufacturerCode have the same meaning as in Figure 17.
 
    *  minReportingInterval is the minimum reporting interval in seconds
       (optional).  It is the minimum time between issued attribute
@@ -832,7 +900,7 @@ Table of Contents
      ? manufacturerCode: uint,
    }
 
-    Figure 18: CDDL definition for Zigbee Protocol Mapping for sdfAction
+    Figure 19: CDDL definition for Zigbee Protocol Mapping for sdfAction
 
    Where:
 
@@ -846,7 +914,7 @@ Table of Contents
       action.
 
    *  profileID has the same meaning and default as described for
-      sdfProperty in Figure 16 (optional).
+      sdfProperty in Figure 17 (optional).
 
    *  manufacturerCode is the Zigbee manufacturer code of the command
       (optional).
@@ -874,7 +942,7 @@ Table of Contents
    a device instance, a method is needed to associate a mapping between
    an instance of a device and its associated SDF models.  To accomplish
    so, this document defines a SCIM extension that MAY be used in
-   conjunction with [RFC9944] in Figure 19.  Implementation of this SCIM
+   conjunction with [RFC9944] in Figure 20.  Implementation of this SCIM
    extension is OPTIONAL and independent of the protocol mapping
    functionality defined in the rest of this document.  The SCIM schema
    attributes used here are described in Section 7 of [RFC7643].
@@ -905,7 +973,7 @@ Table of Contents
        }
    }
 
-                    Figure 19: SCIM SDF Extension Schema
+                    Figure 20: SCIM SDF Extension Schema
 
    Here is an example SCIM device schema extension with SDF models:
 
@@ -1271,7 +1339,7 @@ Appendix A.  CDDL Definition
    }
    <CODE ENDS>
 
-                 Figure 20: CDDL for SDF protocol mappings
+                 Figure 21: CDDL for SDF protocol mappings
 
 Appendix B.  OpenAPI Definition
 
@@ -1330,7 +1398,7 @@ Appendix B.  OpenAPI Definition
                                               ProtocolMap-Zigbee-Action'
    <CODE ENDS>
 
-                          Figure 21: OpenAPI model
+                          Figure 22: OpenAPI model
 
 B.1.  Protocol map for BLE
 
@@ -1432,7 +1500,7 @@ B.1.  Protocol map for BLE
                        - connection_events
    <CODE ENDS>
 
-                      Figure 22: OpenAPI model for BLE
+                      Figure 23: OpenAPI model for BLE
 
 B.2.  Protocol map for Zigbee
 
@@ -1681,7 +1749,7 @@ B.2.  Protocol map for Zigbee
                  example: 4174
    <CODE ENDS>
 
-                    Figure 23: OpenAPI model for Zigbee
+                    Figure 24: OpenAPI model for Zigbee
 
 Acknowledgements
 
@@ -1691,7 +1759,7 @@ Acknowledgements
    of it.  The authors are grateful to Carsten Bormann, Jan Romann, Ari
    Keränen, and Eliot Lear for their reviews and contributions to this
    document, in particular Jan Romann for his help with the CDDL
-   definitions (Figure 20) and Eliot Lear for his contributions to
+   definitions (Figure 21) and Eliot Lear for his contributions to
    Section 5.
 
 Authors' Addresses
