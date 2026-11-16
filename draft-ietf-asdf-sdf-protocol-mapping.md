@@ -10,7 +10,7 @@ date:
 consensus: true
 v: 3
 area: "Applications and Real-Time"
-workgroup: "A Semantic Definition Format for Data and Interactions of Things"
+workgroup: "ASDF"
 keyword:
  - IoT
 venue:
@@ -184,7 +184,7 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 ~~~
 {: #sdf-prop-ext title="SDF Property Extension Point for Protocol Mapping"}
 
-The `property-protocol-map` generic ({{sdf-prop-ext}}) captures the common
+The generic `property-protocol-map` ({{sdf-prop-ext}}) captures the common
 structure of property protocol mappings. The `name` parameter is the protocol
 name and `props` is the protocol-specific map of attributes. A protocol can
 provide either:
@@ -200,7 +200,7 @@ To extend `$$SDF-PROPERTY-PROTOCOL-MAP` for a new protocol (e.g.,
 "new-protocol"), implementers MUST use the `property-protocol-map` generic with
 the protocol name and a map type defining the protocol-specific attributes.
 
-It is to be noted that the protocol `name` (e.g., "new-protocol") MUST be
+The protocol `name` (e.g., "new-protocol") MUST be
 registered in the IANA registry defined in {{iana-prot-map}}.
 
 For a fictitious "new-protocol" that uses the same attributes for both read
@@ -402,7 +402,7 @@ An SDF model using this extension could look like:
 
 ## Reusing Protocol Mappings {#reuse}
 
-Affordances often share most of their protocol mapping, e.g. when several Zigbee
+Affordances often share most of their protocol mapping, e.g., when several Zigbee
 attributes are reached through the same endpoint and application profile. The
 `sdfRef` quality ({{Section 4.4 of -sdf}}) can then be used to base one affordance
 definition on another and patch only the differing protocol attributes; a `null`
@@ -794,9 +794,9 @@ For example, a Zigbee protocol mapping to set a temperature:
 
 While SDF provides a way to describe a device class and SCIM defines a device
 instance, a method is needed to associate a mapping between an instance of a
-device and its associated SDF models. To accomplish so, this document defines
-a SCIM extension that MAY be used in conjunction with
-{{-scim-devices}} in {{scim-sdf-extension-schema}}. Implementation
+device and its associated SDF models. To accomplish this, this document defines
+a SCIM extension ({{scim-sdf-extension-schema}}) that MAY be used in conjunction
+with {{-scim-devices}}. Implementation
 of this SCIM extension is OPTIONAL and independent of the protocol mapping
 functionality defined in the rest of this document. The SCIM schema attributes
 used here are described in Section 7 of {{!RFC7643}}.
@@ -908,7 +908,7 @@ the "Semantic Definition Format (SDF)" registry group {{!IANA.sdf}}, with the fo
 - Protocol map name, as per `sdfProtocolMap`
 - Protocol name
 - Description
-- Reference of the specification describing the protocol mapping.
+- Reference to the specification describing the protocol mapping.
 
 The registration policy for this registry is "Specification Required" as
 defined in Section 4.6 of {{!RFC8126}}. Protocol names used as keys in the
@@ -946,7 +946,7 @@ The following protocol mappings are described in this document:
 
 ## SCIM Device Schema SDF Extension
 
-IANA is requested to create the following extension in the "SCIM
+IANA is requested to register the following extension in the "SCIM
 Server-Related Schema URIs" registry, within the "System for Cross-domain
 Identity Management (SCIM) Schema URIs" registry group {{!IANA.scim}}, as
 described in {{scim-sdf-extension}}:
@@ -1004,7 +1004,9 @@ The following non-normative model is provided for convenience of the implementer
 # Acknowledgements
 {:numbered="false"}
 
-This document relies on SDF models described in {{-sdf}}, as such, we are grateful to the authors of this document for putting their time and effort into defining SDF in depth, allowing us to make use of it.
+This document relies on SDF models described in {{-sdf}}; as such, we are
+grateful to the authors of that document for putting their time and effort
+into defining SDF in depth, allowing us to make use of it.
 The authors are grateful to Carsten Bormann, Jan Romann, Ari Keränen, and Eliot Lear
 for their reviews and contributions to this document,
 in particular Jan Romann for his help with the CDDL definitions ({{sdf-protocol-map-cddl}})
