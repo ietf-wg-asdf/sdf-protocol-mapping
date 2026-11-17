@@ -143,6 +143,10 @@ Protocol-specific attributes are embedded within this object, keyed by a
 protocol name registered in the IANA "SDF Protocol Mapping" registry
 ({{iana-prot-map}}), e.g., "ble" or "zigbee".
 
+An implementation SHOULD ignore mappings for protocols it does not recognize or support.
+A device can expose the same affordance over multiple protocols, each with its own protocol-specific mapping.
+Selection among supported protocol mappings is implementation-specific.
+
 ~~~ aasvg
 sdfProperty / sdfAction / sdfEvent
   |
