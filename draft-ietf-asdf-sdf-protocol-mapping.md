@@ -885,14 +885,31 @@ Licensing: Proprietary
 
 # Security Considerations
 
-The security considerations of {{-sdf}} apply to this document as well.
+The security considerations in {{Section 8 of -sdf}} apply to this document as well.
+When the SCIM SDF extension is used, the considerations in {{Section 8 of -scim-devices}} also
+apply.
 
 Each protocol mapped using this mechanism has its own security model.
 The protocol mapping mechanism defined in this document does not provide
 additional security beyond what is offered by the underlying protocols.
-Implementations MUST ensure that appropriate protocol-level security
-mechanisms are employed when accessing affordances through the mapped
-protocol operations.
+
+A tampered or untrusted SDF model can direct a gateway to read or write
+unintended attributes or send unintended commands.
+The model checks in {{Section 8 of -sdf}} apply before acting on a protocol mapping.
+
+The `sdf` URIs in a SCIM device object may refer to untrusted resources.
+Dereferencing them can expose local files or internal services, disclose
+credentials, or exhaust resources. Model retrieval policies need to apply to
+these URIs and any redirects. SCIM credentials need to be withheld unless
+separately authorized for the retrieval destination.
+
+SDF model references in a SCIM device object can reveal device type and
+capabilities.
+These device-to-model associations need the access protections described in {{Section 8 of -scim-devices}}.
+
+BLE advertisements and BLE or Zigbee `connection_events` can reveal device
+presence and, through correlation over time, users' locations or activities.
+Deployments need to control access to gateway presence notifications and limit retention of stored observations.
 
 # IANA Considerations
 
