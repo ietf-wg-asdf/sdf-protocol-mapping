@@ -104,7 +104,7 @@ mechanism by defining:
 
 - The `sdfProtocolMap` quality, which allows SDF models to include
   protocol-specific mapping information attached to the protocol-agnostic
-  definitions, see {{sdf-pm}}. An `sdfProtocolMap` MAY be applied to an SDF
+  definitions, see {{sdf-pm}}. An `sdfProtocolMap` can be applied to an SDF
   affordance, be it an `sdfProperty`, `sdfEvent` or `sdfAction`. The mapping
   enables use cases such as application gateways or multi-protocol gateways that
   translate between different IoT protocols, automated generation of
@@ -169,7 +169,7 @@ via the corresponding CDDL group socket. The contents of the
 `sdfProtocolMap` object are in turn extensible through a
 protocol-mapping-specific group socket.
 
-A protocol MAY choose to extend only the affordance types that are applicable to
+A protocol can choose to extend only the affordance types that are applicable to
 it. For example, the BLE protocol mapping defines extensions for properties and
 events but not for actions.
 
@@ -795,7 +795,7 @@ For example, a Zigbee protocol mapping to set a temperature:
 While SDF provides a way to describe a device class and SCIM defines a device
 instance, a method is needed to associate a mapping between an instance of a
 device and its associated SDF models. To accomplish so, this document defines
-a SCIM extension that MAY be used in conjunction with
+a SCIM extension that can be used in conjunction with
 {{-scim-devices}} in {{scim-sdf-extension-schema}}. Implementation
 of this SCIM extension is OPTIONAL and independent of the protocol mapping
 functionality defined in the rest of this document. The SCIM schema attributes
