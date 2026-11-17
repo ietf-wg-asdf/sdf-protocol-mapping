@@ -663,8 +663,10 @@ Where:
     command.
 - `endpointID`, `clusterID`, `attributeID`, `attributeType`, `profileID`, and
   `manufacturerCode` have the same meaning as described for `sdfProperty` in
-  {{zigmap1}}. These fields are present when `type` is `"attribute_reporting"`
-  or `"write_event"`, and MUST be absent when `type` is `"connection_events"`.
+  {{zigmap1}}. When `type` is `"attribute_reporting"` or `"write_event"`,
+  `endpointID`, `clusterID`, `attributeID`, and `attributeType` MUST be present;
+  `profileID` and `manufacturerCode` are optional. All six fields MUST be
+  absent when `type` is `"connection_events"`.
 - For `"cluster_command"`, `endpointID` identifies the originating Zigbee end
   device's source endpoint, `clusterID` identifies the cluster, and `commandID`
   identifies the cluster-specific command. `direction` identifies the ZCL
