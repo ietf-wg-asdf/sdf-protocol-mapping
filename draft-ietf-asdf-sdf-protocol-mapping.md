@@ -934,7 +934,7 @@ requirements, and that the protocol map name is appropriately named and
 unlikely to cause confusion.
 
 The registrant of an existing entry may request updates to that entry, subject to the same expert review.
-They should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.
+The designated expert(s) should verify that updates preserve backward compatibility with deployed implementations, or if breaking changes are necessary, consider whether a new registry entry is more appropriate.
 
 The following protocol mappings are described in this document:
 
