@@ -453,6 +453,9 @@ For example, with two Zigbee attributes on the same endpoint and profile:
 ~~~
 {: post="fold" #reuse-json-example title="Reusing a Protocol Mapping via sdfRef"}
 
+The JSON example above uses the decimal equivalents of the Zigbee hexadecimal
+identifiers: `1026` for cluster ID `0x0402` and `260` for profile ID `0x0104`.
+
 `humidity` adds a `minimum` of its own and restates only the two Zigbee attributes
 that differ, `clusterID` and `attributeType`; `endpointID`, `profileID`, and
 `attributeID` come from the base. Adding `"profileID": null` there would drop the
