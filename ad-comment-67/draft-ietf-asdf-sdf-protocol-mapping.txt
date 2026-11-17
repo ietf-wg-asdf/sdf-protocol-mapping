@@ -1759,8 +1759,7 @@ B.3.  RFC Editor Note
    and ProtocolMap-Zigbee.yaml), please set info.version to 1.0.0,
    change externalDocs.description to SDF Protocol Mapping, and replace
    externalDocs.url with https://www.rfc-editor.org/rfc/rfcXXXX.html,
-   where XXXX is the assigned RFC number.  Apply these updates to the
-   sourcecode files as well.  Remove this note before publication.
+   where XXXX is the assigned RFC number.
 
 Acknowledgements
 
