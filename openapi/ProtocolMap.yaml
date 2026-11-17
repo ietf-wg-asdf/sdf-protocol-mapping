@@ -2,9 +2,7 @@ openapi: 3.0.3
 info:
   title: SDF Protocol Mapping
   description: |-
-    SDF Protocol Mapping. When adding a
-    new protocol mapping please add a reference to the protocol map
-    for all the schemas in this file.
+    SDF Protocol Mapping.
   version: 0.10.0
 externalDocs:
   description: SDF Protocol Mapping IETF draft

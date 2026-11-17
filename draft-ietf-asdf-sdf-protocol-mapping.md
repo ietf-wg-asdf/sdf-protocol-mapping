@@ -1001,6 +1001,15 @@ The following non-normative model is provided for convenience of the implementer
    title="OpenAPI model for Zigbee"
 }
 
+## RFC Editor Note
+{:removeinrfc="true"}
+
+For all three OpenAPI models (`ProtocolMap.yaml`, `ProtocolMap-BLE.yaml`, and
+`ProtocolMap-Zigbee.yaml`), please set `info.version` to `1.0.0`, change
+`externalDocs.description` to `SDF Protocol Mapping`, and replace
+`externalDocs.url` with `https://www.rfc-editor.org/rfc/rfcXXXX.html`, where
+`XXXX` is the assigned RFC number.
+
 # Acknowledgements
 {:numbered="false"}
 
