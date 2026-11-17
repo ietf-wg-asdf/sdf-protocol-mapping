@@ -368,7 +368,7 @@ rule of {{Appendix A of -sdf}} is used to add protocol mapping to
 {: #sdf-event-ext title="SDF Event Extension Point for Protocol Mapping"}
 
 Events follow the same simple pattern as actions. To extend
-`$$SDF-EVENT-PROTOCOL-MAP` for a new protocol, implementers add a group entry
+`$$SDF-EVENT-PROTOCOL-MAP` for a new protocol, implementers MUST add a group entry
 that maps the protocol name to the protocol-specific attributes. For example, an
 extension for a fictitious "new-protocol" could be defined as:
 
