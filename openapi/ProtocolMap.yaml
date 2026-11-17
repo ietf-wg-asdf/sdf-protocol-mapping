@@ -19,24 +19,32 @@ components:
       type: object
       properties:
         sdfProtocolMap:
-          oneOf:  
-            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/ProtocolMap-BLE-Propmap'
-            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/ProtocolMap-Zigbee-Propmap'
+          type: object
+          properties:
+            ble:
+              $ref: './ProtocolMap-BLE.yaml#/components/schemas/ProtocolMap-BLE-Propmap/properties/ble'
+            zigbee:
+              $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/ProtocolMap-Zigbee-Propmap/properties/zigbee'
 
 ## Protocol Map for an event
     ProtocolMap-Event:
       type: object
       properties:
         sdfProtocolMap:
-          oneOf:  
-            - $ref: './ProtocolMap-BLE.yaml#/components/schemas/ProtocolMap-BLE-Event'
-            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/ProtocolMap-Zigbee-Event'
+          type: object
+          properties:
+            ble:
+              $ref: './ProtocolMap-BLE.yaml#/components/schemas/ProtocolMap-BLE-Event/properties/ble'
+            zigbee:
+              $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/ProtocolMap-Zigbee-Event/properties/zigbee'
 
 ## Protocol Map for an action
     ProtocolMap-Action:
       type: object
       properties:
         sdfProtocolMap:
-          oneOf:  
-            - $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/ProtocolMap-Zigbee-Action'
+          type: object
+          properties:
+            zigbee:
+              $ref: './ProtocolMap-Zigbee.yaml#/components/schemas/ProtocolMap-Zigbee-Action/properties/zigbee'
  
