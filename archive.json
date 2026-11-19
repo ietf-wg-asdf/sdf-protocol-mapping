@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-17T05:52:31.648370+00:00",
+  "timestamp": "2026-11-19T05:15:18.052897+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -778,9 +778,17 @@
       ],
       "body": "_Comment by @eckelcu_\n\n~~~ \n1149       [BLE53]    Bluetooth SIG, \"Bluetooth Core Specification Version 5.3\",\n...\n1196       [ZCL7]     Connectivity Standards Alliance, \"Zigbee Cluster Library\n1197                  Specification\", CSA Document 07-5123 (Revision 7),\n...\n1201       [Zigbee30] Connectivity Standards Alliance, \"Zigbee Specification\",\n1202                  CSA Document 05-3474-23 (Revision R23.1), July 2024,\n~~~\nIs there a reason for referencing these particular versions rather than the latest ones (e.g., Bluetooth 6.3, ZCL Revision 8)? Also, the [Zigbee30] label suggests Zigbee 3.0, but the reference is to the Zigbee PRO R23.1 specification. Consider a label that aligns with the reference.\n\nSource: [AD evaluation of draft-ietf-asdf-sdf-protocol-mapping-12](https://mailarchive.ietf.org/arch/msg/asdf/qVhETOXaYBLz3w3AhQvKb_V2wP4/).\n\n",
       "createdAt": "2026-11-17T00:21:20Z",
-      "updatedAt": "2026-11-17T00:21:20Z",
+      "updatedAt": "2026-11-18T01:01:27Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "When we initially wrote the NIPC draft, these were our references. We can update it to the latest versions, but it will also work with the older ones. Does it make sense to update them, given that there will be newer ones that will make these references out of date?\n\nI will fix the `[Zigbee30]` label.",
+          "createdAt": "2026-11-18T01:01:27Z",
+          "updatedAt": "2026-11-18T01:01:27Z"
+        }
+      ]
     },
     {
       "number": 67,
@@ -3339,7 +3347,7 @@
       "labels": [],
       "body": "Addresses the seven nits from the [AD evaluation](https://mailarchive.ietf.org/arch/msg/asdf/qVhETOXaYBLz3w3AhQvKb_V2wP4/).\n\n- Abbreviate the WG name to `ASDF` to prevent header overlap. Fixes #68.\n- Use \u201cThe generic property-protocol-map\u201d. Fixes #69.\n- Remove unnecessary introductory wording. Fixes #70.\n- Add the missing comma after \u201ce.g.\u201d. Fixes #71.\n- Improve the SCIM introduction and figure-reference placement. Fixes #72.\n- Correct IANA registration terminology. Fixes #73.\n- Clarify the acknowledgement of RFC 9880\u2019s authors and fix punctuation. Fixes #74.\n\nThe BCP 14 keyword changes are tracked separately in #57.\n\nCC @eckelcu",
       "createdAt": "2026-11-16T23:33:03Z",
-      "updatedAt": "2026-11-17T00:24:17Z",
+      "updatedAt": "2026-11-18T07:43:50Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "91ab26c2685911cff9dbce0fc225110fe0529faa",
@@ -3351,7 +3359,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABYsxE4g",
+          "commit": {
+            "abbreviatedOid": "24db148"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "All good on my side",
+          "createdAt": "2026-11-18T07:43:50Z",
+          "updatedAt": "2026-11-18T07:43:50Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 75,
@@ -3365,7 +3387,7 @@
       "labels": [],
       "body": "Fixes #57.",
       "createdAt": "2026-11-17T00:37:04Z",
-      "updatedAt": "2026-11-17T00:37:05Z",
+      "updatedAt": "2026-11-18T07:46:15Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "91ab26c2685911cff9dbce0fc225110fe0529faa",
@@ -3377,7 +3399,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABYszS7g",
+          "commit": {
+            "abbreviatedOid": "4a69c8b"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-11-18T07:46:15Z",
+          "updatedAt": "2026-11-18T07:46:15Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 76,
@@ -3391,7 +3427,7 @@
       "labels": [],
       "body": "Require implementers to add a group entry when extending `$$SDF-EVENT-PROTOCOL-MAP`, matching the normative requirements for property and action extensions.\n\nFixes #60.",
       "createdAt": "2026-11-17T00:54:09Z",
-      "updatedAt": "2026-11-17T00:54:27Z",
+      "updatedAt": "2026-11-18T07:47:28Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "91ab26c2685911cff9dbce0fc225110fe0529faa",
@@ -3403,7 +3439,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABYs0f8A",
+          "commit": {
+            "abbreviatedOid": "aa35839"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-11-18T07:47:27Z",
+          "updatedAt": "2026-11-18T07:47:27Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 77,
@@ -3417,7 +3467,7 @@
       "labels": [],
       "body": "Explain that the JSON example uses decimal equivalents of Zigbee hexadecimal identifiers, placing the note directly below the example.\n\nFixes #61\n",
       "createdAt": "2026-11-17T00:59:05Z",
-      "updatedAt": "2026-11-17T00:59:40Z",
+      "updatedAt": "2026-11-18T07:48:38Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "91ab26c2685911cff9dbce0fc225110fe0529faa",
@@ -3429,7 +3479,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABYs1gbA",
+          "commit": {
+            "abbreviatedOid": "01d922e"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-11-18T07:48:38Z",
+          "updatedAt": "2026-11-18T07:48:38Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 78,
@@ -3443,7 +3507,7 @@
       "labels": [],
       "body": "Clarify which fields are required or optional for Zigbee attribute-reporting and write events, and which must be absent for connection events, matching the existing CDDL.\n\nFixes #62\n",
       "createdAt": "2026-11-17T01:02:40Z",
-      "updatedAt": "2026-11-17T01:02:41Z",
+      "updatedAt": "2026-11-18T07:52:15Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "91ab26c2685911cff9dbce0fc225110fe0529faa",
@@ -3455,7 +3519,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABYs4rtA",
+          "commit": {
+            "abbreviatedOid": "601bcc7"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-11-18T07:52:14Z",
+          "updatedAt": "2026-11-18T07:52:14Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 79,
@@ -3469,7 +3547,7 @@
       "labels": [],
       "body": "Identify the designated experts as responsible for reviewing backward compatibility of registry updates.\n\nFixes #65\n",
       "createdAt": "2026-11-17T01:05:50Z",
-      "updatedAt": "2026-11-17T01:05:51Z",
+      "updatedAt": "2026-11-18T07:52:53Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "91ab26c2685911cff9dbce0fc225110fe0529faa",
@@ -3481,7 +3559,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABYs5FgQ",
+          "commit": {
+            "abbreviatedOid": "fd629c4"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-11-18T07:52:53Z",
+          "updatedAt": "2026-11-18T07:52:53Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 80,
@@ -3495,7 +3587,7 @@
       "labels": [],
       "body": "Remove the instruction to modify the published OpenAPI model and add RFC Editor instructions to update version and documentation metadata in all three YAML files at publication.\n\nFixes #67\n",
       "createdAt": "2026-11-17T01:11:54Z",
-      "updatedAt": "2026-11-17T01:13:33Z",
+      "updatedAt": "2026-11-18T07:54:40Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "91ab26c2685911cff9dbce0fc225110fe0529faa",
@@ -3507,7 +3599,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABYs6ICQ",
+          "commit": {
+            "abbreviatedOid": "4c8f811"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-11-18T07:54:40Z",
+          "updatedAt": "2026-11-18T07:54:40Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 81,
@@ -3521,7 +3627,7 @@
       "labels": [],
       "body": "Clarify handling of unsupported protocols and selection among multiple protocol mappings. Update the OpenAPI schemas to allow multiple mappings while validating each recognized mapping.\n\nFixes #59\n",
       "createdAt": "2026-11-17T01:46:27Z",
-      "updatedAt": "2026-11-17T01:46:28Z",
+      "updatedAt": "2026-11-18T07:59:42Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "91ab26c2685911cff9dbce0fc225110fe0529faa",
@@ -3533,7 +3639,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABYs9ctw",
+          "commit": {
+            "abbreviatedOid": "f7b2d77"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-11-18T07:59:42Z",
+          "updatedAt": "2026-11-18T07:59:42Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 82,
@@ -3547,7 +3667,7 @@
       "labels": [],
       "body": "Cover model integrity, URI retrieval, device capability disclosure, and presence tracking, with mitigations and references to the applicable SDF and SCIM security guidance.\n\nFixes #64\n",
       "createdAt": "2026-11-17T02:09:22Z",
-      "updatedAt": "2026-11-17T02:09:23Z",
+      "updatedAt": "2026-11-18T10:37:33Z",
       "baseRepository": "ietf-wg-asdf/sdf-protocol-mapping",
       "baseRefName": "main",
       "baseRefOid": "91ab26c2685911cff9dbce0fc225110fe0529faa",
@@ -3559,7 +3679,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPSJ9A88AAAABYvEDQw",
+          "commit": {
+            "abbreviatedOid": "8e9653a"
+          },
+          "author": "lorenzocorneo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-11-18T10:37:33Z",
+          "updatedAt": "2026-11-18T10:37:33Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
