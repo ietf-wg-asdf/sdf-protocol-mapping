@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-19T05:15:18.052897+00:00",
+  "timestamp": "2026-11-24T07:45:01.758176+00:00",
   "repo": "ietf-wg-asdf/sdf-protocol-mapping",
   "labels": [
     {
@@ -721,9 +721,17 @@
       ],
       "body": "_Comment by @eckelcu_\n\n[Section 5](https://www.ietf.org/archive/id/draft-ietf-asdf-sdf-protocol-mapping-12.html#section-5) defines a new SCIM schema extension, and [Section 8.2](https://www.ietf.org/archive/id/draft-ietf-asdf-sdf-protocol-mapping-12.html#section-8.2) registers it in the \"SCIM Server-Related Schema URIs\" registry. Has this been reviewed by someone with SCIM expertise (e.g., from the SCIM WG)? The shepherd writeup does not mention such a review. If not, I think one would be helpful.\n\nSource: [AD evaluation of draft-ietf-asdf-sdf-protocol-mapping-12](https://mailarchive.ietf.org/arch/msg/asdf/qVhETOXaYBLz3w3AhQvKb_V2wP4/).\n\n",
       "createdAt": "2026-11-17T00:21:15Z",
-      "updatedAt": "2026-11-17T00:21:15Z",
+      "updatedAt": "2026-11-23T21:26:16Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "rohitmohan96",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Started the conversation in the SCIM wg mailing list: https://mailarchive.ietf.org/arch/msg/scim/who0XKQh2eLSetv5ZfUvMx4l85Y/",
+          "createdAt": "2026-11-23T21:26:15Z",
+          "updatedAt": "2026-11-23T21:26:15Z"
+        }
+      ]
     },
     {
       "number": 64,
